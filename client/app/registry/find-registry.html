@@ -1,0 +1,39 @@
+<navbar></navbar>
+<div class="find-registry">
+	<div class="container">
+
+	<div class="row">
+	<div class="col-md-12 ">
+		<h1 class="text-center find-title">FIND REGISTRY</h1>
+	</div>
+	</div>
+<br>
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-2">
+			<div class="form-group">
+  
+  			<input type="text" ng-model="input" class="form-control" id="usr">
+			</div>
+			</div>
+			<div class="col-md-3">
+                        <button class = "btn btn-primary"ng-click="searchRegistry()">Find Registry</button>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+			<div class="center-block">
+
+			<div class="col-md-8 col-md-offset-2" ng-repeat="registry in registries">
+			<hr ng-if="registry.visible">
+			<div class="col-md-2" ng-if="registry.visible">
+				<img class="couple-img-circle-find img-responsive" ng-src="{{registry.profileImageUrl}}" >
+			</div>
+			<div class="col-md-6" ng-if="registry.visible">
+				<div><a ui-sref="registry({id:registry._id})" >{{registry.title}}</a></div>
+				<div>Date :{{registry.date  | date : "longDate"}}</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,74 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+@import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import '../bower_components/bootstrap-social/bootstrap-social.scss';
+$fa-font-path: "../bower_components/font-awesome/fonts";
+@import '../bower_components/font-awesome/scss/font-awesome';
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+/**
+ * App-wide Styles
+ */
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+.thumb {
+  width: 100px;
+  height: 100px;
+  float: none;
+  position: relative;
+  top: 7px;
+  margin-bottom: 20px;
+}
+
+form .progress {
+  line-height: 15px;
+}
+
+.remove-btn {
+  padding-top: 20px;
+}
+
+.form-action.account {
+  display: flex;
+}
+
+.table-col td {
+    line-height: 25px !important;
+}
+
+
+.product-grid ul#category {
+	margin-top: -102px !important;
+	position: initial !important;
+	width: 100% !important;
+}
+
+// Component styles are injected through grunt
+// injector
+@import 'about/about.scss';
+@import 'admin/admin.scss';
+@import 'cart/cart.scss';
+@import 'category/category.scss';
+@import 'checkout/checkout.scss';
+@import 'contact/contact.scss';
+@import 'home/home.scss';
+@import 'invoice/invoice.scss';
+@import 'main/main.scss';
+@import 'manage-categories/manage-categories.scss';
+@import 'manage-products/manage-products.scss';
+@import 'manage-requests/manage-requests.scss';
+@import 'orders/orders.scss';
+@import 'product/product.scss';
+@import 'registry/registry.scss';
+@import 'search/search.scss';
+@import '../components/footer/footer.scss';
+@import '../components/modal/modal.scss';
+@import '../components/oauth-buttons/oauth-buttons.scss';
+@import '../components/sidebar-account/sidebar-account.scss';
+@import '../components/sidebar-cat/sidebar-cat.scss';
+// endinjector

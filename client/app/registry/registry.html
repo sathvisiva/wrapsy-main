@@ -1,0 +1,204 @@
+<navbar></navbar>
+<div class="container">
+<div class="row">
+    <section class="registry-top">
+        <div class="registry-hero" ng-style="{'background-image': 'url(' + registry.backgroundImageUrl + ')'}">
+        <div class="registry-hero-gradient"></div>
+        <div class="hero-buttons">
+              <button class="btn btn-md btn-tertiary pull-left" ng-click="selectBackgroundImage()" ng-if="editable">
+                Edit Background
+              </button>
+                                         
+              <!-- <a  class="btn btn-md btn-tertiary pull-right" ng-if="editable">
+                View As Guest
+              </a> -->
+          </div>
+          <div class="registry-hero-content">
+            <div class="row">
+              <div class="col-xs-12">
+                
+                  
+                  <span class="registry-title editable-prev hidden-xs h1" >{{registry.title}}</span>
+                  
+                  <a class="registry-date clearfix h4 hidden-xs" href="/registry/settings/info" target="_self">{{registry.date  | date : "longDate"}} </a>
+                </form>
+              </div>
+            </div>
+            <div class="hero-cta text-center">
+              <!-- ngIf: !regEdCtrl.isPublic --><div class="hidden-sm hidden-xs" ng-if="!registry.visible && editable">
+                <a class="btn btn-md btn-danger publish-registry-button" ng-click="setVisible()">Make It Visible</a>
+                <p>Guests cannot view your registry</p>
+              </div><!-- end ngIf: !regEdCtrl.isPublic -->
+              
+                <a class="btn btn-md btn-tertiary pull-right invite-partner hidden-md hidden-lg" target="_self" ng-href="/registry/dfgdfgdandxvzxzx/settings/invitepartner" uib-tooltip="Invite Partner" href="/registry/dfgdfgdandxvzxzx/settings/invitepartner">
+                  <i class="zolaicon zolaicon-invitefriend"></i>
+                </a>
+              
+            </div>
+          </div>
+          <div class="couple-edit-frame text-center" >
+            <img class="couple-img-circle img-responsive" ng-src="{{registry.profileImageUrl}}" >
+            <div class="img-overlay">
+              <a ng-if="editable" ngf-select="upload($file, $invalidFiles)" ng-model="imagimageUrleUrl" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-resize="{width: 606, height: 780, quality: .8, type: 'image/jpeg', centerCrop: true, restoreExif: false}" ngf-model-invalid="errorFile">
+              <i class="fa fa-pencil fa-2x"></i>
+            </a>
+          </div>
+          </div>
+          <div class="registry-welcome text-center">
+          <h1 class="registry-title visible-xs"><strong>{{registry.title}}</strong></h1>
+          <h2 class="registry-date h4 visible-xs text-muted">{{registry.date  | date : "longDate"}} </h2>
+           <br>
+            <span class="greeting" >{{registry.greeting}}</span>
+        </div>
+    </section>
+                      
+</div>
+<div class="row text-center" ng-if = "editable">
+      <div class="col-md-4">
+        <img src="/assets/img/create.svg" class="customimage">
+        <div>
+          <h3 class="howitworks">
+          <a ui-sref="main({registryId:registry._id, registryTitle:registry.title})">
+          Add Gifts
+          </a>
+          </h3>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <img src="/assets/img/rsvp.png" class="customimage">
+        <div>
+        
+          <h3 class="howitworks">
+          <a ng-click="registryList=false">Guest</a></h3>
+      
+        </div>
+      </div>
+     
+    </div>
+    <div class="row text-center" ng-if = "!editable">
+      <div class="col-md-4">
+        <img src="/assets/img/create.svg" class="customimage">
+        <div>
+          <h3 class="howitworks">
+          <a ng-click="changegeview1()">
+          Gift List
+          </a>
+          </h3>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <img src="/assets/img/rsvp.png" class="customimage">
+        <div>
+        
+          <h3 class="howitworks">
+          <a ng-click="changegeview()">RSVP</a></h3>
+      
+        </div>
+      </div>
+     
+    </div>
+    <hr>
+
+    <div class="registry-items" ng-show="!registryList">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+        <h3 class="hidden-sm hidden-xs text-center registry-label">We hope you can make it to the occasion</h3>
+          <form class="form" name="form" ng-submit="saversvp(form)" novalidate>
+            <div class="col-md-12">
+                <div class = "row">
+                    <div class = "col-md-12">
+                    <div class="form-group">
+                        <label for="firstName" class="registry-label">YOUR NAME:</label>
+                        <input type="text" class="form-control  registry-form" id="firstName" name="title"
+                        ng-model="rsvp.name" required/>
+                        <p class="help-block" ng-show="form.title.$error.required && submitted">
+                            Name is required
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstName" class="registry-label">YOUR EMAIL :</label>
+                            <input type="email" class="form-control registry-form" id="firstName" name="youfirstName" ng-model="rsvp.email" required/>
+                            <p class="help-block" ng-show="form.youfirstName.$error.required && submitted">
+                            email is required
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="registry-label" for="LastName">YOUR PHONE </label>
+                            <input type="text" class="form-control registry-form" id="LastName" name="yousecond" ng-model="rsvp.phone"
+                             required />
+                            <p class="help-block" ng-show="form.yousecond.$error.required  && submitted">
+                            Phone is required
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstName" class="registry-label" >No Of Guests:</label>
+                            <input type="number" class="form-control registry-form" max=10 id="firstName" ng-model="rsvp.people" name="firstName" >
+                            
+
+                        </div>
+                    </div>
+                    
+                </div>
+                 <div class="form-group">
+        <div class="radio">
+            <label>
+                <input type="radio" name="chickenEgg" value="true" ng-model="rsvp.attending">
+                Attending
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="chickenEgg" value="false" ng-model="rsvp.attending">
+                Not Attending
+            </label>
+        </div>
+    </div>
+             
+            <div class="row">
+                <div class="col-md-4">
+                <p class="help-block"> {{ message }} </p>
+                    <button class="btn btn-primary" ng-click="submitted = true" type="submit">Save Changes</button>
+                </div>
+            </div>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+  <div class="registry-items" ng-show="registryList">
+  <div class="row ">
+    <div class="col-md-3" ng-repeat="item in registry.products" >
+      <div class="thumbnail" >
+        <a class="close" ng-if="editable" ng-click="ShowConfirm(item._id)"      
+        >×</a>
+        <img ng-src="{{item.imageUrl}}" class="registry-image" alt="{{item.name}}" data-err-src="images/product.jpg" />
+      
+        <div class="caption text-center">
+          <h5>{{item.name}}</h5>
+          <p>₹ {{item.price}}</p>
+          <p>Desired : <input type=number ng-model="item.desired" ng-if="editable" style="width: 50px;"/>
+            <span ng-if="!editable" >{{item.desired}}</span>&nbsp;&nbsp;Received : {{item.required}}</p>
+            <button class="btn btn-primary" ng-if="!editable" ng-disabled="item.desired==item.received" ng-click="productDetail(item)">Buy Now</button>
+
+            <button class="btn btn-primary" ng-if="editable" ng-click="updatedesired()">Update Desired</button>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div> 
+
+</div>

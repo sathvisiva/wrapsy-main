@@ -1,0 +1,60 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+  <h3 class="list-title text-center">{{product.title}}</h3>
+  
+  
+</div>
+<div class="modal-body">
+  <div class="row">
+  <div class="col-md-4">
+    <div class="single-product">
+            
+            <img class="primary-img" src="{{product.imageUrl}}" alt="">
+  </div>
+  </div>
+  <div class="col-md-8">
+  <div class="row">
+    <h4 class="list-title" style="margin-left: 10px;
+    font-size: 18px;">Quantity</h4>
+  </div>
+  
+    <div class="row">
+      <div class="col-md-6">
+       <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" ng-click="count = count+1" ng-init="count=1" style="float: left;">+ </button>
+                        <input type="number" class="form-control" ng-model=count min="1" max=registryprod.desired style="width: 50px;">
+                        <button type="button" class="btn btn-secondary" ng-click="count = count-1" >-</button>
+                    </span>
+                    
+                </div>
+    </div>
+    <div class = "col-md-6">
+      <button class="btn btn-primary" ng-click="addtocart()"></i>Add to cart</button>
+      </div>
+  </div>
+  <br>
+  <div class="row">
+    <h2 class="list-title" style="margin-left: 10px;
+    font-size: 18px;">Price</h2>
+  </div>
+  <div class="row">
+  <div class="col-md-8">
+    <h5 >{{product.price | number}}</h5>
+    </div>
+  </div>
+  
+  <div class="row">
+    <h2 class="list-title" style="margin-left: 10px;
+    font-size: 18px;">Description</h2>
+  </div>
+  <div class="row">
+  <div class="col-md-8">
+    <h5 >{{product.description}}</h5>
+    </div>
+  </div>
+
+
+  
+
+</div>

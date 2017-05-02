@@ -1,0 +1,162 @@
+<navbar></navbar>
+<!--Breadcrumbs Start-->
+<div class="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                    <li class="active">search-result</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Breadcrumbs-->
+<!--Category Service Area Start-->
+<section class="product-grid">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <!-- category sidebar -->
+                <sidebar-cat></sidebar-cat>
+                <div class="p-widget-title top-title">
+                  <!--   <div class="left-sidebar-title">
+                        <h3>Shop by</h3>
+                    </div> -->
+                </div>
+                <!-- <aside class="widget-price">
+                    <h3 class="sidebar-sub-title">Price Slider</h3>
+                    <div class="price_filter">
+                        <div id="slider-range" slider-range></div>
+                        <div class="price_slider_amount">
+                            <input amount type="text" id="amount" name="price" placeholder="Add Your Price" />
+                        </div>
+                    </div>
+                </aside> -->
+                <aside class="widget widget-banner border-hover">
+                    <a href="#"><img alt="" src="assets/img/banner/banner-30.jpg"></a>
+                </aside>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="cat-service-banner">
+                    <a href="#">
+                        <img src="assets/img/banner/banner-29.jpg" alt="">
+                    </a>
+                </div>
+                <div class="shop-item-filter">
+                    <div class="shop-tab clearfix">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs navbar-left" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#grid" class="grid-view" aria-controls="grid" role="tab" data-toggle="tab" my-tab></a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#list" class="list-view" aria-controls="list" role="tab" data-toggle="tab" my-tab></a>
+                            </li>
+                        </ul>
+                        <div class="filters">
+                            <!--  <div class="filter-by">
+                                <h4>Short by </h4>
+                                <form action="#">
+                                    <div class="select-filter">
+                                        <select>
+                                            <option value="color">Position</option>
+                                            <option value="name">Name</option>
+                                            <option value="brand">Brand</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="filter-by">
+                                <h4>Show </h4>
+                                <form action="#">
+                                    <div class="select-filter">
+                                        <select>
+                                            <option value="10">12</option>
+                                            <option value="20">16</option>
+                                            <option value="30">20</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="tab-content">
+                    <!-- <div ng-include="'app/category/product-list.html'"></div> -->
+                    <div role="tabpanel" class="tab-pane active" id="grid">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" ng-repeat="product in products">
+                                <div class="single-product">
+                                    <a ui-sref="product({id: product.slug})">
+                                        <img class="primary-img" src="{{product.imageUrl}}" alt="">
+                                        <img class="secondary-img" src="{{product.images[0].imageUrl}}" alt="">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                    <div class="product-info">
+                                        <h4><a ui-sref="product({id: product.slug})">{{product.title}}</a></h4>
+                                        <div class="rating">
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 1}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 2}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 3}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 4}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 5}"></i>
+                                        </div>
+                                        <h5>₹{{product.price}}</h5>
+                                        <button ng-show="!ngCart.getItemById(product._id)" ng-click="ngCart.addItem(product._id, product.title, product.price, 1, product)" class="btn btn-sm-product btn-primary">Add to cart</button>
+                                        <button  ng-click="addtoRegistry(product.slug)" class="btn btn-sm-product btn-secondary">Add to Registry</button>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="list">
+                        <div class="row product-list">
+                            <div class="col-md-12">
+                                <div class="single-product" ng-repeat="product in products">
+                                    <a ui-sref="product({id: product.slug})">
+                                        <img class="primary-img" src="{{product.imageUrl}}" alt="">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                    <div class="product-info">
+                                        <h4><a ui-sref="product({id: product.slug})">{{product.title}}</a></h4>
+                                        <div class="rating">
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 1}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 2}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 3}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 4}"></i>
+                                            <i class="fa fa-star" ng-class="{'grey': product.averageRating < 5}"></i>
+                                        </div>
+                                        <h5>₹{{product.price}}</h5>
+                                        <p>{{product.description}}</p>
+                                        <button ng-show="!ngCart.getItemById(product._id)" ng-click="ngCart.addItem(product._id, product.title, product.price, 1, product)" class="btn btn-sm-product btn-primary">Add to cart</button>
+                                        <button  ng-click="addtoRegistry(product.slug)" class="btn btn-sm-product btn-secondary">Add to Registry</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--       <div class="row">
+                        <div class="col-md-12">
+                            <div class="pagination clearfix">
+                                <p>Items 1 to <span>12</span> of <span>48</span> total</p>
+                                <ul>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+</section>
+<!--End of Category Service Area-->
+<footer></footer>

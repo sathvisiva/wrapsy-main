@@ -1,0 +1,106 @@
+<navbar></navbar>
+<div class="container">
+    <div class = "registry-settings">
+        <h3 class=" text-center registry-label">REGISTRY INFORMATION</h3>
+        <form class="form" name="form" ng-submit="save(form)" novalidate>
+            <div class="col-md-12">
+                <div class = "row">
+                    <div class = "col-md-12">
+                    <div class="form-group">
+                        <label for="firstName" class="registry-label">REGISTRY TITLE:</label>
+                        <input type="text" class="form-control  registry-form" id="firstName" name="title"
+                        ng-model="registry.title" required/>
+                        <p class="help-block" ng-show="form.title.$error.required && submitted">
+                            Title is required
+                        </p>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstName" class="registry-label">YOU ARE :</label>
+                            <input type="text" class="form-control registry-form" id="firstName" name="youfirstName" ng-model="registry.youfirstName" required/>
+                            <p class="help-block" ng-show="form.youfirstName.$error.required && submitted">
+                            First Name is required
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="LastName"> </label>
+                            <input type="text" class="form-control registry-form" id="LastName" name="yousecond" ng-model="registry.yousecondName"
+                             required style="margin-top: 5px"/>
+                            <p class="help-block" ng-show="form.yousecond.$error.required  && submitted">
+                            Last Name is required
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="registry.type == 'wedding' || type == 'wedding' ">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstName" class="registry-label" >YOUR SPOUSE-TO-BE IS:</label>
+                            <input type="text" class="form-control registry-form" id="firstName" ng-model="registry.firstName" name="firstName" required>
+                            <p class="help-block" ng-show="form.firstName.$error.required && submitted">
+                            First Name is required
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="LastName">  </label>
+                            <input type="text" class="form-control registry-form" name="second" ng-model="registry.secondName" id="LastName" required style="margin-top: 5px">
+                            <p class="help-block" ng-show="form.second.$error.required && submitted">
+                            Last Name is required
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="LastName" class="registry-label"> LOCATION</label>
+                            <input type="text" class="form-control registry-form" id="location" name="location" ng-model="registry.location"
+                             required />
+                            <p class="help-block" ng-show="form.location.$error.required  && submitted">
+                            Location is required
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="firstName" class="registry-label">YOUR BIG DAY IS:</label>
+                        <input type="text" class="form-control " uib-datepicker-popup="mediumDate" ng-model="registry.date" is-open="popup1.opened"  ng-required="true" close-text="Close"  ng-click="open1()" required/>
+                        <p class="help-block" ng-show="form.yousecond.$error.required && submitted">
+                            Date is required
+                        </p>
+                        
+
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="comment" class="registry-label">WELCOME GREETING:</label>
+                        <textarea class="form-control" rows="3" id="comment" ng-model="registry.greeting"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                <p class="help-block"> {{ message }} </p>
+                    <button class="btn btn-primary" ng-click="submitted = true" type="submit">Save Changes</button>
+                    <button class="btn btn-primary"  ng-click = "viewRegistry()" style="float: right;">View Registry</button>
+                </div>
+            </div>
+
+            </div>
+        </form>
+    </div>
+</div>

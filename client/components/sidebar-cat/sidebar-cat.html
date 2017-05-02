@@ -1,0 +1,16 @@
+<div class="cat-menu">
+    <ul id="category">
+        <li class="cat-title"><a ui-sref="products({slug: 'all'})">Categories</a></li>
+        <li ng-repeat="parentCategory in parentCategories">
+            <a ui-sref="products({slug: parentCategory.slug})">{{parentCategory.name}}<i class="fa fa-angle-right"></i></a>
+            <ul class="sub-menu clearfix">
+                <li class="sub-sec col-md-6">
+                    <ul>
+                        <li><a class="title" ui-sref="products({slug: parentCategory.slug})">{{parentCategory.name}}</a></li>
+                        <li ng-repeat="category in parentCategory.children"><a ui-sref="products({slug: category.slug})">{{category.name}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

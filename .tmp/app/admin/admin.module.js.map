@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../client/app/admin/admin.module.js"],"names":[],"mappings":"AAAA,YAAY,CAAC;;AAEb,OAAO,CAAC,MAAM,CAAC,kBAAkB,EAAE,CACjC,iBAAiB,EACjB,WAAW,CACZ,CAAC,CAAC","file":"admin.module.js","sourcesContent":["'use strict';\n\nangular.module('bhcmartApp.admin', [\n  'bhcmartApp.auth',\n  'ui.router'\n]);\n"]}
