@@ -13,7 +13,8 @@ angular.module('bhcmartApp', [
     'validation.match',
     'ui.bootstrap',
     'ngFileUpload',
-    'toastr'
+    'toaster',
+    'socialLinks',
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
@@ -284,3 +285,4 @@ angular.module('bhcmartApp', [
       }
     }
   });
+

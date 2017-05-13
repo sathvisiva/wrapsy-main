@@ -41,7 +41,8 @@
                                 <td>Delivery Status</td>
                                 <td>Created on</td>
                                 <td>Total</td>
-                                <td class="text-center" colspan="2">Actions</td>
+                                
+                                <td class="text-center" colspan="2">Cancel</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,8 +57,9 @@
                                 </td>
                                 <td>{{o.created | date}}</td>
                                 <td>₹{{o.totalCost}}</td>
+                               
                                 <td>
-                                    <a ui-sref="invoice({id: o._id})" class="btn btn-primary"> <span class="glyphicon glyphicon-eye-open"></span></a>
+                                    <a ng-click="submitcancelRequest()" class="btn btn-primary btn-sm">Cancel order</a>
                                 </td>
                                 <td ng-show="isAdmin"> <a ng-click=" deliverOrder('Order ' + '#' + o.orderNumber, o)" class="yellow"><span class="fa fa-truck fa-2x"></span></a></td>
                                 <td ng-show="isAdmin"> <a ng-click="deleteOrder('Order ' + '#' + o.orderNumber, o)" class="trash"><span class="fa fa-trash fa-2x"></span></a></td>

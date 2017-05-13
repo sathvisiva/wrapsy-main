@@ -55,7 +55,8 @@ angular.module('bhcmartApp').controller('ManageProductsCtrl', ['$scope', 'Produc
   };
 }]).controller('ManageProductsAddCtrl', ['$scope', '$state', 'Product', 'categories', 'Upload', function ($scope, $state, Product, categories, Upload) {
   $scope.categories = categories;
-  console.log($scope.categories);
+
+  $scope.productType = "Normal";
 
   // upload on file select or drop
   $scope.upload = function (file) {

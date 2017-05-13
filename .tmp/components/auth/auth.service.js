@@ -8,6 +8,7 @@
     var userRoles = appConfig.userRoles || [];
 
     if ($cookies.get('token') && $location.path() !== '/logout') {
+
       currentUser = User.get();
     }
 
@@ -26,7 +27,6 @@
           password: user.password
         }).then(function (res) {
           $cookies.put('token', res.data.token);
-          console.log("create user");
           currentUser = User.get();
           return currentUser.$promise;
         }).then(function (user) {
@@ -57,7 +57,6 @@
       createUser: function createUser(user, callback) {
         return User.save(user, function (data) {
           $cookies.put('token', data.token);
-          console.log("inside create user");
           currentUser = User.get();
           return safeCb(callback)(null, user);
         }, function (err) {

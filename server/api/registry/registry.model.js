@@ -34,6 +34,21 @@ var RsvpSchema = new Schema({
   }
 });
 
+var GuestBookSchema = new Schema({
+  wishes: {
+    type: String
+  },
+  by: {
+    type: String
+  },
+  posted: {
+    type: Date,
+    default: Date.now
+  },
+  registryId : {
+    type: String
+  }
+});
 
 var RegistrySchema = new Schema({
   title: {
@@ -84,13 +99,24 @@ var RegistrySchema = new Schema({
     imageUrl : String,
     price : Number,
     desired: {
-    type: Number,
-    min: 0
-  },
-  required: {
-    type: Number,
-    min: 0
-  }
+      type: Number,
+      min: 0
+    },
+    required: {
+      type: Number,
+      min: 0
+    },
+    prodcode: {
+      type: String
+    },
+    linkId : {
+      type: String
+    },
+    affiliate : {
+      type: Boolean,
+      default: false
+    }
+
 
   }]
 
@@ -101,5 +127,6 @@ var RegistrySchema = new Schema({
 
 module.exports = {
   registry: mongoose.model('Registry', RegistrySchema),
-  rsvp: mongoose.model('Rsvp', RsvpSchema)
+  rsvp: mongoose.model('Rsvp', RsvpSchema),
+  guestBook: mongoose.model('GuestBook', GuestBookSchema)
 }

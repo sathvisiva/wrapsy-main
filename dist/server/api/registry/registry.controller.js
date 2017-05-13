@@ -2,7 +2,7 @@
 
 var _ = require('lodash');
 var Registry = require('./registry.model').registry;
-var RegistryProduct = require('./registry.model').registryProduct;
+var Rsvp = require('./registry.model').rsvp;
 
 function isJson(str) {
   try {
@@ -67,13 +67,13 @@ exports.index = function (req, res) {
     } else {
 
       var q = isJson(req.query.where);
-      //console.log(q);
+      console.log(q);
       Registry.find(q).exec(function (err, registry) {
         if (err) {
           console.log(err);
           return handleError(res, err);
         }
-
+        console.log(registry);
         return res.status(200).json(registry);
       });
     }
@@ -89,15 +89,17 @@ exports.index = function (req, res) {
 
 // Get a single product
 exports.show = function (req, res) {
-  Registry.findOne({
-    _id: req.params.id
-  }).populate('product').exec().then(handleEntityNotFound(res)).then(function (entity) {
-    if (entity) {
-      console.log(entity);
-      console.log("inside then");
-      res.status(200).json(entity);
+
+  Registry.findById(req.params.id, function (err, registry) {
+
+    if (err) {
+      return handleError(res, err);
     }
-  })['catch'](handleError(res));
+    if (!registry) {
+      return res.status(404).send('Not Found');
+    }
+    return res.json(registry);
+  });
 };
 
 // Creates a new product in the DB.
@@ -133,6 +135,7 @@ exports.createregistryProduct = function (req, res) {
       .catch(handleError(res));*/
 
   Registry.findByIdAsync(req.params.id).then(handleEntityNotFound(res)).then(function (entity) {
+    console.log(req.body);
     entity.products.push(req.body);
     return entity.save(function (err) {
       if (err) {
@@ -156,6 +159,19 @@ function linkRegistryProduct(res, registryId) {
     });
   };
 }
+
+//rsvpRegistry
+
+exports.creatersvpRegistry = function (req, res) {
+
+  Rsvp.create(req.body, function (err, registry) {
+    if (err) {
+      return handleError(res, err);
+    }
+
+    return res.status(201).json(registry);
+  });
+};
 
 function handleEntityNotFound(res) {
   return function (entity) {
@@ -214,6 +230,36 @@ exports.destroy = function (req, res) {
       }
       return res.status(204).send('No Content');
     });
+  });
+};
+
+exports.search = function (req, res) {
+  var term = "/" + req.params.term + "/";
+  console.log(term);
+  Registry.find({ "title": { $regex: /term/, $options: 'i' } }).exec(function (err, registries) {
+    if (err) {
+      res.status(500).json(err);
+    } else {
+      console.log(registries);
+      res.status(200).json(registries);
+    }
+  });
+};
+
+exports.updateRegistryProduct = function (registryId, productId, quantity) {
+  var increment = {
+    $inc: {
+      'products.$.required': quantity
+    }
+  };
+  var query = {
+    '_id': registryId,
+    'products._id': productId
+
+  };
+  console.log(quantity);
+  Registry.update(query, increment, function (err, registry) {
+    console.log(err);
   });
 };
 

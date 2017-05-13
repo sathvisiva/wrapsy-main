@@ -12,10 +12,14 @@ router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.post('/:id/registryProduct', controller.createregistryProduct);
 router.post('/:id/rsvpRegistry', controller.creatersvpRegistry);
+router.get('/:id/registryGuest', controller.indexrsvpRegistry);
+router.post('/:id/guestBookRegistry', controller.createGuestBookRegistry);
+router.get('/:id/registryGuestBook', controller.indexGuestBookRegistry);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id',  controller.destroy);
 router.get('/search/:term', controller.search);
+router.post('/:id/updatePdtcnt', controller.updatePdtcnt)
 
 
 

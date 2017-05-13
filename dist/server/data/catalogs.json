@@ -4,7 +4,7 @@
   "slug": "all",
   "children": [
     "56f24ce1f0b74ee730de524b",
-    "56f24ce1f0b74ee730de524e",
+    
     "56f24ce1f0b74ee730de524f",
     "56f24ce1f0b74ee730de5252",
     "56f24ce1f0b74ee730de5255",
@@ -45,16 +45,7 @@
     "56f24ce1f0b74ee730de5242",
     "56f24ce1f0b74ee730de524b"
   ]
-}, {
-  "_id": "56f24ce1f0b74ee730de524e",
-  "name": "Fixtures",
-  "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "fixtures",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242"
-  ]
-}, {
+},  {
   "_id": "56f24ce1f0b74ee730de524f",
   "name": "Phones and Tablets",
   "parent": "56f24ce1f0b74ee730de5242",

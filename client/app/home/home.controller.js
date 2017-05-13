@@ -5,12 +5,12 @@
   class HomeController {
 
 
-    constructor($http, $scope, $timeout, socket, Catalog, Product,$uibModal,Auth, $state, Registry) {
+    constructor($http, $scope, $timeout, socket, Catalog, Product,$uibModal,Auth, $state, Registry, toaster) {
     	 $scope.isLoggedIn = Auth.isLoggedIn;
       $scope.selectRegistryType = function(){
         
         if(!$scope.isLoggedIn()){
-          $state.go('login');
+          toaster.pop('error', "Please login to Create Registry");
         }
         else{
     		var modalInstance = $uibModal.open({

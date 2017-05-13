@@ -132,6 +132,11 @@ exports.index = function(req, res) {
     .catch(handleError(res));
 };
 
+exports.indexAffiliateProduct = function(req, res){
+  Product.find({affiliate:true}).sort({ stock: 1 }).populate({ path: "categories", select: "name" }).execAsync()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+}
 // Gets a single Product from the DB
 exports.show = function(req, res) {
   Product.findOne({

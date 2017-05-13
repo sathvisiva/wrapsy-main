@@ -170,8 +170,8 @@ header {
     border-radius: 30px;
     color: #50a6fa;
     height: 36px;
-    padding-left: 13px;
-    width: 94%;
+    
+    width: 70%;
     outline: none
 }
 .search-form button {
@@ -776,7 +776,7 @@ p.total-amount span {
     text-transform: uppercase;
 }
 li.cat-title {
-    background: #0b74bf none repeat scroll 0 0;
+    background: rgb(0, 151, 167) none repeat scroll 0 0;
 }
 li.cat-title a {
     color: #ffffff !important;
@@ -3395,6 +3395,7 @@ i.grey {
 .header-contact-info {
     display: inline-block;
     margin-left: 18px;
+    margin-top: 15px;
 }
 .header-contact-info p {
     color: #444444;
@@ -4179,7 +4180,8 @@ i.grey {
 /*  17.3 Homepage Five Sidebar Cart Area
 /*--------------------------------------------*/
 .home-five .sidebar-cart-area {
-    background: #0B74BF;
+    background: rgb(0, 151, 167);
+    max-height: 50px;
 }
 .home-five .col-md-3.left-sidebar {
     margin-top: -49px;
@@ -4201,21 +4203,21 @@ i.grey {
 }
 .home-five .cat-menu > ul#category > li {
     background: #f3f5f6 none repeat scroll 0 0;
-    border-left: 1px solid #e8ebec;
-    border-right: 1px solid #e8ebec;
+    
     padding: 17.6px 24px;
 }
 .home-five .cat-menu > ul#category li.cat-title {
-    background: #0966A8 !important;
-    border: 1px solid #0966A8 !important;
+    background: rgb(0, 151, 167) !important;
+    
     padding: 11px 24px;
-    z-index:1000;
+    z-index:10;
 }
 .home-five .cat-menu > ul#category {
     border: 0;
 }
 .home-five .sidebar-cart-area .col-md-7 {
     padding-left: 5px;
+    max-height: 50px;
 }
 .home-five .header-right-menu ul li, .home-five .search-form {
     padding: 6px 0;
@@ -4264,9 +4266,9 @@ i.grey {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     color: #b6b6ba;
     display: inline-block;
-    float: right;
+    
     height: 33px;
-    width: 75.5%;
+    width: 70.5%;
 }
 .home-five .search-form > form {
     border: 1px solid #0966A8;
@@ -4276,7 +4278,7 @@ i.grey {
     height: 37px;
 }
 .home-five #search-form > button {
-    background: #0966a8 none repeat scroll 0 0;
+    background: #FF4081 none repeat scroll 0 0;
     border-radius: 0 30px 30px 0;
     font-size: 14.5px;
     height: 35px;
@@ -6823,8 +6825,8 @@ body {
 }
 .btn-primary {
   color: #ffffff;
-  background-color: #00BCD4;
-  border-color: #00BCD4;
+  background-color: #FF4081;
+  border-color: #FF4081;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -6889,6 +6891,6 @@ fieldset[disabled] .btn-primary.active {
 
 .btn-sm-product{
     padding-right: 2px;
-    padding-left: 2px
+    padding-left: 2px;
     border-radius : 0px;
 }

@@ -84,7 +84,11 @@
 /*  1.  Theme default CSS
 /*----------------------------------------*/
 html, body {
+    width: 100%;
     height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
 }
 .floatleft {
     float:left
@@ -1054,6 +1058,7 @@ ul.sub-menu {
 .single-product a img {
     transition: all 0.3s ease-out 0s;
     width: 100%;
+    min-height: 245px;
 }
 .single-product a img.secondary-img {
     left: 0;
@@ -1128,6 +1133,12 @@ ul.sub-menu {
 .single-product a {
     display: block;
     position: relative;
+
+}
+.single-product .product-info a {
+    display: inline-block;
+    position: relative;
+
 }
 .single-product:hover > a:before {
     position: absolute;
@@ -4954,6 +4965,7 @@ h3.sidebar-sub-title {
 }
 .product-large {
     display: inline-block;
+    
 }
 .product-small .nav.nav-tabs > li a {
     border: 0;
@@ -6760,6 +6772,7 @@ body {
 /* Link */
 .navbar-custom .navbar-nav > li > a {
     color: #ffffff;
+    font-weight: bold;
 }
 .navbar-custom .navbar-nav > li > a:hover,
 .navbar-custom .navbar-nav > li > a:focus {
@@ -6827,6 +6840,7 @@ body {
   color: #ffffff;
   background-color: #FF4081;
   border-color: #FF4081;
+  border-radius: 0px;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -6893,4 +6907,88 @@ fieldset[disabled] .btn-primary.active {
     padding-right: 2px;
     padding-left: 2px;
     border-radius : 0px;
+}
+
+.affiliate{
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+     background-color: transparent; 
+    border-color: #428bca;
+}
+
+.ribbon {
+  position: absolute;
+  top: 50px;
+  padding-left: 51px;
+  z-index: 20;
+}
+.ribbon .ribbon-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.ribbon .theribbon {
+  position: relative;
+  width: 80px;
+  padding: 6px 20px 6px 20px;
+  margin: 30px 10px 10px -71px;
+  color: #fff;
+  background-color: #00BCD4;
+  text-shadow: 0px 1px 2px #bbb;
+}
+.ribbon .theribbon:before,
+.ribbon .theribbon:after {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.ribbon .theribbon:after {
+  left: 0px;
+  top: 100%;
+  border-width: 5px 10px;
+  border-style: solid;
+  border-color: #2d7b6b #2d7b6b transparent transparent;
+}
+.ribbon.sale {
+  top: 0;
+}
+.ribbon.new {
+  top: 50px;
+}
+.ribbon.new .theribbon {
+  background-color: #5bc0de;
+  text-shadow: 0px 1px 2px #bbb;
+}
+.ribbon.new .theribbon:after {
+  border-color: #2390b0 #2390b0 transparent transparent;
+}
+.ribbon.gift {
+  top: 100px;
+}
+.ribbon.gift .theribbon {
+  background-color: #5cb85c;
+  text-shadow: 0px 1px 2px #bbb;
+}
+.ribbon.gift .theribbon:after {
+  border-color: #357935 #357935 transparent transparent;
+}
+
+.registryoptions{
+    font-style: italic;
+    font-weight: bold;
+    color: #FF4081;
+    text-decoration: underline;
+}
+.wishname{
+    font-weight: bold;
+    text-decoration: underline;
+    color: #00BCD4
+}
+.wishcontent{
+    font-style: italic;
+    color: #FF4081;
 }

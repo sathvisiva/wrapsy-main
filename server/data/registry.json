@@ -1,0 +1,76 @@
+[{
+	"_id" : "59177eebfb639b354f5e9d67",
+	"title" : "Sample House Warming",
+	"youfirstName" : "House",
+	"yousecondName" : "Warming",
+	"location" : "Chennai",
+	"greeting" : "Welcome",
+	"username" : "sathvisiva12@gmail.com",
+	"backgroundImageUrl" : "assets/img/cover.jpg",
+	"profileImageUrl" : "assets/uploads/hTz4BKfk0Q4xGADrkzgRaVjc.jpg",
+	"products" : [
+		{
+			"_id" : "56f24ce1f0b74ee730de525d",
+			"name" : "Hp 344 Desktops",
+			"slug" : "hp-344-desktops",
+			"price" : 345,
+			"imageUrl" : "assets/uploads/tab-p-1.jpg",
+			"desired" : 1,
+			"required" : 0,
+			"affiliate" : false
+		}
+	],
+	"visible" : true	
+},
+{
+	"_id" : "59177e86fb639b354f5e9d65",
+	"title" : "Sample Birthday",
+	"youfirstName" : "Birthday",
+	"yousecondName" : "Birthday",
+	"location" : "Chennai",
+	"greeting" : "Welcome",
+	"username" : "sathvisiva12@gmail.com",
+	"backgroundImageUrl" : "assets/img/cover.jpg",
+	"profileImageUrl" : "assets/uploads/VrqOi6IJK0KQFvr3T5UQEcIH.jpg",
+	"products" : [
+		{
+			"_id" : "56f24ce1f0b14ee730de525c",
+			"name" : "SparkFun Badgers Intel",
+			"slug" : "sparkfun-badgers-intel",
+			"price" : 1156.87,
+			"imageUrl" : "assets/uploads/tab-p-1.jpg",
+			"desired" : 1,
+			"required" : 0,
+			"affiliate" : false
+		}
+	],
+	"visible" : true
+	
+},
+{
+	"_id" : "59177dd6fb639b354f5e9d63",
+	"title" : "Sample Wedding",
+	"youfirstName" : "Bride",
+	"yousecondName" : "Bride",
+	"firstName" : "Groom",
+	"secondName" : "Groom",
+	"location" : "Chennai",
+	"greeting" : "Welcome you All",
+	"username" : "sathvisiva12@gmail.com",
+	"backgroundImageUrl" : "assets/img/cover.jpg",
+	"profileImageUrl" : "assets/uploads/tdTg-h67Mw7Tmtv2P1RLRfiA.jpg",
+	"products" : [
+		{
+			"_id" : "56f24ce1f0b74ee730de525c",
+			"name" : "Dell laptop",
+			"slug" : "dell-laptop",
+			"price" : 6250,
+			"imageUrl" : "assets/uploads/tab-p-2.jpg",
+			"desired" : 1,
+			"required" : 0,
+			"affiliate" : false
+		}
+	],
+	"visible" : true
+	
+}]

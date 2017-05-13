@@ -3,7 +3,7 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function () {
-  var MainController = function MainController($http, $scope, $timeout, socket, Catalog, Product, ngCart, $state, $stateParams, $rootScope, RegistryService) {
+  var MainController = function MainController($http, $scope, $timeout, socket, Catalog, Product, ngCart, $state, $stateParams, $rootScope, RegistryService, $window) {
     _classCallCheck(this, MainController);
 
     $scope.state = $state.current;
@@ -18,6 +18,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     $scope.addtoRegistry = function (productId) {
       var result = { id: productId, registryId: $scope.registryId, registryTitle: $scope.registrytitle };
       $state.go('product', result);
+    };
+
+    $scope.buynow = function (link) {
+      $window.open(link, '_blank');
     };
 
     this.featuredBannerA = [{

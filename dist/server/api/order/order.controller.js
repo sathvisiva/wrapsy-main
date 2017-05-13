@@ -27,10 +27,13 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 var Order = require('./order.model');
 var Product = require('../product/product.model').product;
+var Registry = require('../registry/registry.model').registry;
+var Registrycontroller = require('../registry/registry.controller');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function (err) {
+    console.log(err);
     res.status(statusCode).send(err);
   };
 }
@@ -94,6 +97,7 @@ function show(req, res) {
 // Creates a new Order in the DB
 
 function create(req, res) {
+
   Order.createAsync(req.body).then(function (entity) {
     if (entity) {
       _lodash2['default'].each(entity.items, function (i) {
@@ -101,6 +105,10 @@ function create(req, res) {
           product.stock -= i.quantity;
           product.saveAsync();
         });
+        if (i.registry) {
+
+          Registrycontroller.updateRegistryProduct(i.registry, i.productId, i.quantity);
+        }
       });
       res.status(201).json(entity);
     }

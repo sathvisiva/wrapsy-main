@@ -24,6 +24,8 @@
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-url-slugs": "=0.1.4",
     "morgan": "~1.6.1",
+    "nodemailer": "^4.0.1",
+    "nodemailer-smtp-transport": "^2.7.4",
     "passport": "~0.3.0",
     "passport-facebook": "^2.0.0",
     "passport-google-oauth": "~0.2.0",

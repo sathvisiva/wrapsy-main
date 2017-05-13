@@ -22,6 +22,7 @@ var OrderItemSchema = new Schema({
   price: Number,
   quantity: Number,
   total: Number,
+  registry: String,
   productId: {
     type: Schema.Types.ObjectId,
     ref: 'Product'

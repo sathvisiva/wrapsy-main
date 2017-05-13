@@ -1,0 +1,19 @@
+<navbar></navbar>
+<div class="row">
+<div ng-repeat="product in products">
+	<div class="col-md-3">
+		<div class="thumbnail affiliate">
+			<a target="_blank" ng-href="https://www.amazon.in/gp/product/{{product.prodcode}}/
+			ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ><img border="0" ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" ></a><img src="//ir-in.amazon-adsystem.com/e/ir?t=sathviprasi-21&l=am2&o=31&a=" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+
+</div>
+</div>
+</div>
+<div class="col-md-3">
+	<div class="thumbnail affiliate">
+		<a target="_blank"  href="https://www.amazon.in/gp/product/B00XA5OFHQ/ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN=B00XA5OFHQ&linkCode=as2&tag=sathviprasi-21&linkId=8ea8e2c1b2f0a056fef2db94f0b6634d"><img border="0" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN=B00XA5OFHQ&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" ></a><img src="//ir-in.amazon-adsystem.com/e/ir?t=sathviprasi-21&l=am2&o=31&a=B00XA5OFHQ" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
+	</div>
+	<div class="product-info">
+		<button ng-click="addtoRegistry(product.slug)" class="btn btn-sm-product btn-sm btn-secondary">Add to Registry</button>
+	</div>
+</div>

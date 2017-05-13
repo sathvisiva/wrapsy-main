@@ -13,7 +13,7 @@
 			<div class="col-md-6 col-md-offset-2">
 			<div class="form-group">
   
-  			<input type="text" ng-model="input" class="form-control" id="usr">
+  			<input type="text" ng-model="input" class="form-control" id="usr" placeholder="Enter Registry Name">
 			</div>
 			</div>
 			<div class="col-md-3">
@@ -24,7 +24,9 @@
 
 		<div class="row">
 			<div class="center-block">
-
+			<div class="col-md-8 col-md-offset-2 text-center" ng-if="registries.length < 1" >
+			Sorry No Registries Found
+			</div>
 			<div class="col-md-8 col-md-offset-2" ng-repeat="registry in registries">
 			<hr ng-if="registry.visible">
 			<div class="col-md-2" ng-if="registry.visible">

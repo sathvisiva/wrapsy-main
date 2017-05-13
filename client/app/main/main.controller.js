@@ -4,7 +4,7 @@
 
   class MainController {
 
-    constructor($http, $scope, $timeout, socket, Catalog, Product, ngCart,$state,$stateParams,$rootScope, RegistryService) {
+    constructor($http, $scope, $timeout, socket, Catalog, Product, ngCart,$state,$stateParams,$rootScope, RegistryService, $window) {
 
       $scope.state = $state.current
       $scope.params = $stateParams;
@@ -18,6 +18,10 @@
       $scope.addtoRegistry = function(productId){
         var result = { id:productId, registryId: $scope.registryId, registryTitle:$scope.registrytitle };
         $state.go('product', result);
+      }
+
+      $scope.buynow = function(link){
+        $window.open(link, '_blank');
       }
 
       this.featuredBannerA = [{

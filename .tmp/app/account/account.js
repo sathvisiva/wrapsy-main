@@ -12,8 +12,10 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
     template: '',
     controller: function controller($state, Auth) {
       var referrer = $state.params.referrer || $state.current.referrer || 'main';
+
       Auth.logout();
-      $state.go(referrer);
+      console.log("account.js");
+      $state.go('home');
     }
   }).state('signup', {
     url: '/signup',

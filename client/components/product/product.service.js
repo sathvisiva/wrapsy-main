@@ -35,6 +35,7 @@ angular.module('bhcmartApp')
           limit: null
         }
       }
+     
     });
   }).factory('Registry', function($resource) {
     return $resource('/api/registry/:id/:controller/:limit', {
@@ -46,6 +47,20 @@ angular.module('bhcmartApp')
         isArray: true,
         params: {
           controller: 'search',
+        }
+      },
+      'registryGuest': {
+        method: 'GET',
+        isArray: true,
+        params: {
+          controller: 'registryGuest',
+        }
+      },
+      'registryGuestBook': {
+        method: 'GET',
+        isArray: true,
+        params: {
+          controller: 'registryGuestBook',
         }
       },
       'registryProduct': {
@@ -61,10 +76,25 @@ angular.module('bhcmartApp')
           controller: 'rsvpRegistry',
           limit: null
         }
+      },
+      'guestBookRegistry': {
+        method: 'POST',
+        params: {
+          controller: 'guestBookRegistry',
+          limit: null
+        }
+      },
+       'updatePdtcnt': {
+        method: 'POST',
+        params: {
+          controller: 'updatePdtcnt',
+          limit: null
+        }
       }
     });
   }).service('RegistryService', function() {
   var registry = {};
+  var registrymethod = "";
 
   var addregistry = function(newObj) {
       registry = newObj;
@@ -74,9 +104,19 @@ angular.module('bhcmartApp')
       return registry;
   }
 
+   var addregistryMethod = function(newObj) {
+      registrymethod = newObj;
+  }
+
+  var getregistryMethod = function(){
+      return registrymethod;
+  }
+
   return {
     addregistry: addregistry,
-    getregistry: getregistry
+    getregistry: getregistry,
+    addregistryMethod : addregistryMethod,
+    getregistryMethod : getregistryMethod
   };
 
 });

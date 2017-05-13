@@ -12,11 +12,14 @@
 import _ from 'lodash';
 var Order = require('./order.model');
 var Product = require('../product/product.model').product;
+var Registry = require('../registry/registry.model').registry;
+var Registrycontroller = require('../registry/registry.controller');
 
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
+    console.log(err)
     res.status(statusCode).send(err);
   };
 }
@@ -42,7 +45,9 @@ function handleEntityNotFound(res) {
 
 function saveUpdates(updates) {
   return function(entity) {
-    var updated = _.merge(entity, updates);
+    
+    var updated = entity;
+    updated.delivered = true
     return updated.saveAsync()
       .spread(updated => {
         return updated;
@@ -70,6 +75,7 @@ export function index(req, res) {
 
 // Gets a list of user Orders
 export function myOrders(req, res) {
+  console.log(req.params.id)
   Order.findAsync({ customerId: req.params.id })
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -85,7 +91,7 @@ export function show(req, res) {
 
 // Creates a new Order in the DB
 export function create(req, res) {
-  console.log(req.body)
+  
   Order.createAsync(req.body)
     .then(entity => {
       if (entity) {
@@ -95,6 +101,10 @@ export function create(req, res) {
               product.stock -= i.quantity;
               product.saveAsync();
             });
+          if(i.registry){
+            
+            Registrycontroller.updateRegistryProduct(i.registry,i.productId,i.quantity)
+          }
         })
         res.status(201).json(entity);
       }
@@ -121,3 +131,5 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+

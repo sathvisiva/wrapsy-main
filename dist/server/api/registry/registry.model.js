@@ -1,24 +1,37 @@
 'use strict';
+var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+var Schema = mongoose.Schema;
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
 var Product = require('../product/product.model').product;
 
-var RegistryProductSchema = new Schema({
-  product: {
-    type: Schema.Types.ObjectId,
-    ref: 'Product',
-    index: true
-  },
-  desired: {
-    type: Number,
-    min: 0
-  },
-  required: {
-    type: Number,
-    min: 0
-  }
+var RsvpSchema = new Schema({
+  name: {
+    type: String,
 
+    trim: true
+  },
+  email: {
+    type: String
+  },
+  phone: {
+    type: Number
+  },
+  attending: {
+    type: Boolean,
+    'default': true
+  },
+  people: {
+    type: Number,
+    min: 1,
+    max: 10
+  },
+  posted: {
+    type: Date,
+    'default': Date.now
+  },
+  registryId: {
+    type: String
+  }
 });
 
 var RegistrySchema = new Schema({
@@ -38,7 +51,7 @@ var RegistrySchema = new Schema({
   type: {
     type: String
   },
-  message: {
+  greeting: {
     type: String
   },
   youfirstName: {
@@ -64,9 +77,10 @@ var RegistrySchema = new Schema({
     'default': false
   },
   products: [{
-    _id: String,
+    _id: { type: String, unique: true },
     name: String,
     slug: String,
+    imageUrl: String,
     price: Number,
     desired: {
       type: Number,
@@ -79,10 +93,12 @@ var RegistrySchema = new Schema({
 
   }]
 
-}, { versionKey: false });
+}, { versionKey: false }).index({
+  'title': 'text'
+});
 
 module.exports = {
   registry: mongoose.model('Registry', RegistrySchema),
-  registryProduct: mongoose.model('RegistryProduct', RegistryProductSchema)
+  rsvp: mongoose.model('Rsvp', RsvpSchema)
 };
 //# sourceMappingURL=registry.model.js.map

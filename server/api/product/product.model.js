@@ -115,17 +115,33 @@ var ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Catalog',
     index: true
-  }]
+  }],
+  prodcode: {
+    type: String
+  },
+  linkId : {
+  	type: String
+  },
+  affiliate : {
+    type: Boolean,
+    default: false
+  }
+
 }).index({
   'title': 'text',
   'description': 'text'
 });
 
+
+
+
 ProductSchema.plugin(slugs('title'));
+
 
 module.exports = {
   product: mongoose.model('Product', ProductSchema),
   variant: mongoose.model('Variant', VariantSchema),
   image: mongoose.model('Image', ImageSchema),
   review: mongoose.model('Review', ReviewSchema)
+  
 }

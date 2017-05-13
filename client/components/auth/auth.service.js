@@ -8,6 +8,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
   var userRoles = appConfig.userRoles || [];
 
   if ($cookies.get('token') && $location.path() !== '/logout') {
+    
     currentUser = User.get();
   }
 
@@ -27,7 +28,6 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       })
         .then(res => {
           $cookies.put('token', res.data.token);
-          console.log("create user")
           currentUser = User.get();
           return currentUser.$promise;
         })
@@ -61,7 +61,6 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       return User.save(user,
         function(data) {
           $cookies.put('token', data.token);
-          console.log("inside create user")
           currentUser = User.get();
           return safeCb(callback)(null, user);
         },

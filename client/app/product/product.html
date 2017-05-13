@@ -20,16 +20,18 @@
         <div class="col-md-9">
         <div class="row">
                         <!-- {{product}} -->
+       
+             <toaster-container toaster-options="{'time-out': 1000}"></toaster-container>
+     
         <div class="col-lg-6 col-md-6 col-sm-6">
         <div class="product-s-l">
         <div class="product-large">
         <div class="tab-content">
         <div class="tab-pane active in" id="img-1">
-        <a href="#"><img alt="" class="zoom_01" src="{{product.imageUrl}}" data-zoom-image="{{product.imageUrl}}" zoom></a>
+        <a ng-if="!product.affiliate" href="#"><img alt="" class="zoom_01" ng-src="{{product.imageUrl}}" data-zoom-image="{{product.imageUrl}}" zoom></a>
+        <a ng-if="product.affiliate" href="#"><img alt="" class="zoom_01" ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sathviprasi-21" data-zoom-image="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sathviprasi-21" zoom></a>
         </div>
-        <div class="tab-pane" ng-repeat="img in product.images" id="img-{{$index + 2}}">
-        <a href="#"><img alt="" class="zoom_01" src="{{img.imageUrl}}" data-zoom-image="{{img.imageUrl}}" zoom></a>
-        </div>
+      
          </div>
         </div>
         </div>
@@ -105,8 +107,10 @@
                     </div>
         
         <div class="product-info">
-        <button class="btn btn-primary" ng-if="!ngCart.getItemById(product._id)" ng-click="ngCart.addItem(product._id, product.title, product.price, qty, product)"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-        <button class="btn btn-secondary" ng-click="addtoRegistry(product,qty,registryId)"><i class="fa fa-shopping-cart"></i>Add to Registry</button>
+        <button class="btn btn-primary" ng-if="!ngCart.getItemById(product._id) && !product.affiliate" ng-click="ngCart.addItem(product._id, product.title, product.price, qty, product)"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+           <a ng-if="product.affiliate" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
+            ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" class="btn btn-primary  ">Buy Now </a>
+        <button class="btn btn-secondary" ng-click="addtoRegistry(product,qty,registry.registryId)"><i class="fa fa-shopping-cart"></i>Add to Registry</button>
         <a ng-show="ngCart.getItemById(product._id)" class="btn btn-sm btn-success" ui-sref="cart">View Cart and Checkout</a>
                             
         </div>

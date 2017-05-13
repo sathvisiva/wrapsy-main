@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'btford.socket-io', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toastr']).config(function ($urlRouterProvider, $locationProvider) {
+angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'btford.socket-io', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks']).config(function ($urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
 }).run(function ($rootScope, $state, ngCart) {

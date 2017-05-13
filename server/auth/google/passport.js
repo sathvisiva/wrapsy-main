@@ -14,7 +14,7 @@ export function setup(User, config) {
     })
       .then(user => {
         if (user) {
-        	console.log("insdie find if")
+        	
           return done(null, user);
         }
 
@@ -28,8 +28,8 @@ export function setup(User, config) {
         });
         user.saveAsync()
           .then(user => {
-          	console.log("inside save if")
-          	done(null, user)
+          	
+          	return done(null, user)
           })
           .catch(err => done(err));
       })

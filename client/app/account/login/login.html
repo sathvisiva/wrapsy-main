@@ -34,8 +34,14 @@
                         <p class="help-block">{{ vm.errors.other }}</p>
                     </div>
                     <div class="form-action account">
-                        <input class="btn btn-inverse btn-lg btn-register" type="submit" id="submit" value="Login">
-                        <a class="btn btn-default  btn-register" ui-sref="signup">Register</a>
+                        <div class="row">
+                        <div class="col-md-6">
+                        <button class="btn btn-primary btn-md " type="submit" id="submit" value="Login">Login</button>
+                        </div>
+                        <div class="col-md-6">
+                        <button class="btn btn-md btn-secondary" ui-sref="signup">Register</button>
+                        </div>
+                        </div>
                     </div>
                 </div>
                 <br>

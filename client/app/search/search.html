@@ -17,7 +17,7 @@
 <section class="product-grid">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-3 col-md-3 hidden-xs hidden-sm">
                 <!-- category sidebar -->
                 <sidebar-cat></sidebar-cat>
                 <div class="p-widget-title top-title">
@@ -88,7 +88,8 @@
                     <!-- <div ng-include="'app/category/product-list.html'"></div> -->
                     <div role="tabpanel" class="tab-pane active" id="grid">
                         <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" ng-repeat="product in products">
+                            <span ng-if = "products.length < 1">Sorry, No Products Found</span>
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" ng-repeat="product in products" ng-if = "products.length > 0">
                                 <div class="single-product">
                                     <a ui-sref="product({id: product.slug})">
                                         <img class="primary-img" src="{{product.imageUrl}}" alt="">
@@ -116,7 +117,8 @@
                     <div role="tabpanel" class="tab-pane" id="list">
                         <div class="row product-list">
                             <div class="col-md-12">
-                                <div class="single-product" ng-repeat="product in products">
+                                <span ng-if = "products.length < 1">Sorry, No products Found</span>
+                                <div class="single-product" ng-repeat="product in products" ng-if = "products.length > 0">
                                     <a ui-sref="product({id: product.slug})">
                                         <img class="primary-img" src="{{product.imageUrl}}" alt="">
                                         <i class="fa fa-expand"></i>

@@ -18,7 +18,19 @@
                 <sidebar-account></sidebar-account>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+
+
+
+
                 <form class="form" name="form" ng-submit="save(form)" novalidate>
+                <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="product.affiliate"> Affiliate
+                            </label>
+                        </div>
+                </div>
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" name="name" class="form-control" ng-model="product.title" required/>
@@ -26,14 +38,28 @@
                             Title is required
                         </p>
                     </div>
-                    <div class="form-group">
+                      <div class="form-group" ng-if="product.affiliate">
+                        <label>Link Id</label>
+                        <input type="text" name="linkId" class="form-control" ng-model="product.linkId" required/>
+                        <p class="help-block" ng-show="form.linkId.$error.required">
+                            Link Id is required
+                        </p>
+                    </div>
+                      <div class="form-group" ng-if="product.affiliate">
+                        <label>Product Code</label>
+                        <input type="text" name="prodcode" class="form-control" ng-model="product.prodcode" required/>
+                        <p class="help-block" ng-show="form.prodcode.$error.required">
+                            Product code is required
+                        </p>
+                    </div>
+                    <div class="form-group" >
                         <label>Description</label>
                         <textarea name="description" class="form-control" ng-model="product.description" required></textarea>
                         <p class="help-block" ng-show="form.description.$error.required">
                             Description is required
                         </p>
                     </div>
-                    <div class="row">
+                    <div class="row" >
                         <div class="form-group col-md-6">
                             <label>Price(₹)</label>
                             <input type="number" name="price" class="form-control" ng-model="product.price" required/>
@@ -41,7 +67,7 @@
                                 Price is required
                             </p>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-6" ng-if="!product.affiliate">
                             <label>Stock</label>
                             <input type="number" name="stock" class="form-control" ng-model="product.stock" required/>
                             <p class="help-block" ng-show="form.stock.$error.required">
@@ -49,10 +75,10 @@
                             </p>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" >
                         <label>Categories</label>
-                        <select class="form-control selectpicker" multiple name="categories" ng-model="product.categories" data-live-search="true">
-                            <option ng-repeat="cat in categories" value="{{cat._id}}">{{cat.name}}</option>
+                           <select class="form-control" name="categories" ng-model="product.categories" data-live-search="true">
+                            <option ng-repeat="cat in categories" value="{{cat._id}}" ng-selected="{{_.size(_.findWhere(product.categories, {_id: cat._id})) > 0}}">{{cat.name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -72,7 +98,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-success': form.imageUrl.$valid && submitted,
+                    <div class="form-group" ng-if="!product.affiliate" ng-class="{ 'has-success': form.imageUrl.$valid && submitted,
                                             'has-error': form.imageUrl.$invalid && submitted }">
                         <label class="form-label" for="imageUrl">Featured Image</label>
                         <span class="desc"></span>

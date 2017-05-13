@@ -12,6 +12,7 @@ var Variant = require('../api/product/product.model').variant;
 var Review = require('../api/product/product.model').review;
 var Image = require('../api/product/product.model').image;
 var Catalog = require('../api/catalog/catalog.model');
+var Registry = require('../api/registry/registry.model').registry;
 import mongoose from 'mongoose';
 
 
@@ -22,6 +23,7 @@ var variants = require('../data/variants.json');
 var images = require('../data/images.json');
 var reviews = require('../data/reviews.json');
 var products = require('../data/products.json');
+var registries = require('../data/registry.json');
 
 Thing.find({}).removeAsync()
   .then(() => {
@@ -128,4 +130,12 @@ Product.find({}).removeAsync()
     })
   }).then(() => {
     console.log('finished populating products');
+  });
+Registry.find({}).removeAsync()
+  .then(() => {
+    _.each(registries, function(registry) {
+      Registry.create(registry);
+    })
+  }).then(() => {
+    console.log('finished populating registries');
   });

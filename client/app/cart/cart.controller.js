@@ -5,5 +5,5 @@ angular.module('bhcmartApp')
     $scope.clearCart = Modal.confirm.delete(function() {
       ngCart.empty()
   });
-    console.log(ngCart.getCart())
+    
   });

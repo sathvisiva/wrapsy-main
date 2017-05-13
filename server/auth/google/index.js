@@ -14,7 +14,7 @@ router
       'email'
     ],
     session: false
-  }))
+  }), setTokenCookie)
   .get('/callback', passport.authenticate('google', {
     failureRedirect: '/signup',
     session: false
