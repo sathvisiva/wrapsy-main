@@ -101,6 +101,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     }
     Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
       $scope.registry = res;
+      toaster.pop('success', "Product successfully deleted");
     });
   };
 
@@ -157,6 +158,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
   $scope.updatedesired = function () {
     Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
       $scope.registry = res;
+      toaster.pop('success', "Product desired count updated");
     });
   };
 
@@ -232,23 +234,9 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
         console.log("success");
       });
     });
-    /* $scope.registry.backgroundImageUrl = "assets/img/cover.jpg"
-    */
   };
 
   $scope.productDetail = function (product) {
-
-    console.log("inside product details");
-    /*  if(product.affiliate){
-      Registry.updatePdtcnt({ id: $scope.registry._id }, product, function(resp) {
-        console.log(resp)
-      }, function(err) {
-        console.log(err)
-        $scope.message = "An error occured!"
-      });
-      }else{*/
-    //product({id: product.slug})
-
     var modalInstance = $uibModal.open({
       templateUrl: 'app/registry/registry-product.html',
       controller: 'RegistryProductDetailCtrl',
@@ -260,7 +248,9 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
           return product;
         }
       }
-    }).result.then(function (result) {});
+    }).result.then(function (result) {
+      $scope.queryRegistry();
+    });
     /* }*/
     /* $scope.registry.backgroundImageUrl = "assets/img/cover.jpg"
     */
@@ -325,7 +315,7 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
   $scope.buyNow = function (qyt) {
 
     Registry.updatePdtcnt({ id: $scope.registryid }, $scope.product, function (resp) {
-      $uibModalInstance.close();
+      $uibModalInstance.cancel();
     }, function (err) {
       console.log(err);
       $scope.message = "An error occured!";
@@ -333,6 +323,7 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
   };
 
   $scope.product = Product.get({ id: registryprod.slug });
+
   $scope.max = parseInt(registryprod.desired) - parseInt(registryprod.required);
 
   $scope.ok = function () {
@@ -357,7 +348,6 @@ angular.module('bhcmartApp').controller('FindRegistryController', ['$scope', '$s
 
 angular.module('bhcmartApp').controller('ManageRegistryListController', ['$scope', '$stateParams', '$state', 'Registry', 'Auth', function ($scope, $stateParams, $state, Registry, Auth) {
   var q = { where: { username: Auth.getCurrentUser().email } };
-
   $scope.registries = Registry.query(q);
 }]);
 angular.module('bhcmartApp').controller('inviteRegistryCtrl', function ($scope, $rootScope, $state, $stateParams, Registry, Auth, $location, $uibModalInstance) {

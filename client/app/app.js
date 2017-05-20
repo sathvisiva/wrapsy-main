@@ -265,7 +265,6 @@ angular.module('bhcmartApp', [
           $(element).on("click", function() {
             var $button = $(this);
             var oldValue = $button.parent().find("input").val();
-            console.log($button.parent().find("input")[0])
             var attrs = $button.parent().find("input")[0];
             if ($button.text() == "+" && parseFloat(oldValue) < attrs.max) {
               var newVal = parseFloat(oldValue) + 1;

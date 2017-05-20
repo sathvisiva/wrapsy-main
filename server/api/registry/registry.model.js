@@ -70,6 +70,10 @@ var RegistrySchema = new Schema({
   greeting: {
     type: String
   },
+
+  thankyou: {
+    type: String
+  },
   youfirstName: {
     type: String
   },
@@ -93,7 +97,7 @@ var RegistrySchema = new Schema({
     default: false
   },
   products : [{
-    _id: { type: String, unique: true }, 
+    _id: { type: String }, 
     name: String, 
     slug: String,
     imageUrl : String,

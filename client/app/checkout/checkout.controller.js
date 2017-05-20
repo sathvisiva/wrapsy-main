@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('bhcmartApp')
-  .controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart', function($scope, Auth, $state, Order, ngCart) {
+  .controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster', function($scope, Auth, $state, Order, ngCart, toaster) {
 
     $scope.user = Auth.getCurrentUser() || {};
     $scope.user.country = "In"
+    
     $scope.isLoggedIn = Auth.isLoggedIn();
     $scope.errors = {};
     $scope.submitted = false;
@@ -157,6 +158,7 @@ angular.module('bhcmartApp')
 ]
 
 
+
     $scope.login = (form) => {
       $scope.submitted = true;
 
@@ -175,11 +177,14 @@ angular.module('bhcmartApp')
     }
 
     $scope.validate = form => {
-      console.log($scope.user.state)
-      
-      if (form.$valid) {
+      if(!$scope.isLoggedIn){
+        toaster.pop('error', "Please login to continue");
+      }      
+      if (form.$valid && ( $scope.user.state || $scope.user.state != "")) {
         $scope.message = '';
         $scope.submitted = true;
+      }else{
+        toaster.pop('error', "Please check the data entered");
       }
     }
 
@@ -212,10 +217,10 @@ angular.module('bhcmartApp')
             $state.go('invoice', {id: resp._id});
           },
           function(err) {
-            console.log(err)
+            toaster.pop('error', "Please Try again later");
           });
       } else {
-        $scope.message = 'Please, complete the shipping section and click on validate'
+        $scope.message = 'Please, complete the shipping section and click on continue'
       }
     }
   }]);

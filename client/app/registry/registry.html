@@ -271,9 +271,9 @@ Phone is required
 
 									<img ng-src="{{item.imageUrl}}" class="registry-image" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "!item.affiliate" ng-click="productDetail(item)"/>
 
-									<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="registry-image" style="margin-top:35px;" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "item.affiliate" ng-click="productDetail(item)"/>
+									<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="registry-image" style="margin-top:35px; min-height: 165px" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "item.affiliate" ng-click="productDetail(item)"/>
 
-									<div class="ribbon sale" ng-show="item.desired==item.required">
+									<div class="ribbon sale" ng-show="item.desired<=item.required">
 										<div class="theribbon">FullFilled</div>
 										<div class="ribbon-background"></div>
 									</div>
@@ -281,8 +281,11 @@ Phone is required
 									<div class="caption text-center">
 										<h5>{{item.name}}</h5>
 										<p>₹ {{item.price}}</p>
-										<p>Desired : <input type=number ng-model="item.desired" ng-if="editable" style="width: 50px;" min = {{item.required}} />
-											<span ng-if="!editable" >{{item.desired}}</span>&nbsp;&nbsp;Received : {{item.required}}</p>
+										<p>Desired : 
+	<input type=number ng-model="item.desired" ng-if="editable" style="width: 50px;" min = {{item.required}} />
+	<span ng-if="!editable" >{{item.desired}}</span>&nbsp;&nbsp;Received : <span ng-if="item.desired >= item.required">{{item.required}}</span>
+	<span ng-if="item.desired < item.required">{{item.desired}}</span>
+	</p>
 
 
 								<!-- <a class="btn btn-primary" ng-if="item.affiliate" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{item.prodcode}}/

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams', '$state', 'Product', 'Registry', '$rootScope', 'RegistryService', 'Auth', 'toaster', function ($scope, $stateParams, $state, Product, Registry, $rootScope, RegistryService, Auth, toaster) {
+angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams', '$state', 'Product', 'Registry', '$rootScope', 'RegistryService', 'Auth', 'toaster', '$timeout', function ($scope, $stateParams, $state, Product, Registry, $rootScope, RegistryService, Auth, toaster, $timeout) {
 
   //Get product and fetch related products based on category
   $scope.product = Product.get({ id: $stateParams.id }, function (p) {
@@ -56,6 +56,9 @@ angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams'
         if (data.length == 0) {
           Registry.registryProduct({ id: registryId }, $scope.products, function (resp) {
             toaster.pop('success', "Product has been added successfully");
+            $timeout(function () {
+              window.history.back();
+            }, 1000);
           }, function (err) {
             console.log(err);
           });

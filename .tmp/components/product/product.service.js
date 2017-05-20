@@ -69,6 +69,13 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
         limit: null
       }
     },
+    'getregistryProduct': {
+      method: 'POST',
+      params: {
+        controller: 'getregistryProduct',
+        limit: null
+      }
+    },
     'rsvpRegistry': {
       method: 'POST',
       params: {

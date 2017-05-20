@@ -12,6 +12,8 @@
         </div>
     </div>
 </div>
+
+<toaster-container toaster-options="{'time-out': 1000}"></toaster-container>
 <!--End of Breadcrumbs-->
 <!--Checkout Area Start-->
 <section class="checkout-area">
@@ -39,15 +41,14 @@
                             <div class="panel-body row" ng-hide="isLoggedIn">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <div class="single-checkout">
-                                        <h2 class="border-down">Check as a guest or register</h2>
+                                        <h2 class="border-down">register</h2>
                                         <p class="heading-p">Register with us for future convenience</p>
                                         <form action="#">
+ 
                                             <label>
-                                                <input type="radio" name="check" value="guest" checked="checked">
-                                                <span>Checkout as Guest</span>
-                                            </label>
-                                            <label>
-                                                <input ng-click="$state.go('signup')" type="radio" name="check" value="user">
+                                                <input ng-click="$state.go('signup')" 
+                                              
+                                                type="radio" name="check" value="user">
                                                 <span>Register</span>
                                             </label>
                                         </form>
@@ -57,7 +58,7 @@
                                         <p class="heading-p">Register with us for future convenience</p>
                                         <p class="r-with-us">Fast and easy checkout</p>
                                         <p class="r-with-us">Easy access to your order history and status</p>
-                                        <a href="#shipping" class="c-btn">Continue</a>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -150,8 +151,9 @@
                                             </div>
                                             <div class="state">
                                                 <p>State/Province</p>
-        <select class="country" ng-model="user.state" name="state" ng-options = "p.key as p.name for p in states track by p.key"
+        <select class="country" ng-model="user.state" name="state"  ng-options = "p.key as p.name for p in states track by p.key"
          required>
+         <option value="" selected hidden />
 
                                                 </select>
                                             </div>
@@ -163,7 +165,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <button href="#" ng-hide="form.$valid && submitted" class="login-btn">Validate</button>
+                                        <button href="#" ng-hide="form.$valid && submitted" class="login-btn">Continue</button>
                                     </form>
                                 </div>
                             </div>

@@ -8,7 +8,6 @@
     var userRoles = appConfig.userRoles || [];
 
     if ($cookies.get('token') && $location.path() !== '/logout') {
-
       currentUser = User.get();
     }
 

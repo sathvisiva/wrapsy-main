@@ -119,6 +119,7 @@ angular.module('bhcmartApp')
     }
     Registry.update({id:$scope.registry._id},$scope.registry).$promise.then(function(res) {
       $scope.registry = res
+      toaster.pop('success', "Product successfully deleted");
     });
   }
 
@@ -179,7 +180,8 @@ angular.module('bhcmartApp')
 
       $scope.updatedesired = function(){
         Registry.update({id:$scope.registry._id},$scope.registry).$promise.then(function(res) {
-          $scope.registry = res
+          $scope.registry = res;
+          toaster.pop('success', "Product desired count updated");
         });
       }
 
@@ -265,27 +267,10 @@ angular.module('bhcmartApp')
             console.log("success")
           });
         });
-         /* $scope.registry.backgroundImageUrl = "assets/img/cover.jpg"
-    		 */
+         
     	}
 
-      $scope.productDetail = function(product){
-
-        console.log("inside product details")
-      /*  if(product.affiliate){
-        Registry.updatePdtcnt({ id: $scope.registry._id }, product, function(resp) {
-          console.log(resp)
-        }, function(err) {
-          console.log(err)
-          $scope.message = "An error occured!"
-        });
-        }else{*/
-          //product({id: product.slug})
-          
-        
-
-
-
+      $scope.productDetail = function(product){  
         var modalInstance = $uibModal.open({
           templateUrl : 'app/registry/registry-product.html',
           controller: 'RegistryProductDetailCtrl',
@@ -299,7 +284,7 @@ angular.module('bhcmartApp')
       }
         })
         .result.then(function(result) {
-           
+           $scope.queryRegistry()
         });
      /* }*/
          /* $scope.registry.backgroundImageUrl = "assets/img/cover.jpg"
@@ -378,14 +363,25 @@ angular.module('bhcmartApp')
       $scope.buyNow = function(qyt){
 
         Registry.updatePdtcnt({ id: $scope.registryid  }, $scope.product, function(resp) {
-          $uibModalInstance.close();  
+          $uibModalInstance.cancel();  
         }, function(err) {
           console.log(err)
           $scope.message = "An error occured!"
         });
       }
-      
+    
+
+
      $scope.product = Product.get({ id: registryprod.slug });
+
+
+
+
+     
+
+
+
+
      $scope.max = parseInt(registryprod.desired) - parseInt(registryprod.required)
 
        $scope.ok = function() {
@@ -420,8 +416,8 @@ angular.module('bhcmartApp')
   .controller('ManageRegistryListController', ['$scope', '$stateParams', '$state', 'Registry','Auth',
     function($scope, $stateParams, $state,  Registry,Auth) {
     var q = {where:{username:Auth.getCurrentUser().email}};
-
       $scope.registries =  Registry.query(q);
+
   }
   ]);
 angular.module('bhcmartApp')

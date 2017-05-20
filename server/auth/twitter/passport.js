@@ -24,7 +24,7 @@ export function setup(User, config) {
           twitter: profile._json
         });
         user.saveAsync()
-          .then(user => done(null, user))
+          .then(user => done(null, user[0]))
           .catch(err => done(err));
       })
       .catch(err => done(err));

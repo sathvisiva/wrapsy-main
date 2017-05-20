@@ -7,25 +7,6 @@ var Rsvp = require('./registry.model').rsvp;
 var GuestBook = require('./registry.model').guestBook;
 var smtpTransport = require('nodemailer-smtp-transport');
 
-/*var smtpTransport = nodemailer.createTransport("SMTP",{
-    service: "Gmail",
-    auth: {
-        user: "sathvisiva@gmail.com",
-        pass: "couchpotato"
-    }
-});*/
-
-
-var transport = nodemailer.createTransport(smtpTransport({
-  service: 'Gmail',
-  host : 'smtp.gmail.com',
-  secureConnection: true,
-  port : 465,
-  auth:{
-    user : "sathvisiva@gmail.com",     //username
-    pass : "couchpotato"                //password
-  }
-}));
 
 function isJson(str) {
 	try {
@@ -34,6 +15,66 @@ function isJson(str) {
 		str = str;
 	}
 	return str
+}
+
+function sendThankyouMessage(email, name, message){
+  var transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+          type: 'OAuth2', 
+          user: 'kurt.pricel06@gmail.com',
+          clientId: '473046905698-d2m4jt0okt652uu8j7u2ieucfdqf55mb.apps.googleusercontent.com',
+          clientSecret: 'TeK_CBWzxMZYK9FbfydIlzHq',
+          refreshToken: '1/M5yyE-ABuqr9DxRPgnUBXc5U3IMPsUX1KYU-PJw6KII' 
+      }, 
+      
+      debug: true // include SMTP traffic in the logs
+  }, {
+      // default message fields
+
+      // sender info
+      from: 'Sathvi<sathvisiva@gmail.com>',
+      headers: {
+          'X-Laziness-level': 1000 // just an example header, no need to use this
+      }
+  });
+ 
+ 
+  console.log('SMTP Configured');
+
+
+  // Message object
+  var message = {
+
+      // Comma separated list of recipients
+      to: 'Prasi <sathvi.prasi@gmail.com>',
+
+      // Subject of the message
+      subject: 'Thank you', //
+
+      // plaintext body
+      html: '<div>Hey ' + name + ',</div></br>' +
+          '<div>'+ message + '</div></br>'
+
+
+           
+  };
+
+  console.log('Sending Mail');
+  transporter.sendMail(message, function(error, info){
+      if (error) {
+          console.log('Error occurred');
+          console.log(error.message);
+          return;
+      }
+      console.log('Message sent successfully!');
+      console.log('Server responded with "%s"', info.response);
+      transporter.close();
+  });
+  
+
+
+
 }
 
 
@@ -63,7 +104,7 @@ exports.count = function(req, res) {
 	
 	if(req.query){
 		var q = isJson(req.query.where);
-		Wishlist.find(q).count().exec(function (err, count) {
+		Registry.find(q).count().exec(function (err, count) {
 			if(err) { 
 				console.log(err)
 				return handleError(res, err); }
@@ -308,9 +349,7 @@ exports.search = function(req, res) {
 };
 
 exports.updatePdtcnt =  function(req, res) {
-  
-    
-     var increment = {
+      var increment = {
                   $inc: {
                     'products.$.required': 1
                   }
@@ -330,8 +369,37 @@ exports.updatePdtcnt =  function(req, res) {
 
 };
 
-exports.updateRegistryProduct = function(registryId, productId,quantity){
-      var increment = {
+exports.getRegistryProduct = function(req, res) {
+var registryId = req.params.id;
+  var productId = req.body._id;
+    Registry.findOne({'products._id': productId}, {'products.$': 1}, function(err, product){
+      console.log(product.products[0]._id)
+      console.log(product.products[0].desired)
+      return res.status(201).json(product);
+    });
+};
+
+
+/*exports.getRegistryProduct = function(req, res){
+  var registryId = req.params.id;
+  var productId = req.body._id;
+    Registry.findById({registryId, 'products._id': productId}, {'products.$': 1}, function(err, product){
+      console.log(product)
+      return res.status(201).json(product);
+    }
+
+
+};*/
+
+exports.updateRegistryProduct = function(registryId, productId,quantity, email, name){
+      
+
+    Registry.findOne({'products._id': productId}, {'products.$': 1}, function(err, registry){
+      var desiredQuantity = parseInt(registry.products[0].desired, 10) - parseInt(registry.products[0].required, 10)
+      if(quantity > desiredQuantity) {
+        quantity = desiredQuantity
+      }
+           var increment = {
                   $inc: {
                     'products.$.required': quantity
                   }
@@ -341,10 +409,16 @@ exports.updateRegistryProduct = function(registryId, productId,quantity){
                 'products._id': productId
                 
               };
-              console.log(quantity)
+
+          
            Registry.update(query, increment, function(err,registry){
-              console.log(err)
+                
+                sendThankyouMessage(email,name, "Thank you")
            });
+    });
+
+
+ 
 }
 
 

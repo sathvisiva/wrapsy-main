@@ -70,6 +70,13 @@ angular.module('bhcmartApp')
           limit: null
         }
       },
+      'getregistryProduct': {
+        method: 'POST',
+        params: {
+          controller: 'getregistryProduct',
+          limit: null
+        }
+      },
        'rsvpRegistry': {
         method: 'POST',
         params: {

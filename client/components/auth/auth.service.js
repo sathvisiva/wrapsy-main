@@ -8,7 +8,6 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
   var userRoles = appConfig.userRoles || [];
 
   if ($cookies.get('token') && $location.path() !== '/logout') {
-    
     currentUser = User.get();
   }
 

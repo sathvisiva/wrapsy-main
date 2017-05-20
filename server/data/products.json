@@ -1181,4 +1181,49 @@
   "hot": false,
   "featured": true,
   "stock": 50
-}]
+},
+{
+  "_id" : "591857bce2efb24c1027c83c",
+  "prodcode" : "B01HOIA6ZY",
+  "linkId" : "1082a478465efdab021557c463846869",
+  "title" : "Puma Men's Atom Fashion",
+  "description" : "Puma Men's Atom Fashion III Idp Running Shoes",
+  "price" : 1399,
+  "slug" : "puma-men-s-atom-fashion",
+  "affiliate" : true,
+  "categories" : [
+    "56f24ce1f0b74ee730de5253"
+  ],
+  "reviews" : [ ],
+  "variants" : [ ],
+  "images" : [ ],
+  "new" : false,
+  "hot" : false,
+  "featured" : false,
+  "stock" : 1,
+  "__v" : 0
+
+},
+{
+"_id" : "591857bce2efb24c1027c83c",
+  "prodcode" : "B01HOIA6ZY",
+  "linkId" : "1082a478465efdab021557c463846869",
+  "title" : "Puma Men's Atom Fashion",
+  "description" : "Puma Men's Atom Fashion III Idp Running Shoes",
+  "price" : 1399,
+  "slug" : "puma-men-s-atom-fashion",
+  "affiliate" : true,
+  "categories" : [
+      "56f24ce1f0b74ee730de5253"
+  ],
+  "reviews" : [ ],
+  "variants" : [ ],
+  "images" : [ ],
+  "new" : false,
+  "hot" : false,
+  "featured" : false,
+  "stock" : 1,
+  "__v" : 0
+}
+
+]

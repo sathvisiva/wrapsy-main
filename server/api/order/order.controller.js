@@ -102,8 +102,7 @@ export function create(req, res) {
               product.saveAsync();
             });
           if(i.registry){
-            
-            Registrycontroller.updateRegistryProduct(i.registry,i.productId,i.quantity)
+            Registrycontroller.updateRegistryProduct(i.registry,i.productId,i.quantity, req.body.customerEmail, req.body.customerName)
           }
         })
         res.status(201).json(entity);

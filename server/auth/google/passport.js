@@ -29,7 +29,7 @@ export function setup(User, config) {
         user.saveAsync()
           .then(user => {
           	
-          	return done(null, user)
+          	return done(null, user[0])
           })
           .catch(err => done(err));
       })
