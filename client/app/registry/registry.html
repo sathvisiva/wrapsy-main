@@ -194,7 +194,7 @@ Phone is required
 	<div class="form-group">
 		<div class="radio">
 												<label>
-<input type="radio" name="attending" value="true" ng-model="rsvp.attending" checked=true ng-checked = true>
+<input type="radio" name="attending" value="true" ng-model="rsvp.attending" checked="checked" ng-checked = true>
 													Attending
 												</label>
 											</div>
@@ -219,8 +219,12 @@ Phone is required
 					</div>
 
 					<div class="registry-items" ng-show="show4" ng-if = "editable">
-						<div class="table-responsive">   
-							<table class="table">
+					<div class="text-center" ng-show="guests.length < 1">
+						No Guest Information Available
+					</div>
+
+						<div class="table-responsive" ng-show="guests.length > 0">   
+							<table class="table" >
 								<thead>
 									<tr>
 										<th>Name</th>
@@ -260,6 +264,9 @@ Phone is required
 				<div class="wishname">{{wish.by}}</div>
 				<div class="wishcontent">{{wish.wishes}}</div>
 				<br>
+			</div>
+			<div class="text-center" ng-show="guestWishes.length < 1">
+				No Messages
 			</div>
 					</div>
 
@@ -304,5 +311,6 @@ Phone is required
 			</div> 
 
 		</div>
-
+<br>
+<br>
 		<footer></footer>

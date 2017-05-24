@@ -180,6 +180,7 @@ angular.module('bhcmartApp')
       if(!$scope.isLoggedIn){
         toaster.pop('error', "Please login to continue");
       }      
+      console.log("state" + $scope.user.state)
       if (form.$valid && ( $scope.user.state || $scope.user.state != "")) {
         $scope.message = '';
         $scope.submitted = true;

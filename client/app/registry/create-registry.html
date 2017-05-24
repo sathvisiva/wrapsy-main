@@ -74,11 +74,10 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="firstName" class="registry-label">YOUR BIG DAY IS:</label>
-                        <input type="text" class="form-control " uib-datepicker-popup="mediumDate" ng-model="registry.date" is-open="popup1.opened"  ng-required="true" close-text="Close"  ng-click="open1()" required/>
-                        <p class="help-block" ng-show="form.yousecond.$error.required && submitted">
+                        <input type="text" class="form-control" id="bigday" name="bigday" uib-datepicker-popup="mediumDate" ng-model="registry.date" is-open="popup1.opened"  ng-required="true" close-text="Close"  ng-click="open1()" required/>
+                        <p class="help-block" ng-show="form.bigday.$error.required  && submitted">
                             Date is required
-                        </p>
-                        
+                            </p>
 
                         
                     </div>
@@ -110,4 +109,6 @@
         </form>
     </div>
 </div>
+<br>
+<br>
 <footer></footer>

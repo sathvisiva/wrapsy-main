@@ -401,12 +401,27 @@ angular.module('bhcmartApp')
   .controller('FindRegistryController', ['$scope', '$stateParams', '$state', 'Registry',
     function($scope, $stateParams, $state,  Registry) {
     
+        
       $scope.searchRegistry = function(){
-          
+        $scope.display = false;
         var q = {where:{title: {'$regex': $scope.input}}};
         q.where.title.$options ="$i";
         $scope.registries = Registry.query(q,function(data){
-              console.log(data);
+              
+              var groupArrayNew = [];
+
+          angular.forEach(data, function (item, idx) {
+              if (item.visible)
+              groupArrayNew.push(item)
+          });
+           if(groupArrayNew.length == 0){
+              console.log("inside loog")
+              $scope.display = true;
+              console.log($scope.display)
+            }
+
+
+
          });
 
 
@@ -425,7 +440,7 @@ angular.module('bhcmartApp')
 angular.module('bhcmartApp')
 .controller('inviteRegistryCtrl',function ($scope,$rootScope,$state, $stateParams,Registry,Auth,$location, $uibModalInstance) {
 
- $scope.url = 'http:wishlist.in/'+$location.path();
+ $scope.url = 'http://www.wrapsytest.com'+$location.path();
  console.log($location.path());
 
  $scope.cancel = function () {
