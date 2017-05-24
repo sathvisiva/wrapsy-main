@@ -37,4 +37,11 @@ angular.module('bhcmartApp')
         console.log(resp)
       })
     });
+
+    $scope.cancelOrder = Modal.confirm.cancel(function(o) {
+      o.delivered = o.delivered ? false : true;
+      o.$updateCancel(function(resp) {
+        console.log(resp)
+      })
+    });
   }]);

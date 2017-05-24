@@ -94,7 +94,12 @@
     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" ng-repeat="product in filtered = products  | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage">
     <div class="single-product">
     <a ui-sref="product({id: product.slug})">
-    <img class="primary-img" src="{{product.imageUrl}}" alt="">
+    <!-- <img class="primary-img" src="{{product.imageUrl}}" alt=""> -->
+
+    <img class="primary-img" ng-src="{{product.imageUrl}}" alt="" ng-if="!product.affiliate">
+            <img class="secondary-img" ng-src="{{product.imageUrl}}" alt="" ng-if="!product.affiliate">
+            <img class="primary-img" ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" alt="" ng-if="product.affiliate">
+            <img class="secondary-img" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" alt="" ng-if="product.affiliate">
     
     <i class="fa fa-expand"></i>
     </a>
@@ -108,7 +113,9 @@
     <i class="fa fa-star" ng-class="{'grey': product.averageRating < 5}"></i>
     </div>
     <h5>₹{{product.price | number}}</h5>
-    <button ng-show="!ngCart.getItemById(product._id)" ng-click="ngCart.addItem(product._id, product.title, product.price, 1, product)" class="btn btn-primary btn-sm btn-sm-product">Add to cart</button>
+    <button ng-show="!ngCart.getItemById(product._id)" ng-click="ngCart.addItem(product._id, product.title, product.price, 1, product)" class="btn btn-primary btn-sm btn-sm-product" ng-if="!product.affiliate">Add to cart</button>
+     <a ng-if="product.affiliate" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
+            ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" class="btn btn-primary btn-sm ">Buy Now </a>
                                         
                                         
     <button  
@@ -127,7 +134,14 @@
     
     <div class="single-product" ng-repeat="product in filtered = products  | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage">
     <a ui-sref="product({id: product.slug})">
-    <img class="primary-img" src="{{product.imageUrl}}" alt="">
+    <!-- <img class="primary-img" src="{{product.imageUrl}}" alt=""> -->
+
+    <img class="primary-img" ng-src="{{product.imageUrl}}" alt="" ng-if="!product.affiliate">
+            <img class="secondary-img" ng-src="{{product.imageUrl}}" alt="" ng-if="!product.affiliate">
+            <img class="primary-img" ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" alt="" ng-if="product.affiliate">
+            <img class="secondary-img" src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" alt="" ng-if="product.affiliate">
+
+    
     <i class="fa fa-expand"></i>
     </a>
     <div class="product-info">
@@ -141,7 +155,9 @@
     </div>
     <h5>₹{{product.price | number}}</h5>
     <p>{{product.description}}</p>
-    <button ng-show="!ngCart.getItemById(product._id)" ng-click="ngCart.addItem(product._id, product.title, product.price, 1, product)" class="btn btn-primary btn-sm btn-sm-product">Add to cart</button>
+    <button ng-show="!ngCart.getItemById(product._id)" ng-click="ngCart.addItem(product._id, product.title, product.price, 1, product)" class="btn btn-primary btn-sm btn-sm-product" ng-if="!product.affiliate">Add to cart</button>
+     <a ng-if="product.affiliate" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
+            ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" class="btn btn-primary btn-sm ">Buy Now </a>
     <button  ng-click="addtoRegistry(product)" class="btn btn-secondary btn-sm btn-sm-product">Add to Registry</button>
     <a ng-show="ngCart.getItemById(product._id)" class="btn btn-success btn-sm n-a-btn" ng-click="ngCart.removeItemById(product._id)"><i class="fa fa-check"></i> ADDED</a>
     </div>

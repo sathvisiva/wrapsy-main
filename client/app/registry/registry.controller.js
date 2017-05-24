@@ -284,6 +284,7 @@ angular.module('bhcmartApp')
       }
         })
         .result.then(function(result) {
+          console.log(result)
            $scope.queryRegistry()
         });
      /* }*/
@@ -361,13 +362,14 @@ angular.module('bhcmartApp')
       }
 
       $scope.buyNow = function(qyt){
-
+        $uibModalInstance.close("test");  
         Registry.updatePdtcnt({ id: $scope.registryid  }, $scope.product, function(resp) {
-          $uibModalInstance.cancel();  
+           
         }, function(err) {
           console.log(err)
           $scope.message = "An error occured!"
         });
+
       }
     
 

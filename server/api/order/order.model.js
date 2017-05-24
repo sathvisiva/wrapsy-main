@@ -42,6 +42,10 @@ var OrderSchema = new Schema({
     type: Boolean,
     default: false
   },
+  cancel : {
+  	type: Boolean,
+    default: false
+  },
   created: {
     type: Date,
     default: Date.now

@@ -59,7 +59,7 @@
                                 <td>₹{{o.totalCost}}</td>
                                
                                 <td>
-                                    <a ng-click="submitcancelRequest()" class="btn btn-primary btn-sm">Cancel order</a>
+                                    <a ng-click=" cancelOrder('Order ' + '#' + o.orderNumber, o)" class="btn btn-primary btn-sm" ng-disabled ="o.cancel">Cancel order</a>
                                 </td>
                                 <td ng-show="isAdmin"> <a ng-click=" deliverOrder('Order ' + '#' + o.orderNumber, o)" class="yellow"><span class="fa fa-truck fa-2x"></span></a></td>
                                 <td ng-show="isAdmin"> <a ng-click="deleteOrder('Order ' + '#' + o.orderNumber, o)" class="trash"><span class="fa fa-trash fa-2x"></span></a></td>

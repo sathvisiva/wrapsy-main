@@ -249,6 +249,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
         }
       }
     }).result.then(function (result) {
+      console.log(result);
       $scope.queryRegistry();
     });
     /* }*/
@@ -313,10 +314,8 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
   };
 
   $scope.buyNow = function (qyt) {
-
-    Registry.updatePdtcnt({ id: $scope.registryid }, $scope.product, function (resp) {
-      $uibModalInstance.cancel();
-    }, function (err) {
+    $uibModalInstance.close("test");
+    Registry.updatePdtcnt({ id: $scope.registryid }, $scope.product, function (resp) {}, function (err) {
       console.log(err);
       $scope.message = "An error occured!";
     });

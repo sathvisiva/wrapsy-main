@@ -55,6 +55,18 @@ function saveUpdates(updates) {
   };
 }
 
+function saveCancelUpdates(updates) {
+  return function(entity) {
+    
+    var updated = entity;
+    updated.cancel = true
+    return updated.saveAsync()
+      .spread(updated => {
+        return updated;
+      });
+  };
+}
+
 function removeEntity(res) {
   return function(entity) {
     if (entity) {
@@ -119,6 +131,17 @@ export function update(req, res) {
   Order.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+}
+
+export function updateCancel(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Order.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(saveCancelUpdates(req.body))
     .then(responseWithResult(res))
     .catch(handleError(res));
 }

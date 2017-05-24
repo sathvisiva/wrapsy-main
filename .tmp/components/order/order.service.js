@@ -11,6 +11,13 @@ angular.module('bhcmartApp').factory('Order', function ($resource) {
       params: {
         controller: 'myorders'
       }
+    },
+    'updateCancel': {
+      method: 'POST',
+
+      params: {
+        controller: 'updateCancel'
+      }
     }
   });
 });
