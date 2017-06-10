@@ -243,6 +243,90 @@ angular.module('bhcmartApp').factory('Modal', function ($rootScope, $uibModal) {
             del.apply(event, args);
           });
         };
+      },
+
+      remove: function remove() {
+        var del = arguments.length <= 0 || arguments[0] === undefined ? angular.noop : arguments[0];
+
+        /**
+         * Open a deliver confirmation modal
+         * @param  {String} name   - name or info to show on modal
+         * @param  {All}           - any additional args are passed straight to del callback
+         */
+        return function () {
+          var args = Array.prototype.slice.call(arguments),
+              name = args.shift(),
+              removeModal;
+
+          removeModal = openModal({
+            modal: {
+              dismissable: true,
+              title: 'Confirm Remove',
+              html: '<p>Are you sure you want to remove <strong>' + name + '</strong> from your cart ?</p>',
+              buttons: [{
+                classes: 'btn-success',
+                text: 'Yes',
+                click: function click(e) {
+                  removeModal.close(e);
+                }
+              }, {
+                classes: 'btn-default',
+                text: 'No',
+                click: function click(e) {
+                  removeModal.dismiss(e);
+                }
+              }]
+            }
+          }, 'modal-danger');
+
+          removeModal.result.then(function (event) {
+            del.apply(event, args);
+          });
+        };
+      },
+      /**
+       * Create a function to open a deliver confirmation modal (ex. ng-click='myModalFn(name, arg1, arg2...)')
+       * @param  {Function} del - callback, ran when deliver is confirmed
+       * @return {Function}     - the function to open the modal (ex. myModalFn)
+       */
+      process: function process() {
+        var remove = arguments.length <= 0 || arguments[0] === undefined ? angular.noop : arguments[0];
+
+        /**
+         * Open a deliver confirmation modal
+         * @param  {String} name   - name or info to show on modal
+         * @param  {All}           - any additional args are passed straight to del callback
+         */
+        return function () {
+          var args = Array.prototype.slice.call(arguments),
+              name = args.shift(),
+              removeModal;
+
+          removeModal = openModal({
+            modal: {
+              dismissable: true,
+              title: 'Confirm Processing',
+              html: '<p>Are you sure you want to process <strong>' + name + '</strong> ?</p>',
+              buttons: [{
+                classes: 'btn-success',
+                text: 'Process',
+                click: function click(e) {
+                  cancelModal.close(e);
+                }
+              }, {
+                classes: 'btn-default',
+                text: 'Cancel',
+                click: function click(e) {
+                  removeModal.dismiss(e);
+                }
+              }]
+            }
+          }, 'modal-danger');
+
+          removeModal.result.then(function (event) {
+            del.apply(event, args);
+          });
+        };
       }
 
     }

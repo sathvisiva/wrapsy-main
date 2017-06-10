@@ -181,14 +181,13 @@ header {
 .search-form button {
     background: #1d84ce none repeat scroll 0 0;
     border: 0 none;
-    border-radius: 30px;
     color: #ffffff;
     height: 38px;
     position: absolute;
     right: 0;
     text-transform: uppercase;
     top: 0;
-    width: 32%;
+    
     transition: background 0.3s ease 0s, color 0.2s ease 0s
 }
 #search-form > button:hover {
@@ -198,6 +197,7 @@ header {
 .search-form button i {
     margin-right: 5px;
     display: inline-block
+    margin-left  :5px;
 }
 .header-r-cart > li > a, .header-r-account > li > a {
   background: #1d84ce none repeat scroll 0 0;
@@ -3364,6 +3364,7 @@ i.grey {
 .header-left-top li {
     display: inline-block;
     position: relative;
+    width: 100%
 }
 .header-left-top a {
     color: #ffffff;
@@ -3517,16 +3518,22 @@ i.grey {
     z-index: 99999;
 }
 .box-search-select select {
-    -moz-appearance: none;
+    /*-moz-appearance: none;
     -webkit-appearance: none;
     background: rgba(0, 0, 0, 0) url("../img/icon/arrow-down.png") no-repeat scroll 13px 7px;
     border: 0 none;
     border-radius: 0;
-    cursor: pointer;
+    cursor: pointer;*/
     font-size: 15px;
     height: 35px;
-    padding-right: 12px;
-    outline: none
+    /*padding-right: 12px;
+    outline: none*/
+}
+.search-select {
+    height: 35px;
+    background: none;
+    border: none;
+    border-radius: 35px;
 }
 .home-four #search-form input {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
@@ -4247,6 +4254,24 @@ i.grey {
     right: 0;
     left: auto;
 }
+.home-five .header-right-menu ul li, .home-five .search-form {
+    padding: 6px 0;
+}
+.home-five .header-left-menu .header-r-cart {
+    padding: 0;
+    float: left
+    color : #FF4081;
+}
+
+.home-five .header-left-menu .header-r-cart li > a
+.home-five .cart > span {
+    bottom: -3px;
+    color: #FF4081;
+    left: 26px;
+}
+.home-five .header-left-menu ul li, .home-five .search-form {
+    padding: 6px 0;
+}
 .home-five .header-r-cart > li > a, .home-five .header-r-account > li > a {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     color: #ffffff;
@@ -4277,9 +4302,8 @@ i.grey {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     color: #b6b6ba;
     display: inline-block;
-    
     height: 33px;
-    width: 70.5%;
+    width: 60.5%;
 }
 .home-five .search-form > form {
     border: 1px solid #0966A8;
@@ -4290,12 +4314,13 @@ i.grey {
 }
 .home-five #search-form > button {
     background: #FF4081 none repeat scroll 0 0;
-    border-radius: 0 30px 30px 0;
+    padding-left: 10px
     font-size: 14.5px;
     height: 35px;
     right: 0;
     top: 0;
-    width: 26%;
+    border-radius: 0px 30px 30px 0px;
+    
 }
 .home-five .header-right-menu ul li {
     padding: 5px 0;
@@ -6773,7 +6798,9 @@ body {
 .navbar-custom .navbar-nav > li > a {
     color: #ffffff;
     font-weight: bold;
+    cursor: pointer !important;
 }
+
 .navbar-custom .navbar-nav > li > a:hover,
 .navbar-custom .navbar-nav > li > a:focus {
     background-color: #ff4081;
@@ -6837,7 +6864,7 @@ body {
   border-radius: 3px;
 }
 .btn-primary {
-  color: #ffffff;
+  color: #ffffff !important;
   background-color: #FF4081;
   border-color: #FF4081;
   border-radius: 0px;
@@ -6898,9 +6925,10 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .btn-secondary {
-    color: #fff;
+    
     background-color: #00BCD4;
     border-color: #00BCD4;
+    color: white;
 }
 
 .btn-sm-product{
@@ -6982,6 +7010,7 @@ fieldset[disabled] .btn-primary.active {
     font-weight: bold;
     color: #FF4081;
     text-decoration: underline;
+    cursor: pointer;
 }
 .wishname{
     font-weight: bold;
@@ -6991,4 +7020,35 @@ fieldset[disabled] .btn-primary.active {
 .wishcontent{
     font-style: italic;
     color: #FF4081;
+}
+
+.logintext{
+    color: #00BCD4;
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
+    float: none;
+    
+    font-style: italic;
+}
+
+.toast-top-center {
+      top: 40%;
+}
+
+
+/*.slick-next{
+    right: 20px !important;
+}
+
+.slick-prev{
+    left: 20px !important;
+}*/
+
+.slick-prev, .slick-next {
+    
+    background: #FF4081 !important;
+    }
+
+.publish-registry-button{
+    cursor: pointer !important;
 }

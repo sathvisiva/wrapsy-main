@@ -10,9 +10,10 @@
                         <label for="firstName" class="registry-label">REGISTRY TITLE:</label>
                         <input type="text" class="form-control  registry-form" id="firstName" name="title"
                         ng-model="registry.title" required/>
-                        <p class="help-block" ng-show="form.title.$error.required && submitted">
+                        <p class="help-block" ng-show="form.title.$error.required && form.title.$touched && form.title.$invalid">
                             Title is required
                         </p>
+
                     </div>
                     </div>
                 </div>
@@ -21,7 +22,7 @@
                         <div class="form-group">
                             <label for="firstName" class="registry-label">YOU ARE :</label>
                             <input type="text" class="form-control registry-form" id="firstName" name="youfirstName" ng-model="registry.youfirstName" required/>
-                            <p class="help-block" ng-show="form.youfirstName.$error.required && submitted">
+                            <p class="help-block" ng-show="form.youfirstName.$error.required && form.youfirstName.$touched && form.youfirstName.$invalid ">
                             First Name is required
                             </p>
                         </div>
@@ -31,7 +32,7 @@
                             <label for="LastName"> </label>
                             <input type="text" class="form-control registry-form" id="LastName" name="yousecond" ng-model="registry.yousecondName"
                              required style="margin-top: 5px"/>
-                            <p class="help-block" ng-show="form.yousecond.$error.required  && submitted">
+                            <p class="help-block" ng-show="form.yousecond.$error.required  && form.yousecond.$touched && form.yousecond.$invalid">
                             Last Name is required
                             </p>
                         </div>
@@ -42,7 +43,7 @@
                         <div class="form-group">
                             <label for="firstName" class="registry-label" >YOUR SPOUSE-TO-BE IS:</label>
                             <input type="text" class="form-control registry-form" id="firstName" ng-model="registry.firstName" name="firstName" required>
-                            <p class="help-block" ng-show="form.firstName.$error.required && submitted">
+                            <p class="help-block" ng-show="form.firstName.$error.required && form.firstName.$touched && form.firstName.$invalid">
                             First Name is required
                             </p>
 
@@ -52,7 +53,7 @@
                         <div class="form-group">
                             <label for="LastName">  </label>
                             <input type="text" class="form-control registry-form" name="second" ng-model="registry.secondName" id="LastName" required style="margin-top: 5px">
-                            <p class="help-block" ng-show="form.second.$error.required && submitted">
+                            <p class="help-block" ng-show="form.second.$error.required && form.second.$touched && form.second.$invalid">
                             Last Name is required
                             </p>
                         </div>
@@ -64,7 +65,7 @@
                             <label for="LastName" class="registry-label"> LOCATION</label>
                             <input type="text" class="form-control registry-form" id="location" name="location" ng-model="registry.location"
                              required />
-                            <p class="help-block" ng-show="form.location.$error.required  && submitted">
+                            <p class="help-block" ng-show="form.location.$error.required  && form.location.$touched && form.location.$invalid">
                             Location is required
                             </p>
                         </div>
@@ -74,9 +75,12 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="firstName" class="registry-label">YOUR BIG DAY IS:</label>
-                        <input type="text" class="form-control" id="bigday" name="bigday" uib-datepicker-popup="mediumDate" ng-model="registry.date" is-open="popup1.opened"  ng-required="true" close-text="Close"  ng-click="open1()" required/>
-                        <p class="help-block" ng-show="form.bigday.$error.required  && submitted">
+                        <input type="text" class="form-control" id="bigday" name="bigday" ng-focus="open1()" uib-datepicker-popup="dd-MMM-yyyy" ng-model="registry.date" is-open="popup1.opened" datepicker-options="options"   ng-required="true" close-text="Close"  ng-click="open1()" required/>
+                        <p class="help-block" ng-show="form.bigday.$error.required  && form.bigday.$touched && form.bigday.$invalid">
                             Date is required
+                            </p>
+                        <p class="help-block" ng-show="form.bigday.$error.date  && form.bigday.$touched && form.bigday.$invalid">
+                            invalid date
                             </p>
 
                         
@@ -102,7 +106,7 @@
             <div class="row">
                 <div class="col-md-4">
                 <p class="help-block"> {{ message }} </p>
-                    <button class="btn btn-primary" ng-click="submitted = true" type="submit">Save Changes</button>
+                    <button class="btn btn-primary" ng-click="submitted = true" ng-disabled="form.$invalid" type="submit">Save Changes</button>
                 </div>
             </div>
             </div>

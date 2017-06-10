@@ -33,59 +33,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     };
 
+    $scope.setDate = function (year, month, day) {
+      $scope.registry.date = new Date(day, month, year);
+    };
+
+    var date = new Date();
+    $scope.setDate(date.getFullYear(), date.getMonth(), date.getDate());
+
+    $scope.registry.date = new Date();
+
     $scope.clear = function () {
       $scope.registry.date = null;
     };
 
-    $scope.inlineOptions = {
-      customClass: getDayClass,
-      minDate: new Date(),
-      showWeeks: true
-    };
-
-    $scope.dateOptions = {
-
-      formatYear: 'yy',
-      maxDate: new Date(2020, 5, 22),
-      minDate: new Date(),
-      startingDay: 1
-    };
-
-    // Disable weekend selection
-
     $scope.open1 = function () {
       $scope.popup1.opened = true;
     };
+    $scope.popup1 = { opened: false };
 
-    $scope.setDate = function (year, month, day) {
-      $scope.registry.date = new Date(year, month, day);
+    $scope.options = {
+      minDate: new Date()
     };
-
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
-    $scope.altInputFormats = ['M!/d!/yyyy'];
-
-    $scope.popup1 = {
-      opened: false
-    };
-
-    function getDayClass(data) {
-      var date = data.date,
-          mode = data.mode;
-      if (mode === 'day') {
-        var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-        for (var i = 0; i < $scope.events.length; i++) {
-          var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-          if (dayToCheck === currentDay) {
-            return $scope.events[i].status;
-          }
-        }
-      }
-
-      return '';
-    }
   };
 
   angular.module('bhcmartApp').controller('CreateRegistryController', CreateRegistryController);
@@ -118,6 +86,8 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     });
   };
 
+  $scope.ph_numbr = /^(\+?(\d{1}|\d{2}|\d{3})[- ]?)?\d{3}[- ]?\d{3}[- ]?\d{4}$/;
+
   $scope.queryRegistry();
 
   $scope.show1 = true;
@@ -137,6 +107,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     $scope.show3 = false;
     $scope.show4 = false;
     $scope.rsvp = {};
+    $scope.rsvp.attending = "true";
   };
 
   $scope.showGuestBook = function () {
@@ -393,56 +364,18 @@ angular.module('bhcmartApp').controller('ManageRegistryController', ['$scope', '
   $scope.viewRegistry = function () {
     $state.go('registry', { id: $scope.registry._id });
   };
-
-  $scope.inlineOptions = {
-    customClass: getDayClass,
-    minDate: new Date(),
-    showWeeks: true
+  $scope.clear = function () {
+    $scope.registry.date = null;
   };
-
-  $scope.dateOptions = {
-
-    formatYear: 'yy',
-    maxDate: new Date(2020, 5, 22),
-    minDate: new Date(),
-    startingDay: 1
-  };
-
-  // Disable weekend selection
 
   $scope.open1 = function () {
     $scope.popup1.opened = true;
   };
+  $scope.popup1 = { opened: false };
 
-  $scope.setDate = function (year, month, day) {
-    $scope.registry.date = new Date(year, month, day);
+  $scope.options = {
+    minDate: new Date()
   };
-
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-  $scope.altInputFormats = ['M!/d!/yyyy'];
-
-  $scope.popup1 = {
-    opened: false
-  };
-
-  function getDayClass(data) {
-    var date = data.date,
-        mode = data.mode;
-    if (mode === 'day') {
-      var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-      for (var i = 0; i < $scope.events.length; i++) {
-        var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-        if (dayToCheck === currentDay) {
-          return $scope.events[i].status;
-        }
-      }
-    }
-
-    return '';
-  }
 
   $scope.setDate = function (year, month, day) {
     $scope.registry.date = new Date(year, month, day);

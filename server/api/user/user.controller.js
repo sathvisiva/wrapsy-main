@@ -12,6 +12,15 @@ function validationError(res, statusCode) {
   }
 }
 
+function isJson(str) {
+  try {
+    str = JSON.parse(str);
+  } catch (e) {
+    str = str;
+  }
+  return str
+}
+
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
@@ -30,12 +39,22 @@ function respondWith(res, statusCode) {
  * Get list of users
  * restriction: 'admin'
  */
-export function index(req, res) {
+export function index(req, res, next) {
+  if(req.query){
+    var q = isJson(req.query.where);
+    User.find(q).exec(function (err, user) {
+        if(err) { console.log(err);
+          return handleError(res, err); }
+          
+          return res.status(200).json(user);
+        });
+  }else{
   User.findAsync({}, '-salt -password')
     .then(users => {
       res.status(200).json(users);
     })
     .catch(handleError(res));
+  }
 }
 
 /**
@@ -91,22 +110,21 @@ export function destroy(req, res) {
  * Change a users password
  */
 export function changePassword(req, res, next) {
-  var userId = req.user._id;
-  var oldPass = String(req.body.oldPassword);
+
+  var userId = req.params.id;
   var newPass = String(req.body.newPassword);
 
-  User.findByIdAsync(userId)
+  User.find({email: userId})
     .then(user => {
-      if (user.authenticate(oldPass)) {
+      console.log(user)
         user.password = newPass;
         return user.saveAsync()
           .then(() => {
+            console.log("inside then")
             res.status(204).end();
           })
           .catch(validationError(res));
-      } else {
-        return res.status(403).end();
-      }
+      
     });
 }
 

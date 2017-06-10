@@ -26,8 +26,8 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
     url: '/settings',
     templateUrl: 'app/account/settings/settings.html',
     controller: 'SettingsController',
-    controllerAs: 'vm',
-    authenticate: true
+    controllerAs: 'vm'
+
   });
 }).run(function ($rootScope) {
   $rootScope.$on('$stateChangeStart', function (event, next, nextParams, current) {

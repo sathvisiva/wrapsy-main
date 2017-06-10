@@ -1,35 +1,47 @@
 'use strict';
 
-class LoginController {
-  //start-non-standard
-  user = {};
-  errors = {};
-  submitted = false;
-  //end-non-standard
+(function() {
 
-  constructor(Auth, $state) {
-    this.Auth = Auth;
-    this.$state = $state;
-  }
+  class LoginController {
 
-  login(form) {
-    this.submitted = true;
+
+    constructor($http, $scope, $timeout, socket, Auth, $state,User, toaster) {
+      $scope.user = {};
+      $scope.errors = {};
+      $scope.submitted = false;
+      
+     
+  $scope.login = function(form) {
+        $scope.submitted = true;
 
     if (form.$valid) {
-      this.Auth.login({
-        email: this.user.email,
-        password: this.user.password
+      Auth.login({
+        email: $scope.user.email,
+        password: $scope.user.password
       })
       .then(() => {
-        // Logged in, redirect to home
-        window.history.back();
+        // Logged in,home redirect to home
+        $state.go('home')
       })
       .catch(err => {
-        this.errors.other = err.message;
+        console.log(err.message)
+        $scope.errors.other = err.message;
       });
     }
+  }
+
+
+    
   }
 }
 
 angular.module('bhcmartApp')
-  .controller('LoginController', LoginController);
+.controller('LoginController', LoginController);
+
+})();
+
+
+
+
+
+

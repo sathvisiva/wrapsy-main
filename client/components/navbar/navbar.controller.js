@@ -83,6 +83,7 @@ class NavbarController {
       self.parentCategories = _.filter(categories, function(category) {
         return category.ancestors.length == 1 && category.slug != 'upsell-products';
       })
+      
     });
   }
 }

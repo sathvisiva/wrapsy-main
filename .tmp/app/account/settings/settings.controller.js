@@ -1,44 +1,32 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var SettingsController = (function () {
-  //end-non-standard
-
-  function SettingsController(Auth) {
+(function () {
+  var SettingsController = function SettingsController($http, $scope, $timeout, socket, Auth, $state, User, toaster) {
     _classCallCheck(this, SettingsController);
 
-    this.errors = {};
-    this.submitted = false;
+    $scope.user = {};
+    $scope.errors = {};
+    $scope.submitted = false;
 
-    this.Auth = Auth;
-  }
-
-  _createClass(SettingsController, [{
-    key: 'changePassword',
-    value: function changePassword(form) {
-      var _this = this;
-
-      this.submitted = true;
+    $scope.changePassword = function (form) {
+      $scope.submitted = true;
 
       if (form.$valid) {
-        this.Auth.changePassword(this.user.oldPassword, this.user.newPassword).then(function () {
-          _this.message = 'Password successfully changed.';
-        })['catch'](function () {
+        console.log("insiede");
+        Auth.changePassword($scope.user.email, $scope.user.newPassword).then(function () {
+          console.log("success");
+          $scope.message = 'Password successfully changed.';
+        })["catch"](function () {
           form.password.$setValidity('mongoose', false);
-          _this.errors.other = 'Incorrect password';
-          _this.message = '';
+          $scope.errors.other = 'Incorrect password';
+          $scope.message = '';
         });
       }
-    }
-  }]);
+    };
+  };
 
-  return SettingsController;
+  angular.module('bhcmartApp').controller('SettingsController', SettingsController);
 })();
-
-angular.module('bhcmartApp').controller('SettingsController', SettingsController);
-
-//start-non-standard
 //# sourceMappingURL=settings.controller.js.map

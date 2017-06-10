@@ -1,15 +1,15 @@
 <navbar></navbar>
 <div class="figure">
 	<div class="row btndiv">
-    	<toaster-container toaster-options="{'time-out': 1000}"></toaster-container>
-      
-      <a ui-sref="manageregistryList" ng-show="isLoggedIn()" class="btn btn-primary mainbtn">Manage Registry</a>
-      <a ui-sref="findregistry" class="btn btn-primary mainbtn">Find Registry</a>
-    	<button ng-click="selectRegistryType()" class="btn btn-primary mainbtn">Create Registry</button>
-      
-        <a ui-sref="main" class="btn btn-primary mainbtn">Shop Now</a>
-        
-    </div>
+     <toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
+
+     <a ui-sref="manageregistryList" ng-show="isLoggedIn()" class="btn btn-primary mainbtn">Manage Registry</a>
+     <a ui-sref="findregistry" class="btn btn-primary mainbtn">Find Registry</a>
+     <button ng-click="selectRegistryType()" class="btn btn-primary mainbtn">Create Registry</button>
+
+     <a ui-sref="main" class="btn btn-primary mainbtn">Shop Now</a>
+
+ </div>
 </div>
 <div class="container">
 	<div class="row">
@@ -23,54 +23,73 @@
     			<p class="howitworkstext">
     				Wedding? Birthday party? New home?
                     Create your wishlist. Choose from our wide range of products or add your own!
-    			</p>
-    		</div>
-    	</div>
-    	<div class="col-md-4">
-    		<img src="/assets/img/invite.svg" class="customimage">
-    		<div>
-    			<h3 class="howitworks">Invite</h3>
-    			<p class="howitworkstext">
-    				Confirm your wishlist and share your wishlist link on your invitation and on social media.
-    			</p>
-    		</div>
-    	</div>
-    	<div class="col-md-4">
-    		<img src="/assets/img/gift.svg" class="customimage">
-    		<div>
-    			<h3 class="howitworks">Gift</h3>
-    			<p class="howitworkstext">
-    				Super-duper easy for your guests. They will pick your favorite products. Win-win for everyone!
-    			</p>
-    		</div>
-    	</div>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+          <img src="/assets/img/invite.svg" class="customimage">
+          <div>
+           <h3 class="howitworks">Invite</h3>
+           <p class="howitworkstext">
+            Confirm your wishlist and share your wishlist link on your invitation and on social media.
+        </p>
     </div>
-    
 </div>
-<div class="row">
-        <p class="text-center topic">View a Sample Registry</p>
-    </div>
+<div class="col-md-4">
+  <img src="/assets/img/gift.svg" class="customimage">
+  <div>
+   <h3 class="howitworks">Gift</h3>
+   <p class="howitworkstext">
+    Super-duper easy for your guests. They will pick your favorite products. Win-win for everyone!
+</p>
+</div>
+</div>
+</div>
 
-    <div class="featuredweddings container  text-center">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a ui-sref="sampleWedding"><img class="curvedimage" src="/assets/img/sampleWedding.jpg" style="width: 100%; min-height: 217px;"></a>
-                    <a style="color: #FF4081" ui-sref="registry({id:'59177dd6fb639b354f5e9d63'})" target="_blank"><h3 class="lighter">Wedding Registry</h3></a>
-                </div>
+</div>
+<div class="container">
+    <div class="row">
+        <p class="text-center topic">Trending Products</p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+         <slick class="slider" settings="slickConfig3" ng-if="slickConfig3Loaded" >
+            <div ng-repeat="slide in slides">
+                <a  href="/product/hp-344-desktops">
+                    <img ng-src="{{slide.image}}" width="200px" height="200px">
+                </a>
             </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a ui-sref="samplebaby"><img class="curvedimage" src="/assets/img/sampleBaby.jpg" style="width: 100%"></a>
-                    <a style="color: #FF4081" ui-sref="registry({id:'59177e86fb639b354f5e9d65'})" target="_blank"><h3 class="lighter">Birthday Registry</h3></a>
-                </div>
+
+         </slick>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="row">
+    <p class="text-center topic">View a Sample Registry</p>
+</div>
+
+<div class="featuredweddings container  text-center">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a ui-sref="sampleWedding"><img class="curvedimage" src="/assets/img/sampleWedding.jpg" style="width: 100%; min-height: 217px;"></a>
+                <a style="color: #FF4081" ui-sref="registry({id:'59177dd6fb639b354f5e9d63'})" target="_blank"><h3 class="lighter">Wedding Registry</h3></a>
             </div>
-            <div class="col-md-4">
-                <div class="thumbnail">
-                    <a ui-sref="sampleWishlist"><img class="curvedimage" src="/assets/img/sampleWishlist.jpg" style="width: 95%"></a>
-                    <a style="color: #FF4081" ui-sref="registry({id:'59177eebfb639b354f5e9d67'})" target="_blank"><h3 class="lighter">House Warming</h3></a>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a ui-sref="samplebaby"><img class="curvedimage" src="/assets/img/sampleBaby.jpg" style="width: 100%"></a>
+                <a style="color: #FF4081" ui-sref="registry({id:'59177e86fb639b354f5e9d65'})" target="_blank"><h3 class="lighter">Birthday Registry</h3></a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a ui-sref="sampleWishlist"><img class="curvedimage" src="/assets/img/sampleWishlist.jpg" style="width: 95%"></a>
+                <a style="color: #FF4081" ui-sref="registry({id:'59177eebfb639b354f5e9d67'})" target="_blank"><h3 class="lighter">House Warming</h3></a>
             </div>
         </div>
     </div>
+</div>
 <footer></footer>

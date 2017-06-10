@@ -39,15 +39,15 @@
                         <tbody>
                             <tr ng-repeat="item in ngCart.getCart().items track by $index">
                                 <td class="p-image">
-                                    <a ui-sref="product({id: item.getId()})"><img alt="" width="100" src="{{item.getData().imageUrl}}"></a>
+                                    <a ui-sref="product({id: item.getData().slug})"><img alt="" width="100" src="{{item.getData().imageUrl}}"></a>
                                 </td>
-                                <td class="p-name"><a ui-sref="product({id: item.getId()})">{{ item.getName() }}</a></td>
+                                <td class="p-name"><a ui-sref="product({id: item.getData().slug})">{{ item.getName() }}</a></td>
                                 <td class="p-amount"><span class="amount">₹{{ item.getPrice() | number:2}}</span></td>
                                 <td class="p-quantity"><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
                                     <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span>
                                 </td>
                                 <td class="p-total">₹{{ item.getTotal() | number:2}}</td>
-                                <td class="p-action"><a href="#" ng-click="ngCart.removeItemById(item.getId())"><i class="fa fa-times"></i></a></td>
+                                <td class="p-action"><a href="#" ng-click="removeProduct(item.getName(), item)"><i class="fa fa-times"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -64,7 +64,7 @@
                             <p class="total">Subtotal: <span>₹{{ ngCart.getSubTotal() | number:2}}</span></p>
                             <p class="total">Tax(0%): <span>₹{{ ngCart.getTax() | number:2}}</span></p>
                             <p class="total">Grandtotal: <span>₹{{ ngCart.totalCost() | number:2}}</span></p>
-                            <a ui-sref="checkout" class="button">PROCCED TO CHECKOUT</a>
+                            <a ui-sref="checkout" class="button">PROCEED TO CHECKOUT</a>
                         </div>
                     </div>
                 </div>

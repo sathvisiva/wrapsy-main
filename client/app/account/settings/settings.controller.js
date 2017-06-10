@@ -1,31 +1,47 @@
 'use strict';
 
-class SettingsController {
-  //start-non-standard
-  errors = {};
-  submitted = false;
-  //end-non-standard
+(function() {
 
-  constructor(Auth) {
-    this.Auth = Auth;
-  }
+  class SettingsController {
 
-  changePassword(form) {
-    this.submitted = true;
+
+    constructor($http, $scope, $timeout, socket, Auth, $state,User, toaster) {
+      $scope.user = {};
+      $scope.errors = {};
+      $scope.submitted = false;
+      
+     
+  $scope.changePassword = function(form) {
+        $scope.submitted = true;
 
     if (form.$valid) {
-      this.Auth.changePassword(this.user.oldPassword, this.user.newPassword)
+      console.log("insiede")
+      Auth.changePassword($scope.user.email, $scope.user.newPassword)
         .then(() => {
-          this.message = 'Password successfully changed.';
+          console.log("success");
+          $scope.message = 'Password successfully changed.';
         })
         .catch(() => {
           form.password.$setValidity('mongoose', false);
-          this.errors.other = 'Incorrect password';
-          this.message = '';
+          $scope.errors.other = 'Incorrect password';
+          $scope.message = '';
         });
+  
     }
+  }
+
+
+    
   }
 }
 
 angular.module('bhcmartApp')
-  .controller('SettingsController', SettingsController);
+.controller('SettingsController', SettingsController);
+
+})();
+
+
+
+
+
+

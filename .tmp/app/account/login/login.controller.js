@@ -1,48 +1,33 @@
 'use strict';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-var LoginController = (function () {
-  //end-non-standard
-
-  function LoginController(Auth, $state) {
+(function () {
+  var LoginController = function LoginController($http, $scope, $timeout, socket, Auth, $state, User, toaster) {
     _classCallCheck(this, LoginController);
 
-    this.user = {};
-    this.errors = {};
-    this.submitted = false;
+    $scope.user = {};
+    $scope.errors = {};
+    $scope.submitted = false;
 
-    this.Auth = Auth;
-    this.$state = $state;
-  }
-
-  _createClass(LoginController, [{
-    key: 'login',
-    value: function login(form) {
-      var _this = this;
-
-      this.submitted = true;
+    $scope.login = function (form) {
+      $scope.submitted = true;
 
       if (form.$valid) {
-        this.Auth.login({
-          email: this.user.email,
-          password: this.user.password
+        Auth.login({
+          email: $scope.user.email,
+          password: $scope.user.password
         }).then(function () {
-          // Logged in, redirect to home
-          window.history.back();
+          // Logged in,home redirect to home
+          $state.go('home');
         })['catch'](function (err) {
-          _this.errors.other = err.message;
+          console.log(err.message);
+          $scope.errors.other = err.message;
         });
       }
-    }
-  }]);
+    };
+  };
 
-  return LoginController;
+  angular.module('bhcmartApp').controller('LoginController', LoginController);
 })();
-
-angular.module('bhcmartApp').controller('LoginController', LoginController);
-
-//start-non-standard
 //# sourceMappingURL=login.controller.js.map

@@ -33,8 +33,8 @@ angular.module('bhcmartApp')
         url: '/settings',
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsController',
-        controllerAs: 'vm',
-        authenticate: true
+        controllerAs: 'vm'
+        
       });
   })
   .run(function($rootScope) {

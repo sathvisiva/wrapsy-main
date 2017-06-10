@@ -14,49 +14,46 @@
 <div class="container" style="margin-bottom: 30px">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-md-offset-3">
-            <form class="form" name="form" ng-submit="vm.register(form)" novalidate>
+            <form class="form" name="form" ng-submit="register(form)" novalidate>
                 <div class="form-fields">
                     <div class="form-group" ng-class="{ 'has-success': form.name.$valid && vm.submitted,
                                             'has-error': form.name.$invalid && vm.submitted }">
                         <label>Name</label>
-                        <input type="text" name="name" class="form-control" ng-model="vm.user.name" required/>
-                        <p class="help-block" ng-show="form.name.$error.required && vm.submitted">
-                            A name is required
+                        <input type="text" name="name" class="form-control" ng-model="user.name" required/>
+                        <p class="help-block" ng-show="form.name.$touched && form.name.$invalid">
+                        Name is required
                         </p>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group" ng-class="{ 'has-success': form.email.$valid && vm.submitted,
                                             'has-error': form.email.$invalid && vm.submitted }">
                                 <label>Email</label>
-                                <input type="email" name="email" class="form-control" ng-model="vm.user.email" required mongoose-error/>
-                                <p class="help-block" ng-show="form.email.$error.email && vm.submitted">
+                                <input type="email" name="email" class="form-control" ng-model="user.email" 
+                                ng-change=" inputChanged()" ng-model-options="{debounce:2000}"
+                                required mongoose-error/>
+                                <p class="help-block" ng-show="form.email.$dirty && form.email.$invalid"
+                                >
                                     Doesn't look like a valid email.
                                 </p>
-                                <p class="help-block" ng-show="form.email.$error.required && vm.submitted">
-                                    What's your email address?
+                                <p class="help-block" ng-show="form.email.$error.required && form.email.$touched && form.email.$invalid">
+                                    Email address is required
+                                </p>
+                                <p class="help-block" ng-show="duplicate">
+                                    Email is already Registered
                                 </p>
                                 <p class="help-block" ng-show="form.email.$error.mongoose">
                                     {{ vm.errors.email }}
                                 </p>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group" ng-class="{ 'has-success': form.phone.$valid && vm.submitted,
-                                            'has-error': form.phone.$invalid && vm.submitted }">
-                                <label>Phone Number</label>
-                                <input type="text" name="phone" class="form-control" ng-model="vm.user.phone" required/>
-                                <p class="help-block" ng-show="form.phone.$error.required && vm.submitted">
-                                    A phone number is required
-                                </p>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="form-group" ng-class="{ 'has-success': form.password.$valid && vm.submitted,
                                             'has-error': form.password.$invalid && vm.submitted }">
                         <label>Password</label>
-                        <input type="password" name="password" class="form-control" ng-model="vm.user.password" ng-minlength="3" required mongoose-error/>
-                        <p class="help-block" ng-show="(form.password.$error.e || form.password.$error.required) && vm.submitted">
+                        <input type="password" name="password" class="form-control" ng-model="user.password" ng-minlength="3" required mongoose-error/>
+                        <p class="help-block" ng-show="form.password.$touched && form.password.$invalid">
                             Password must be at least 3 characters.
                         </p>
                         <p class="help-block" ng-show="form.password.$error.mongoose">
@@ -66,15 +63,15 @@
                     <div class="form-group" ng-class="{ 'has-success': form.confirmPassword.$valid && vm.submitted,
                                             'has-error': form.confirmPassword.$invalid && vm.submitted }">
                         <label>Confirm Password</label>
-                        <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.password" ng-minlength="3" required/>
-                        <p class="help-block" ng-show="form.confirmPassword.$error.match && vm.submitted">
+                        <input type="password" name="confirmPassword" class="form-control" ng-model="user.confirmPassword" match="user.password" ng-minlength="3" required/>
+                        <p class="help-block" ng-show="form.confirmPassword.$error.match && form.confirmPassword.$touched">
                             Passwords must match.
                         </p>
                     </div>
                     <!-- <div class="form-group" ng-class="{ 'has-success': form.address.$valid && vm.submitted,
                                             'has-error': form.address.$invalid && vm.submitted }">
                         <label>Address</label>
-                        <input type="text" name="address" class="form-control" ng-model="vm.user.address" required/>
+                        <input type="text" name="address" class="form-control" ng-model="user.address" required/>
                         <p class="help-block" ng-show="form.address.$error.required && vm.submitted">
                             An address is required
                         </p>
@@ -84,7 +81,7 @@
                             <div class="form-group" ng-class="{ 'has-success': form.city.$valid && vm.submitted,
                                             'has-error': form.city.$invalid && vm.submitted }">
                                 <label>City</label>
-                                <input type="text" name="city" class="form-control" ng-model="vm.user.city" required/>
+                                <input type="text" name="city" class="form-control" ng-model="user.city" required/>
                                 <p class="help-block" ng-show="form.city.$error.required && vm.submitted">
                                     A city is required
                                 </p>
@@ -94,8 +91,8 @@
                             <div class="form-group" ng-class="{ 'has-success': form.state.$valid && vm.submitted,
                                             'has-error': form.state.$invalid && vm.submitted }">
                                 <label>State</label>
-                                <!--vm.user.state-->
-                               <!-- <select name="state" class="form-control" ng-model="vm.user.state" ng-options="obj.name for obj in vm.states track by obj.key" required></select>
+                                <!--user.state-->
+                               <!-- <select name="state" class="form-control" ng-model="user.state" ng-options="obj.name for obj in vm.states track by obj.key" required></select>
                                 
                                 
                                 <p class="help-block" ng-show="form.state.$error.required && vm.submitted">
@@ -107,7 +104,7 @@
                             <div class="form-group" ng-class="{ 'has-success': form.country.$valid && vm.submitted,
                                             'has-error': form.country.$invalid && vm.submitted }">
                                 <label>Country</label>
-                                <input type="text" name="country" class="form-control" ng-model="vm.user.country" required/>
+                                <input type="text" name="country" class="form-control" ng-model="user.country" required/>
                                 <p class="help-block" ng-show="form.country.$error.required && vm.submitted">
                                     A country is required
                                 </p>
@@ -115,14 +112,17 @@
                         </div>
                     </div> -->
                     <div class="form-action account">
-                        <div class="row">
+                        
+                        <div class="col-md-12">
                         <div class="col-md-6">
-                        <button class="btn btn-primary btn-md " type="submit" id="submit" value="Signup"> Sign Up</button>
+                        <button class="btn btn-primary btn-md " ng-disabled="form.$invalid"  type="submit" id="submit" value="Signup"> Sign Up</button>
                         </div>
-                        <div class="col-md-6">
-                        <button class="btn btn-secondary btn-md" ui-sref="login">Login</button>
+                        <div class="col-md-6" style="top:25%;">
+                        <span ><a style="color: #FF4081;" ui-sref="login">Existing User, login</a> </span>
+                        
                         </div>
                         </div>
+                        
                     </div>
                 </div>
             </form>

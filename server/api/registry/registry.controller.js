@@ -132,7 +132,7 @@ exports.index = function(req, res) {
 		else{
 			
 			var q = isJson(req.query.where);
-			console.log(q);
+			
 			Registry.find(q).exec(function (err, registry) {
 				if(err) { console.log(err);
 					return handleError(res, err); }

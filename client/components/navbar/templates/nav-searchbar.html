@@ -2,22 +2,39 @@
 <div class="sidebar-cart-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-7 col-lg-offset-3 col-md-7 col-md-offset-3 hidden-xs">
+         <div class="col-lg-2 col-md-2 col-sm-12">
+            
+                <div class="header-left-menu" ng-show="nav.isLoggedIn()">
+                 <ul >
+                <li><a class="cart btn btn-primary hidden-xs " ui-sref="manageregistryList"><i class="fa fa-heart"></i> My Registry</span></a>
+                </li>
+                </ul>
+                <!-- <a ui-sref="findregistry"  href="/find-registry">My Registry</a> -->
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-8  hidden-xs">
                 <div class="search-form">
                     <form id="search-form" action="search">
-                        <div class="categories">
+                        <!-- <div class="categories">
                             <div class="box-search-select">
-                                <select class="selects" name="category">
+                                <select  name="category">
                                     <option value="all">All Categories</option>
-                                    <option ng-repeat="category in nav.parentCategories" value="{{category.slug}}">{{category.name | limitTo:15}}</option>
+                                    <option ng-repeat="category in nav.parentCategories" value="{{category.slug}}">{{category.name }}</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
+
+                        <select class="search-select" name="category" >
+                                    <option value="all">All Categories</option>
+                                    <option ng-repeat="category in nav.parentCategories" value="{{category.slug}}">{{category.name }}</option>
+                                </select>
                         <input type="search" name="term" required/>
-                        <button type="submit"><i class="fa fa-search"></i>Search</button>
+                        <button type="submit"> <i class="fa fa-search"></i>Search</button>
                     </form>
                 </div>
             </div>
+             
             <div class="col-lg-2 col-md-2 col-sm-12">
             
                 <div class="header-right-menu">
@@ -30,14 +47,14 @@
                                 <div ng-show="ngCart.getTotalItems() > 0">
                                     <div class="mini-top-sec" ng-repeat="item in ngCart.getCart().items track by $index">
                                         <div class="cart-image">
-                                            <a ui-sref="product({id: item.getId()})"><img alt="" src="{{item.getData().imageUrl}}"></a>
+                                            <a ui-sref="product({id: item.getData().slug})"><img alt="" src="{{item.getData().imageUrl}}"></a>
                                         </div>
                                         <div class="cart-info">
-                                            <a ui-sref="product({id: item.getId()})"><h4>{{ item.getName() }}</h4></a>
+                                            <a ui-sref="product({id: item.getData().slug})"><h4>{{ item.getName() }}</h4></a>
                                             <h5>₹{{ item.getPrice() | number:2}}</h5><span class="quantity"><i class="fa fa-times"></i>&nbsp;&nbsp;{{ item.getQuantity() | number }}&nbsp;&nbsp;</span>
                                         </div>
-                                        <div class="product-cancel"><a href="#" ng-click="ngCart.removeItemById(item.getId())"><i class="fa fa-times"></i></a>
-                                        </div>
+                                      <!--   <div class="product-cancel"><a href="#" ng-click="ngCart.removeItemById(item.getId())"><i class="fa fa-times"></i></a>
+                                        </div> -->
                                     </div>
                                     <div class="mini-bottom-sec">
                                         <p class="total-amount">Tax: <span>₹{{ ngCart.getTax() | number:2}}</span></p>
@@ -50,9 +67,12 @@
                             </div>
                         </li>
 
+
                     </ul>
                 </div>
             </div>
+          
+            
         </div>
     </div>
 </div>

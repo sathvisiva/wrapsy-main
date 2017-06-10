@@ -7,10 +7,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     _classCallCheck(this, HomeController);
 
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.number2 = [{ label: 1, otherLabel: 1 }, { label: 2, otherLabel: 2 }, { label: 3, otherLabel: 3 }, {
+      label: 4,
+      otherLabel: 4
+    }, { label: 5, otherLabel: 5 }, { label: 6, otherLabel: 6 }, { label: 7, otherLabel: 7 }, { label: 8, otherLabel: 8 }];
+
+    $scope.slickConfig3Loaded = true;
+    $scope.slickConfig3 = {
+      method: {},
+      dots: true,
+      infinite: false,
+      speed: 300,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      responsive: [{
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      }, {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }, {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }]
+    };
+
     $scope.selectRegistryType = function () {
 
       if (!$scope.isLoggedIn()) {
-        toaster.pop('error', "Please login to Create Registry");
+        $state.go('login');
       } else {
         var modalInstance = $uibModal.open({
           templateUrl: 'app/home/registryType.html',
@@ -71,7 +107,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }]
     };
 
-    $scope.slides = [{ image: 'assets/uploads/p-3.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-4.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-5.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-1.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-2.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-3.jpg', title: 'Pic 6' }, { image: 'assets/uploads/p-d-4.jpg', title: 'Pic 6' }, { image: 'assets/uploads/tab-1.jpg', title: 'Pic 6' }, { image: 'assets/uploads/tab-2.jpg', title: 'Pic 6' }, { image: 'assets/uploads/tab-3.jpg', title: 'Pic 6' }];
+    $scope.slides = [{ image: 'assets/uploads/p-3.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-4.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-5.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-1.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-2.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-3.jpg', title: 'Pic 6' }, { image: 'assets/uploads/p-d-4.jpg', title: 'Pic 6' }, { image: 'assets/uploads/tab-1.jpg', title: 'Pic 6' }];
   };
 
   angular.module('bhcmartApp').controller('HomeController', HomeController);

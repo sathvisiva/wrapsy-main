@@ -15,6 +15,8 @@
         self.noOfPages = Math.ceil(self.totalItems / self.itemsPerPage);
       });
 
+      
+
       this.delete = Modal.confirm.delete(user => {
         user.$remove();
         this.users.splice(this.users.indexOf(user), 1);

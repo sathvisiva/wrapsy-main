@@ -15,6 +15,7 @@ angular.module('bhcmartApp', [
     'ngFileUpload',
     'toaster',
     'socialLinks',
+    'slickCarousel'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
@@ -283,5 +284,30 @@ angular.module('bhcmartApp', [
         }, 0);
       }
     }
-  });
+  }).directive('phone', function() {
+    return {
+        restrice: 'A',
+        require: 'ngModel',
+        link: function(scope, element, attrs, ctrl) {
+            angular.element(element).bind('blur', function() {
+                var value = this.value;
+                var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
+                if(PHONE_REGEXP.test(value)) {
+                    // Valid input
+                    console.log("valid phone number");
+                    angular.element(this).next().next().css('display','none');  
+                } else {
+                    // Invalid input  
+                    console.log("invalid phone number");
+                    angular.element(this).next().next().css('display','block');
+                    /* 
+                        Looks like at this point ctrl is not available,
+                        so I can't user the following method to display the error node:
+                        ctrl.$setValidity('currencyField', false); 
+                    */                    
+                }
+            });              
+        }            
+    }        
+});
 

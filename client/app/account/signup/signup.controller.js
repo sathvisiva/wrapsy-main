@@ -1,193 +1,67 @@
 'use strict';
 
-class SignupController {
-  //start-non-standard
-  user = {};
-  errors = {};
-  submitted = false;
-  //end-non-standard
+(function() {
 
-states = [
-{
-"key": "AN",
-"name": "Andaman and Nicobar Islands"
-},
-{
-"key": "AP",
-"name": "Andhra Pradesh"
-},
-{
-"key": "AR",
-"name": "Arunachal Pradesh"
-},
-{
-"key": "AS",
-"name": "Assam"
-},
-{
-"key": "BR",
-"name": "Bihar"
-},
-{
-"key": "CG",
-"name": "Chandigarh"
-},
-{
-"key": "CH",
-"name": "Chhattisgarh"
-},
-{
-"key": "DH",
-"name": "Dadra and Nagar Haveli"
-},
-{
-"key": "DD",
-"name": "Daman and Diu"
-},
-{
-"key": "DL",
-"name": "Delhi"
-},
-{
-"key": "GA",
-"name": "Goa"
-},
-{
-"key": "GJ",
-"name": "Gujarat"
-},
-{
-"key": "HR",
-"name": "Haryana"
-},
-{
-"key": "HP",
-"name": "Himachal Pradesh"
-},
-{
-"key": "JK",
-"name": "Jammu and Kashmir"
-},
-{
-"key": "JH",
-"name": "Jharkhand"
-},
-{
-"key": "KA",
-"name": "Karnataka"
-},
-{
-"key": "KL",
-"name": "Kerala"
-},
-{
-"key": "LD",
-"name": "Lakshadweep"
-},
-{
-"key": "MP",
-"name": "Madhya Pradesh"
-},
-{
-"key": "MH",
-"name": "Maharashtra"
-},
-{
-"key": "MN",
-"name": "Manipur"
-},
-{
-"key": "ML",
-"name": "Meghalaya"
-},
-{
-"key": "MZ",
-"name": "Mizoram"
-},
-{
-"key": "NL",
-"name": "Nagaland"
-},
-{
-"key": "OR",
-"name": "Odisha"
-},
-{
-"key": "PY",
-"name": "Puducherry"
-},
-{
-"key": "PB",
-"name": "Punjab"
-},
-{
-"key": "RJ",
-"name": "Rajasthan"
-},
-{
-"key": "SK",
-"name": "Sikkim"
-},
-{
-"key": "TN",
-"name": "Tamil Nadu"
-},
-{
-"key": "TS",
-"name": "Telangana"
-},
-{
-"key": "TR",
-"name": "Tripura"
-},
-{
-"key": "UP",
-"name": "Uttar Pradesh"
-},
-{
-"key": "UK",
-"name": "Uttarakhand"
-},
-{
-"key": "WB",
-"name": "West Bengal"
-}
-]
+  class SignupController {
+
+
+    constructor($http, $scope, $timeout, socket, Auth, $state,User, toaster) {
+      $scope.user = {};
+      $scope.errors = {};
+      $scope.submitted = false;
+      
+      $scope.inputChanged = function(){
+        $scope.duplicate = false;
+        var q = {where:{email: $scope.user.email}};
+        $scope.existingUser = User.query(q,function(data){
+            if(data.length > 0){
+              $scope.duplicate = true
+              console.log($scope.duplicate)
+            }
+        });
+
+     }
 
 
 
-
-  constructor(Auth, $state, $scope) {
-    this.Auth = Auth;
-    this.$state = $state;
-  }
-
-  register(form) {
-    this.submitted = true;
+  $scope.register = function(form) {
+    $scope.submitted = true;
 
     if (form.$valid) {
-      this.Auth.createUser({
-        name: this.user.name,
-        email: this.user.email,
-        password: this.user.password
+      Auth.createUser({
+        name: $scope.user.name,
+        email: $scope.user.email,
+        password: $scope.user.password
       })
       .then(() => {
         // Account created, redirect to home
-        window.history.back();
+        $state.go('home')
       })
       .catch(err => {
         err = err.data;
-        this.errors = {};
+        $scope.errors = {};
 
         // Update validity of form fields that match the mongoose errors
         angular.forEach(err.errors, (error, field) => {
           form[field].$setValidity('mongoose', false);
-          this.errors[field] = error.message;
+          $scope.errors[field] = error.message;
         });
       });
     }
   }
+
+
+    
+  }
 }
 
 angular.module('bhcmartApp')
-  .controller('SignupController', SignupController);
+.controller('SignupController', SignupController);
+
+})();
+
+
+
+
+
+
