@@ -1,19 +1,20 @@
 'use strict';
 
 angular.module('bhcmartApp')
-  .controller('CategoryCtrl', ['$scope', '$stateParams', 'Product','$rootScope','$state', function($scope, $stateParams, Product, $rootScope, $state) {
-   
-    $scope.addtoRegistry = function(productId){
-        
-        var result = { id:productId, registryId: $scope.registryId, registryTitle:$scope.registrytitle };
-        $state.go('product', result);
-      }
+.controller('CategoryCtrl', ['$scope', '$stateParams', 'Product','$rootScope','$state', function($scope, $stateParams, Product, $rootScope, $state) {
 
-    $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 0 }, process($scope));
+  $scope.categoryTitle = $stateParams.slug;
+  $scope.addtoRegistry = function(productId){
 
-    $scope.registryId = $rootScope.registryId;
-      $scope.registrytitle = $rootScope.registryTitle;
-  }]);
+    var result = { id:productId, registryId: $scope.registryId, registryTitle:$scope.registrytitle };
+    $state.go('product', result);
+  }
+
+  $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 0 }, process($scope));
+
+  $scope.registryId = $rootScope.registryId;
+  $scope.registrytitle = $rootScope.registryTitle;
+}]);
 
 let getAverageRating = p => Math.ceil(_.reduce(p.reviews, (a, b) => a + b.rating, 0) / p.reviews.length);
 

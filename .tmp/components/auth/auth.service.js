@@ -73,10 +73,18 @@
        * @return {Promise}
        */
       changePassword: function changePassword(email, newPassword, callback) {
-        console.log("test");
         return User.changePassword({ id: email }, {
           newPassword: newPassword
         }, function () {
+          return safeCb(callback)(null);
+        }, function (err) {
+          return safeCb(callback)(err);
+        }).$promise;
+      },
+
+      forgotPassword: function forgotPassword(email, callback) {
+
+        return User.forgotPassword({ id: email }, function () {
           return safeCb(callback)(null);
         }, function (err) {
           return safeCb(callback)(err);

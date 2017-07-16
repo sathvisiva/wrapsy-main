@@ -8,6 +8,14 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
       method: 'PUT'
     }
   });
+}).factory('Address', function ($resource) {
+  return $resource('/api/address/:id', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    }
+  });
 }).factory('Product', function ($resource) {
   return $resource('/api/products/:id/:controller/:limit', {
     id: '@_id'

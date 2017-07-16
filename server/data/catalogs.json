@@ -4,201 +4,116 @@
   "slug": "all",
   "children": [
     "56f24ce1f0b74ee730de524b",
-    
-    "56f24ce1f0b74ee730de524f",
-    "56f24ce1f0b74ee730de5252",
-    "56f24ce1f0b74ee730de5255",
-    "56f24ce1f0b74ee730de5256",
-    "56f24ce1f0b74ee730de5257",
-    "56f24ce1f0b74ee730de5258"
+    "56f24ce1f0b74ee730de525b",
+    "56f24ce1f0b74ee730de527b",
+    "56f24ce1f0b74ee730de528b",
+    "56f24ce1f0b74ee730de530b",
+    "56f24ce1f0b74ee730de531b",
+    "56f24ce1f0b74ee730de532b",
+    "56f24ce1f0b74ee730de533c"
+
+
   ],
   "ancestors": []
 }, {
   "_id": "56f24ce1f0b74ee730de524b",
-  "name": "Computers and Accessories",
+  "name": "Kitchen",
   "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "computers-and-accessories",
+  "slug": "kitchen",
   "children": [
-    "56f24ce1f0b74ee730de524c",
-    "56f24ce1f0b74ee730de524d"
   ],
   "ancestors": [
     "56f24ce1f0b74ee730de5242"
   ]
-}, {
-  "_id": "56f24ce1f0b74ee730de524c",
-  "name": "Laptops",
-  "parent": "56f24ce1f0b74ee730de524b",
-  "slug": "laptops",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de524b"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de524d",
-  "name": "Desktops",
-  "parent": "56f24ce1f0b74ee730de524b",
-  "slug": "desktops",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de524b"
-  ]
-},  {
-  "_id": "56f24ce1f0b74ee730de524f",
-  "name": "Phones and Tablets",
+  ,
+  "imageUrl" : "assets/uploads/vg-peaGbrtDPged-M8y9K7rK.jpg"
+},{
+  "_id": "56f24ce1f0b74ee730de525b",
+  "name": "Living",
   "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "phones-and-tablets",
+  "slug": "living",
   "children": [
-    "56f24ce1f0b74ee730de5250",
-    "56f24ce1f0b74ee730de5251"
   ],
   "ancestors": [
     "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5250",
-  "name": "Phones",
-  "parent": "56f24ce1f0b74ee730de524f",
-  "slug": "phones-2",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de524f"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5251",
-  "name": "Tablets",
-  "parent": "56f24ce1f0b74ee730de524f",
-  "slug": "tablets",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de524f"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5252",
+  ],
+  "imageUrl" : "assets/uploads/Yh7BK8ou9ZNwJLCc4t5RYy_B.png"
+},{
+  "_id": "56f24ce1f0b74ee730de527b",
   "name": "Fashion",
   "parent": "56f24ce1f0b74ee730de5242",
   "slug": "fashion",
   "children": [
-    "56f24ce1f0b74ee730de5253",
-    "56f24ce1f0b74ee730de5254"
   ],
   "ancestors": [
     "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5253",
-  "name": "Men",
-  "parent": "56f24ce1f0b74ee730de5252",
-  "slug": "men",
-  "children": [],
+  ],
+  "imageUrl" : "assets/uploads/5vabWQk1rNk2jvyvrFGhcUh-.jpg"
+
+},{
+  "_id": "56f24ce1f0b74ee730de528b",
+  "name": "Application & Electronics",
+  "parent": "56f24ce1f0b74ee730de5242",
+  "slug": "application-electronics",
+  "children": [
+  ],
   "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de5252"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5254",
-  "name": "Women",
-  "parent": "56f24ce1f0b74ee730de5252",
-  "slug": "women",
-  "children": [],
+    "56f24ce1f0b74ee730de5242"
+  ],
+  "imageUrl" : "assets/uploads/H3kEGD5UIethGob8BM5irj7c.jpg"
+},{
+  "_id": "56f24ce1f0b74ee730de530b",
+  "name": "Personal",
+  "parent": "56f24ce1f0b74ee730de5242",
+  "slug": "personal",
+  "children": [
+  ],
   "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de5252"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5255",
+    "56f24ce1f0b74ee730de5242"
+  ],
+  "imageUrl" : "assets/uploads/JRZ_sJrLGYoqZr7ZVxbcwGIQ.jpg"
+},{
+  "_id": "56f24ce1f0b74ee730de531b",
+  "name": "Experiences",
+  "parent": "56f24ce1f0b74ee730de5242",
+  "slug": "experiences",
+  "children": [
+  ],
+  "ancestors": [
+    "56f24ce1f0b74ee730de5242"
+  ],
+  "imageUrl" : "assets/uploads/7LRXF9DG4T3IfUX6IIHFhIdp.jpg"
+
+},{
+  "_id": "56f24ce1f0b74ee730de532b",
   "name": "Books",
   "parent": "56f24ce1f0b74ee730de5242",
   "slug": "books",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5256",
-  "name": "Art Works",
-  "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "art-works",
-  "children": [
-    "56f24ce1f0b44ee730de5256",
-    "56f14ce1f0b44ee730de5256"
-  ],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b44ee730de5256",
-  "name": "Foreign",
-  "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "foreign-1",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de5256"
-  ]
-}, {
-  "_id": "56f14ce1f0b44ee730de5256",
-  "name": "Local",
-  "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "local-1",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242",
-    "56f24ce1f0b74ee730de5256"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5257",
-  "name": "Foods and Recipee",
-  "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "foods-and-recipee",
-  "children": [],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de5258",
-  "name": "Home and Kitchen",
-  "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "home-and-kitchen",
-  "children": [
-    "56f24ce1f0b74ee730de4258",
-    "56f24ce1f0b74ee720de4258"
-  ],
-  "ancestors": [
-    "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b71ee730de5258",
-  "name": "Upsell Products",
-  "parent": "56f24ce1f0b74ee730de5242",
-  "slug": "upsell-products",
   "children": [
   ],
   "ancestors": [
     "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee730de4258",
-  "name": "Home",
-  "parent": "56f24ce1f0b74ee730de5258",
-  "slug": "home",
+  ],
+  "imageUrl" : "assets/uploads/Pw2Pda1jSWlMLebDeUgYE2Yw.jpg"
+},{
+  "_id": "56f24ce1f0b74ee730de533c",
+  "name": "Sports & Games",
+  "parent": "56f24ce1f0b74ee730de5242",
+  "slug": "sports-games",
   "children": [],
   "ancestors": [
-    "56f24ce1f0b74ee730de5258",
     "56f24ce1f0b74ee730de5242"
-  ]
-}, {
-  "_id": "56f24ce1f0b74ee720de4258",
-  "name": "Kitchen",
-  "parent": "56f24ce1f0b74ee730de5258",
-  "slug": "kitchen",
+  ],
+  "imageUrl" : "assets/uploads/0lm06Vf_BKsSdMUoW3w1vKou.jpg"
+},{
+  "_id": "5966012544888e0edee48734",
+  "name": "Gift Voucher",
+  "parent": "56f24ce1f0b74ee730de5242",
+  "slug": "gift-voucher",
   "children": [],
   "ancestors": [
-    "56f24ce1f0b74ee730de5258",
     "56f24ce1f0b74ee730de5242"
-  ]
-}]
+  ],
+  "imageUrl" : "assets/uploads/2LyV-jrJyU-b9Ai0mYCVCfI9.jpg"
+}
+]

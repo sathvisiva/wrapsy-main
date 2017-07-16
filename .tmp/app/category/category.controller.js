@@ -2,6 +2,7 @@
 
 angular.module('bhcmartApp').controller('CategoryCtrl', ['$scope', '$stateParams', 'Product', '$rootScope', '$state', function ($scope, $stateParams, Product, $rootScope, $state) {
 
+  $scope.categoryTitle = $stateParams.slug;
   $scope.addtoRegistry = function (productId) {
 
     var result = { id: productId, registryId: $scope.registryId, registryTitle: $scope.registrytitle };

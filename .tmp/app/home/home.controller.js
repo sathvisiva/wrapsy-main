@@ -3,19 +3,14 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function () {
-  var HomeController = function HomeController($http, $scope, $timeout, socket, Catalog, Product, $uibModal, Auth, $state, Registry, toaster) {
+  var HomeController = function HomeController($http, $scope, $timeout, Catalog, Product, $mdDialog, Auth, $state, Registry, toaster) {
     _classCallCheck(this, HomeController);
 
     $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.number2 = [{ label: 1, otherLabel: 1 }, { label: 2, otherLabel: 2 }, { label: 3, otherLabel: 3 }, {
-      label: 4,
-      otherLabel: 4
-    }, { label: 5, otherLabel: 5 }, { label: 6, otherLabel: 6 }, { label: 7, otherLabel: 7 }, { label: 8, otherLabel: 8 }];
-
     $scope.slickConfig3Loaded = true;
     $scope.slickConfig3 = {
       method: {},
-      dots: true,
+      dots: false,
       infinite: false,
       speed: 300,
       slidesToShow: 4,
@@ -41,6 +36,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           slidesToScroll: 1
         }
       }]
+    };
+
+    $scope.slides = [];
+    $scope.active = 0;
+    $scope.myInterval = 3000;
+    $scope.noWrapSlides = false;
+
+    for (var i = 1; i < 5; i++) {
+      $scope.slides.push({
+        image: 'assets/img/banner' + i + '.jpg',
+        text: "The Perfect Gift to Complete your Perfect Celebration"
+      });
+    }
+
+    $scope.createregistry = function (registry) {
+      if (!$scope.isLoggedIn()) {
+        $mdDialog.show({
+          templateUrl: 'app/account/login/login.html',
+          parent: angular.element(document.body),
+          hasBackdrop: false,
+          clickOutsideToClose: true,
+          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+        });
+      } else {
+          $state.go('registryType');
+        }
     };
 
     $scope.selectRegistryType = function () {
@@ -71,43 +92,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       });
     };
 
-    $scope.number2 = [{ label: 1, otherLabel: 1 }, { label: 2, otherLabel: 2 }, { label: 3, otherLabel: 3 }, {
-      label: 4,
-      otherLabel: 4
-    }, { label: 5, otherLabel: 5 }, { label: 6, otherLabel: 6 }, { label: 7, otherLabel: 7 }, { label: 8, otherLabel: 8 }];
+    /*  $scope.slickslides = [
+      { image: 'assets/uploads/p-3.jpg', title: 'Pic 1' },
+      { image: 'assets/uploads/p-4.jpg', title: 'Pic 1' },
+      { image: 'assets/uploads/p-5.jpg', title: 'Pic 1' },
+      { image: 'assets/uploads/p-d-1.jpg', title: 'Pic 1' },
+      {image: 'assets/uploads/p-d-2.jpg', title: 'Pic 1' },
+      {image: 'assets/uploads/p-d-3.jpg', title:'Pic 6'},
+      {image: 'assets/uploads/p-d-4.jpg', title:'Pic 6'},
+      {image: 'assets/uploads/tab-1.jpg', title:'Pic 6'},
+      ];*/
 
-    $scope.slickConfig3Loaded = true;
-    $scope.slickConfig3 = {
-      method: {},
-      dots: true,
-      infinite: false,
-      speed: 300,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      responsive: [{
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true
-        }
-      }, {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2
-        }
-      }, {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }]
-    };
-
-    $scope.slides = [{ image: 'assets/uploads/p-3.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-4.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-5.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-1.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-2.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-3.jpg', title: 'Pic 6' }, { image: 'assets/uploads/p-d-4.jpg', title: 'Pic 6' }, { image: 'assets/uploads/tab-1.jpg', title: 'Pic 6' }];
+    $scope.registryslides = [{ image: 'assets/img/sampleWedding.jpg', registry: '59177dd6fb639b354f5e9d63', text: "Wedding Registry" }, { image: 'assets/img/sampleBaby.jpg', registry: '59177e86fb639b354f5e9d65', text: "Baby Registry" }, { image: 'assets/img/sampleWishlist.jpg', registry: '59177eebfb639b354f5e9d67', text: "House Warming Registry" }, { image: 'assets/img/samplebirthday.jpg', registry: '59177e86fb639b354f5e9d65', text: "Birthday Registry" }];
   };
 
   angular.module('bhcmartApp').controller('HomeController', HomeController);

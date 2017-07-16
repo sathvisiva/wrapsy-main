@@ -18,9 +18,7 @@
                 <sidebar-account></sidebar-account>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                <div class="alert alert-warning" role="alert" ng-show="filtered.length === 0">
-                    You do not have any product
-                </div>
+                
                 <div class="table-responsive" ng-hide="filtered.length === 0">
                     <div class="row">
                         <div ng-show="isAdmin" class="col-md-6 pull-right">
@@ -34,6 +32,9 @@
                             <input type="text" class="form-control search-page-input" placeholder="Search Product" ng-model="search">
                         </div>
                     </div>
+                    <div class="alert alert-warning" role="alert" ng-show="filtered.length === 0">
+                    You do not have any product
+                </div>
                     <table class="table table-striped">
                         <thead>
                             <tr>

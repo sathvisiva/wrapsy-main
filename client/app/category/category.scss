@@ -1,0 +1,133 @@
+.registry-product-name h2 a, .registry-products-container.products-list .product-name a {
+    color: #54585f;
+    font-weight: normal;
+    font-family: LatoRegular;
+}
+
+.registry-product-name h2.brand-name a {
+    text-transform: uppercase;
+    font-size: 13px;
+}
+
+.product-outer .registry-product-name h2 {
+    margin-bottom: 0;
+    overflow: hidden;
+    height: 18px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.products-grid .product-name, .products-list .product-name {
+    margin: 0 0 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.registry-products-container.products-list .price-box, .select-items-grid .price-box {
+    color: #54585f;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 5px 5px;
+    text-align: center;
+}
+
+.products-list .price-box {
+    color: #3A3A3A;
+    margin: 12px 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.registry-products-container.products-list .price-box .regular-price, .select-items-grid .price-box .regular-price {
+    float: none;
+    padding: 0;
+}
+
+.regular-price {
+    display: block;
+    text-align: center;
+}
+
+.price {
+    white-space: nowrap !important;
+}
+
+.registry-products-grid .price-box span.price {
+    font-family: LatoBold;
+    font-size: 14px;
+    color: #54585f;
+    font-weight: normal;
+}
+
+
+.product-grid{
+    margin: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color : #ffffff;
+}
+
+.toolbar {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top : 30px;
+    font-family: LatoRegular;
+    color: #54585f;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.toolbar .pager {
+    float: left;
+    margin: 0;
+    border-bottom: 0 none;
+    padding: 0;
+}
+
+.pager {
+    text-align: center;
+    list-style: none;
+}
+
+.pager .amount {
+    float: left;
+    padding-top: 2px;
+}
+
+.amount-new {
+    margin-top: 3px;
+}
+
+.pager .amount strong {
+    font-weight: normal;
+    display: inline-block;
+    padding-top: 0px;
+}
+
+.toolbar .sorter {
+    float: right;
+    padding: 0;
+}
+
+.sorter .sort-by {
+    float: right;
+    min-width: 152px;
+    margin-top: 3px;
+}
+
+.sorter .sort-by label {
+    display: inline-block;
+    padding-top: 2px;
+    padding-right: 6px;
+    float: left;
+}
+
+.products-list .toolbar .sorter select {
+    margin-right: 0;
+    height: 25px;
+    font-family: LatoRegular;
+    vertical-align: middle;
+    border-radius: 3px;
+    padding-left: 12px;
+}

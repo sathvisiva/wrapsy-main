@@ -3,16 +3,61 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function () {
-  var CreateRegistryController = function CreateRegistryController($http, $scope, $timeout, socket, Registry, $uibModal, $state, Auth, $stateParams, RegistryService) {
+  var CreateRegistryController = function CreateRegistryController($http, $scope, $timeout, Registry, $uibModal, $state, Auth, $stateParams, RegistryService, Address) {
     _classCallCheck(this, CreateRegistryController);
 
+    $state.go('.registryType');
+
+    $scope.disableevent = true;
+    $scope.disablelocation = true;
+    $scope.disablemessage = true;
+    $scope.enableSecondName = false;
+    $scope.eventformsubmitted = false;
+    $scope.locationformsubmitted = false;
     this.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
-    $scope.state = $state.current;
-    $scope.params = $stateParams;
-    $scope.type = $scope.params.type;
+    $scope.phoneNumbr = /^\+?\d{2}\d{3}\d{5}$/;
     $scope.registry = {};
-    $scope.registry.type = $scope.type;
+    $scope.address = {};
+
+    $scope.eventType = function (type) {
+      $scope.registry.type = type;
+      if ($scope.registry.type == 'wedding') {
+        $scope.enableSecondName = true;
+      }
+      $scope.disableevent = false;
+      $state.go('createregistry.eventDetails');
+      console.log($scope.registry);
+    };
+
+    $scope.saveeventdetails = function (form) {
+      $scope.eventformsubmitted = false;
+      if (!form.$valid) {
+        $scope.eventformsubmitted = true;
+      } else {
+        $scope.disablelocation = false;
+        $state.go('createregistry.location');
+        console.log($scope.registry);
+      }
+    };
+
+    $scope.savelocation = function (form) {
+      $scope.locationformsubmitted = false;
+      if (!form.$valid) {
+        $scope.locationformsubmitted = true;
+      } else {
+        $scope.disablemessage = false;
+        $state.go('createregistry.message');
+        console.log($scope.registry);
+        console.log($scope.address);
+      }
+    };
+
+    $scope.registryType = function (state) {
+      $scope.state = 'createregistry.' + state;
+      console.log($scope.state);
+      $state.go($scope.state);
+    };
 
     $scope.save = function (form) {
       console.log(form.$valid);
@@ -22,10 +67,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         $scope.registry.backgroundImageUrl = 'assets/img/cover.jpg';
         $scope.registry.profileImageUrl = 'assets/img/noimage.jpg';
         Registry.save($scope.registry, function (resp) {
-          var registrydata = {};
-          registrydata._id = resp._id;
-          registrydata.title = resp.title;
-          RegistryService.addregistry(registrydata);
+          $scope.address.registryId = resp._id;
+          Address.save($scope.address, function (resp) {}, function (err) {
+            console.log(err);
+          });
           $state.go('registry', { id: resp._id });
         }, function (err) {
           console.log(err);

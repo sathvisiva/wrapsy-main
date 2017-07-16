@@ -67,9 +67,22 @@ var ProductSchema = new Schema({
   code: {
     type: String
   },
+  brand: {
+    type: String
+  },
+  size: {
+    type: String
+  },
+  color: {
+    type: String
+  },
   price: {
     type: Number,
     required: true,
+    min: 0
+  },
+  sellingPrice: {
+    type: Number,
     min: 0
   },
   stock: {

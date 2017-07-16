@@ -19,6 +19,7 @@ export default function(app) {
   app.use('/api/products', require('./api/product'));
   app.use('/api/registry', require('./api/registry'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/address', require('./api/address'));
 
   app.use('/auth', require('./auth'));
 

@@ -1,12 +1,7 @@
 'use strict';
 
 angular.module('bhcmartApp').config(function ($stateProvider) {
-  $stateProvider.state('login', {
-    url: '/login',
-    templateUrl: 'app/account/login/login.html',
-    controller: 'LoginController',
-    controllerAs: 'vm'
-  }).state('logout', {
+  $stateProvider.state('logout', {
     url: '/logout?referrer',
     referrer: 'main',
     template: '',
@@ -14,20 +9,17 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
       var referrer = $state.params.referrer || $state.current.referrer || 'main';
 
       Auth.logout();
-      console.log("account.js");
       $state.go('home');
     }
-  }).state('signup', {
-    url: '/signup',
-    templateUrl: 'app/account/signup/signup.html',
-    controller: 'SignupController',
-    controllerAs: 'vm'
-  }).state('settings', {
-    url: '/settings',
-    templateUrl: 'app/account/settings/settings.html',
-    controller: 'SettingsController',
-    controllerAs: 'vm'
+  }).state('forgotPassword', {
+    url: '/forgotPassword',
+    templateUrl: 'app/account/forgot/forgotpassword.html',
+    controller: 'ForgotPasswordController'
 
+  }).state('settings', {
+    url: '/reset/{token}',
+    templateUrl: 'app/account/forgot/resetpassword.html',
+    controller: 'ForgotPasswordController'
   });
 }).run(function ($rootScope) {
   $rootScope.$on('$stateChangeStart', function (event, next, nextParams, current) {

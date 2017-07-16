@@ -7592,11 +7592,6 @@ form .progress {
 .table-col td {
   line-height: 25px !important; }
 
-.product-grid ul#category {
-  margin-top: -102px !important;
-  position: initial !important;
-  width: 100% !important; }
-
 .trash {
   color: #d15b47; }
 
@@ -7618,24 +7613,146 @@ form .progress {
         align-items: center;
     text-decoration: none; }
 
-.figure {
+.registry-product-name h2 a, .registry-products-container.products-list .product-name a {
+  color: #54585f;
+  font-weight: normal;
+  font-family: LatoRegular; }
+
+.registry-product-name h2.brand-name a {
+  text-transform: uppercase;
+  font-size: 13px; }
+
+.product-outer .registry-product-name h2 {
+  margin-bottom: 0;
+  overflow: hidden;
+  height: 18px;
+  font-size: 14px;
+  text-align: center; }
+
+.products-grid .product-name, .products-list .product-name {
+  margin: 0 0 5px;
+  font-weight: bold;
+  font-size: 14px; }
+
+.registry-products-container.products-list .price-box, .select-items-grid .price-box {
+  color: #54585f;
+  margin: 0;
+  overflow: hidden;
+  padding: 0 5px 5px;
+  text-align: center; }
+
+.products-list .price-box {
+  color: #3A3A3A;
+  margin: 12px 0;
+  overflow: hidden;
+  width: 100%; }
+
+.registry-products-container.products-list .price-box .regular-price, .select-items-grid .price-box .regular-price {
+  float: none;
+  padding: 0; }
+
+.regular-price {
   display: block;
-  padding-top: 20.56%;
-  background: url(/assets/img/bg.jpg) no-repeat center center fixed;
-  background-size: cover;
+  text-align: center; }
+
+.price {
+  white-space: nowrap !important; }
+
+.registry-products-grid .price-box span.price {
+  font-family: LatoBold;
+  font-size: 14px;
+  color: #54585f;
+  font-weight: normal; }
+
+.product-grid {
+  margin: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #ffffff; }
+
+.toolbar {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  font-family: LatoRegular;
+  color: #54585f;
+  padding-right: 20px;
+  padding-left: 20px; }
+
+.toolbar .pager {
+  float: left;
+  margin: 0;
+  border-bottom: 0 none;
+  padding: 0; }
+
+.pager {
   text-align: center;
-  position: relative;
-  min-height: 500px;
+  list-style: none; }
+
+.pager .amount {
+  float: left;
+  padding-top: 2px; }
+
+.amount-new {
+  margin-top: 3px; }
+
+.pager .amount strong {
+  font-weight: normal;
+  display: inline-block;
+  padding-top: 0px; }
+
+.toolbar .sorter {
+  float: right;
+  padding: 0; }
+
+.sorter .sort-by {
+  float: right;
+  min-width: 152px;
+  margin-top: 3px; }
+
+.sorter .sort-by label {
+  display: inline-block;
+  padding-top: 2px;
+  padding-right: 6px;
+  float: left; }
+
+.products-list .toolbar .sorter select {
+  margin-right: 0;
+  height: 25px;
+  font-family: LatoRegular;
   vertical-align: middle;
-  padding-bottom: 50px;
-  padding-left: 10px;
-  padding-right: 10px; }
+  border-radius: 3px;
+  padding-left: 12px; }
+
+.figure {
+  background: url(/assets/img/pdtcarousel-bg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  padding: 15px; }
 
 .mainbtn {
   margin: 5px;
   font-family: 'LatoRegular', serif !important;
   font-size: 22px !important;
-  font-weight: 500 !important; }
+  font-weight: 500 !important;
+  width: 177px; }
+
+.mainbtnxs {
+  margin: 2px;
+  font-family: 'LatoRegular', serif !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  width: 165px; }
+
+.home-buttons {
+  margin-bottom: 20px;
+  margin-top: 20px; }
+
+@media screen and (min-width: 768px) {
+  .carousel-caption {
+    top: 40%; } }
+.slide-text {
+  padding-bottom: 50px; }
 
 .nopadding {
   padding-right: 0;
@@ -7686,11 +7803,52 @@ form .progress {
   color: #333333; }
 
 .topic {
-  color: #585b5c;
-  font-family: 'LatoRegular', serif;
-  font-size: 30px;
+  color: #00BCD4;
+  font-family: 'Vidaloka', serif;
+  font-size: 26px;
   font-weight: 500;
-  margin-top: 10px; }
+  margin-top: 10px;
+  text-transform: uppercase;
+  word-spacing: 7px; }
+
+.share_main_block {
+  position: fixed;
+  top: 30%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 99999;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 5px;
+  text-align: center; }
+
+.share_main_block i {
+  color: #fff !important;
+  font-size: 20px;
+  margin: 5px 0;
+  cursor: pointer; }
+
+.fb_social_share {
+  padding: 8px 12px;
+  background-color: #3a5897;
+  border-radius: 50% !important; }
+
+.twitter_share {
+  padding: 5px 7px;
+  background-color: #02afe8;
+  border-radius: 50% !important; }
+
+.googleplus_share {
+  padding: 8px 6px;
+  background-color: #da4f46;
+  border-radius: 50% !important;
+  font-size: 16px !important; }
+
+.home {
+  background-color: azure; }
+
+.home-container {
+  margin-right: 10px;
+  margin-left: 10px; }
 
 .howitworks {
   color: #585b5c;
@@ -7704,15 +7862,34 @@ form .progress {
   font-family: 'LatoRegular', serif;
   font-size: 18px;
   font-weight: 300;
-  margin-top: 10px; }
+  margin-top: 10px;
+  font-style: italic; }
 
-.slick-prev, .slick-next {
-  color: #00BCD4;
-  background: #FF4081; }
+.carousel-inner > .item > img {
+  min-width: 100%;
+  min-height: 300px; }
 
-.slickslider {
-  margin-left: 30px !important;
-  margin-rigth: 30px !important; }
+.carousel-control.right {
+  background-image: linear-gradient(to right, transparent 0%, transparent 100%) !important; }
+
+.carousel-control.left {
+  background-image: linear-gradient(to right, transparent 0%, transparent 100%) !important; }
+
+.banner-holder {
+  margin-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px; }
+
+.stretch-image {
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  max-height: 200px; }
+
+.sampleregistryText {
+  padding: 10px;
+  margin-left: 30px;
+  color: #FF4081; }
 
 .thing-form {
   margin: 20px 0; }
@@ -7741,6 +7918,41 @@ a {
   color: -webkit-link;
   text-decoration: underline;
   cursor: auto !important; }
+
+.product-name {
+  margin-top: 0px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 184.61538%;
+  line-height: 141.66667%;
+  font-family: "montserratregular", sans-serif; }
+
+.product-details-area {
+  padding: 60px; }
+
+.product-price {
+  margin-top: 0px;
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 184.61538%;
+  line-height: 141.66667%;
+  font-family: "montserratregular", sans-serif;
+  color: #086fcf; }
+
+.product-detail-label {
+  margin-top: 2%;
+  padding-left: 3%;
+  font-size: 13px;
+  color: #5a5a59;
+  text-transform: capitalize;
+  font-weight: bold; }
+
+.product-size, .product-color {
+  margin-top: 10px;
+  margin-bottom: 10px; }
 
 .registry-settings {
   margin-top: 30px;
@@ -7916,6 +8128,95 @@ a {
 
 .registryHeading {
   cursor: pointer !important; }
+
+@keyframes slideOutLeft {
+  to {
+    transform: translateX(-200%); } }
+/* slide in from the right */
+@keyframes slideInRight {
+  from {
+    transform: translateX(200%); }
+  to {
+    transform: translateX(0); } }
+#form-container {
+  margin-bottom: 20px;
+  border-radius: 5px; }
+
+#form-container .page-header {
+  margin: 0;
+  padding: 30px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; }
+
+/* numbered buttons */
+#status-buttons a {
+  color: #333;
+  display: inline-block;
+  font-size: 12px;
+  margin-right: 10px;
+  text-align: center;
+  text-transform: uppercase; }
+
+#status-buttons a:hover {
+  text-decoration: none; }
+
+#status-buttons span {
+  background: grey;
+  display: block;
+  height: 30px;
+  margin: 0 auto 10px;
+  padding-top: 5px;
+  width: 30px;
+  border-radius: 50%; }
+
+.disableevent, .disablelocation, .disablemessage {
+  cursor: not-allowed !important; }
+
+#status-buttons a.active span {
+  background: #00BC8C; }
+
+#signup-form {
+  position: relative;
+  min-height: 300px;
+  overflow: hidden; }
+
+#form-views.ng-enter,
+#form-views.ng-leave {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  transition: 0.5s all ease;
+  -moz-transition: 0.5s all ease;
+  -webkit-transition: 0.5s all ease; }
+
+#form-views.ng-enter {
+  animation: slideInRight 0.5s both ease; }
+
+#form-views.ng-leave {
+  animation: slideOutLeft 0.5s both ease; }
+
+.registryPage {
+  background-image: url("/assets/img/flower-website-backgrounds-81.jpg"); }
+
+.navbar-registry {
+  background-color: transparent !important;
+  border-color: transparent; }
+
+.navbar-registry {
+  width: 100%;
+  text-align: center; }
+  .navbar-registry > li {
+    float: none;
+    display: inline-block;
+    font-size: 16px;
+    color: black;
+    font-family: 'Montserrat-Regular';
+    font-weight: 400;
+    text-transform: uppercase; }
+
+.registry-tabs {
+  margin-top: 30px;
+  margin-bottom: 30px; }
 
 footer.footer {
   text-align: center;

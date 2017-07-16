@@ -1,95 +1,144 @@
 <navbar></navbar>
-<div class="figure">
-	<div class="row btndiv">
-     <toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
-
-     <a ui-sref="manageregistryList" ng-show="isLoggedIn()" class="btn btn-primary mainbtn">Manage Registry</a>
-     <a ui-sref="findregistry" class="btn btn-primary mainbtn">Find Registry</a>
-     <button ng-click="selectRegistryType()" class="btn btn-primary mainbtn">Create Registry</button>
-
-     <a ui-sref="main" class="btn btn-primary mainbtn">Shop Now</a>
-
- </div>
-</div>
-<div class="container">
+<div class="home">
+	<div class="share_main_block">
+		<span style="font-size: 12px; font-family: 'Montserrat', sans-serif; font-weight: bold; color: #6c3003;">Share</span>
+		<div class="clearfix"></div>
+		<a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://www.wrapsy.in/"><i class="fa fa-facebook fb_social_share"></i></a>
+		<div class="clearfix"></div>
+		<a target="_blank" href="https://twitter.com/intent/tweet?url=https://www.wrapsy.in/"><i class="fa fa-twitter twitter_share"></i></a>
+		<div class="clearfix"></div>
+		<a target="_blank" href="https://plus.google.com/share?url=https://www.wrapsy.in/"><i class="fa fa-google-plus googleplus_share"></i></a>
+	</div>
 	<div class="row">
-		<p class="text-center topic">How it Works</p>
-    </div>
-    <div class="row text-center">
-    	<div class="col-md-4">
-    		<img src="/assets/img/create.svg" class="customimage">
-    		<div>
-    			<h3 class="howitworks">Create</h3>
-    			<p class="howitworkstext">
-    				Wedding? Birthday party? New home?
-                    Create your wishlist. Choose from our wide range of products or add your own!
-                </p>
-            </div>
-        </div>
-        <div class="col-md-4">
-          <img src="/assets/img/invite.svg" class="customimage">
-          <div>
-           <h3 class="howitworks">Invite</h3>
-           <p class="howitworkstext">
-            Confirm your wishlist and share your wishlist link on your invitation and on social media.
-        </p>
-    </div>
+		<div class="col-md-12">
+			<div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+				<div uib-slide ng-repeat="slide in slides " index="$index">
+					<img ng-src="{{slide.image}}" >
+					<div class="carousel-caption">
+						<ul><li><h2 
+							class="wow bounceInLeft layer-1 slide-text hidden-xs" data-wow-duration="3s" data-wow-delay=".5s">{{slide.text}}</h2></li><li class="home-buttons hidden-xs">
+							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtn">Manage Registry</a>
+							<a ng-click="createregistry()"  class="btn btn-primary mainbtn">Create Registry</a>
+							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtn">Find Registry</a>
+							<a ui-sref="main"  class="btn btn-primary mainbtn">Shop Now</a>
+						</li>
+						<li class="home-buttons visible-xs">
+							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Manage Registry</a>
+							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Create Registry</a>
+							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Find Registry</a>
+							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Shop Now</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="col-md-4">
-  <img src="/assets/img/gift.svg" class="customimage">
-  <div>
-   <h3 class="howitworks">Gift</h3>
-   <p class="howitworkstext">
-    Super-duper easy for your guests. They will pick your favorite products. Win-win for everyone!
-</p>
-</div>
-</div>
-</div>
+<div>
+	<!-- <div class="row">
+		<p class="text-center topic wow bounceInRight layer-1" data-wow-duration="3s" data-wow-delay=".5s">How it Works</p>
+	</div> -->
+	<div class="container">
+		<div class="row">
+			<h5 class="heading "><span >It's convenient, easy and fun</span></h5>
+		</div>
+	</div>
+	<div class="row text-center" >
+		<div class="col-md-4">
+			<img src="/assets/img/create.svg" class="customimage">
+			<div>
+				<h3 class="howitworks">Create</h3>
+				<p class="howitworkstext">
+					Wedding? Birthday party? New home?
+					Create your wishlist. Choose from our wide range of products or add your own!
+				</p>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<img src="/assets/img/invite.svg" class="customimage">
+			<div>
+				<h3 class="howitworks">Invite</h3>
+				<p class="howitworkstext">
+					Confirm your wishlist and share your wishlist link on your invitation and on social media.
+				</p>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<img src="/assets/img/gift.svg" class="customimage">
+			<div>
+				<h3 class="howitworks">Gift</h3>
+				<p class="howitworkstext">
+					Super-duper easy for your guests. They will pick your favorite products. Win-win for everyone!
+				</p>
+			</div>
+		</div>
+	</div>
 
-</div>
-<div class="container">
-    <div class="row">
-        <p class="text-center topic">Trending Products</p>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-         <slick class="slider" settings="slickConfig3" ng-if="slickConfig3Loaded" >
-            <div ng-repeat="slide in slides">
-                <a  href="/product/hp-344-desktops">
-                    <img ng-src="{{slide.image}}" width="200px" height="200px">
-                </a>
-            </div>
+	<hr style="border-top-color: pink;">
+	<div class="container">
+		<div class="row">
+			<h5 class="heading"><span>Explore Our Gifts</span></h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 banner-holder cyan-hover" >
+			<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="assets/img/birthday-banner.jpg" alt="Birthday Gifts"></a>      </div>
+			<div class="col-md-6 banner-holder cyan-hover">
+				<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="assets/img/anniversary-banner.jpg" alt="Birthday Gifts"></a>            </div>
+			</div>
 
-         </slick>
-        </div>
-    </div>
-</div>
-<br>
+			<div class="row ">
+				<div class="col-md-12 ">
+					<div class="banner1-holder cyan-hover ">     
+						<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive " src="assets/img/gifts-everyone.jpg" alt="Birthday Gifts"></a>   
 
-<div class="row">
-    <p class="text-center topic">View a Sample Registry</p>
-</div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			
+			<div class="registry-container">
+				<div class="container">
+					<div class="row">
+						<h5 class="heading"><span>View A Sample Registry</span></h5>
+					</div>
 
-<div class="featuredweddings container  text-center">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <a ui-sref="sampleWedding"><img class="curvedimage" src="/assets/img/sampleWedding.jpg" style="width: 100%; min-height: 217px;"></a>
-                <a style="color: #FF4081" ui-sref="registry({id:'59177dd6fb639b354f5e9d63'})" target="_blank"><h3 class="lighter">Wedding Registry</h3></a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <a ui-sref="samplebaby"><img class="curvedimage" src="/assets/img/sampleBaby.jpg" style="width: 100%"></a>
-                <a style="color: #FF4081" ui-sref="registry({id:'59177e86fb639b354f5e9d65'})" target="_blank"><h3 class="lighter">Birthday Registry</h3></a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="thumbnail">
-                <a ui-sref="sampleWishlist"><img class="curvedimage" src="/assets/img/sampleWishlist.jpg" style="width: 95%"></a>
-                <a style="color: #FF4081" ui-sref="registry({id:'59177eebfb639b354f5e9d67'})" target="_blank"><h3 class="lighter">House Warming</h3></a>
-            </div>
-        </div>
-    </div>
-</div>
-<footer></footer>
+					<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" >
+						<div ng-repeat="slide in registryslides">
+							<a  ui-sref="registry({id:slide.registry})">
+								<img ng-src="{{slide.image}}" class="img-responsive" >
+							</a>
+							<div class="sampleregistryText">{{slide.text}}
+							</div>
+						</div>
+
+					</slick>
+				</div>
+			</div>
+
+			<hr style="border-top-color: pink;">
+			<div class="container">
+				<div class="row">
+					<h5 class="heading"><span>Featured Products</span></h5>
+				</div>
+			</div>
+			<div class="figure">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12 ">
+							<slick class="slider cyan-hover" settings="slickConfig3" ng-if="slickConfig3Loaded" >
+								<div ng-repeat="slide in slickslides">
+									<a  href="/product/hp-344-desktops">
+										<img ng-src="{{slide.image}}" class="img-responsive " width="200px" height="200px">
+									</a>
+								</div>
+
+							</slick>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer></footer> 

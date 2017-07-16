@@ -1,75 +1,80 @@
 'use strict';
 
 angular.module('bhcmartApp', [
-    'bhcmartApp.auth',
-    'bhcmartApp.admin',
-    'bhcmartApp.constants',
-    'ngCart',
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'btford.socket-io',
-    'ui.router',
-    'validation.match',
-    'ui.bootstrap',
-    'ngFileUpload',
-    'toaster',
-    'socialLinks',
-    'slickCarousel'
+  'bhcmartApp.auth',
+  'bhcmartApp.admin',
+  'bhcmartApp.constants',
+  'ngCart',
+  'ngCookies',
+  'ngResource',
+  'ngSanitize',
+  'ui.router',
+  'validation.match',
+  'ui.bootstrap',
+  'ngFileUpload',
+  'toaster',
+  'socialLinks',
+  'slickCarousel',
+  'ngMaterial',
+  'ngMessages'
   ])
-  .config(function($urlRouterProvider, $locationProvider) {
-    $urlRouterProvider
-      .otherwise('/');
-    $locationProvider.html5Mode(true);
+.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
+  $urlRouterProvider
+  .otherwise('/');
+  $locationProvider.html5Mode(true);
+  $mdThemingProvider.theme('default')
+  .primaryPalette('cyan')
+  .accentPalette('pink');
 
-  })
-  .run(function($rootScope, $state, ngCart) {
-    $.scrollUp({
-      scrollName: 'scrollUp',
-      scrollText: '<i class="fa fa-angle-up"></i>',
-      easingType: 'linear',
-      scrollSpeed: 900,
-      animation: 'fade',
-      animationInSpeed: 2000
-    });
-    ngCart.setShipping(0);
-    $rootScope.ngCart = ngCart;
-    $rootScope.$state = $state;
-    $rootScope._ = _;
-  })
-  .directive('myTab', function($timeout) {
-    return {
-      link: function(scope, element, attrs) {
-        $timeout(function() {
-          $(element).click(function(e) {
-            e.preventDefault()
-            $(this).tab('show')
-          })
+})
+
+.run(function($rootScope, $state, ngCart) {
+  $.scrollUp({
+    scrollName: 'scrollUp',
+    scrollText: '<i class="fa fa-angle-up"></i>',
+    easingType: 'linear',
+    scrollSpeed: 900,
+    animation: 'fade',
+    animationInSpeed: 2000
+  });
+  ngCart.setShipping(0);
+  $rootScope.ngCart = ngCart;
+  $rootScope.$state = $state;
+  $rootScope._ = _;
+})
+.directive('myTab', function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
+      $timeout(function() {
+        $(element).click(function(e) {
+          e.preventDefault()
+          $(this).tab('show')
         })
-      }
+      })
     }
-  })
-  .directive('slideit', function() {
-    return {
-      link: function(scope, element, attrs) {
-        $(element).nivoSlider({
-          effect: 'fade',
-          slices: 15,
-          boxCols: 12,
-          boxRows: 12,
-          animSpeed: 500,
-          pauseTime: 5000,
-          startSlide: 0,
-          directionNav: false,
-          controlNavThumbs: false,
-          pauseOnHover: true,
-          manualAdvance: true
-        });
-      }
+  }
+})
+.directive('slideit', function() {
+  return {
+    link: function(scope, element, attrs) {
+      $(element).nivoSlider({
+        effect: 'fade',
+        slices: 15,
+        boxCols: 12,
+        boxRows: 12,
+        animSpeed: 500,
+        pauseTime: 5000,
+        startSlide: 0,
+        directionNav: false,
+        controlNavThumbs: false,
+        pauseOnHover: true,
+        manualAdvance: true
+      });
     }
-  }).directive('newArrivalCarousel', function() {
-    return {
-      link: function(scope, element, attrs) {
+  }
+}).directive('newArrivalCarousel', function() {
+  return {
+    link: function(scope, element, attrs) {
         //New Arrival Carousel Area
         $(element).owlCarousel({
           autoPlay: false,
@@ -86,9 +91,9 @@ angular.module('bhcmartApp', [
       }
     }
   })
-  .directive('singlePSlide', function($timeout) {
-    return {
-      link: function(scope, element, attrs) {
+.directive('singlePSlide', function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
         //Features Tab Carousel
         $timeout(function() {
           $(element).owlCarousel({
@@ -107,9 +112,9 @@ angular.module('bhcmartApp', [
       }
     }
   })
-  .directive('singlePSlideBottom', function($timeout) {
-    return {
-      link: function(scope, element, attrs) {
+.directive('singlePSlideBottom', function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
         //Features Tab Bottom Carousel
         $timeout(function() {
           $(element).owlCarousel({
@@ -128,9 +133,9 @@ angular.module('bhcmartApp', [
       }
     }
   })
-  .directive('brandWrapper', function() {
-    return {
-      link: function(scope, element, attrs) {
+.directive('brandWrapper', function() {
+  return {
+    link: function(scope, element, attrs) {
         // Brand Carousel
         $(element).owlCarousel({
           autoPlay: false,
@@ -146,9 +151,9 @@ angular.module('bhcmartApp', [
       }
     }
   })
-  .directive('singlePSlideFive', function() {
-    return {
-      link: function(scope, element, attrs) {
+.directive('singlePSlideFive', function() {
+  return {
+    link: function(scope, element, attrs) {
         //Home five Hot Tab
         $(element).owlCarousel({
           autoPlay: false,
@@ -165,13 +170,13 @@ angular.module('bhcmartApp', [
       }
     }
   })
-  .directive('countdowner', function() {
-    return {
-      link: function(scope, element, attrs) {
+.directive('countdowner', function() {
+  return {
+    link: function(scope, element, attrs) {
         //Countdown
         $(element).each(function() {
           var $this = $(this),
-            finalDate = $(this).data('countdown');
+          finalDate = $(this).data('countdown');
           $this.countdown(finalDate, function(event) {
             $this.html(event.strftime('<h4 class="cdown days"><span class="counting">%-D</span></h4><h4 class="cdown hours"><span class="counting">%-H</span></h4><h4 class="cdown minutes"><span class="counting">%M</span></h4><h4 class="cdown seconds"><span><span class="counting">%S</span></h4>'));
           });
@@ -179,9 +184,9 @@ angular.module('bhcmartApp', [
       }
     }
   })
-  .directive('meanmenu', function($timeout) {
-    return {
-      link: function(scope, element, attrs) {
+.directive('meanmenu', function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
         //MeanMenu Js
         $timeout(function() {
           $(element).meanmenu();
@@ -286,17 +291,17 @@ angular.module('bhcmartApp', [
     }
   }).directive('phone', function() {
     return {
-        restrice: 'A',
-        require: 'ngModel',
-        link: function(scope, element, attrs, ctrl) {
-            angular.element(element).bind('blur', function() {
-                var value = this.value;
-                var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
-                if(PHONE_REGEXP.test(value)) {
+      restrice: 'A',
+      require: 'ngModel',
+      link: function(scope, element, attrs, ctrl) {
+        angular.element(element).bind('blur', function() {
+          var value = this.value;
+          var PHONE_REGEXP = /^[(]{0,1}[0-9]{3}[)\.\- ]{0,1}[0-9]{3}[\.\- ]{0,1}[0-9]{4}$/;
+          if(PHONE_REGEXP.test(value)) {
                     // Valid input
                     console.log("valid phone number");
                     angular.element(this).next().next().css('display','none');  
-                } else {
+                  } else {
                     // Invalid input  
                     console.log("invalid phone number");
                     angular.element(this).next().next().css('display','block');
@@ -304,10 +309,10 @@ angular.module('bhcmartApp', [
                         Looks like at this point ctrl is not available,
                         so I can't user the following method to display the error node:
                         ctrl.$setValidity('currencyField', false); 
-                    */                    
-                }
-            });              
-        }            
+                        */                    
+                      }
+                    });              
+      }            
     }        
-});
+  });
 

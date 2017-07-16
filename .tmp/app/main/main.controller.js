@@ -1,187 +1,59 @@
 'use strict';
+/*
+(function() {
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  class MainController {
 
-(function () {
-  var MainController = function MainController($http, $scope, $timeout, socket, Catalog, Product, ngCart, $state, $stateParams, $rootScope, RegistryService, $window) {
-    _classCallCheck(this, MainController);
+    constructor($http, $scope, $timeout, Catalog, $state,$stateParams,$rootScope,) {
 
-    $scope.state = $state.current;
-    $scope.params = $stateParams;
-    $scope.registryId = $scope.params.registryId;
-    $scope.registrytitle = $scope.params.registryTitle;
+      Catalog.query(function(categories) {
+        $scope.categories = categories;
+      });
 
-    $scope.registrydata = RegistryService.getregistry();
+      console.log($scope.categories)
 
-    console.log(RegistryService.getregistry());
+      $scope.parentCategories = _.filter($scope.categories, function(category) {
+        return category.ancestors.length == 1;
+      })
 
-    $scope.addtoRegistry = function (productId) {
-      var result = { id: productId, registryId: $scope.registryId, registryTitle: $scope.registrytitle };
-      $state.go('product', result);
-    };
+      console.log($scope.parentCategories)
 
-    $scope.buynow = function (link) {
-      $window.open(link, '_blank');
-    };
 
-    this.featuredBannerA = [{
-      'img': 'assets/img/banner/banner-21.jpg',
-      'link': '#'
-    }, {
-      'img': 'assets/img/banner/banner-22.jpg',
-      'link': '#'
-    }];
+      let self = $scope;
 
-    this.featuredBannerB = {
-      'img': 'assets/img/banner/banner-24.jpg',
-      'link': '/category/fashion'
-    };
+      Catalog.query(function(categories) {
+        self.categories = categories;
+        self.allCategory = _.filter(categories, function(category) {
+          return category.ancestors.length == 0;
+        })
+        let parentCategories = _.filter(categories, function(category) {
+          return category.ancestors.length == 1 && category.slug != "upsell-products";
+        })
+        self.parentCategories = _.map(parentCategories, function(parentCategory) {
+          parentCategory.children = _.map(parentCategory.children, function(childId) {
+            if (childId)
+              return _.find(categories, {
+                "_id": childId
+              })
+          })
+          return parentCategory
+        });
+      });
 
-    this.sliderAreaBanner = {
-      'img': 'assets/img/banner/banner-28.jpg',
-      'link': '/category/home'
-    };
-
-    this.limitedTimeFeatured = false;
-
-    var featuredCategoriesA = [{
-      'slug': 'computers-and-accessories',
-      'banner': {
-        'img': 'assets/img/banner/banner-31.jpg',
-        'link': '/category/computers-and-accessories'
-      }
-    }, {
-      'slug': 'fashion',
-      'banner': {
-        'img': 'assets/img/banner/banner-32.jpg',
-        'link': '/category/fashion'
-      }
-    }];
-
-    var featuredCategoriesB = [{
-      'slug': 'home-and-kitchen',
-      'banner': {
-        'img': 'assets/img/banner/banner-33.jpg',
-        'link': '/category/home-and-kitchen'
-      }
-    }, {
-      'slug': 'art-works',
-      'banner': {
-        'img': 'assets/img/banner/banner-34.jpg',
-        'link': '/category/art-works'
-      }
     }
-    /*, {
-            'slug': 'laptops',
-            'banner': {
-              'img': 'assets/img/banner/banner-35.jpg',
-              'link': '/category/laptops'
-            }
-          }*/
-    ];
+  }
 
-    this.$http = $http;
-    this.awesomeThings = [];
-    self = this;
+  angular.module('bhcmartApp')
+  .controller('MainController', MainController);
 
-    /* $http.get('/api/things').then(response => {
-       this.awesomeThings = response.data;
-       socket.syncUpdates('thing', this.awesomeThings);
-     });*/
+})();*/
 
-    var featuredCategoriesDetailsA = [];
-    _.each(featuredCategoriesA, function (o) {
-      Catalog.get({ id: o.slug }, function (parentCat) {
-        var a = {
-          title: parentCat.name,
-          slug: parentCat.slug,
-          banner: o.banner,
-          firstChildren: []
-        };
-        if (parentCat.children.length > 0) {
-          _.each(parentCat.children, function (c) {
-            Product.catalog({ id: c.slug, limit: 10 }, function (prod) {
-              prod = _.map(prod, function (rP) {
-                return _.extend(rP, { averageRating: getAverageRating(rP) });
-              });
-              var p = {
-                title: c.name,
-                slug: c.slug,
-                products: prod
-              };
-              a.firstChildren.push(p);
-            });
-          });
-        } else {
-          Product.catalog({ id: o.slug, limit: 10 }, function (prod) {
-            prod = _.map(prod, function (rP) {
-              return _.extend(rP, { averageRating: getAverageRating(rP) });
-            });
-            var p = {
-              title: o.name,
-              slug: o.slug,
-              products: prod
-            };
-            a.firstChildren.push(p);
-          });
-        }
-        featuredCategoriesDetailsA.push(a);
-        self.featuredCategoriesDetailsA = featuredCategoriesDetailsA;
-      });
+angular.module('bhcmartApp').controller('MainController', ['$scope', 'Catalog', 'Modal', function ($scope, Catalog, Modal) {
+  Catalog.query(function (categories) {
+    $scope.categories = categories;
+    $scope.parentCategories = _.filter(categories, function (category) {
+      return category.ancestors.length == 1;
     });
-
-    var featuredCategoriesDetailsB = [];
-    _.each(featuredCategoriesB, function (o) {
-      Catalog.get({ id: o.slug }, function (parentCat) {
-        var a = {
-          title: parentCat.name,
-          slug: parentCat.slug,
-          banner: o.banner,
-          firstChildren: []
-        };
-        if (parentCat.children.length > 0) {
-          _.each(parentCat.children, function (c) {
-            Product.catalog({ id: c.slug, limit: 10 }, function (prod) {
-              prod = _.map(prod, function (rP) {
-                return _.extend(rP, { averageRating: getAverageRating(rP) });
-              });
-              var p = {
-                title: c.name,
-                slug: c.slug,
-                products: prod
-              };
-              a.firstChildren.push(p);
-            });
-          });
-        } else {
-          Product.catalog({ id: o.slug, limit: 10 }, function (prod) {
-            prod = _.map(prod, function (rP) {
-              return _.extend(rP, { averageRating: getAverageRating(rP) });
-            });
-            var p = {
-              title: o.name,
-              slug: o.slug,
-              products: prod
-            };
-            a.firstChildren.push(p);
-          });
-        }
-        featuredCategoriesDetailsB.push(a);
-        self.featuredCategoriesDetailsB = featuredCategoriesDetailsB;
-      });
-    });
-
-    _.each(featuredCategoriesA, function (slug) {
-      self.featuredCategoriesDetailsA = Catalog.get({ id: slug });
-    });
-  };
-
-  angular.module('bhcmartApp').controller('MainController', MainController);
-})();
-
-var getAverageRating = function getAverageRating(p) {
-  return Math.ceil(_.reduce(p.reviews, function (a, b) {
-    return a + b.rating;
-  }, 0) / p.reviews.length);
-};
+  });
+}]);
 //# sourceMappingURL=main.controller.js.map

@@ -6,6 +6,12 @@
     return $resource('/api/users/:id/:controller', {
       id: '@_id'
     }, {
+      forgotPassword: {
+        method: 'POST',
+        params: {
+          controller: 'forgot'
+        }
+      },
       changePassword: {
         method: 'PUT',
         params: {

@@ -1,91 +1,41 @@
 
 <navbar></navbar>
 
- <div ng-include="'app/main/templates/slider-area.html'"></div>
- 
- <div ng-include="'app/main/templates/featured-timer-tab.html'"></div>
-
-<!-- Featured tabs area 1 -->
- <div ng-include="'app/main/templates/featured-tabs-a.html'"></div>
-
-<!--Product Banner Area A Start-->
-<div class="full-width-banner-area white-hover">
-    <div class="container">
+<div class="container">
+    <section class="categories">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6" ng-repeat="banner in main.featuredBannerA">
-                <a href="{{banner.link}}"><img src="{{banner.img}}" alt=""></a>
+            <h5 class="heading "><span >Select From Our Categories</span></h5>
+        </div>
+
+        <div class="category-choices">
+            <div class="row">
+                <div ng-repeat="parentCategory in parentCategories">
+                    <div class="col-md-4">
+                    <img ng-src="{{parentCategory.imageUrl}}" class="category-products"/>
+                        <div class="category-name">
+                            <a ui-sref="products({slug: parentCategory.slug, category : parentCategory.name })">{{parentCategory.name}}</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+
+    </section>
 </div>
-<!--End of Product Banner Area-->
 
-<!-- <!-- Featured tabs area 2 -->
- <div ng-include="'app/main/templates/featured-tabs-b.html'"></div>
+<!-- <ul id="category">
+    <li class="cat-title"><a ui-sref="products({slug: 'all'})">Categories</a></li>
+    <li ng-repeat="parentCategory in parentCategories">
+        <a ui-sref="products({slug: parentCategory.slug})">{{parentCategory.name}}<i class="fa fa-angle-right"></i></a>
+        <ul class="sub-menu clearfix">
+            <li class="sub-sec col-md-6">
+                <ul>
+                    <li><a class="title" ui-sref="products({slug: parentCategory.slug})">{{parentCategory.name}}</a></li>
+                    <li ng-repeat="category in parentCategory.children"><a ui-sref="products({slug: category.slug})">{{category.name}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul> -->
 
-<!--Full Width Banner B Area-->
-<div class="full-width-banner-area white-hover">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="{{main.featuredBannerB.link}}"><img src="{{main.featuredBannerB.img}}" alt=""></a>
-            </div>
-        </div>
-    </div>
-</div> 
-<!--End of Full Width Banner Area-->
-
-<!--Service Area Start--> 
-<section class="product-service-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 hidden-sm">
-                <div class="single-service">
-                    <div class="s-icon">
-                        <i class="fa fa-phone"></i>
-                    </div>
-                    <div class="s-information">
-                        <h4>Phone:(+234)888 987 666</h4>
-                        <p>24/7 Support</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4">
-                <div class="single-service">
-                    <div class="s-icon">
-                        <i class="fa fa-truck"></i>
-                    </div>
-                    <div class="s-information">
-                        <h4>Free shipping</h4>
-                        <p>On orders over ₹1000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4">
-                <div class="single-service">
-                    <div class="s-icon">
-                        <i class="fa fa-unlock-alt"></i>
-                    </div>
-                    <div class="s-information">
-                        <h4>PAYMENT SECURED</h4>
-                        <p>100% Guaranteed Checkout</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4">
-                <div class="single-service">
-                    <div class="s-icon">
-                        <i class="fa fa-money"></i>
-                    </div>
-                    <div class="s-information">
-                        <h4>Money back 100%</h4>
-                        <p>Within 30 Days after delivery</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--End of Service Area-->
-
-<footer></footer>

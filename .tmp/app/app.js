@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'btford.socket-io', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel']).config(function ($urlRouterProvider, $locationProvider) {
+angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
+  $mdThemingProvider.theme('default').primaryPalette('cyan').accentPalette('pink');
 }).run(function ($rootScope, $state, ngCart) {
   $.scrollUp({
     scrollName: 'scrollUp',
@@ -274,7 +275,7 @@ angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp
               Looks like at this point ctrl is not available,
               so I can't user the following method to display the error node:
               ctrl.$setValidity('currencyField', false); 
-          */
+              */
         }
       });
     }

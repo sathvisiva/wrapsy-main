@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bhcmartApp').controller('SidebarCatCtrl', function ($scope, Catalog, socket) {
+angular.module('bhcmartApp').controller('SidebarCatCtrl', function ($scope, Catalog) {
   var self = $scope;
 
   Catalog.query(function (categories) {
@@ -19,7 +19,6 @@ angular.module('bhcmartApp').controller('SidebarCatCtrl', function ($scope, Cata
       });
       return parentCategory;
     });
-    socket.syncUpdates('catalog', self.categories);
   });
 });
 //# sourceMappingURL=sidebar-cat.controller.js.map

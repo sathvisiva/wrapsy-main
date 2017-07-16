@@ -78,10 +78,18 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
      * @return {Promise}
      */
     changePassword(email, newPassword, callback) {
-      console.log("test")
       return User.changePassword({ id: email }, {
         newPassword: newPassword
       }, function() {
+        return safeCb(callback)(null);
+      }, function(err) {
+        return safeCb(callback)(err);
+      }).$promise;
+    },
+
+    forgotPassword(email,  callback) {
+      
+      return User.forgotPassword({ id: email }, function() {
         return safeCb(callback)(null);
       }, function(err) {
         return safeCb(callback)(err);

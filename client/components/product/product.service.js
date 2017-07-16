@@ -1,122 +1,131 @@
 'use strict';
 
 angular.module('bhcmartApp')
-  .factory('Catalog', function($resource) {
-    return $resource('/api/catalogs/:id', {
-      id: '@_id'
-    }, {
-      'update': {
-        method: 'PUT'
+.factory('Catalog', function($resource) {
+  return $resource('/api/catalogs/:id', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+})
+.factory('Address', function($resource) {
+  return $resource('/api/address/:id', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+}).factory('Product', function($resource) {
+  return $resource('/api/products/:id/:controller/:limit', {
+    id: '@_id'
+  }, {
+    'update': { method: 'PUT' },
+    'catalog': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'catalog'
       }
-    });
-  }).factory('Product', function($resource) {
-    return $resource('/api/products/:id/:controller/:limit', {
-      id: '@_id'
-    }, {
-      'update': { method: 'PUT' },
-      'catalog': {
-        method: 'GET',
-        isArray: true,
-        params: {
-          controller: 'catalog'
-        }
-      },
-      'search': {
-        method: 'GET',
-        isArray: true,
-        params: {
-          controller: 'search',
-        }
-      },
-      'review': {
-        method: 'POST',
-        params: {
-          controller: 'reviews',
-          limit: null
-        }
+    },
+    'search': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'search',
       }
-     
-    });
-  }).factory('Registry', function($resource) {
-    return $resource('/api/registry/:id/:controller/:limit', {
-      id: '@_id'
-    }, {
-      'update': { method: 'PUT' },
-      'search': {
-        method: 'GET',
-        isArray: true,
-        params: {
-          controller: 'search',
-        }
-      },
-      'registryGuest': {
-        method: 'GET',
-        isArray: true,
-        params: {
-          controller: 'registryGuest',
-        }
-      },
-      'registryGuestBook': {
-        method: 'GET',
-        isArray: true,
-        params: {
-          controller: 'registryGuestBook',
-        }
-      },
-      'registryProduct': {
-        method: 'POST',
-        params: {
-          controller: 'registryProduct',
-          limit: null
-        }
-      },
-      'getregistryProduct': {
-        method: 'POST',
-        params: {
-          controller: 'getregistryProduct',
-          limit: null
-        }
-      },
-       'rsvpRegistry': {
-        method: 'POST',
-        params: {
-          controller: 'rsvpRegistry',
-          limit: null
-        }
-      },
-      'guestBookRegistry': {
-        method: 'POST',
-        params: {
-          controller: 'guestBookRegistry',
-          limit: null
-        }
-      },
-       'updatePdtcnt': {
-        method: 'POST',
-        params: {
-          controller: 'updatePdtcnt',
-          limit: null
-        }
+    },
+    'review': {
+      method: 'POST',
+      params: {
+        controller: 'reviews',
+        limit: null
       }
-    });
-  }).service('RegistryService', function() {
+    }
+
+  });
+}).factory('Registry', function($resource) {
+  return $resource('/api/registry/:id/:controller/:limit', {
+    id: '@_id'
+  }, {
+    'update': { method: 'PUT' },
+    'search': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'search',
+      }
+    },
+    'registryGuest': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'registryGuest',
+      }
+    },
+    'registryGuestBook': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'registryGuestBook',
+      }
+    },
+    'registryProduct': {
+      method: 'POST',
+      params: {
+        controller: 'registryProduct',
+        limit: null
+      }
+    },
+    'getregistryProduct': {
+      method: 'POST',
+      params: {
+        controller: 'getregistryProduct',
+        limit: null
+      }
+    },
+    'rsvpRegistry': {
+      method: 'POST',
+      params: {
+        controller: 'rsvpRegistry',
+        limit: null
+      }
+    },
+    'guestBookRegistry': {
+      method: 'POST',
+      params: {
+        controller: 'guestBookRegistry',
+        limit: null
+      }
+    },
+    'updatePdtcnt': {
+      method: 'POST',
+      params: {
+        controller: 'updatePdtcnt',
+        limit: null
+      }
+    }
+  });
+}).service('RegistryService', function() {
   var registry = {};
   var registrymethod = "";
 
   var addregistry = function(newObj) {
-      registry = newObj;
+    registry = newObj;
   }
 
   var getregistry = function(){
-      return registry;
+    return registry;
   }
 
-   var addregistryMethod = function(newObj) {
-      registrymethod = newObj;
+  var addregistryMethod = function(newObj) {
+    registrymethod = newObj;
   }
 
   var getregistryMethod = function(){
-      return registrymethod;
+    return registrymethod;
   }
 
   return {

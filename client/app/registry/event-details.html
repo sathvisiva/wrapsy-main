@@ -1,0 +1,85 @@
+<section class="event-details">
+	<div class="container">
+		<div class="row">
+			<div class="category-title-header">
+				<div class="title-center">
+					<div class="title"><h1>Event details</h1></div>
+					<div class="separator-title"><div class="divider-line"></div></div>
+				</div>
+				<div class="clearer"></div>
+			</div>
+		</div>
+		<div class = "register-section">
+			<form class="form" name="form" ng-submit="saveeventdetails(form)" novalidate>
+				<!-- our nested state views will be injected here -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group form-group-lg">
+							<label>Registry Title</label>
+							<div class="row grid-container grid-spacing-half">
+								<div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+									<input type="text"  class="form-control" placeholder="Registry Title" id="firstName" name="title"
+									ng-model="registry.title" required>
+									<p ng-show="(form.title.$invalid && !form.title.$pristine) || (form.title.$invalid && form.title.$touched) || (form.title.$invalid && eventformsubmitted )" class="help-block">Registry Title is required.</p>                                
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group form-group-lg registry-fields">
+					<label>You Are</label>
+					<div class="row grid-container grid-spacing-half">
+						<div class="col-xs-12 col-sm-5 col-md-4 grid-item top-row bottom-row">
+							<input type="text"  class="form-control" placeholder="First Name" id="firstName" name="youfirstName" ng-model="registry.youfirstName" required>
+							<p ng-show="(form.youfirstName.$invalid && !form.youfirstName.$pristine) || (form.youfirstName.$invalid && form.youfirstName.$touched) || (form.youfirstName.$invalid && eventformsubmitted) " class="help-block">First Name is required.</p>
+						</div>
+						<div class="hidden-xs col-sm-1 text-center">
+
+						</div>
+						<div class="col-xs-12 col-sm-5 col-md-4 grid-item top-row bottom-row">
+							<input type="text" class="form-control" placeholder="Last Name" id="LastName" name="yousecond" ng-model="registry.yousecondName"
+							required>
+							<p ng-show="(form.yousecond.$invalid && !form.yousecond.$pristine) || (form.yousecond.$invalid && form.yousecond.$touched) || (form.yousecond.$invalid && eventformsubmitted) " class="help-block">Second Name is required.</p>
+
+
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group form-group-lg registry-fields" ng-if="enableSecondName">
+					<label>Your Spouse-To-Be is:</label>
+					<div class="row grid-container grid-spacing-half">
+						<div class="col-xs-12 col-sm-5 col-md-4 grid-item top-row bottom-row">
+							<input type="text"  class="form-control" placeholder="First Name" id="firstName" ng-model="registry.firstName" name="firstName" required>
+							<p ng-show="(form.firstName.$invalid && !form.firstName.$pristine) || (form.firstName.$invalid && form.firstName.$touched) || (form.firstName.$invalid && eventformsubmitted) " class="help-block">First Name is required.</p>
+						</div>
+						<div class="hidden-xs col-sm-1 text-center">
+						</div>
+						<div class="col-xs-12 col-sm-5 col-md-4 grid-item top-row bottom-row">
+							<input type="text" class="form-control" placeholder="Last Name" name="second" ng-model="registry.secondName" id="LastName" required>
+							<p ng-show="(form.second.$invalid && !form.second.$pristine) || (form.second.$invalid && form.second.$touched) || (form.second.$invalid && eventformsubmitted) " class="help-block">Second Name is required.</p>
+						</div>
+					</div>
+				</div>
+				<div class="form-group form-group-lg registry-fields">
+					<label>Your Big Day Is</label>
+					<div class="row grid-container grid-spacing-half">
+						<div class="col-xs-12 col-sm-5 col-md-4 grid-item top-row bottom-row">
+							<input type="text" class="form-control" placeholder="Event Date" id="bigday" name="bigday" ng-focus="open1()" uib-datepicker-popup="dd-MMM-yyyy" ng-model="registry.date" is-open="popup1.opened" datepicker-options="options"   ng-required="true" close-text="Close"  ng-click="open1()" required/> 
+							<p ng-show="(form.bigday.$invalid && !form.bigday.$pristine) || (form.bigday.$invalid && form.bigday.$touched) || (form.bigday.$invalid && eventformsubmitted) " class="help-block">Event Date is required.</p>                            
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-5 col-md-2 pull-right">
+						<input type="submit" class="btn btn-primary btn-lg " value="Continue">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+

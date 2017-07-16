@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bhcmartApp')
-  .controller('SidebarCatCtrl', function($scope, Catalog, socket) {
+  .controller('SidebarCatCtrl', function($scope, Catalog) {
     let self = $scope;
 
     Catalog.query(function(categories) {
@@ -21,6 +21,6 @@ angular.module('bhcmartApp')
         })
         return parentCategory
       });
-      socket.syncUpdates('catalog', self.categories);
+      
     });
   });

@@ -1,242 +1,370 @@
 .registry-settings{
-    margin-top: 30px;
-    margin: 0 auto;
-    max-width: 700px;
-    padding: 10px 40px;
+margin-top: 30px;
+margin: 0 auto;
+max-width: 700px;
+padding: 10px 40px;
 }
 
 .registry-form{
-    border: 1px solid #d9d9d9;
-    border-radius: 0;
-    box-shadow: none;
+border: 1px solid #d9d9d9;
+border-radius: 0;
+box-shadow: none;
 }
 
 .registry-label{
 
-    font-family: 'PT Serif', serif;
-    color : #333
+font-family: 'PT Serif', serif;
+color : #333
 }
 
 @media (min-width: 992px){
 .registry-top .registry-hero {
-    height: 430px;
+height: 430px;
 }
 }
 
 @media (min-width: 768px){
 
 .registry-top .registry-hero {
-    height: 362px;
+height: 362px;
 }
 }
 
 .registry-top .registry-hero {
-    margin: 20px 0 45px 0;
+margin: 20px 0 45px 0;
 }
 
 @media (min-width: 1280px){
 
 .registry-hero {
-    padding: initial;
-    height: 420px;
+padding: initial;
+height: 420px;
 }
 }
 
 .registry-hero {
-    position: relative;
-    max-width: 1280px;
-    margin-right: auto;
-    margin-left: auto;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    -ms-behavior: url(/assets/backgroundsize.htc);
-    background-position: center;
-    padding-bottom: 15.625%;
+position: relative;
+max-width: 1280px;
+margin-right: auto;
+margin-left: auto;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+-ms-behavior: url(/assets/backgroundsize.htc);
+background-position: center;
+padding-bottom: 15.625%;
 }
 
 .registry-hero .registry-hero-gradient {
-    position: absolute;
-    height: 50%;
-    width: 100%;
-    top: 0;
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0, rgba(0,0,0,0) 100%);
-    background-image: -o-linear-gradient(top, rgba(0,0,0,0.5) 0, rgba(0,0,0,0) 100%);
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0, rgba(0,0,0,0) 100%);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=0);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#50000000,endColorstr=#00000000,GradientType=0);
+position: absolute;
+height: 50%;
+width: 100%;
+top: 0;
+background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0, rgba(0,0,0,0) 100%);
+background-image: -o-linear-gradient(top, rgba(0,0,0,0.5) 0, rgba(0,0,0,0) 100%);
+background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0, rgba(0,0,0,0) 100%);
+background-repeat: repeat-x;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=0);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#50000000,endColorstr=#00000000,GradientType=0);
 }
 
 .registry-top .registry-hero .hero-buttons {
-    position: absolute;
-    width: 100%;
-    padding: 7px;
+position: absolute;
+width: 100%;
+padding: 7px;
 }
 
 .registry-hero .registry-hero-content {
-    padding-top: 75px;
-    text-align: center;
-    text-shadow: 1px 1px 15px rgba(0,0,0,0.4);
+padding-top: 75px;
+text-align: center;
+text-shadow: 1px 1px 15px rgba(0,0,0,0.4);
 }
 
 @media (min-width: 992px)
 {
 .registry-top .couple-edit-frame {
-    cursor: pointer;
+cursor: pointer;
 }
 }
 
 .registry-top .couple-edit-frame {
-    bottom: -40px;
-    left: 50%;
-    width: 150px;
-    height: 150px;
-    margin-left: -75px;
-    position: absolute;
+bottom: -40px;
+left: 50%;
+width: 150px;
+height: 150px;
+margin-left: -75px;
+position: absolute;
 }
 
 .registry-top .couple-edit-frame .couple-img-circle {
-    bottom: 0;
-    left: 0;
-    margin-left: 0;
+bottom: 0;
+left: 0;
+margin-left: 0;
 }
 
 @media (min-width: 992px){
 .registry-top .couple-edit-frame * {
-    -webkit-transition: all .5s ease;
-    -o-transition: all .5s ease;
-    transition: all .5s ease;
+-webkit-transition: all .5s ease;
+-o-transition: all .5s ease;
+transition: all .5s ease;
 }
 }
 .registry-hero .couple-img-circle {
-    width: 150px;
-    height: 150px;
-    position: relative;
-    bottom: -30px;
-    left: 50%;
-    margin-left: -75px;
+width: 150px;
+height: 150px;
+position: relative;
+bottom: -30px;
+left: 50%;
+margin-left: -75px;
 }
 
 .couple-img-circle {
-    background-color: #fff;
-    -webkit-box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
-    box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
-    padding: 3px;
-    border-radius: 50%;
+background-color: #fff;
+-webkit-box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
+box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
+padding: 3px;
+border-radius: 50%;
 }
 
 .couple-img-circle-find {
-    background-color: #fff;
-    -webkit-box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
-    box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
-    padding: 3px;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+background-color: #fff;
+-webkit-box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
+box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
+padding: 3px;
+border-radius: 50%;
+width: 50px;
+height: 50px;
 }
 
 .btn-tertiary {
-    color: #a8a8aa;
-    background-color: #fff;
-    border-color: #a8a8aa;
+color: #a8a8aa;
+background-color: #fff;
+border-color: #a8a8aa;
 }
 
 .registry-title {
-    overflow: hidden;
+overflow: hidden;
 }
 
 .registry-top .editable-prev {
-    display: inline-block;
-    width: 95%;
-    
-    border: 2px solid transparent;
+display: inline-block;
+width: 95%;
+
+border: 2px solid transparent;
 }
 
 .registry-hero .registry-hero-content .registry-title, .registry-hero .registry-hero-content .registry-date {
-    color: white;
+color: white;
 }
 
 .greeting {
-    color: white;
-    margin-top : 5px;
+color: white;
+margin-top : 5px;
 }
 
 .registry-image{
-    max-height : 200px;
-    padding : 0px;
+max-height : 200px;
+padding : 0px;
 }
 
 
 .registry-hero .registry-hero-content .registry-title {
-    position: relative;
-    font-size: 40px;
-    text-transform: uppercase;
-    font-weight: 500;
+position: relative;
+font-size: 40px;
+text-transform: uppercase;
+font-weight: 500;
 }
 
 
 @media (min-width: 768px){
 .registry-top .registry-hero .registry-hero-content .registry-title {
-    font-size: 32px;
+font-size: 32px;
 }
 }
 
 @media (min-width: 992px){
 .registry-top .registry-hero .registry-hero-content .registry-title {
-    font-size: 32px;
+font-size: 32px;
 }
 }
 
 @media (min-width: 1200px){
 .registry-top .registry-hero .registry-hero-content .registry-title {
-    font-size: 32px;
+font-size: 32px;
 }
 }
 
 .registry-top .hero-cta {
-    position: absolute;
-    bottom: 10px;
-    right: 7px;
+position: absolute;
+bottom: 10px;
+right: 7px;
 }
 
 .registry-top .registry-welcome .lead {
-    font-family: "Aleo",'Georgia',serif;
-    font-size: 18px;
-    color: #7f7f7f;
-    font-style: italic;
+font-family: "Aleo",'Georgia',serif;
+font-size: 18px;
+color: #7f7f7f;
+font-style: italic;
 }
 
 .image-upload .image-gallery .gallery-image {
-    position: relative;
+position: relative;
 }
 
 .img-overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    color: #fff;
-    padding: 50%;
-    padding: 50%;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+
+color: #fff;
+padding: 50%;
+padding: 50%;
 }
 
 .find-title{
-    font-size: 28px;
-    line-height: 1.15;
-    margin-bottom: 0px;
-    text-align: center;
-    color: #2b3136;
-    font-family:LatoRegular, sans-serif;
-    padding-top : 5px;
-    margin-top : 10px;
+font-size: 28px;
+line-height: 1.15;
+margin-bottom: 0px;
+text-align: center;
+color: #2b3136;
+font-family:LatoRegular, sans-serif;
+padding-top : 5px;
+margin-top : 10px;
 }
 
 .registryHeading{
-    
-    cursor: pointer !important;
+
+cursor: pointer !important;
 }
 
+
+
+@keyframes slideOutLeft {
+to      { transform: translateX(-200%); }
+}
+@-moz-keyframes slideOutLeft {  
+to      { -moz-transform: translateX(-200%); }
+}
+@-webkit-keyframes slideOutLeft {
+to      { -webkit-transform: translateX(-200%); }
+}
+
+/* slide in from the right */
+@keyframes slideInRight {
+from    { transform:translateX(200%); }
+to      { transform: translateX(0); }
+}
+@-moz-keyframes slideInRight {
+from    { -moz-transform:translateX(200%); }
+to      { -moz-transform: translateX(0); }
+}
+@-webkit-keyframes slideInRight {
+from    { -webkit-transform:translateX(200%); }
+to      { -webkit-transform: translateX(0); }
+}
+
+
+#form-container{  
+margin-bottom:20px;
+border-radius:5px; 
+}
+#form-container .page-header{  
+margin:0; padding:30px; 
+border-top-left-radius:5px;
+border-top-right-radius:5px; 
+}
+
+/* numbered buttons */
+#status-buttons a{ 
+color:#333; 
+display:inline-block; 
+font-size:12px; 
+margin-right:10px; 
+text-align:center; 
+text-transform:uppercase;
+}
+#status-buttons a:hover{ 
+text-decoration:none; 
+}
+#status-buttons span{ 
+background:grey; 
+display:block; 
+height:30px; 
+margin:0 auto 10px; 
+padding-top:5px; 
+width:30px; 
+border-radius:50%; 
+
+}
+
+.disableevent, .disablelocation, .disablemessage{
+cursor : not-allowed !important;
+}
+
+#status-buttons a.active span{ 
+background:#00BC8C; 
+}
+
+
+#signup-form{ 
+position:relative; 
+min-height:300px; 
+overflow:hidden; 
+
+}
+
+#form-views.ng-enter,
+#form-views.ng-leave{ 
+position:absolute; 
+left:30px; 
+right:30px;
+transition:0.5s all ease;
+-moz-transition:0.5s all ease; 
+-webkit-transition:0.5s all ease; 
+}
+
+
+#form-views.ng-enter{ 
+-webkit-animation:slideInRight 0.5s both ease;
+-moz-animation:slideInRight 0.5s both ease;
+animation:slideInRight 0.5s both ease; 
+}
+
+
+#form-views.ng-leave { 
+-webkit-animation:slideOutLeft 0.5s both ease;
+-moz-animation:slideOutLeft 0.5s both ease;
+animation:slideOutLeft 0.5s both ease;   
+}
+
+.registryPage {
+background-image: url("/assets/img/flower-website-backgrounds-81.jpg");   
+}
+
+.navbar-registry{
+background-color : transparent !important;
+border-color: transparent;
+
+}
+
+.navbar-registry{
+width: 100%;
+text-align: center;
+> li {
+float: none;
+display: inline-block;
+font-size: 16px;
+color: black;
+font-family: 'Montserrat-Regular';
+font-weight: 400;
+text-transform: uppercase;
+}
+}
+
+.registry-tabs{
+margin-top : 30px;
+margin-bottom : 30px;
+}

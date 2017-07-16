@@ -32,7 +32,9 @@ var UserSchema = new Schema({
   address: String,
   city: String,
   state: String,
-  country: String
+  country: String,
+  resetPasswordToken: String,
+  resetPasswordExpires: Date
 });
 
 /**

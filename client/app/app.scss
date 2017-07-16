@@ -42,15 +42,8 @@ form .progress {
 }
 
 
-.product-grid ul#category {
-	margin-top: -102px !important;
-	position: initial !important;
-	width: 100% !important;
-}
-
 // Component styles are injected through grunt
 // injector
-@import 'about/about.scss';
 @import 'admin/admin.scss';
 @import 'cart/cart.scss';
 @import 'category/category.scss';

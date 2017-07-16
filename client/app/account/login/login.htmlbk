@@ -1,0 +1,197 @@
+<md-dialog id="login-dialog" aria-label="Login" ng-controller="LoginController">
+  <div ng-if="loginlayout">
+    <form name="loginForm" ng-submit="login(loginForm)">
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <div flex="" layout="row" layout-align="center center">
+            <h2>Login</h2>
+          </div>
+
+          <md-button aria-label="cancel" class="md-icon-button" ng-click="cancel()">
+           <i class="fa fa-close"></i>
+         </md-button> 
+       </div>
+     </md-toolbar>
+
+     <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="socialLogin">
+      <md-button class="md-fab facebook" aria-label="Facebook" ng-click="loginOauth('facebook')">
+        <i class="fa fa-facebook"></i>
+      </md-button>
+
+      <md-button class="md-fab  twitter" aria-label="Twitter" ng-click="loginOauth('twitter')">
+        <i class="fa fa-twitter"></i>
+      </md-button>
+
+      <md-button class="md-fab google" aria-label="Google" ng-click="loginOauth('google')">
+        <i class="fa fa-google-plus"></i>
+      </md-button>
+
+    </section>
+
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input type="email" name="email" ng-model="user.email" md-autofocus required />
+          <div ng-messages="loginForm.email.$error">
+            <div ng-message="required">
+             Email is required.
+           </div>
+           <div ng-message="email">
+             Please enter valid email
+           </div>
+
+         </div> 
+       </md-input-container>
+       <md-input-container class="md-block">
+        <label>Password</label>
+        <input type="password" name="password" ng-model="user.password" required />
+        <div ng-messages="loginForm.password.$error">
+          <div ng-message="required">
+           Password is required.
+         </div>
+       </div> 
+
+       <span class="pull-right"><md-button  ng-click="switchforgotlayout()" class="md-primary">Forgot Password?</md-button></span>
+
+     </md-input-container>
+     <div class="form-group has-error">
+
+      <p class="help-block">{{ errors.other }}</p>
+    </div>
+
+  </div>
+</md-dialog-content>
+
+<md-dialog-actions layout="row" layout-wrap>        
+  <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-accent" flex>Login</md-button>
+  
+</md-dialog-actions>
+<md-dialog-actions layout="row" layout-align="center">        
+  <span ><a href="" class="md-primary">New to Wrapsy? Sign up</a></span>  </md-dialog-actions>
+</form>
+</div>
+
+
+<div ng-if="signup">
+  <form name="loginForm" ng-submit="dialog.login()">
+    <md-toolbar class="md-primary">
+      <div class="md-toolbar-tools">
+        <div flex="" layout="row" layout-align="center center">
+          <h2>Login</h2>
+        </div>
+
+        <md-button aria-label="cancel" class="md-icon-button" ng-click="cancel()">
+         <i class="fa fa-close"></i>
+       </md-button> 
+     </div>
+   </md-toolbar>
+   <md-dialog-content>
+    <div class="md-dialog-content">
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input type="email" name="email" ng-model="user.email" md-autofocus required />
+        <div ng-messages="loginForm.email.$error">
+          <div ng-message="required">
+           Email is required.
+         </div>
+         <div ng-message="email">
+           Please enter valid email
+         </div>
+
+       </div> 
+     </md-input-container>
+     <md-input-container class="md-block">
+      <label>Password</label>
+      <input type="password" name="password" ng-model="user.password" required />
+      <div ng-messages="loginForm.password.$error">
+        <div ng-message="required">
+         Password is required.
+       </div>
+     </div> 
+
+     <span class="pull-right"><md-button  ng-click="switchforgotlayout()" class="md-primary">Forgot Password?</md-button></span>
+
+   </md-input-container>
+   <div class="form-group has-error">
+
+    <p class="help-block">{{ errors.other }}</p>
+  </div>
+
+</div>
+</md-dialog-content>
+
+
+<md-dialog-actions layout="row" layout-wrap>        
+  <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-accent" flex>Login</md-button>
+  
+</md-dialog-actions>
+<md-dialog-actions layout="row" layout-align="center">        
+  <span ><a href="" class="md-primary">New to Wrapsy? Sign up</a></span>  </md-dialog-actions>
+</form>
+
+</div>
+</md-dialog>
+
+
+
+
+
+  <!-- <md-dialog id="login-dialog" aria-label="Login" ng-cloak ng-controller="LoginController">
+      <form name="loginForm" ng-submit="dialog.login()">
+        <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <div flex="" layout="row" layout-align="center center">
+            <h2>Login</h2>
+          </div>
+
+          <md-button aria-label="cancel" class="md-icon-button" ng-click="cancel()">
+           <i class="fa fa-close"></i>
+         </md-button> 
+       </div>
+     </md-toolbar>
+        <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input type="email" name="email" ng-model="user.email" md-autofocus required />
+          <div ng-messages="loginForm.email.$error">
+            <div ng-message="required">
+             Email is required.
+           </div>
+           <div ng-message="email">
+             Please enter valid email
+           </div>
+
+         </div> 
+       </md-input-container>
+       <md-input-container class="md-block">
+        <label>Password</label>
+        <input type="password" name="password" ng-model="user.password" required />
+        <div ng-messages="loginForm.password.$error">
+          <div ng-message="required">
+           Password is required.
+         </div>
+       </div> 
+
+       <span class="pull-right"><md-button  ng-click="switchforgotlayout()" class="md-primary">Forgot Password?</md-button></span>
+
+     </md-input-container>
+     <div class="form-group has-error">
+
+      <p class="help-block">{{ errors.other }}</p>
+    </div>
+
+  </div>
+</md-dialog-content>
+
+
+       <md-dialog-actions layout="row" layout-wrap>        
+  <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-accent" flex>Login</md-button>
+  
+</md-dialog-actions>
+<md-dialog-actions layout="row" layout-align="center">        
+  <span ><a href="" class="md-primary">New to Wrapsy? Sign up</a></span>  </md-dialog-actions>
+      </form>
+    </md-dialog> -->

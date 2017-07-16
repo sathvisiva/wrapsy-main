@@ -6,7 +6,6 @@
             <ul class="sub-menu clearfix">
                 <li class="sub-sec col-md-6">
                     <ul>
-                        <li><a class="title" ui-sref="products({slug: parentCategory.slug})">{{parentCategory.name}}</a></li>
                         <li ng-repeat="category in parentCategory.children"><a ui-sref="products({slug: category.slug})">{{category.name}}</a></li>
                     </ul>
                 </li>

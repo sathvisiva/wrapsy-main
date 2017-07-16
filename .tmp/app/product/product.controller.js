@@ -2,8 +2,11 @@
 
 angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams', '$state', 'Product', 'Registry', '$rootScope', 'RegistryService', 'Auth', 'toaster', '$timeout', function ($scope, $stateParams, $state, Product, Registry, $rootScope, RegistryService, Auth, toaster, $timeout) {
 
-  //Get product and fetch related products based on category
   $scope.product = Product.get({ id: $stateParams.id }, function (p) {
+
+    $scope.colors = p.color.split(',');
+    $scope.sizes = p.size.split(',');
+    $scope.selectedObj = {};
     $scope.product.averageRating = getAverageRating(p);
     Product.catalog({ id: p.categories[0].slug, limit: 6 }, function (relatedProducts) {
       $scope.relatedProducts = _.filter(_.map(relatedProducts, function (relatedProduct) {

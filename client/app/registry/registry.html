@@ -1,61 +1,86 @@
 <navbar></navbar>
-<div class="container">
-	<toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
+<div class="registryPage">
+	<div class="container">
 
-	<div class="row">
-		<section class="registry-top">
-			<div class="registry-hero" ng-style="{'background-image': 'url(' + registry.backgroundImageUrl + ')'}">
-				<div class="registry-hero-gradient"></div>
-				<div class="hero-buttons">
-					<button class="btn btn-md btn-tertiary pull-left" ng-click="selectBackgroundImage()" ng-if="editable">
-						Edit Background
-					</button>
+	<section class="registry-tabs">
 
-					<a  class="btn btn-md btn-tertiary pull-right" ng-if="editable" ui-sref="manageregistry({id:registry._id})">
-						Edit Registry
-					</a> 
-				</div>
-				<div class="registry-hero-content">
-					<div class="row">
-						<div class="col-xs-12">
+			<nav class="navbar navbar-default navbar-registry" role="navigation">
+				<div class="container-fluid">
 
 
-							<span class="registry-title editable-prev h1 hidden-sm hidden-xs" >{{registry.title}}</span>
-							<div class="registry-welcome text-center visible-xs visible-sm"  style="
-							margin-bottom: 100px;>
-							<h5
-							" class="registry-title "><strong>{{registry.title}}</strong></h5>
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav navbar-registry">
+
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="#">Our Wishlist</a></li>
+							<li><a href="#">Gallery</a></li>
+							<li><a href="#">Travel</a></li>
+							<li><a href="#">RSVP</a></li>
+							<li><a href="#">Guest Book</a></li>
+
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+
+		</section>
+
+
+		<div class="row">
+			<section class="registry-top">
+				<div class="registry-hero" ng-style="{'background-image': 'url(' + registry.backgroundImageUrl + ')'}">
+					<div class="registry-hero-gradient"></div>
+					<div class="hero-buttons">
+						<button class="btn btn-md btn-tertiary pull-left" ng-click="selectBackgroundImage()" ng-if="editable">
+							Edit Background
+						</button>
+
+						<a  class="btn btn-md btn-tertiary pull-right" ng-if="editable" ui-sref="manageregistry({id:registry._id})">
+							Edit Registry
+						</a> 
+					</div>
+					<div class="registry-hero-content">
+						<div class="row">
+							<div class="col-xs-12">
+
+
+								<span class="registry-title editable-prev h1 hidden-sm hidden-xs" >{{registry.title}}</span>
+								<div class="registry-welcome text-center visible-xs visible-sm"  style="
+								margin-bottom: 100px;>
+								<h5
+								" class="registry-title "><strong>{{registry.title}}</strong></h5>
+								<br>
+								<a class="btn btn-md btn-danger publish-registry-button" ng-click="setVisible()">Make It Visible</a>
+
+
+							</div>
+
+							<a class="registry-date clearfix h4 hidden-sm hidden-xs" href="/registry/settings/info" target="_self">{{registry.date  | date : "longDate"}} </a>
 							<br>
-							<a class="btn btn-md btn-danger publish-registry-button" ng-click="setVisible()">Make It Visible</a>
-
-
-						</div>
-
-						<a class="registry-date clearfix h4 hidden-sm hidden-xs" href="/registry/settings/info" target="_self">{{registry.date  | date : "longDate"}} </a>
-						<br>
-						<span class="greeting hidden-xs hidden-sm" >{{registry.greeting}}</span>
-					</form>
+							<span class="greeting hidden-xs hidden-sm" >{{registry.greeting}}</span>
+						</form>
+					</div>
 				</div>
+				<div class="hero-cta text-center">
+					<!-- ngIf: !regEdCtrl.isPublic --><div class="hidden-sm hidden-xs" ng-if="!registry.visible && editable">
+					<a class="btn btn-md btn-danger publish-registry-button" ng-click="setVisible()">Make It Visible</a>
+					<p>Guests cannot view your registry</p>
+				</div><!-- end ngIf: !regEdCtrl.isPublic -->
+
+
 			</div>
-			<div class="hero-cta text-center">
-				<!-- ngIf: !regEdCtrl.isPublic --><div class="hidden-sm hidden-xs" ng-if="!registry.visible && editable">
-				<a class="btn btn-md btn-danger publish-registry-button" ng-click="setVisible()">Make It Visible</a>
-				<p>Guests cannot view your registry</p>
-			</div><!-- end ngIf: !regEdCtrl.isPublic -->
-
-
 		</div>
-	</div>
-	<div class="couple-edit-frame text-center" >
-		<img class="couple-img-circle img-responsive" ng-src="{{registry.profileImageUrl}}" >
-		<div class="img-overlay">
-			<a ng-if="editable" ngf-select="upload($file, $invalidFiles)" ng-model="imagimageUrleUrl" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-resize="{width: 606, height: 780, quality: .8, type: 'image/jpeg', centerCrop: true, restoreExif: false}" ngf-model-invalid="errorFile">
-				<i class="fa fa-pencil fa-2x"></i>
-			</a>
+		<div class="couple-edit-frame text-center" >
+			<img class="couple-img-circle img-responsive" ng-src="{{registry.profileImageUrl}}" >
+			<div class="img-overlay">
+				<a ng-if="editable" ngf-select="upload($file, $invalidFiles)" ng-model="imagimageUrleUrl" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-resize="{width: 606, height: 780, quality: .8, type: 'image/jpeg', centerCrop: true, restoreExif: false}" ngf-model-invalid="errorFile">
+					<i class="fa fa-pencil fa-2x"></i>
+				</a>
+			</div>
 		</div>
-	</div>
 
-</section>
+	</section>
 
 </div>
 <div class="row text-center visible-xs visible-sm">
@@ -80,8 +105,8 @@
 		<div>
 			<h3 class="howitworks registryoptions ">
 				<a ng-click="showWishlist()" class="registryHeading">
-								Wishlist
-							</a>
+					Wishlist
+				</a>
 			</h3>
 		</div>
 	</div>
@@ -148,161 +173,161 @@
 							<div class="col-md-8 col-md-offset-2">
 								<h3 class="hidden-sm hidden-xs text-center registry-label">We hope you can make it to the occasion</h3>
 								<form class="form" name="form" ng-submit="saversvp(form)" novalidate>
-<div class="col-md-12">
-<div class = "row">
-<div class = "col-md-12">
-<div class="form-group">
-<label for="firstName" class="registry-label">YOUR NAME:</label>
-<input type="text" class="form-control  registry-form" id="firstName" name="name" ng-model="rsvp.name" required/>
-<p class="help-block" ng-show="form.name.$error.required && form.name.$touched && form.name.$invalid">
-Name is required
-</p>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-md-6">
-<div class="form-group">
-<label for="firstName" class="registry-label">YOUR EMAIL :</label>
-<input type="email" class="form-control registry-form" id="email" name="email" ng-model="rsvp.email" required/>
-<p class="help-block" ng-show="form.email.$dirty && form.email.$invalid"
-                                >
-                                    Doesn't look like a valid email.
-                                </p>
-                                <p class="help-block" ng-show="form.email.$error.required && form.email.$touched && form.email.$invalid">
-                                    Email address is required
-                                </p>
-</div>
-</div>
-<div class="col-md-6">
-<div class="form-group">
-<label class="registry-label" for="LastName">YOUR PHONE </label>
-<input type="text" class="form-control registry-form" id="phone" ng-pattern="ph_numbr" name="phone" ng-model="rsvp.phone"
- required />
-  <p class="help-block" ng-show="form.phone.$error.required && form.phone.$touched && form.phone.$invalid">
-        Phone number is required.
-        
-      </p>
-  <p class="help-block" ng-show="form.phone.$error.pattern && form.phone.$touched && form.phone.$invalid">
-        Invalid Phone Number
-        
-      </p>
-</div>
-</div>
-</div>
-<div class="row" >
-<div class="col-md-6">
-<div class="form-group">
-<label for="firstName" class="registry-label" >NO OF GUESTS:</label>
-<input type="number" class="form-control registry-form" min="{{0}}" id="firstName" ng-model="rsvp.people" name="firstName" >
-
-</div>
-											</div>
-
-										</div>
-	<div class="form-group">
-		<div class="radio">
-
-												<label>
-<input type="radio" name="attending" value="true" ng-model="rsvp.attending" checked="checked" ng-checked = true>
-													Attending
-												</label>
-											</div>
-											<div class="radio">
-												<label>
-	<input type="radio" name="attending" value="false" ng-model="rsvp.attending">
-													Not Attending
-												</label>
+									<div class="col-md-12">
+										<div class = "row">
+											<div class = "col-md-12">
+												<div class="form-group">
+													<label for="firstName" class="registry-label">YOUR NAME:</label>
+													<input type="text" class="form-control  registry-form" id="firstName" name="name" ng-model="rsvp.name" required/>
+													<p class="help-block" ng-show="form.name.$error.required && form.name.$touched && form.name.$invalid">
+														Name is required
+													</p>
+												</div>
 											</div>
 										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="firstName" class="registry-label">YOUR EMAIL :</label>
+													<input type="email" class="form-control registry-form" id="email" name="email" ng-model="rsvp.email" required/>
+													<p class="help-block" ng-show="form.email.$dirty && form.email.$invalid"
+													>
+													Doesn't look like a valid email.
+												</p>
+												<p class="help-block" ng-show="form.email.$error.required && form.email.$touched && form.email.$invalid">
+													Email address is required
+												</p>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="registry-label" for="LastName">YOUR PHONE </label>
+												<input type="text" class="form-control registry-form" id="phone" ng-pattern="ph_numbr" name="phone" ng-model="rsvp.phone"
+												required />
+												<p class="help-block" ng-show="form.phone.$error.required && form.phone.$touched && form.phone.$invalid">
+													Phone number is required.
 
-	<div class="row">
-											<div class="col-md-4">
-	<p class="help-block"> {{ message }} </p>
-	<button class="btn btn-primary" ng-click="submitted = true" ng-disabled="form.$invalid" type="submit">Save Changes</button>
+												</p>
+												<p class="help-block" ng-show="form.phone.$error.pattern && form.phone.$touched && form.phone.$invalid">
+													Invalid Phone Number
+
+												</p>
 											</div>
 										</div>
 									</div>
-								</form>
-							</div>
+									<div class="row" >
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="firstName" class="registry-label" >NO OF GUESTS:</label>
+												<input type="number" class="form-control registry-form" min="{{0}}" id="firstName" ng-model="rsvp.people" name="firstName" >
+
+											</div>
+										</div>
+
+									</div>
+									<div class="form-group">
+										<div class="radio">
+
+											<label>
+												<input type="radio" name="attending" value="true" ng-model="rsvp.attending" checked="checked" ng-checked = true>
+												Attending
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" name="attending" value="false" ng-model="rsvp.attending">
+												Not Attending
+											</label>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-4">
+											<p class="help-block"> {{ message }} </p>
+											<button class="btn btn-primary" ng-click="submitted = true" ng-disabled="form.$invalid" type="submit">Save Changes</button>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
 					</div>
+				</div>
 
-					<div class="registry-items" ng-show="show4" ng-if = "editable">
+				<div class="registry-items" ng-show="show4" ng-if = "editable">
 					<div class="text-center" ng-show="guests.length < 1">
 						No Guest Information Available
 					</div>
 
-						<div class="table-responsive" ng-show="guests.length > 0">   
-							<table class="table" >
-								<thead>
-									<tr>
-										<th>Name</th>
-										<th>Email</th>
-										<th>Phone</th>
-										<th>Guests</th>
-										<th>attending</th>
+					<div class="table-responsive" ng-show="guests.length > 0">   
+						<table class="table" >
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Email</th>
+									<th>Phone</th>
+									<th>Guests</th>
+									<th>attending</th>
 
-									</tr>
-								</thead>
-								<tr ng-repeat = "guest in guests">
-									<th>{{guest.name}}</th>
-									<th>{{guest.email}}</th>
-									<th>{{guest.phone}}</th>
-									<th><span ng-if ="guest.people ==null">1</span><span ng-if ="guest.people != null">1 + {{guest.people}}</span></th>
-									<th>{{guest.attending}}</th>
 								</tr>
-							</table>
-						</div>
+							</thead>
+							<tr ng-repeat = "guest in guests">
+								<th>{{guest.name}}</th>
+								<th>{{guest.email}}</th>
+								<th>{{guest.phone}}</th>
+								<th><span ng-if ="guest.people ==null">1</span><span ng-if ="guest.people != null">1 + {{guest.people}}</span></th>
+								<th>{{guest.attending}}</th>
+							</tr>
+						</table>
 					</div>
+				</div>
 
-					<div class="registry-items" ng-show="show3" >
-						<div class="row" ng-show="!editable">
-							<div class="form-group col-sm-3 col-md-3 col-lg-3">
-								<label>Nickname<span title="required" class="required">*</span></label>
-								<input type="text" class="form-control" name="name" ng-model="guestbook.by" required>
-							</div>
-							<div class="form-group col-sm-6 col-md-6 col-lg-6">
-								<label>Your Wishes<span title="required" class="required">*</span></label>
-								<input type="text" class="form-control" name="subject" ng-model="guestbook.wishes" required>
-							</div>
-							<div class="form-group col-sm-2 col-md-2 col-lg-2" style="   margin-top: 25px;">
+				<div class="registry-items" ng-show="show3" >
+					<div class="row" ng-show="!editable">
+						<div class="form-group col-sm-3 col-md-3 col-lg-3">
+							<label>Nickname<span title="required" class="required">*</span></label>
+							<input type="text" class="form-control" name="name" ng-model="guestbook.by" required>
+						</div>
+						<div class="form-group col-sm-6 col-md-6 col-lg-6">
+							<label>Your Wishes<span title="required" class="required">*</span></label>
+							<input type="text" class="form-control" name="subject" ng-model="guestbook.wishes" required>
+						</div>
+						<div class="form-group col-sm-2 col-md-2 col-lg-2" style="   margin-top: 25px;">
 							<button class="btn-primary btn-sm" ng-click=saveGuestWish()>Post Wishes</button>
-							</div>
 						</div>
-			<div ng-repeat = "wish in guestWishes| orderBy: '-posted'">
-				<div class="wishname">{{wish.by}}</div>
-				<div class="wishcontent">{{wish.wishes}}</div>
-				<br>
-			</div>
-			<div class="text-center" ng-show="guestWishes.length < 1">
-				No Messages
-			</div>
 					</div>
+					<div ng-repeat = "wish in guestWishes| orderBy: '-posted'">
+						<div class="wishname">{{wish.by}}</div>
+						<div class="wishcontent">{{wish.wishes}}</div>
+						<br>
+					</div>
+					<div class="text-center" ng-show="guestWishes.length < 1">
+						No Messages
+					</div>
+				</div>
 
 
-					<div class="registry-items" ng-show="show1">
-						<div class="row ">
-							<div class="col-md-3" ng-repeat="item in registry.products" >
-								<div class="thumbnail" >
+				<div class="registry-items" ng-show="show1">
+					<div class="row ">
+						<div class="col-md-3" ng-repeat="item in registry.products" >
+							<div class="thumbnail" >
 
-									<img ng-src="{{item.imageUrl}}" class="registry-image" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "!item.affiliate" ng-click="productDetail(item)"/>
+								<img ng-src="{{item.imageUrl}}" class="registry-image" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "!item.affiliate" ng-click="productDetail(item)"/>
 
-									<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="registry-image" style="margin-top:35px; min-height: 165px" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "item.affiliate" ng-click="productDetail(item)"/>
+								<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="registry-image" style="margin-top:35px; min-height: 165px" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "item.affiliate" ng-click="productDetail(item)"/>
 
-									<div class="ribbon sale" ng-show="item.desired<=item.required">
-										<div class="theribbon">FullFilled</div>
-										<div class="ribbon-background"></div>
-									</div>
+								<div class="ribbon sale" ng-show="item.desired<=item.required">
+									<div class="theribbon">FullFilled</div>
+									<div class="ribbon-background"></div>
+								</div>
 
-									<div class="caption text-center">
-										<h5>{{item.name}}</h5>
-										<p>₹ {{item.price}}</p>
-										<p>Desired : 
-	<input type=number ng-model="item.desired" ng-if="editable" style="width: 50px;" min = {{item.required}} />
-	<span ng-if="!editable" >{{item.desired}}</span>&nbsp;&nbsp;Received : <span ng-if="item.desired >= item.required">{{item.required}}</span>
-	<span ng-if="item.desired < item.required">{{item.desired}}</span>
-	</p>
+								<div class="caption text-center">
+									<h5>{{item.name}}</h5>
+									<p>₹ {{item.price}}</p>
+									<p>Desired : 
+										<input type=number ng-model="item.desired" ng-if="editable" style="width: 50px;" min = {{item.required}} />
+										<span ng-if="!editable" >{{item.desired}}</span>&nbsp;&nbsp;Received : <span ng-if="item.desired >= item.required">{{item.required}}</span>
+										<span ng-if="item.desired < item.required">{{item.desired}}</span>
+									</p>
 
 
 								<!-- <a class="btn btn-primary" ng-if="item.affiliate" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{item.prodcode}}/
@@ -321,6 +346,7 @@ Name is required
 			</div> 
 
 		</div>
-<br>
-<br>
-		<footer></footer>
+	</div>
+	<br>
+	<br>
+	<footer></footer>

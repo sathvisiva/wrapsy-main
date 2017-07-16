@@ -20,7 +20,10 @@ var CatalogSchema = new Schema({
   children: [{
     type: Schema.Types.ObjectId,
     ref: 'Catalog'
-  }]
+  }],
+  imageUrl : {
+    type: String
+  }
 });
 
 CatalogSchema.methods = {

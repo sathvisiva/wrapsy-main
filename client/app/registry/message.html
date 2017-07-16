@@ -1,0 +1,56 @@
+<section class="event-details">
+	<div class="container">
+		<div class="row">
+			<div class="category-title-header">
+				<div class="title-center">
+					<div class="title"><h1>Leave A Message for Your Guests</h1></div>
+					<div class="separator-title"><div class="divider-line"></div></div>
+				</div>
+				<div class="clearer"></div>
+			</div>
+		</div>
+		<div class = "register-section">
+			<form class="form" name="form" ng-submit="save(form)" novalidate>
+				<!-- our nested state views will be injected here -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group form-group-lg">
+							<label>Message for your guests</label>
+							<div class="row grid-container grid-spacing-half">
+								<div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+									<textarea id="TextArea" class="form-control"  ng-model="registry.greeting"  placeholder="Thank you for visiting my Registry">
+									</textarea>                               
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group form-group-lg">
+							<label>Thank you Message</label>
+							<div class="row grid-container grid-spacing-half">
+								<div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+									<textarea id="TextArea" class="form-control"  ng-model="registry.thankyou"  placeholder="I am extremely grateful to you for the gift that you have sent me. It totally made my day. Thank you.">
+									</textarea>                               
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-5 col-md-2 pull-right">
+						<input type="submit" class="btn btn-primary btn-lg " value="Create Registry">
+					</div>
+					<div class="col-xs-12 col-sm-4 col-md-4 pull-left">
+						<input type="button" class="btn btn-primary btn-lg " value="Previous">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>
+
