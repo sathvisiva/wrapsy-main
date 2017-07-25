@@ -31,7 +31,7 @@ angular.module('bhcmartApp')
   })
   .state('manageregistryList', {
     url: '/manage-registry-list',
-    templateUrl: 'app/registry/manage-registry-list.html',
+    templateUrl: 'app/registry/themeregistry.html',
     controller: 'ManageRegistryListController'
   })
   .state('registry', {

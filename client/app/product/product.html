@@ -1,5 +1,18 @@
 <navbar></navbar>
-
+<div class="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+                    <li class="active">product</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Breadcrumbs-->
+<!--Product Details Area Start-->
 <div class="product-details">
     <section class="product-details-area">
         <div class="container">
@@ -7,15 +20,15 @@
                 <div class="col-md-12">
                     <div class="row">
                         <!-- {{product}} -->
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-5 col-md-5 col-sm-6">
                             <div class="product-s-l">
                                 <div class="product-large">
                                     <div class="tab-content">
                                         <div class="tab-pane active in" id="img-1">
-                                            <a href="#"><img alt="" class="zoom_01 pdt-large-image" src="{{product.imageUrl}}" data-zoom-image="{{product.imageUrl}}" zoom></a>
+                                            <a href="#"><img alt="" class="zoom_01" src="{{product.imageUrl}}" data-zoom-image="{{product.imageUrl}}" zoom></a>
                                         </div>
                                         <div class="tab-pane" ng-repeat="img in product.images" id="img-{{$index + 2}}">
-                                            <a href="#"><img alt="" class="zoom_01 pdt-large-image" src="{{img.imageUrl}}" data-zoom-image="{{img.imageUrl}}" zoom></a>
+                                            <a href="#"><img alt="" class="zoom_01" src="{{img.imageUrl}}" data-zoom-image="{{img.imageUrl}}" zoom></a>
                                         </div>
                                     </div>
                                 </div>
@@ -41,10 +54,142 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="product-right-details">
+
+
+                          <div class="product-reference">
+                            <label class="label">Reference:</label>
+                            <span itemprop="sku">00112</span>
+                        </div>
+
+
+                        <div class="product-quantities">
+                            <label class="label">In stock:</label>
+                            <span>{{product.stock}} Items</span>
+                        </div>
+
+
+                        <div class="product-out-of-stock">
+
+                        </div>
+
+                        <div class="product-information">
+
+
+                            <h2 class="h3">{{product.title}}</h2>
+
+
+                            <div id="product-description-short-12">
+                              <p>What can be more convenient than having all the assortment of any-type-of-products in one place? When you don’t have to dash to different shops looking for a specific brand, whether it is a bathroom cleaner or an activity tracker.
+                                All-in-one-shop, this is a way to save your time and money.</p>
+                            </div>
+
+
+                            <div class="product-prices">
+
+                              <div class="product-price h5 has-discount">
+                                 <div class="current-price">
+                                  <span itemprop="price" content="32">₹{{product.price | number}}</span>
+                              </div>
+
+
+                          </div>
+
+<!-- 
+          <div class="product-discount">
+            <span class="regular-price">$40.00</span>
+        </div> -->
+
+
+        <div class="tax-shipping-delivery-label">
+
+
+        </div>
+
+
+    </div>
+
+    <div class="product-actions">
+
+      <form >
+
+
+
+        <div class="product-variants">
+          <div class="clearfix product-variants-item" ng-if="colors">
+            <span class="control-label">Color</span>
+            <ul id="group_3">
+              <li class="pull-xs-left input-container" ng-repeat="color in colors">
+                <input class="input-color" type="radio" ng-model="$parent.product.color" ng-value="color" >
+                <span class="color" style="background-color: {{color}}"><span class="sr-only">Grey</span></span>
+            </li>
+
+        </ul>
+
+    </div>
+    <div class="clearfix product-variants-item" ng-if="sizes">
+        <span class="control-label">Size</span>
+        <select ng-model="product.size" class="form-control-select" ng-options="x for x in sizes">
+        </select>
+    </div>
+    
+
+    <div class="clearfix product-variants-item">
+        <span class="control-label">Quantity</span>
+        <input type="number" ng-model= "qty" class="form-control-select qty"/>
+    </div>
+</div>
+
+<div class="pdt-button">
+    <div class="col-md-6">
+        <button class="btn btn-primary btn-lg pdt-button" ng-if="!product.affiliate" ng-click="addtocart(product, qty)">
+            Add to cart
+        </button>
+    </div>
+
+    <div class="col-md-6">
+        <button class="btn btn-primary btn-lg pdt-button">
+            Add to Registry
+        </button>
+    </div>
+</div>
+</form>
+
+<div class="clearfix"></div>
+
+
+</div>
+
+
+<input class="product-refresh ps-hidden-by-js" name="refresh" type="submit" value="Refresh" style="display: none;">
+
+</form>
+
+</div>
+
+<div class="product-additional-info">
+
+  <div class="social-sharing">
+    <ul>
+      <li class="facebook"><a href="http://www.facebook.com/sharer.php?u=https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1"
+          class="text-hide" title="Share" target="_blank">Share</a></li>
+          <li class="twitter"><a href="https://twitter.com/intent/tweet?text=Google Nexus 9 Tablet https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1"
+              class="text-hide" title="Tweet" target="_blank">Tweet</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/share?url=https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1" class="text-hide"
+                  title="Google+" target="_blank">Google+</a></li>
+                  <li class="pinterest"><a href="http://www.pinterest.com/pin/create/button/?media=https://ld-prestashop.template-help.com/prestashop_64444/img/p/1/7/9/179.jpg&amp;url=https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1"
+                      class="text-hide" title="Pinterest" target="_blank">Pinterest</a></li>
+                  </ul>
+              </div>
+
+
+          </div>
+
+
+      </div>
+                            <!-- <div class="product-right-details">
                                 <div class="product-info">
-                                    <h1 class="product-name">{{product.title}}</h1>
-                                    <!--  <h4 class="price">₹{{product.price | number}}</h4> -->
+                                    <h4>{{product.title}}</h4>
+                                    <h5>₦{{product.price | number}}</h5>
                                     <div class="rating">
                                         <i class="fa fa-star" ng-class="{'grey': product.averageRating < 1}"></i>
                                         <i class="fa fa-star" ng-class="{'grey': product.averageRating < 2}"></i>
@@ -52,231 +197,221 @@
                                         <i class="fa fa-star" ng-class="{'grey': product.averageRating < 4}"></i>
                                         <i class="fa fa-star" ng-class="{'grey': product.averageRating < 5}"></i>
                                     </div>
-                                    <p>{{product.reviews.length}} Rating(s)</p>
+                                    <p>{{product.reviews.length}} Review (s)</p>
                                 </div>
-
+                            </div>
+                            <div class="borderd-para">
+                                <p>Products available in store.</p>
+                                <br>
+                                <p>Stock: <span>{{product.stock}}</span>.</p>
+                            </div>
+                            <p class="details">{{product.description}}</p>
+                            <div class="p-d-info" ng-show="!ngCart.getItemById(product._id)">
+                                <div class="filter-by">
+                                    <h4>Size:</h4>
+                                    <form action="#">
+                                        <div class="select-filter">
+                                            <select disabled>
+                                                <option value="m">N/A</option>
+                                                <option value="l">L</option>
+                                                <option value="xl">XL</option>
+                                                <option value="xs">XS</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="filter-by">
+                                    <h4>Color:</h4>
+                                    <form action="#">
+                                        <div class="select-filter">
+                                            <select disabled>
+                                                <option value="white">N/A</option>
+                                                <option value="red">Red</option>
+                                                <option value="blue">Blue</option>
+                                                <option value="green">Green</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="filter-by">
+                                    <h4>Qty:</h4>
+                                    <form action="#">
+                                        <div class="select-filter number" ng-init="qty = 1">
+                                            <div class="inc qtybutton" qtybutton>+</div>
+                                            <input type="text" ng-model="qty" max="{{product.stock}}" min="1" name="qtybutton" class="cart-plus-minus-box">
+                                            <div class="dec qtybutton" qtybutton>-</div>
+                                        </div>
+                                    </form>
+                                </div>
                                 <div class="product-info">
-                                    <h1 class="product-price"> ₹{{product.price | number}}</h1>  
+                                    <button class="n-a-btn" ng-click="ngCart.addItem(product._id, product.title, product.price, qty, product)"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                    <a class="wishlist" href="#"><i class="fa fa-heart"></i></a>
+                                    <a class="signal" href="#"><i class="fa fa-signal"></i></a>
                                 </div>
-
-                                <div>
-                                  <span>Products available in store.</span>
-                              </div>
-                              <br>
-                              <div class="row product-size">
-                                  <div class="col-md-2">
-                                      <span class="product-detail-label">Size</span>
-                                  </div>
-                                  <div class="col-md-8">
-                                      <p class="btn-group" ng-repeat="size in sizes">
-                                         <button type="button" class="btn btn-btngrps" >{{size}}</button>
-                                     </p>
-                                 </div>
-                             </div>
-                             <div class="row product-color">
-                              <div class="col-md-2">
-                                  <span class="product-detail-label">Color</span>
-                              </div>
-                              <div class="col-md-8">
-                                  <p class="btn-group" ng-repeat="color in colors">
-                                  <button type="button" class="btn btn-btngrps">{{color}}</button>
-                                 </p>
-                             </div>
-                         </div>
-                         <div class="row">
-                            <div class="col-md-4 col-md-offset-2">
-                                <input type="submit" class="btn btn-secondary btn-lg " value="Add to Cart">
                             </div>
-                            <div class="col-md-4">
-                                <input type="submit" class="btn btn-primary btn-lg " value="Add to Registry">
-                            </div>
+                            <div ng-show="ngCart.getItemById(product._id)">
+                                <a class="btn btn-success btn-sm" ng-click="ngCart.removeItemById(product._id)"><i class="fa fa-check"></i> ADDED</a>
+                                <a class="btn btn-sm btn-success" ui-sref="cart">View Cart and Checkout</a>
+                            </div> -->
                         </div>
                     </div>
-                </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 cold-md-12 col-sm-12">
+
+                            <md-content>
+                                <md-tabs md-dynamic-height md-border-bottom>
+                                    <md-tab label="Product Description">
+                                        <md-content class="md-padding">
+                                          <p>{{product.description}}</p>
+                                      </md-content>
+                                  </md-tab>
+                                  <md-tab label="Shipping">
+                                    <md-content class="md-padding">
+                                       <p>Shipped by the seller.</p>
+
+                                   </md-content>
+                               </md-tab>
+                               <md-tab label="Ratings & Reviews">
+                                <md-content class="md-padding">
+
+                                  <h4 class="md-display-6 text-center"><span>Have you used this Product? <md-button class="md-raised md-accent" ng-click="addrating = true">Review</md-button></span></h4>
 
 
-                           <!--  <p>Products available in store.</p>
-                           <br> -->
-                           <!-- <p>Stock: <span>{{product.stock}}</span>.</p> -->
+                                  <div>
 
-                       <!-- <p class="details">{{product.description}}</p>
-                       <div class="p-d-info" ng-show="!ngCart.getItemById(product._id)">
-                        <div class="filter-by">
-                            <h4>Size:</h4>
-                            <form action="#">
-                                <div class="select-filter">
-                                    <select disabled>
-                                        <option value="m">N/A</option>
-                                        <option value="l">L</option>
-                                        <option value="xl">XL</option>
-                                        <option value="xs">XS</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="filter-by">
-                            <h4>Color:</h4>
-                            <form action="#">
-                                <div class="select-filter">
-                                    <select disabled>
-                                        <option value="white">N/A</option>
-                                        <option value="red">Red</option>
-                                        <option value="blue">Blue</option>
-                                        <option value="green">Green</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="filter-by">
-                            <h4>Qty:</h4>
-                            <form action="#">
-                                <div class="select-filter number" ng-init="qty = 1">
-                                    <div class="inc qtybutton" qtybutton>+</div>
-                                    <input type="text" ng-model="qty" max="{{product.stock}}" min="1" name="qtybutton" class="cart-plus-minus-box">
-                                    <div class="dec qtybutton" qtybutton>-</div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="product-info">
-                            <button class="n-a-btn" ng-click="ngCart.addItem(product._id, product.title, product.price, qty, product)"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-                            <a class="wishlist" href="#"><i class="fa fa-heart"></i></a>
-                            <a class="signal" href="#"><i class="fa fa-signal"></i></a>
-                        </div>
-                    </div> -->
-                   <!--  <div ng-show="ngCart.getItemById(product._id)">
-                        <a class="btn btn-success btn-sm" ng-click="ngCart.removeItemById(product._id)"><i class="fa fa-check"></i> ADDED</a>
-                        <a class="btn btn-sm btn-success" ui-sref="cart">View Cart and Checkout</a>
-                    </div> -->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="p-details-tab">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab" my-tab>Product Description</a></li>
-                            <li role="presentation"><a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab" my-tab>Reviews</a></li>
-                        </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="tab-content review">
-                        <div role="tabpanel" class="tab-pane active" id="description">
-                            <p>{{product.description}}</p>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="reviews">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div ng-repeat="review in product.reviews">
-                                        <div class="review-left">
-                                            <p><span> {{review.title}} </span></p>
-                                            <div class="review-rating">
-                                                <p>rating</p>
-                                                <div class="rating">
-                                                    <i class="fa fa-star" ng-class="{'grey': review.rating < 1}"></i>
-                                                    <i class="fa fa-star" ng-class="{'grey': review.rating < 2}"></i>
-                                                    <i class="fa fa-star" ng-class="{'grey': review.rating < 3}"></i>
-                                                    <i class="fa fa-star" ng-class="{'grey': review.rating < 4}"></i>
-                                                    <i class="fa fa-star" ng-class="{'grey': review.rating < 5}"></i>
+                                      <form name="reviewForm" ng-show = "addrating" ng-submit="addReview(review, product._id)">
+                                        <div class="p-details-table table-responsive">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>1 star</th>
+                                                        <th>2 stars</th>
+                                                        <th>3 stars</th>
+                                                        <th>4 stars </th>
+                                                        <th>5 stars </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody ng-init="review.rating = '5'">
+                                                    <tr>
+                                                        <th class="required">Rating</th>
+                                                        <td>
+                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="1">
+                                                        </td>
+                                                        <td>
+                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="2">
+                                                        </td>
+                                                        <td>
+                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="3">
+                                                        </td>
+                                                        <td>
+                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="4">
+                                                        </td>
+                                                        <td>
+                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="5">
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="row form-top">
+                                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Nickname<span title="required" class="required">*</span></label>
+                                                    <input type="text" class="form-control" name="name" ng-model="review.by" required>
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Summary of Your Review<span title="required" class="required">*</span></label>
+                                                    <input type="text" class="form-control" name="subject" ng-model="review.title" required>
+                                                </div>
+                                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
+                                                    <label>Review<span title="required" class="required">*</span></label>
+                                                    <textarea class="yourmessage" name="message" ng-model="review.content" required></textarea>
                                                 </div>
                                             </div>
-                                            <p>{{review.content}} <span class="italic">(Posted on {{review.posted | date: 'short'}} by {{review.by}}) </span></p>
+                                            <div class="submit-form form-group col-sm-12 submit-review">
+                                                <input type="submit" class="md-raised md-primary" value="Submit Review" />
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                    <div class="review" ng-repeat="review in product.reviews">
+                                      <div class="row">
+                                          <div class="col-md-1">
+                                              <md-button random-backgroundcolor class="md-fab" aria-label="Eat cake">
+                                                  {{ review.by | limitTo:1 }}
+                                              </md-button>
+                                          </div>
+                                          <div class="col-md-9">
+                                            <div class="review-left">
+                                             <div class="rating">
+                                                <i class="fa fa-star" ng-class="{'grey': review.rating < 1}"></i>
+                                                <i class="fa fa-star" ng-class="{'grey': review.rating < 2}"></i>
+                                                <i class="fa fa-star" ng-class="{'grey': review.rating < 3}"></i>
+                                                <i class="fa fa-star" ng-class="{'grey': review.rating < 4}"></i>
+                                                <i class="fa fa-star" ng-class="{'grey': review.rating < 5}"></i>
+                                            </div>
+                                        </div>
+                                        <span> {{review.title}} </span>
+                                        <div class="posted" ><span class="italic">by  {{review.by}} on {{review.posted | date: 'short'}}</span></div>
+                                        <div class="review-rating review-comment">                                     
+
+                                            <span>{{review.content}} </span>
                                         </div>
                                     </div>
                                 </div>
-                                        <!--    </div>
-                                        <div class="row"> -->
-                                            <div class="col-md-6">
-                                                <div class="review-right">
-                                                    <h3><span>You're reviewing: {{product.title}}</span></h3>
-                                                    <h4>{{message}}</h4>
-                                                    <form name="reviewForm" ng-submit="addReview(review, product._id)">
-                                                        <div class="p-details-table table-responsive">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th></th>
-                                                                        <th>1 star</th>
-                                                                        <th>2 stars</th>
-                                                                        <th>3 stars</th>
-                                                                        <th>4 stars </th>
-                                                                        <th>5 stars </th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody ng-init="review.rating = '5'">
-                                                                    <tr>
-                                                                        <th class="required">Rating</th>
-                                                                        <td>
-                                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="1">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="2">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="3">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="4">
-                                                                        </td>
-                                                                        <td>
-                                                                            <input name="rating" type="radio" class="radio" ng-model="review.rating" value="5">
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div class="row form-top">
-                                                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                                                                    <label>Nickname<span title="required" class="required">*</span></label>
-                                                                    <input type="text" class="form-control" name="name" ng-model="review.by" required>
-                                                                </div>
-                                                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                                                                    <label>Summary of Your Review<span title="required" class="required">*</span></label>
-                                                                    <input type="text" class="form-control" name="subject" ng-model="review.title" required>
-                                                                </div>
-                                                                <div class="form-group col-sm-12 col-md-12 col-lg-12">
-                                                                    <label>Review<span title="required" class="required">*</span></label>
-                                                                    <textarea class="yourmessage" name="message" ng-model="review.content" required></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="submit-form form-group col-sm-12 submit-review">
-                                                                <input type="submit" class="add-tag-btn" value="Submit Review" />
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <md-divider ng-if="!$last"></md-divider>
                             </div>
-                        </div>
-                        <div class="col-md-3 sidebar-info">
-                            <div class="feature-heading">
-                                <h2>Related Products</h2>
-                            </div>
-                            <div class="single-news" ng-repeat="p in relatedProducts">
-                                <div class="single-image">
-                                    <a ui-sref="product({id: p.slug})">
-                                        <img src="{{p.imageUrl}}" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-info">
-                                    <h4><a ui-sref="product({id: p.slug})">{{p.title}}</a></h4>
-                                    <h5>₦{{p.price | number}}</h5>
-                                    <div class="rating">
-                                        <i class="fa fa-star" ng-class="{'grey': p.averageRating < 1}"></i>
-                                        <i class="fa fa-star" ng-class="{'grey': p.averageRating < 2}"></i>
-                                        <i class="fa fa-star" ng-class="{'grey': p.averageRating < 3}"></i>
-                                        <i class="fa fa-star" ng-class="{'grey': p.averageRating < 4}"></i>
-                                        <i class="fa fa-star" ng-class="{'grey': p.averageRating < 5}"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <aside class="widget widget-banner border-hover">
-                                <a href="#"><img alt="" src="assets/img/banner/banner-30.jpg"></a>
-                            </aside>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        </md-content>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
         </div>
-        <!--End of product-details Area-->
-        <footer></footer>
+    </div>
+
+    <div class="category-title-header" style="margin-top: 50px;">
+
+        <div class="title-center">
+            <div class="title"><h1 class="ng-binding">Products You May Like</h1></div>
+            <div class="separator-title"><div class="divider-line"></div></div>
+        </div>
+        <div class="clearer"></div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 col-xs-6 first registry-item" ng-repeat="product in relatedProducts| limitTo:4">
+        <div class="product-outer">
+          <div class="registry-product-image single-product">
+              <a ui-sref="product({id: product.slug})" class="registry-product-link" >
+                  <img class="img-responsive item-image lazy primary-img" ng-src="{{product.imageUrl}}" width="480" height="480"  style="display: block;">
+                  <img class="img-responsive item-image lazy secondary-img" ng-src="{{product.imageUrl}}" width="480" height="480"  style="display: block;">
+                  <i class="fa fa-expand"></i>
+              </a>
+
+          </div>                      
+
+          <div class="registry-product-name">
+            <h2 class="product-name brand-name">
+                <a ui-sref="product({id: product.slug})" class="registry-product-link">{{product.brand}}                                </a>
+            </h2>
+            <h2 class="product-name">
+                <a ui-sref="product({id: product.slug})" >{{product.title}}      </a>
+            </h2>
+        </div>
+        <div class="price-box" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+            <span class="regular-price" itemprop="price" id="product-price-3259">
+                <span class="price">₹&nbsp;{{product.price}}  </span> </span>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+</section>
+</div>
+<!--End of product-details Area-->
+<footer></footer>

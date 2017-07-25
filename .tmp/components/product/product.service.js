@@ -16,6 +16,36 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
       method: 'PUT'
     }
   });
+}).factory('Voucher', function ($resource) {
+  return $resource('/api/voucher/:id', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+}).factory('Payment', function ($resource) {
+  return $resource('/api/payment/:id/:controller', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    },
+    'createHash': {
+      method: 'POST',
+      params: {
+        controller: 'createHash',
+        limit: null
+      }
+    },
+    'PaymentStatus': {
+      method: 'POST',
+      params: {
+        controller: 'PaymentStatus',
+        limit: null
+      }
+    }
+  });
 }).factory('Product', function ($resource) {
   return $resource('/api/products/:id/:controller/:limit', {
     id: '@_id'

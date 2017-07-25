@@ -34,14 +34,14 @@
 		</div>
 	</div>
 </div>
-<div>
-	<!-- <div class="row">
-		<p class="text-center topic wow bounceInRight layer-1" data-wow-duration="3s" data-wow-delay=".5s">How it Works</p>
-	</div> -->
-	<div class="container">
-		<div class="row">
-			<h5 class="heading "><span >It's convenient, easy and fun</span></h5>
+<div class="section-details">
+	
+	<div class="category-title-header">
+		<div class="title-center">
+			<div class="title"><h1>It's convenient, easy and fun</h1></div>
+			<div class="separator-title"><div class="divider-line"></div></div>
 		</div>
+		<div class="clearer"></div>
 	</div>
 	<div class="row text-center" >
 		<div class="col-md-4">
@@ -74,33 +74,43 @@
 		</div>
 	</div>
 
-	<hr style="border-top-color: pink;">
-	<div class="container">
-		<div class="row">
-			<h5 class="heading"><span>Explore Our Gifts</span></h5>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6 banner-holder cyan-hover" >
-			<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="assets/img/birthday-banner.jpg" alt="Birthday Gifts"></a>      </div>
-			<div class="col-md-6 banner-holder cyan-hover">
-				<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="assets/img/anniversary-banner.jpg" alt="Birthday Gifts"></a>            </div>
-			</div>
+	<section class="home-categories">
+		<div class="category-title-header">
 
-			<div class="row ">
+			<div class="title-center">
+				<div class="title"><h1>Popular Categories</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 banner-holder cyan-hover" >
+				<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-01.jpg" alt="Birthday Gifts"></a>      </div>
+				<div class="col-md-4 banner-holder cyan-hover">
+					<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-02.jpg" alt="Birthday Gifts"></a>            </div>
+					<div class="col-md-4 banner-holder cyan-hover">
+						<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-03_1.jpg" alt="Birthday Gifts"></a>            </div>
+					</div>
+				</section>
+
+			<!-- <div class="row ">
 				<div class="col-md-12 ">
 					<div class="banner1-holder cyan-hover ">     
 						<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive " src="assets/img/gifts-everyone.jpg" alt="Birthday Gifts"></a>   
 
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<div class="clearfix"></div>
 			
 			<div class="registry-container">
 				<div class="container">
-					<div class="row">
-						<h5 class="heading"><span>View A Sample Registry</span></h5>
+					<div class="category-title-header">
+						<div class="title-center">
+							<div class="title"><h1>View A Sample Registry</h1></div>
+							<div class="separator-title"><div class="divider-line"></div></div>
+						</div>
+						<div class="clearer"></div>
 					</div>
 
 					<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" >
@@ -116,28 +126,34 @@
 				</div>
 			</div>
 
-			<hr style="border-top-color: pink;">
-			<div class="container">
-				<div class="row">
-					<h5 class="heading"><span>Featured Products</span></h5>
-				</div>
-			</div>
-			<div class="figure">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12 ">
-							<slick class="slider cyan-hover" settings="slickConfig3" ng-if="slickConfig3Loaded" >
-								<div ng-repeat="slide in slickslides">
-									<a  href="/product/hp-344-desktops">
-										<img ng-src="{{slide.image}}" class="img-responsive " width="200px" height="200px">
-									</a>
-								</div>
 
-							</slick>
+			<div class="home-categories">
+				<div class="category-title-header">
+					<div class="title-center">
+						<div class="title"><h1>Featured Products</h1></div>
+						<div class="separator-title"><div class="divider-line"></div></div>
+					</div>
+					<div class="clearer"></div>
+				</div>
+				<div class="figure">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 ">
+								<slick class="slider cyan-hover" settings="slickConfig3" ng-if="slickConfig3Loaded" >
+									<div ng-repeat="slide in slickslides">
+										<a  href="/product/hp-344-desktops">
+											<img ng-src="{{slide.image}}" class="img-responsive " width="200px" height="200px">
+										</a>
+									</div>
+
+								</slick>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+
 		</div>
 	</div>
 

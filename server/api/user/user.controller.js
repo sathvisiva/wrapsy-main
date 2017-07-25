@@ -110,25 +110,29 @@ function respondWith(res, statusCode) {
   .catch(handleError(res));
 }
 
-/**
- * Change a users password
- */
- export function changePassword(req, res, next) {
 
-  var token = req.params.token;
+
+export function changePassword(req, res, next) {
+
+  var userId = req.params.id;
+
   var newPass = String(req.body.newPassword);
 
-  User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } })
+  User.findOne({email: userId})
   .then(user => {
-    console.log(user)
-    user.password = newPass;
-    return user.saveAsync()
-    .then(() => {
-      res.status(204).end();
-    })
-    .catch(validationError(res));
+   user.password = req.body.newPassword;
+   user.resetPasswordToken = undefined;
+   user.resetPasswordExpires = undefined;
+   user.save(function(err) {
+    if(err){
+      console.log(err)
+    }
+    res.status(204).end();
 
   });
+
+
+ });
 }
 
 /**
@@ -209,71 +213,44 @@ export function getresetuser(req, res, next) {
 }
 
 
-function sendMail(to, host, token){
-  var connection = nodemailer.createTransport({
-    host: 'smtp.zoho.com',
-    port: 465,
-    secure: true, // use SSL
-    auth: {
-      user: 'admin@wrapsytest.com',
-      pass: 'SS@thTinku'
-    }
-  });
-
-  var email = {
-      from: '"Wrapsy" <admin@wrapsytest.com>',  // this email account should be the same as before auth.user
-      to: to, // recipient, passed as parameter to the function
-      subject: 'Password reset', // subject, passed as parameter to the function
-      html: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-      'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-      'http://' + host + '/reset/' + token + '\n\n' +
-          'If you did not request this, please ignore this email and your password will remain unchanged.\n' // template, passed as parameter to the function
-        };
-
-        connection.sendMail(email);
-
-      }
-
-      export function forgot(req, res, next) {
-        var emailid = String(req.body.id);
-        console.log(emailid)
-
-        async.waterfall([
-          function(done) {
-            crypto.randomBytes(20, function(err, buf) {
-              var token = buf.toString('hex');
-              done(err, token);
-            });
-          },
-          function(token, done) {
-            User.findOne({ email: emailid }, function(err, user) {
-              if (!user) {
-                return res.status(422).json("Invalid email");
-              }
-              if(user.provider != 'local'){
-                return res.status(422).json("Email Registered with Social authentication");
-              }
-              console.log(user);
-              user.resetPasswordToken = token;
+export function forgot(req, res, next) {
+  var emailid = String(req.body.id);
+  
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ email: emailid }, function(err, user) {
+        if (!user) {
+          return res.status(422).json("Invalid email");
+        }
+        if(user.provider != 'local'){
+          return res.status(422).json("Email Registered with Social authentication");
+        }
+        user.resetPasswordToken = token;
               user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
               user.save(function(err) {
                 done(err, token, user);
               });
             });
-          },
-          function(token, user, done) {
-           let users = [
-           {
-            'host': req.headers.host,
-            'token' : token,
-            'email': user,
-          }
-          ];
-          mail.sendmail('forgot',users);
-            //sendMail(user, req.headers.host , token);
+    },
+    function(token, user, done) {
+     let users = [
+     {
+      'host': req.headers.host,
+      'token' : token,
+      'email': user.email,
+    }
+    ];
+    mail.sendmail('forgot',users);
+    return res.status(200).json("success");
 
-          }
-          ],function(err) {
-            validationError(res)
-          });
-      }
+  }
+  ],function(err) {
+    validationError(res)
+  });
+}

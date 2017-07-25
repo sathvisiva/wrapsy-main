@@ -1,63 +1,93 @@
- <md-dialog id="login-dialog" aria-label="Login">
+ <md-dialog id="login-dialog" aria-label="Login" class="fullscreen-dialog">
   <div ng-if="loginlayout">
     <form name="loginForm" ng-submit="login(loginForm)">
-      <md-toolbar class="md-primary">
-        <div class="md-toolbar-tools">
-          <div flex="" layout="row" layout-align="center center">
-            <h2>Login</h2>
-          </div>
+     <md-toolbar class="md-accent">
+      <div class="md-toolbar-tools">
+        <div flex="" layout="row" layout-align="center center">
+          <h2>Login</h2>
+        </div>
 
-          <md-button aria-label="cancel" class="md-icon-button" ng-click="cancel()">
-           <i class="fa fa-close"></i>
-         </md-button> 
-       </div>
-     </md-toolbar>
+        <md-button aria-label="cancel" class="md-icon-button" ng-click="cancel()">
+         <i class="fa fa-close"></i>
+       </md-button> 
+     </div>
+   </md-toolbar> 
 
-     <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="socialLogin">
-      <md-button class="md-fab facebook" aria-label="Facebook" ng-click="loginOauth('facebook')">
-        <i class="fa fa-facebook"></i>
-      </md-button>
+   <div layout="row" layout-xs="column" layout-sm="column" layout-align="center center">
+     <div flex="35" flex-sm = "100" flex-xs = "100" >
+       <section class="socialLogin">           
 
-      <md-button class="md-fab  twitter" aria-label="Twitter" ng-click="loginOauth('twitter')">
-        <i class="fa fa-twitter"></i>
-      </md-button>
+         <div layout="column" layout-xs="row" layout-sm="row" layout-align="center center">
 
-      <md-button class="md-fab google" aria-label="Google" ng-click="loginOauth('google')">
-        <i class="fa fa-google-plus"></i>
-      </md-button>
+           <span hide-xs hide-sm>
+             <md-button class="md-raised facebook social-button" ng-click="loginOauth('facebook')"> <i class="fa fa-facebook"></i> &nbsp; Login with Facebook</md-button>
 
-    </section>
+             <md-button class="md-raised twitter social-button" ng-click="loginOauth('twitter')"><i class="fa fa-twitter"></i> &nbsp; Login with Twitter&nbsp;&nbsp;</md-button>
+
+             <md-button class="md-raised google social-button" ng-click="loginOauth('google')"><i class="fa fa-google-plus"></i> &nbsp; Login with Google&nbsp;&nbsp;</md-button>
+
+           </span>
 
 
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        <md-input-container class="md-block">
-          <label>Email</label>
-          <input type="email" name="email" ng-model="user.email" md-autofocus required />
-          <div ng-messages="loginForm.email.$error">
+           <span show-xs show-sm hide-gt-sm>
+             <md-button class="md-fab facebook" aria-label="Facebook" ng-click="loginOauth('facebook')">
+              <i class="fa fa-facebook"></i>
+            </md-button>
+
+            <md-button class="md-fab  twitter" aria-label="Twitter" ng-click="loginOauth('twitter')">
+              <i class="fa fa-twitter"></i>
+            </md-button>
+
+            <md-button class="md-fab google" aria-label="Google" ng-click="loginOauth('google')">
+              <i class="fa fa-google-plus"></i>
+            </md-button> 
+          </span>
+        </div>
+
+      </section>
+    </div>
+
+
+    <div flex = "5"  flex-sm = "100" flex-xs = "100">
+      OR
+    </div>
+
+
+
+    <div flex = "60"  flex-sm = "100" flex-xs = "100">
+      <md-dialog-content>
+        <div class="md-dialog-content">
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input type="email" name="email" ng-model="user.email" md-autofocus required />
+            <div ng-messages="loginForm.email.$error">
+              <div ng-message="required">
+               Email is required.
+             </div>
+             <div ng-message="email">
+               Please enter valid email
+             </div>
+
+           </div> 
+         </md-input-container>
+         <md-input-container class="md-block">
+          <label>Password</label>
+          <input type="password" name="password" ng-model="user.password" required />
+          <div ng-messages="loginForm.password.$error">
             <div ng-message="required">
-             Email is required.
+             Password is required.
            </div>
-           <div ng-message="email">
-             Please enter valid email
-           </div>
-
          </div> 
-       </md-input-container>
-       <md-input-container class="md-block">
-        <label>Password</label>
-        <input type="password" name="password" ng-model="user.password" required />
-        <div ng-messages="loginForm.password.$error">
-          <div ng-message="required">
-           Password is required.
-         </div>
-       </div> 
 
-       <span class="pull-right"><md-button  ng-click="switchforgotlayout()" class="md-primary">Forgot Password?</md-button></span>
+         <span class="pull-right">
+          <a n ng-click="switchforgotlayout()" class="md-primary cursorpointer">Forgot Password?</a>
+          <!-- <md-button  ng-click="switchforgotlayout()" class="md-primary">Forgot Password?</md-button> -->
 
-     </md-input-container>
-     <div class="form-group has-error">
-       <p class="help-block" ng-if = "unregistered">Email is not Registered. Would You like to <a ng-click="signup">Signup</a> ?</p>
+        </span>
+
+      </md-input-container>
+      <div class="form-group has-error">
+       <p class="help-block" ng-if = "unregistered">Email is not Registered. Would You like to <a class="cursorpointer" ng-click="switchsigninlayout()">Signup</a> ?</p>
        <p class="help-block" ng-if = "incorrectpassword">Password is incorrect. Would You like to <a ng-click="signup">Reset Password</a> ?</p>
        <p class="help-block">{{ errors.other }}</p>
      </div>
@@ -66,11 +96,13 @@
  </md-dialog-content>
 
  <md-dialog-actions layout="row" layout-wrap class="md-dialog-button">        
-  <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-accent" flex>Login</md-button>
-  
+  <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary" flex>Login</md-button>
+
 </md-dialog-actions>
 <md-dialog-actions layout="row" layout-align="center">        
-  <span ><a ng-click="switchsigninlayout()" class="md-primary">New to Wrapsy? Sign up</a></span>  </md-dialog-actions>
+  <span ><a ng-click="switchsigninlayout()" class="md-primary cursorpointer">New to Wrapsy? Sign up</a></span>  </md-dialog-actions>
+</div>
+</div>
 </form>
 </div>
 
@@ -88,86 +120,112 @@
        </md-button> 
      </div>
    </md-toolbar>
-   <section layout="row" layout-sm="column" layout-align="center center" layout-wrap class="socialLogin">
-    <md-button class="md-fab facebook" aria-label="Facebook" ng-click="loginOauth('facebook')">
-      <i class="fa fa-facebook"></i>
-    </md-button>
+   <div layout="row" layout-xs="column" layout-sm="column" layout-align="center center">
+     <div flex="35" flex-sm = "100" flex-xs = "100" >
+       <section class="socialLogin">           
 
-    <md-button class="md-fab  twitter" aria-label="Twitter" ng-click="loginOauth('twitter')">
-      <i class="fa fa-twitter"></i>
-    </md-button>
+         <div layout="column" layout-xs="row" layout-sm="row" layout-align="center center">
 
-    <md-button class="md-fab google" aria-label="Google" ng-click="loginOauth('google')">
-      <i class="fa fa-google-plus"></i>
-    </md-button>
+           <span hide-xs hide-sm>
+             <md-button class="md-raised facebook social-button" ng-click="loginOauth('facebook')"> <i class="fa fa-facebook"></i> &nbsp; Login with Facebook</md-button>
 
-  </section>
-  <md-dialog-content>
-    <div class="md-dialog-content">
+             <md-button class="md-raised twitter social-button" ng-click="loginOauth('twitter')"><i class="fa fa-twitter"></i> &nbsp; Login with Twitter&nbsp;&nbsp;</md-button>
+
+             <md-button class="md-raised google social-button" ng-click="loginOauth('google')"><i class="fa fa-google-plus"></i> &nbsp; Login with Google&nbsp;&nbsp;</md-button>
+
+           </span>
+
+
+           <span show-xs show-sm hide-gt-sm>
+             <md-button class="md-fab facebook" aria-label="Facebook" ng-click="loginOauth('facebook')">
+              <i class="fa fa-facebook"></i>
+            </md-button>
+
+            <md-button class="md-fab  twitter" aria-label="Twitter" ng-click="loginOauth('twitter')">
+              <i class="fa fa-twitter"></i>
+            </md-button>
+
+            <md-button class="md-fab google" aria-label="Google" ng-click="loginOauth('google')">
+              <i class="fa fa-google-plus"></i>
+            </md-button> 
+          </span>
+        </div>
+
+      </section>
+    </div>
+    <div flex = "5"  flex-sm = "100" flex-xs = "100">
+      OR
+    </div>
+
+
+
+    <div flex = "60"  flex-sm = "100" flex-xs = "100">
+      <md-dialog-content>
+        <div class="md-dialog-content">
+
+
+
+         <md-input-container class="md-block">
+          <label>Name</label>
+          <input type="text" name="name" ng-model="user.name" md-autofocus required />
+          <div ng-messages="signupForm.name.$error">
+            <div ng-message="required">
+             Name is required.
+           </div>
+         </div> 
+       </md-input-container>
+
 
 
 
        <md-input-container class="md-block">
-        <label>Name</label>
-        <input type="text" name="name" ng-model="user.name" md-autofocus required />
-        <div ng-messages="signupForm.name.$error">
+        <label>Email</label>
+        <input type="email" name="email" ng-model="user.email" md-autofocus required />
+        <div ng-messages="signupForm.email.$error">
           <div ng-message="required">
-           Name is required.
+           Email is required.
          </div>
+         <div ng-message="email">
+           Please enter valid email
+         </div>
+
        </div> 
      </md-input-container>
 
-   
 
-  
+
+
+
+
+     <div layout-gt-sm="row">
+
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input type="password" name="password" ng-model="user.password" ng-minlength="3" required />
+        <div ng-messages="signupForm.password.$error">
+          <div ng-message="required">
+           Password is required.
+         </div>
+         <div ng-message="min-length">
+           Password must be atleast 3 characters
+         </div>
+       </div>
+     </md-input-container>
+
+     <div flex="5" hide-xs hide-sm>
+      <!-- Spacer //-->
+    </div>
+
     <md-input-container class="md-block">
-      <label>Email</label>
-      <input type="email" name="email" ng-model="user.email" md-autofocus required />
-      <div ng-messages="signupForm.email.$error">
-        <div ng-message="required">
-         Email is required.
-       </div>
-       <div ng-message="email">
-         Please enter valid email
-       </div>
-
-     </div> 
-   </md-input-container>
- 
-
-
-
-
-
- <div layout-gt-sm="row">
-
-  <md-input-container class="md-block">
-    <label>Password</label>
-    <input type="password" name="password" ng-model="user.password" ng-minlength="3" required />
-    <div ng-messages="signupForm.password.$error">
+     <label>Confirm Password</label>
+     <input type="password" name="confirmPassword" ng-model="user.confirmPassword" ng-pattern="user.password" required />
+     <div ng-messages="signupForm.confirmPassword.$error">
       <div ng-message="required">
        Password is required.
      </div>
-     <div ng-message="min-length">
-       Password must be atleast 3 characters
-     </div>
+     <div ng-message="pattern">Passwords do not match.</div>
    </div>
  </md-input-container>
-
- <div flex="5" hide-xs hide-sm>
-  <!-- Spacer //-->
-</div>
-
-<md-input-container class="md-block">
- <label>Confirm Password</label>
- <input type="confirmPassword" name="confirmPassword" ng-model="user.confirmPassword" ng-pattern="user.password" required />
- <div ng-messages="signupForm.confirmPassword.$error">
-  <div ng-message="required">
-   Password is required.
- </div>
- <div ng-message="pattern">Passwords do not match.</div>
-</div>
-</md-input-container>
 </div>
 
 <div class="form-group has-error">
@@ -179,12 +237,15 @@
 </md-dialog-content>
 
 
+
 <md-dialog-actions class="md-dialog-button" layout="row" >        
   <md-button type="submit" ng-disabled="signupForm.$invalid" class="md-raised md-accent" flex>Sign up</md-button>
   
 </md-dialog-actions>
 <md-dialog-actions layout="row" layout-align="center">        
   <span ><a ng-click="switchloginlayout()" class="md-primary">Existing User? login</a></span>  </md-dialog-actions>
+</div>
+</div>
 </form>
 
 </div>
@@ -194,59 +255,3 @@
 
 
 
-  <!-- <md-dialog id="login-dialog" aria-label="Login" ng-cloak ng-controller="LoginController">
-      <form name="loginForm" ng-submit="dialog.login()">
-        <md-toolbar class="md-primary">
-        <div class="md-toolbar-tools">
-          <div flex="" layout="row" layout-align="center center">
-            <h2>Login</h2>
-          </div>
-
-          <md-button aria-label="cancel" class="md-icon-button" ng-click="cancel()">
-           <i class="fa fa-close"></i>
-         </md-button> 
-       </div>
-     </md-toolbar>
-        <md-dialog-content>
-      <div class="md-dialog-content">
-        <md-input-container class="md-block">
-          <label>Email</label>
-          <input type="email" name="email" ng-model="user.email" md-autofocus required />
-          <div ng-messages="loginForm.email.$error">
-            <div ng-message="required">
-             Email is required.
-           </div>
-           <div ng-message="email">
-             Please enter valid email
-           </div>
-
-         </div> 
-       </md-input-container>
-       <md-input-container class="md-block">
-        <label>Password</label>
-        <input type="password" name="password" ng-model="user.password" required />
-        <div ng-messages="loginForm.password.$error">
-          <div ng-message="required">
-           Password is required.
-         </div>
-       </div> 
-
-       <span class="pull-right"><md-button  ng-click="switchforgotlayout()" class="md-primary">Forgot Password?</md-button></span>
-
-     </md-input-container>
-     <div class="form-group has-error">
-
-      <p class="help-block">{{ errors.other }}</p>
-    </div>
-
-  </div>
-</md-dialog-content>
-
-
-       <md-dialog-actions layout="row" layout-wrap>        
-  <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-accent" flex>Login</md-button>
-  
-</md-dialog-actions>
-<md-dialog-actions layout="row" layout-align="center">        
-  <span ><a href="" class="md-primary">New to Wrapsy? Sign up</a></span>  </md-dialog-actions>
-</form> --> 

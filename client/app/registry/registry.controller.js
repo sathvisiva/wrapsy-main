@@ -5,7 +5,7 @@
   class CreateRegistryController {
 
     constructor($http, $scope, $timeout, Registry,$uibModal,$state, Auth,$stateParams,RegistryService, Address) {
-     $state.go('.registryType');
+      $state.go('createregistry.registryType');
 
      $scope.disableevent = true;
      $scope.disablelocation = true ; 
@@ -48,8 +48,6 @@
       }else{
         $scope.disablemessage = false;
         $state.go('createregistry.message');
-        console.log($scope.registry);
-        console.log($scope.address);
       }
 
     }
@@ -88,13 +86,6 @@
 
   var date = new Date();
   $scope.setDate(date.getFullYear(),date.getMonth(),date.getDate() )
-
-
-
-
-
-
-
 
   $scope.registry.date = new Date();
 
@@ -137,58 +128,19 @@ angular.module('bhcmartApp')
 
   $scope.queryRegistry = function(){
 
+
     $scope.registry = Registry.get({ id: $stateParams.id }, function(resp) {
       if(Auth.getCurrentUser().email == resp.username){
         $scope.editable = true
       }
-      var registrydata = {}
-      registrydata._id = resp._id
-      registrydata.title = resp.title
-      RegistryService.addregistry(registrydata)
+      if(!resp.products){
+        $scope.showassistance = true;
+      }
     });
   }
 
-  $scope.ph_numbr = /^(\+?(\d{1}|\d{2}|\d{3})[- ]?)?\d{3}[- ]?\d{3}[- ]?\d{4}$/;
-
-
-  $scope.queryRegistry()
-
-  $scope.show1 = true
-  $scope.show2 = false
-  $scope.show3 = false
-  $scope.show4 = false
-
-  $scope.showWishlist = function(){
-    $scope.show1 = true
-    $scope.show2 = false
-    $scope.show3 = false
-    $scope.show4 = false
-  }
-  $scope.showRSVP = function(){
-    $scope.show1 = false
-    $scope.show2 = true
-    $scope.show3 = false
-    $scope.show4 = false
-    $scope.rsvp = {}
-    $scope.rsvp.attending = "true"
-  }
-
-  $scope.showGuestBook = function(){
-    $scope.show1 = false
-    $scope.show2 = false
-    $scope.show3 = true
-    $scope.show4 = false
-    $scope.getGuestWishes()
-  }
-
-  $scope.showGuests = function(){
-    $scope.show1 = false
-    $scope.show2 = false
-    $scope.show3 = false
-    $scope.show4 = true;
-    $scope.getGuestList()
-
-  }
+  
+  $scope.queryRegistry();
 
   $scope.updatedesired = function(){
     Registry.update({id:$scope.registry._id},$scope.registry).$promise.then(function(res) {
@@ -197,71 +149,17 @@ angular.module('bhcmartApp')
     });
   }
 
-  $scope.saversvp = function(form) {
+  
 
-    if (form.$valid) {
-      console.log($scope.rsvp)
-      $scope.rsvp.registryId = $scope.registry._id
-      Registry.rsvpRegistry({ id: $scope.registry._id }, $scope.rsvp, function(resp) {
-        toaster.pop('success', "Thank you for your Response");
-        $timeout(function() {
-          $scope.showWishlist()
-        }, 1000);
-      }, function(err) {
+  $scope.inviteFriends = function(){
+    var modalInstance = $uibModal.open({
+      templateUrl : 'app/registry/invite.html',
+      controller: 'inviteRegistryCtrl',
+      size :'md'
+    })
+    .result.then(function(result) {
 
-        toaster.pop('error', "Some error occured");
-      });
-    } 
-  }
-
-  $scope.saveGuestWish = function(form) {
-
-    if ($scope.guestbook.by && $scope.guestbook.wishes) {
-      $scope.guestbook.registryId = $scope.registry._id
-      Registry.guestBookRegistry({ id: $scope.registry._id }, $scope.guestbook, function(resp) {
-        toaster.pop('success', "Thank you for sharing your wishes");
-        $scope.guestbook.wishes = ""
-        $scope.guestbook.by = ""
-        $scope.getGuestWishes()
-      }, function(err) {
-
-        toaster.pop('error', "Some error occured");
-      });
-    }
-  }
-
-  $scope.getGuestWishes = function(){
-
-    $scope.guestWishes =  Registry.registryGuestBook({ id: $scope.registry._id });
-    console.log($scope.guestWishes)
-       /*  Registry.registryGuestBook({ id: $scope.registry._id }, function(resp) {
-            $scope.guest.guestWishes = resp;
-            console.log($scope.guest.guestWishes)
-            
-        }, function(err) {
-          
-          toaster.pop('error', "Some error occured");
-        });*/
-        
-
-
-      }
-
-
-      $scope.getGuestList = function(){
-        $scope.guests = Registry.registryGuest({ id: $scope.registry._id });
-      }
-
-
-      $scope.inviteFriends = function(){
-        var modalInstance = $uibModal.open({
-          templateUrl : 'app/registry/invite.html',
-          controller: 'inviteRegistryCtrl',
-          size :'md'
-        })
-        .result.then(function(result) {
-
-        });
+    });
          /* $scope.registry.backgroundImageUrl = "assets/img/cover.jpg"
          */
        }

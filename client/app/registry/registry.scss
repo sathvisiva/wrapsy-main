@@ -1,3 +1,8 @@
+.registryPage{
+background-color : #ffffff
+}
+
+
 .registry-settings{
 margin-top: 30px;
 margin: 0 auto;
@@ -43,6 +48,26 @@ height: 420px;
 }
 
 .registry-hero {
+position: relative;
+max-width: 1280px;
+margin-right: auto;
+margin-left: auto;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+-ms-behavior: url(/assets/backgroundsize.htc);
+background-position: center;
+padding-bottom: 15.625%;
+}
+
+
+.full-width-image{
+background-size: cover;
+text-align: center;
+}
+
+.registry-image{
 position: relative;
 max-width: 1280px;
 margin-right: auto;
@@ -340,31 +365,331 @@ animation:slideInRight 0.5s both ease;
 animation:slideOutLeft 0.5s both ease;   
 }
 
-.registryPage {
-background-image: url("/assets/img/flower-website-backgrounds-81.jpg");   
+
+
+
+
+
+
+
+
+
+
+#main-container-background, #main-nav>ul>li>ul {
+background-color: #FFFFFF;
 }
 
-.navbar-registry{
-background-color : transparent !important;
-border-color: transparent;
-
+#main-container-background {
+background-image: url(https://static.xoedge.com/xo-guest-services/assets/guest/themes/archival_florals/background_image-647bad8655988d3dcd0fc73915772796.png);
+background-repeat: no-repeat;
+background-size: 100% auto;
+background-position: top center;
 }
 
-.navbar-registry{
+#main-container-background {
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+background-position: center;
+}
+
+#main-container {
+padding-bottom: 0 !important;
+}
+
+@media (min-width: 1200px){
+#main-container {
+padding-bottom: 120px;
+}
+}
+
+#main-container {
+position: relative;
+min-height: 100%;
+padding-bottom: 12%;
+}
+
+@media (min-width: 1200px){
+.theme-image-container, .theme-image-container-bottom {
+padding: 0;
+height: 120px;
+}
+}
+
+.theme-image-container {
+position: relative;
+}
+
+.theme-image-container, .theme-image-container-bottom {
+width: 100%;
+padding-bottom: 12%;
+}
+
+.theme-image, .theme-image-layer-top, .theme-image-bottom, .theme-image-left, .theme-image-right {
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+width: 100%;
+height: 100%;
+background-size: contain;
+background-repeat: no-repeat;
+}
+
+.theme-image-container-left, .theme-image-container-right {
+width: 12%;
+max-width: 132px;
+position: fixed;
+top: 0;
+bottom: 0;
+}
+
+.theme-image-container-left, .theme-image-container-right {
+width: 12%;
+max-width: 132px;
+position: fixed;
+top: 0;
+bottom: 0;
+}
+
+.theme-image-container-right {
+right: 0;
+}
+
+#main-nav-container {
+position: relative;
+padding-top: 30px;
+padding-bottom: 30px;
 width: 100%;
 text-align: center;
-> li {
-float: none;
-display: inline-block;
-font-size: 16px;
-color: black;
-font-family: 'Montserrat-Regular';
-font-weight: 400;
-text-transform: uppercase;
+z-index: 1000;
+}
+
+@media (min-width: 1200px){
+.main-nav-container-inner {
+max-width: 70%;
 }
 }
 
-.registry-tabs{
-margin-top : 30px;
-margin-bottom : 30px;
+
+@media (min-width: 768px){
+.main-nav-container-inner {
+max-width: 90%;
 }
+}
+
+.main-nav-container-inner {
+position: relative;
+max-width: 70%;
+margin-left: auto;
+margin-right: auto;
+}
+
+#main-nav {
+display: block;
+}
+
+#main-nav>ul>li {
+position: relative;
+display: inline-block;
+padding: 8px 12px;
+text-transform: uppercase;
+}
+
+#main-nav li a {
+font-family: "Work Sans";
+font-size: 16px;
+font-style: normal;
+font-weight: normal;
+color: #000000;
+}
+
+#main-nav li a:hover, #main-nav li a.selected {
+color: #EA3954;
+}
+
+#header {
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.17);
+-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.17);
+box-shadow: 0 1px 2px rgba(0,0,0,0.17);
+}
+
+@media (min-width: 1200px){
+#header {
+width: 70%;
+}
+}
+
+#header {
+position: relative;
+margin: auto;
+}
+
+@media (min-width: 768px){
+#header {
+width: 90%;
+}
+}
+
+.header-background {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+#cover-image {
+    background-color: #F9F9F9;
+}
+
+#cover-image {
+    position: relative;
+    border: 15px solid white;
+    padding-bottom: 50%;
+    background-color: white;
+    overflow: hidden;
+}
+
+#cover-image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-position: center;
+}
+
+#title-container {
+    position: relative;
+    padding: 5px 10px 20px 0;
+    text-align: center;
+    background-color: white;
+}
+
+#wedding-title {
+    color: #000000;
+    font-family: Italiana;
+    font-size: 60px;
+    font-style: normal;
+}
+
+#wedding-title {
+    font-family: "Italiana";
+    font-size: 60px;
+    font-style: normal;
+    font-weight: normal;
+    color: #000000;
+}
+
+#wedding-title {
+    margin: 6px 0 8px 0;
+    line-height: 1;
+}
+
+#wedding-date-location {
+    color: #000000;
+    font-family: Work Sans;
+    font-size: 16px;
+    font-style: normal;
+}
+
+#wedding-date-location {
+    font-family: "Work Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
+    color: #000000;
+}
+
+#wedding-location {
+    white-space: nowrap;
+}
+
+#wedding-countdown {
+    color: #000000;
+    font-family: Work Sans;
+    font-size: 16px;
+    font-style: normal;
+}
+
+#wedding-countdown {
+    margin: 3px 1px;
+    font-size: 1.6em;
+}
+
+#content {
+    margin-top: 60px;
+}
+
+@media (min-width: 1200px){
+.page {
+    width: 70%;
+}
+}
+
+@media (min-width: 768px){
+.page {
+    width: 90%;
+}
+}
+
+.page {
+    position: relative;
+    margin-bottom: 1.5em;
+    width: 70%;
+}
+
+.center-block, .page {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#main-nav-container.fixed {
+    background-color: rgba(255,255,255,0.9);
+}
+
+#main-nav-container.fixed {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    background-color: white;
+    -webkit-box-shadow: 0,1px,1px,rgba(0,0,0,0.17);
+    box-shadow: 0,1px,1px,rgba(0,0,0,0.17);
+}
+
+#main-nav-container {
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+#cover-image {
+    background-color: #F9F9F9;
+}
+
+#cover-image {
+    position: relative;
+    border: 15px solid white;
+    padding-bottom: 50%;
+    background-color: white;
+    overflow: hidden;
+}
+
+#cover-image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-position: center;
+}
+
+
+
+

@@ -23,6 +23,7 @@ var getAverageRating = function getAverageRating(p) {
 
 var process = function process($scope) {
   return function (prod) {
+    console.log(prod);
     $scope.products = _.map(prod, function (rP) {
       return _.extend(rP, { averageRating: getAverageRating(rP) });
     });

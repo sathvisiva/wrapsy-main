@@ -138,6 +138,14 @@ var ProductSchema = new Schema({
   affiliate : {
     type: Boolean,
     default: false
+  },
+  cgst: {
+    type: Number,
+    min: 0
+  },
+  sgst: {
+    type: Number,
+    default: 1
   }
 
 }).index({

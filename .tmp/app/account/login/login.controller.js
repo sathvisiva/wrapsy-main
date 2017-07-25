@@ -6,11 +6,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var LoginController = function LoginController($http, $scope, $timeout, Auth, $state, User, $mdDialog, $window, dataToPass) {
     _classCallCheck(this, LoginController);
 
-    console.log(dataToPass);
+    $scope.dataToPass = dataToPass;
+    if (dataToPass) {
+      if (dataToPass.event == 'login') {
+        $scope.loginlayout = true;
+        $scope.signup = false;
+      } else {
+        $scope.loginlayout = false;
+        $scope.signup = true;
+      }
+    } else {
+      $scope.loginlayout = true;
+    }
     $scope.user = {};
     $scope.errors = {};
     $scope.submitted = false;
-    $scope.loginlayout = true;
+
     $scope.forgotlayout = false;
     $scope.unregistered = false;$scope.incorrectpassword = false;
 
@@ -38,6 +49,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           email: $scope.user.email,
           password: $scope.user.password
         }).then(function () {
+          if ($scope.dataToPass) {
+            $state.go($scope.dataToPass.state);
+          }
           $scope.cancel();
         })['catch'](function (err) {
           err = err.data;
@@ -46,7 +60,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         });
       }
     };
-
     $scope.login = function (form) {
       $scope.submitted = true;
 
@@ -55,6 +68,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           email: $scope.user.email,
           password: $scope.user.password
         }).then(function () {
+          if ($scope.dataToPass) {
+            $state.go($scope.dataToPass.state);
+          }
           $scope.cancel();
         })['catch'](function (err) {
           if (err.message == '1') {

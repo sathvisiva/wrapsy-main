@@ -54,6 +54,11 @@ angular.module('bhcmartApp').controller('MainController', ['$scope', 'Catalog', 
     $scope.parentCategories = _.filter(categories, function (category) {
       return category.ancestors.length == 1;
     });
+    $scope.subparentCategories = _.filter(categories, function (category) {
+      return category.ancestors.length == 2;
+    });
+
+    console.log($scope.subparentCategories);
   });
 }]);
 //# sourceMappingURL=main.controller.js.map

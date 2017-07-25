@@ -1,0 +1,54 @@
+<navbar></navbar>
+
+
+<section class="event-details">
+	<div class="container">
+		<div class="row">
+			<div class="category-title-header">
+				<div class="title-center">
+					<div class="title"><h1>My Vouchers</h1></div>
+					<div class="separator-title"><div class="divider-line"></div></div>
+				</div>
+				<div class="clearer"></div>
+			</div>
+		</div>
+		<div class = "register-section">
+			<form class="form" name="form" ng-submit="savevoucher($event,form)" novalidate>
+
+				<div class="row">
+					<div class="col-md-12">
+						<img src="/assets/img/giftvouchers.jpg" style="width: 100%;max-height: 300px;">
+					</div>
+				</div>
+				<br>
+
+				<!-- our nested state views will be injected here -->
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-hover table-responsive">
+							<thead>
+								<tr>
+									<th>Voucher Code</th>
+									<th>Voucher Amount</th>
+									<th>Valid Until</th>
+									<th>Is Reedemed?</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="voucher in vouchers | orderBy : 'validuntil'">
+								<td>{{ voucher.code }}</td>
+								<td>{{voucher.amount}}</td>
+								<td>{{voucher.validuntil  | date : "longDate"}}</td>
+								<td>{{ voucher.redeemed }}</td>
+							</tr>
+						</table>
+					</div>
+				</div>							
+				
+			</form> 
+		</div>
+
+
+		
+	</div>
+</section>
+<footer></footer>

@@ -2,16 +2,16 @@
 
 (function() {
 
-function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
-  var safeCb = Util.safeCb;
-  var currentUser = {};
-  var userRoles = appConfig.userRoles || [];
+  function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
+    var safeCb = Util.safeCb;
+    var currentUser = {};
+    var userRoles = appConfig.userRoles || [];
 
-  if ($cookies.get('token') && $location.path() !== '/logout') {
-    currentUser = User.get();
-  }
+    if ($cookies.get('token') && $location.path() !== '/logout') {
+      currentUser = User.get();
+    }
 
-  var Auth = {
+    var Auth = {
 
     /**
      * Authenticate user and save token
@@ -20,31 +20,31 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
      * @param  {Function} callback - optional, function(error, user)
      * @return {Promise}
      */
-    login(user, callback) {
+     login(user, callback) {
       return $http.post('/auth/local', {
         email: user.email,
         password: user.password
       })
-        .then(res => {
-          $cookies.put('token', res.data.token);
-          currentUser = User.get();
-          return currentUser.$promise;
-        })
-        .then(user => {
-          safeCb(callback)(null, user);
-          return user;
-        })
-        .catch(err => {
-          Auth.logout();
-          safeCb(callback)(err.data);
-          return $q.reject(err.data);
-        });
+      .then(res => {
+        $cookies.put('token', res.data.token);
+        currentUser = User.get();
+        return currentUser.$promise;
+      })
+      .then(user => {
+        safeCb(callback)(null, user);
+        return user;
+      })
+      .catch(err => {
+        Auth.logout();
+        safeCb(callback)(err.data);
+        return $q.reject(err.data);
+      });
     },
 
     /**
      * Delete access token and user info
      */
-    logout() {
+     logout() {
       $cookies.remove('token');
       currentUser = {};
     },
@@ -56,7 +56,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
      * @param  {Function} callback - optional, function(error, user)
      * @return {Promise}
      */
-    createUser(user, callback) {
+     createUser(user, callback) {
       return User.save(user,
         function(data) {
           $cookies.put('token', data.token);
@@ -77,7 +77,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
      * @param  {Function} callback    - optional, function(error, user)
      * @return {Promise}
      */
-    changePassword(email, newPassword, callback) {
+     changePassword(email, newPassword, callback) {
       return User.changePassword({ id: email }, {
         newPassword: newPassword
       }, function() {
@@ -103,21 +103,21 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
      * @param  {Function|*} callback - optional, funciton(user)
      * @return {Object|Promise}
      */
-    getCurrentUser(callback) {
+     getCurrentUser(callback) {
       if (arguments.length === 0) {
         return currentUser;
       }
 
       var value = (currentUser.hasOwnProperty('$promise')) ?
-        currentUser.$promise : currentUser;
+      currentUser.$promise : currentUser;
       return $q.when(value)
-        .then(user => {
-          safeCb(callback)(user);
-          return user;
-        }, () => {
-          safeCb(callback)({});
-          return {};
-        });
+      .then(user => {
+        safeCb(callback)(user);
+        return user;
+      }, () => {
+        safeCb(callback)({});
+        return {};
+      });
     },
 
     /**
@@ -127,17 +127,17 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
      * @param  {Function|*} callback - optional, function(is)
      * @return {Bool|Promise}
      */
-    isLoggedIn(callback) {
+     isLoggedIn(callback) {
       if (arguments.length === 0) {
         return currentUser.hasOwnProperty('role');
       }
 
       return Auth.getCurrentUser(null)
-        .then(user => {
-          var is = user.hasOwnProperty('role');
-          safeCb(callback)(is);
-          return is;
-        });
+      .then(user => {
+        var is = user.hasOwnProperty('role');
+        safeCb(callback)(is);
+        return is;
+      });
     },
 
      /**
@@ -148,23 +148,23 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       * @param  {Function|*} callback - optional, function(has)
       * @return {Bool|Promise}
       */
-    hasRole(role, callback) {
-      var hasRole = function(r, h) {
-        return userRoles.indexOf(r) >= userRoles.indexOf(h);
-      };
+      hasRole(role, callback) {
+        var hasRole = function(r, h) {
+          return userRoles.indexOf(r) >= userRoles.indexOf(h);
+        };
 
-      if (arguments.length < 2) {
-        return hasRole(currentUser.role, role);
-      }
+        if (arguments.length < 2) {
+          return hasRole(currentUser.role, role);
+        }
 
-      return Auth.getCurrentUser(null)
+        return Auth.getCurrentUser(null)
         .then(user => {
           var has = (user.hasOwnProperty('role')) ?
-            hasRole(user.role, role) : false;
+          hasRole(user.role, role) : false;
           safeCb(callback)(has);
           return has;
         });
-    },
+      },
 
      /**
       * Check if a user is an admin
@@ -173,17 +173,17 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       * @param  {Function|*} callback - optional, function(is)
       * @return {Bool|Promise}
       */
-    isAdmin() {
-      return Auth.hasRole
+      isAdmin() {
+        return Auth.hasRole
         .apply(Auth, [].concat.apply(['admin'], arguments));
-    },
+      },
 
     /**
      * Get auth token
      *
      * @return {String} - a token string used for authenticating
      */
-    getToken() {
+     getToken() {
       return $cookies.get('token');
     }
   };
@@ -192,6 +192,6 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
 }
 
 angular.module('bhcmartApp.auth')
-  .factory('Auth', AuthService);
+.factory('Auth', AuthService);
 
 })();

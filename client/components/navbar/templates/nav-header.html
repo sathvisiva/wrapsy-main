@@ -10,331 +10,111 @@
         <span class="hidden-xs"><a ui-sref="home"><img ng-src="/assets/img/logo/logo.png" class="logo"></img></a></span>
         <span  class="visible-xs text-center"><a ui-sref="home"><img ng-src="/assets/img/logo/logo.png" alt="wrapsy" class="logo"></a></span>
     </div>
-    
-    <div class="collapse navbar-collapse js-navbar-collapse ">
-        <ul class="nav navbar-nav navbar-center">
-            <li class="dropdown mega-dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>              
-                <ul class="dropdown-menu mega-dropdown-menu">
-                    <li class="col-sm-3">
-                        <ul>
-                            <li class="dropdown-header">Men Collection</li>                            
-                            <div id="menCollection" class="carousel slide" data-ride="carousel">
-                                <img class="img-responsive hidden-xs hidden-sm" ng-src="/assets/img/men-fashion.jpg">
-                            </img>
 
-                        </div><!-- /.carousel -->
-                        <li class="divider"></li>
-                        <li><a ui-sref="products({slug: 'men'})">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Top-wear</li>
-                        <li><a ui-sref="products({slug: 'men'})">T-shirts</a></li>
-                        <li><a ui-sref="products({slug: 'men'})">Shirts</a></li>
-                        <li><a ui-sref="products({slug: 'men'})">Blazers</a></li>
-                        <li><a ui-sref="products({slug: 'men'})">Jackets</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Bottom-wear</li>
-                        <li><a ui-sref="products({slug: 'men'})">Jeans</a></li>
-                        <li><a ui-sref="products({slug: 'men'})">Trousers</a></li>
-                        <li><a ui-sref="products({slug: 'men'})">shorts</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Personal</li>
-                        <li><a ui-sref="products({slug: 'men'})">Trimmers</a></li>  
-                        <li><a ui-sref="products({slug: 'men'})">Shavers</a></li> 
-                        <li><a ui-sref="products({slug: 'men'})">Grooming Kit</a></li>        
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                       <li class="dropdown-header"><a ui-sref="products({slug: 'men'})">Accessories</a></li> 
-                       <li><a ui-sref="products({slug: 'men'})">Backpacks</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Belts</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Sunglasses</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Wallets</a></li>
-                   </ul>
-               </li>
-           </ul>               
-       </li>
-       <li class="dropdown mega-dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown">Women <span class="caret"></span></a>              
-                <ul class="dropdown-menu mega-dropdown-menu">
-                    <li class="col-sm-3">
-                        <ul>
-                            <li class="dropdown-header">Women Collection</li>                            
-                            <div id="menCollection" class="carousel slide" data-ride="carousel">
-                                <img class="img-responsive hidden-xs hidden-sm" ng-src="/assets/img/womencollection.jpeg">
-                            </img>
-                            
-                        </div><!-- /.carousel -->
-                        <li class="divider"></li>
-                        <li><a ui-sref="products({slug: 'women'})">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Top-wear</li>
-                        <li><a ui-sref="products({slug: 'women'})">T-shirts</a></li>
-                        <li><a ui-sref="products({slug: 'women'})">Kurti</a></li>
-                        <li><a ui-sref="products({slug: 'women'})">Kurta</a></li>
-                        <li><a ui-sref="products({slug: 'women'})">Jackets</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Bottom-wear</li>
-                        <li><a ui-sref="products({slug: 'women'})">Jeans</a></li>
-                        <li><a ui-sref="products({slug: 'women'})">Trousers</a></li>
-                        <li><a ui-sref="products({slug: 'women'})">Leggins</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Personal</li>
-                        <li><a ui-sref="products({slug: 'women'})">Hair Dryer</a></li>  
-                        <li><a ui-sref="products({slug: 'women'})">Skin care</a></li> 
-                        <li><a ui-sref="products({slug: 'women'})">Makeup Kit</a></li>        
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                       <li class="dropdown-header">Accessories</li>
-                       <li><a ui-sref="products({slug: 'men'})">Backpacks</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Belts</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Sunglasses</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Wallets</a></li>
-                   </ul>
-               </li>
-           </ul>               
-       </li>
-       <li class="dropdown mega-dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown">Kids & Baby <span class="caret"></span></a>              
-                <ul class="dropdown-menu mega-dropdown-menu">
-                    <li class="col-sm-3">
-                        <ul>
-                            <li class="dropdown-header">Baby Collection</li>                            
-                            <div id="menCollection" class="carousel slide" data-ride="carousel">
-                                <img class="img-responsive hidden-xs hidden-sm" ng-src="/assets/img/babycollection.jpeg">
-                            </img>
-                            
-                        </div><!-- /.carousel -->
-                        <li class="divider"></li>
-                        <li><a ui-sref="products({slug: 'kids'})">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Top-wear</li>
-                        <li><a ui-sref="products({slug: 'kids'})">T-shirts</a></li>
-                        <li><a ui-sref="products({slug: 'kids'})">Kurti</a></li>
-                        <li><a ui-sref="products({slug: 'kids'})">Kurta</a></li>
-                        <li><a ui-sref="products({slug: 'kids'})">Jackets</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Bottom-wear</li>
-                        <li><a ui-sref="products({slug: 'kids'})">Jeans</a></li>
-                        <li><a ui-sref="products({slug: 'kids'})">Trousers</a></li>
-                        <li><a ui-sref="products({slug: 'kids'})">Leggins</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Toys</li>
-                        <li><a ui-sref="products({slug: 'kids'})">Remote control toys</a></li>  
-                        <li><a ui-sref="products({slug: 'kids'})">soft toys</a></li> 
-                        <li><a ui-sref="products({slug: 'kids'})">Board Games</a></li>        
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                       <li class="dropdown-header">Baby Care</li>
-                       <li><a ui-sref="products({slug: 'men'})">Feeding and Nursing</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Diappers</a></li>
-                       <li><a ui-sref="products({slug: 'men'})">Baby Grooming</a></li>
-                       
-                   </ul>
-               </li>
-           </ul>               
-       </li>
-       <li class="dropdown mega-dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown">Electronics <span class="caret"></span></a>              
-                <ul class="dropdown-menu mega-dropdown-menu">
-                    <li class="col-sm-3">
-                        <ul>
-                            <li class="dropdown-header">Mobile Collection</li>                            
-                            <div id="menCollection" class="carousel slide" data-ride="carousel">
-                                <img class="img-responsive hidden-xs hidden-sm" ng-src="/assets/img/electronics.jpeg">
-                            </img>
-                            
-                        </div><!-- /.carousel -->
-                        <li class="divider"></li>
-                        <li><a ui-sref="products({slug: 'phones'})">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Mobile</li>
-                        <li><a ui-sref="products({slug: 'phones'})">I-phone</a></li>
-                        <li><a ui-sref="products({slug: 'phones'})">Samsung</a></li>
-                        <li><a ui-sref="products({slug: 'phones'})">Redmi</a></li>
-                        <li><a ui-sref="products({slug: 'phones'})">Moto</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Laptops</li>
-                        <li><a ui-sref="products({slug: 'phones'})">Asus</a></li>
-                        <li><a ui-sref="products({slug: 'phones'})">Macbook</a></li>
-                        <li><a ui-sref="products({slug: 'phones'})">Dell</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Accessories</li>
-                        <li><a ui-sref="products({slug: 'phones'})">Charger</a></li>  
-                        <li><a ui-sref="products({slug: 'phones'})">headset</a></li> 
-                        <li><a ui-sref="products({slug: 'phones'})">Panel</a></li>        
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                       <li class="dropdown-header">Televisions</li>
-                       <li><a ui-sref="products({slug: 'phones'})">Sony</a></li>
-                       <li><a ui-sref="products({slug: 'phones'})">LG</a></li>
-                       <li><a ui-sref="products({slug: 'phones'})">Panasonic</a></li>
-                       
-                   </ul>
-               </li>
-           </ul>               
-       </li>
-
-       <li class="dropdown mega-dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown">Home & Kitchen <span class="caret"></span></a>              
-                <ul class="dropdown-menu mega-dropdown-menu">
-                    <li class="col-sm-3">
-                        <ul>
-                            <li class="dropdown-header">Furniture Collection</li>                            
-                            <div id="menCollection" class="carousel slide" data-ride="carousel">
-                                <img class="img-responsive hidden-xs hidden-sm" ng-src="/assets/img/home.jpeg">
-                            </img>
-                            
-                        </div><!-- /.carousel -->
-                        <li class="divider"></li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Kitchen and Dining</li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Pots</a></li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Pressure Cooker</a></li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Gas stove</a></li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Flasks</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Furniture</li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Cot</a></li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Sofa set</a></li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Dining Table</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Furnishing</li>
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Bed Sheets</a></li>  
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Blankets</a></li> 
-                        <li><a ui-sref="products({slug: 'home-and-kitchen'})">Towels</a></li>        
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                       <li class="dropdown-header">Home Decor</li>
-                       <li><a ui-sref="products({slug: 'home-and-kitchen'})">Paintings</a></li>
-                       <li><a ui-sref="products({slug: 'home-and-kitchen'})">Clocks</a></li>
-                       <li><a ui-sref="products({slug: 'home-and-kitchen'})">Wall Hangings</a></li>
-                       
-                   </ul>
-               </li>
-           </ul>               
-       </li>
-
-       <li class="dropdown mega-dropdown">
-                <a  class="dropdown-toggle" data-toggle="dropdown">Appliances<span class="caret"></span></a>              
-                <ul class="dropdown-menu mega-dropdown-menu">
-                    <li class="col-sm-3">
-                        <ul>
-                            <li class="dropdown-header">TV Collection</li>                            
-                            <div id="menCollection" class="carousel slide" data-ride="carousel">
-                                <img class="img-responsive hidden-xs hidden-sm" ng-src="/assets/img/appliances.jpeg">
-                            </img>
-                            
-                        </div><!-- /.carousel -->
-                        <li class="divider"></li>
-                        <li><a ui-sref="products({slug: 'appliances'})">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Televsions</li>
-                        <li><a ui-sref="products({slug: 'appliances'})">Pots</a></li>
-                        <li><a ui-sref="products({slug: 'appliances'})">Sony</a></li>
-                        <li><a ui-sref="products({slug: 'appliances'})">Samsung</a></li>
-                        <li><a ui-sref="products({slug: 'appliances'})">LG</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Fridge</li>
-                        <li><a ui-sref="products({slug: 'appliances'})">Single Door</a></li>
-                        <li><a ui-sref="products({slug: 'appliances'})">Double Door</a></li>
-                        <li><a ui-sref="products({slug: 'appliances'})">Triple Door</a></li>
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                        <li class="dropdown-header">Washing Machine</li>
-                        <li><a ui-sref="products({slug: 'appliances'})">LG</a></li>  
-                        <li><a ui-sref="products({slug: 'appliances'})">IFB</a></li> 
-                        <li><a ui-sref="products({slug: 'appliances'})">Onida</a></li>        
-                    </ul>
-                </li>
-                <li class="col-sm-3">
-                    <ul>
-                       <li class="dropdown-header">Mixer & Grinder</li>
-                       <li><a ui-sref="products({slug: 'appliances'})">Mixie</a></li>
-                       <li><a ui-sref="products({slug: 'appliances'})">Grinder</a></li>
-                       <li><a ui-sref="products({slug: 'appliances'})">Juicer</a></li>
-                       
-                   </ul>
-               </li>
-           </ul>               
-       </li>
-
-       <li class="dropdown mega-dropdown">
-                <a ui-sref="products({slug: 'books'})">Books<span class="caret"></span></a>
+    <div class="collapse navbar-collapse">
+     <ul class="nav navbar-nav">
+         <li>
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kitchen </a>
+             <ul class="dropdown-menu multi-level">
+                <li><a href="#">Appliances</a></li>
+                <li><a href="#">Storage</a></li>
+                <li><a href="#">Cooking</a></li>
+            </ul>
         </li>
 
-   </ul>               
-</li>
-</ul>
-<ul class="nav navbar-nav navbar-right">
-         <!-- <li><a class="cart" ui-sref="cart"><i class="fa fa-shopping-cart"></i>Cart <span>{{ ngCart.getTotalItems() }}</span></a>
-                            
-     </li> -->
-     <!-- <div class="header-contact-info">
-        <ul class="header-left-top header-menu">
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user"></i>
-                    <!-- <span ng-hide="nav.isLoggedIn()">Account</span> -->
-                    <!-- <span ng-show="nav.isLoggedIn()">Hello {{ nav.getCurrentUser().name }} </span> -->
-                    <!-- <i class="fa fa-angle-down"></i> -->
-                <!-- </a>
-                <ul class="dropdown-menu">
-                    <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="signup">Register</a></li>
-                    <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
-                    <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="orders"><span class="glyphicon glyphicon-tasks"></span> My Orders</a></li>
-                    <li ng-show="nav.isLoggedIn()"><a ui-sref="logout"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div> -->
- 
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Living </a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Furniture</a></li>
+                <li><a href="#">Home Decor</a></li>
+                <li><a href="#">Bed and Bath</a></li>
+            </ul>
+        </li>
 
-</ul>
-</div><!-- /.nav-collapse -->
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">The Cool Stuff </a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Home Accessories</a></li>
+                <li><a href="#">Phone and Laptop Cases</a></li>
+                <li><a href="#">Stationary</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fashion</a>
+            <ul class="dropdown-menu multi-level">
+
+                <li class="dropdown-submenu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men</a>
+                    <ul class="dropdown-menu">
+                        <li><a>Ethnic Wear</a></li>
+                        <li><a>Formal Wear</a></li>
+                        <li><a>Casual Wear</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women</a>
+                    <ul class="dropdown-menu">
+                        <li><a>Ethnic Wear</a></li>
+                        <li><a>Formal Wear</a></li>
+                        <li><a>Casual Wear</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Appliances & Electronics</a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Televisions</a></li>
+                <li><a href="#">Phones</a></li>
+                <li><a href="#">Refrigerators</a></li>
+                <li><a href="#">Washing Machines</a></li>
+                <li><a href="#">Cameras</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kids</a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Toys</a></li>
+                <li><a href="#">Baby Care</a></li>
+                <li><a href="#">Baby Gear</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Personal</a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Skin Care</a></li>
+                <li><a href="#">Make Up </a></li>
+                <li><a href="#">Grooming Accessories</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Experiences</a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Beauty</a></li>
+                <li><a href="#">Spa</a></li>
+                <li><a href="#">Holidays</a></li>
+            </ul>
+        </li>
+         <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books</a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Literature</a></li>
+                <li><a href="#">Fiction</a></li>
+                <li><a href="#">Selfhelp</a></li>
+            </ul>
+        </li>
+         <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sports</a>
+            <ul class="dropdown-menu multi-level">
+                <li><a href="#">Games</a></li>
+                <li><a href="#">Fitness</a></li>
+                <li><a href="#">Playstations</a></li>
+            </ul>
+        </li>
+
+    </div>
+
+
 </nav>

@@ -42,7 +42,7 @@ export function sendmail(templ, data) {
     return Promise.all(results.map((result) => {
       sendEmail({
         to: result.context.email,
-        from: '"Sathvi siva" <admin@wrapsytest.com>',
+        from: '"Wrapsy" <admin@wrapsytest.com>',
         subject: result.email.subject,
         html: result.email.html,
         text: result.email.text,

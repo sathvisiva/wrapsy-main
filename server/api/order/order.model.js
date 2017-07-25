@@ -34,6 +34,8 @@ var OrderSchema = new Schema({
   customerName: String,
   customerEmail: String,
   customerAddress: String,
+  customerAddress1 : String,
+  customerlandmark : String,
   customerPhone: String,
   customerCity: String,
   customerState: String,
@@ -49,6 +51,10 @@ var OrderSchema = new Schema({
   created: {
     type: Date,
     default: Date.now
+  },
+  paif : {
+    type: Boolean,
+    default: false
   }
 });
 
