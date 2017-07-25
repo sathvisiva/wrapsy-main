@@ -54,50 +54,64 @@
         });
       }
 
-      $scope.createregistry = function(registry){
-        if(!$scope.isLoggedIn()){
-         $mdDialog.show({
-          templateUrl: 'app/account/login/login.html',
-          parent: angular.element(document.body),
-          hasBackdrop: false,
-          clickOutsideToClose:true,
-          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-          });
-       } else{
-        $state.go('registryType');
-      }
-
-    }
-
-    $scope.selectRegistryType = function(){
-
-      if(!$scope.isLoggedIn()){
-        $state.go('login');
-      }
-      else{
-        var modalInstance = $uibModal.open({
-         templateUrl : 'app/home/registryType.html',
-         controller: 'RegistryTypeCtrl',
-         size :'md'
-       })
-      }
-    }
-
-    $scope.myregistries = function(){
-
-      var q = {count:{username:Auth.getCurrentUser().name}};
-      q._id = 1;
-
-      Registry.query(q,function(data) {
-        console.log(data)
-        if(data.length == 1){
-          $state.go('manageregistry', {id: data[0]._id});
+      $scope.createRegistry = function(ev){
+        if($scope.isLoggedIn()){
+          $state.go('createregistry');
         }else{
-          $scope.openregistryList(data);
+          $scope.data = {'state' : 'createregistry' , 'event' : 'login'};
+          $scope.login(ev, $scope.data);
         }
+      }
 
-      });
-    }
+      $scope.login = function(ev,data) {
+        $mdDialog.show({
+          controller: 'LoginController'
+          , templateUrl: 'app/account/login/login.html'
+          , parent: angular.element(document.body)
+          , targetEvent: ev
+          
+          , clickOutsideToClose: true
+          , locals: {
+            dataToPass: data
+          }
+        });
+
+        $scope.$watch(function () {
+          return $mdMedia('xs') || $mdMedia('sm');
+        }, function (wantsFullScreen) {
+          $scope.customFullscreen = (wantsFullScreen === true);
+        });
+      }
+
+      $scope.selectRegistryType = function(){
+
+        if(!$scope.isLoggedIn()){
+          $state.go('login');
+        }
+        else{
+          var modalInstance = $uibModal.open({
+           templateUrl : 'app/home/registryType.html',
+           controller: 'RegistryTypeCtrl',
+           size :'md'
+         })
+        }
+      }
+
+      $scope.myregistries = function(){
+
+        var q = {count:{username:Auth.getCurrentUser().name}};
+        q._id = 1;
+
+        Registry.query(q,function(data) {
+          console.log(data)
+          if(data.length == 1){
+            $state.go('manageregistry', {id: data[0]._id});
+          }else{
+            $scope.openregistryList(data);
+          }
+
+        });
+      }
 
 
     /*  $scope.slickslides = [

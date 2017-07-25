@@ -22,6 +22,13 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
   }, {
     'update': {
       method: 'PUT'
+    },
+    'redeem': {
+      method: 'POST',
+      params: {
+        controller: 'redeem',
+        limit: null
+      }
     }
   });
 }).factory('Payment', function ($resource) {

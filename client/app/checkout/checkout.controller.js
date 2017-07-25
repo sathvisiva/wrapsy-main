@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bhcmartApp')
-.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster', function($scope, Auth, $state, Order, ngCart, toaster) {
+.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster','Voucher', function($scope, Auth, $state, Order, ngCart, toaster,Voucher) {
   $state.go('checkout.shipping')
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.country = "In"
@@ -13,7 +13,13 @@ angular.module('bhcmartApp')
   $scope.disableorder = true ; 
   $scope.disablepayment = true;
 
+  var q = {where:{email:Auth.getCurrentUser().email}};
+ /* $scope.vouchers =  Voucher.query(q);
+  console.log($scope.vouchers)
+  */
 
+
+/*
   $scope.savelocation = function(form){
     $scope.locationformsubmitted = false;
     if (!form.$valid) {
@@ -23,10 +29,17 @@ angular.module('bhcmartApp')
       $state.go('createregistry.message');
     }
 
+  }*/
+
+  $scope.redeemVoucher = function(voucher1){
+    var data = {code:voucher1};
+    Voucher.redeem(data, function(resp) {
+      
+    }, function(err) {
+      console.log(err)
+    })
+
   }
-
-
-
 
 
   $scope.validate = form => {

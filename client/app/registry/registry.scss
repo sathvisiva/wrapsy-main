@@ -500,7 +500,7 @@ text-transform: uppercase;
 
 #main-nav li a {
 font-family: "Work Sans";
-font-size: 16px;
+font-size: 22px;
 font-style: normal;
 font-weight: normal;
 color: #000000;
@@ -551,7 +551,7 @@ width: 90%;
 }
 
 #cover-image {
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
     top: 0;
@@ -651,8 +651,7 @@ width: 90%;
 }
 
 #main-nav-container.fixed {
-    position: fixed;
-    left: 0;
+        left: 0;
     top: 0;
     right: 0;
     background-color: white;
@@ -682,7 +681,7 @@ width: 90%;
 }
 
 #cover-image {
-    position: absolute;
+    position: relative;
     left: 0;
     right: 0;
     top: 0;
@@ -690,6 +689,17 @@ width: 90%;
     background-position: center;
 }
 
+.navbar-registry {
+    background-color : transparent;
+    width: 100%;
+    text-align: center;
+    > li {
+      float: none;
+      display: inline-block;
+    }
+  }
 
-
-
+#cover-image img.wide-cover-image {
+    position: absolute;
+    width: 100%;
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart', 'toaster', function ($scope, Auth, $state, Order, ngCart, toaster) {
+angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart', 'toaster', 'Voucher', function ($scope, Auth, $state, Order, ngCart, toaster, Voucher) {
   $state.go('checkout.shipping');
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.country = "In";
@@ -12,14 +12,28 @@ angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$sta
   $scope.disableorder = true;
   $scope.disablepayment = true;
 
-  $scope.savelocation = function (form) {
-    $scope.locationformsubmitted = false;
-    if (!form.$valid) {
-      $scope.locationformsubmitted = true;
-    } else {
-      $scope.disablemessage = false;
-      $state.go('createregistry.message');
-    }
+  var q = { where: { email: Auth.getCurrentUser().email } };
+  /* $scope.vouchers =  Voucher.query(q);
+   console.log($scope.vouchers)
+   */
+
+  /*
+    $scope.savelocation = function(form){
+      $scope.locationformsubmitted = false;
+      if (!form.$valid) {
+        $scope.locationformsubmitted = true
+      }else{
+        $scope.disablemessage = false;
+        $state.go('createregistry.message');
+      }
+  
+    }*/
+
+  $scope.redeemVoucher = function (voucher1) {
+    var data = { code: voucher1 };
+    Voucher.redeem(data, function (resp) {}, function (err) {
+      console.log(err);
+    });
   };
 
   $scope.validate = function (form) {

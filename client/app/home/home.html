@@ -17,14 +17,14 @@
 					<div class="carousel-caption">
 						<ul><li><h2 
 							class="wow bounceInLeft layer-1 slide-text hidden-xs" data-wow-duration="3s" data-wow-delay=".5s">{{slide.text}}</h2></li><li class="home-buttons hidden-xs">
-							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtn">Manage Registry</a>
-							<a ng-click="createregistry()"  class="btn btn-primary mainbtn">Create Registry</a>
+							<a ui-sref="manageregistryList" ng-show="isLoggedIn()" class="btn btn-primary mainbtn">Manage Registry</a>
+							<a ng-click="createRegistry($event)"  class="btn btn-primary mainbtn cursorpointer">Create Registry</a>
 							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtn">Find Registry</a>
 							<a ui-sref="main"  class="btn btn-primary mainbtn">Shop Now</a>
 						</li>
 						<li class="home-buttons visible-xs">
-							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Manage Registry</a>
-							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Create Registry</a>
+							<a ui-sref="manageregistryList"  ng-show="isLoggedIn()" class="btn btn-primary mainbtnxs">Manage Registry</a>
+							<a  ng-click="createRegistry($event)"   class="btn btn-primary mainbtnxs cursorpointer">Create Registry</a>
 							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Find Registry</a>
 							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Shop Now</a>
 						</li>
@@ -85,11 +85,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-4 banner-holder cyan-hover" >
-				<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-01.jpg" alt="Birthday Gifts"></a>      </div>
+				<a href="/category/fashion"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-01.jpg" alt="Birthday Gifts"></a>      </div>
 				<div class="col-md-4 banner-holder cyan-hover">
-					<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-02.jpg" alt="Birthday Gifts"></a>            </div>
+					<a href="/category/fashion"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-02.jpg" alt="Birthday Gifts"></a>            </div>
 					<div class="col-md-4 banner-holder cyan-hover">
-						<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-03_1.jpg" alt="Birthday Gifts"></a>            </div>
+						<a href="/category/fashion"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-03_1.jpg" alt="Birthday Gifts"></a>            </div>
 					</div>
 				</section>
 

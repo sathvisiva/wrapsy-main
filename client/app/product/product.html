@@ -137,6 +137,17 @@
         <span class="control-label">Quantity</span>
         <input type="number" ng-model= "qty" class="form-control-select qty"/>
     </div>
+
+
+
+
+    <div class="clearfix product-variants-item" ng-if = "registryOptions.length > 0 ">
+        <span class="control-label">Select Registry</span>
+        <select id="test" name ="test" class="form-control-select"  ng-model="registry.registryId" ng-options="v._id as v.title for v in registryOptions" required>
+            <option value="">- Please Choose -</option>
+        </select>
+    </div>
+
 </div>
 
 <div class="pdt-button">
@@ -147,7 +158,7 @@
     </div>
 
     <div class="col-md-6">
-        <button class="btn btn-primary btn-lg pdt-button">
+        <button class="btn btn-primary btn-lg pdt-button" ng-click="addtoRegistry(product,qty,registry.registryId)">
             Add to Registry
         </button>
     </div>

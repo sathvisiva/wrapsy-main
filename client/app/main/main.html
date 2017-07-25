@@ -16,7 +16,7 @@
             <div class="row">
                 <div ng-repeat="parentCategory in parentCategories">
                     <div class="col-md-4">
-                        <img ng-src="{{parentCategory.imageUrl}}" class="category-products"/>
+                        <a ui-sref="products({slug: parentCategory.slug, category : parentCategory.name })"><img ng-src="{{parentCategory.imageUrl}}" class="category-products"/></a>
                         <div class="category-name">
                             <a ui-sref="products({slug: parentCategory.slug, category : parentCategory.name })">{{parentCategory.name}}</a>
                         </div>

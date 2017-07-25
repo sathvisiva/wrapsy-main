@@ -31,16 +31,38 @@ angular.module('bhcmartApp')
   })
   .state('manageregistryList', {
     url: '/manage-registry-list',
-    templateUrl: 'app/registry/themeregistry.html',
+    templateUrl: 'app/registry/manage-registry-list.html',
     controller: 'ManageRegistryListController'
   })
+  /*.state('registry', {
+    url: '/registry/{id}',
+    templateUrl: 'app/registry/registry.html',
+    controller: 'RegistryController'
+  })*/
   .state('registry', {
     url: '/registry/{id}',
     templateUrl: 'app/registry/registry.html',
     controller: 'RegistryController'
-  }).state('findregistry', {
+  })
+  /*.state('registry.home', {
+    url: '/home',
+    templateUrl: 'app/registry/home.html'
+  })
+  .state('registry.registrypdts', {
+    url: '/registry',
+    templateUrl: 'app/registry/registry-products.html'
+  })
+  .state('registry.guestbook', {
+    url: '/guestbook',
+    templateUrl: 'app/registry/guestbook.html'
+  })
+  .state('registry.rsvp', {
+    url: '/rsvp',
+    templateUrl: 'app/registry/rsvp.html'
+  })
+  .state('findregistry', {
     url: '/find-registry',
     templateUrl: 'app/registry/find-registry.html',
     controller: 'FindRegistryController'
-  });
+  });*/
 });

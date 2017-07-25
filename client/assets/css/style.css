@@ -1057,9 +1057,9 @@ footer a {
         padding-top: 25px;
     }
     .product-list .single-product h4 {
-     color:  #252525 
- }
- .product-list .single-product > a {
+       color:  #252525 
+   }
+   .product-list .single-product > a {
     display: inline-block;
     float: left;
     width: 200px;
@@ -1650,7 +1650,8 @@ a.p-d-btn:hover {
 }
 .cart-main-area .cart-table table {
     background: #ffffff none repeat scroll 0 0;
-    border: 1px solid #e6e8e9;
+    border-top: 1px solid #e6e8e9;
+    border-bottom: 1px solid #e6e8e9;
     margin: 0;
     width: 100%;
 }
@@ -1774,7 +1775,7 @@ a.p-d-btn:hover {
     .shipping-discount, .amount-totals {
         border: 1px solid #e1e1e1;
         display: block;
-        margin: 40px 0 48px;
+        margin: 10px 0 48px;
         overflow: hidden;
         padding: 21px 15px;
     }
@@ -2656,8 +2657,8 @@ fieldset[disabled] .btn-primary.active, fieldset[disabled] .btn-secondary.active
 }
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
-   background-color: transparent; 
-   border-color: #428bca;
+ background-color: transparent; 
+ border-color: #428bca;
 }
 
 .ribbon {
@@ -2944,6 +2945,7 @@ label {
     min-height: 200px;
     max-height: 200px;
     margin-top : 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
 }
 
@@ -3072,4 +3074,8 @@ label {
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
+}
+
+.checkout{
+    background-color : #ffffff;
 }

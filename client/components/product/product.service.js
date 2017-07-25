@@ -25,6 +25,13 @@ angular.module('bhcmartApp')
   }, {
     'update': {
       method: 'PUT'
+    },
+    'redeem': {
+      method: 'POST',
+      params: {
+        controller: 'redeem',
+        limit: null
+      }        
     }
   });
 })

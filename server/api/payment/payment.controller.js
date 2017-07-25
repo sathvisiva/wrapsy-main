@@ -72,7 +72,7 @@ export function createHash(req, res) {
 }
 
 export function giftPaymentStatus(req, res) {
-  console.log(req.body);
+  
   Voucher.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
     if (err) {
       responseObject.err = err;

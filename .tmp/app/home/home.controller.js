@@ -50,18 +50,33 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       });
     }
 
-    $scope.createregistry = function (registry) {
-      if (!$scope.isLoggedIn()) {
-        $mdDialog.show({
-          templateUrl: 'app/account/login/login.html',
-          parent: angular.element(document.body),
-          hasBackdrop: false,
-          clickOutsideToClose: true,
-          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        });
+    $scope.createRegistry = function (ev) {
+      if ($scope.isLoggedIn()) {
+        $state.go('createregistry');
       } else {
-          $state.go('registryType');
+        $scope.data = { 'state': 'createregistry', 'event': 'login' };
+        $scope.login(ev, $scope.data);
+      }
+    };
+
+    $scope.login = function (ev, data) {
+      $mdDialog.show({
+        controller: 'LoginController',
+        templateUrl: 'app/account/login/login.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+
+        clickOutsideToClose: true,
+        locals: {
+          dataToPass: data
         }
+      });
+
+      $scope.$watch(function () {
+        return $mdMedia('xs') || $mdMedia('sm');
+      }, function (wantsFullScreen) {
+        $scope.customFullscreen = wantsFullScreen === true;
+      });
     };
 
     $scope.selectRegistryType = function () {

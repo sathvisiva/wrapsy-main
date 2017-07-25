@@ -5,10 +5,6 @@ angular.module('bhcmartApp').controller('CartCtrl', function ($scope, Modal, ngC
 		ngCart.empty();
 	});
 
-	$scope.removeProduct = Modal.confirm.remove(function (o) {
-		ngCart.removeItemById(o.getId());
-	});
-
 	/*ui-sref="checkout"*/
 
 	$scope.checkout = function (ev) {

@@ -53,7 +53,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     $scope.registryType = function (state) {
       $scope.state = 'createregistry.' + state;
-      console.log($scope.state);
       $state.go($scope.state);
     };
 
@@ -122,19 +121,108 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
       if (Auth.getCurrentUser().email == resp.username) {
         $scope.editable = true;
       }
-      if (!resp.products) {
-        $scope.showassistance = true;
-      }
+      var registrydata = {};
+      registrydata._id = resp._id;
+      registrydata.title = resp.title;
+      RegistryService.addregistry(registrydata);
     });
   };
 
+  $scope.ph_numbr = /^(\+?(\d{1}|\d{2}|\d{3})[- ]?)?\d{3}[- ]?\d{3}[- ]?\d{4}$/;
+
   $scope.queryRegistry();
+
+  $scope.show1 = true;
+  $scope.show2 = false;
+  $scope.show3 = false;
+  $scope.show4 = false;
+
+  $scope.showWishlist = function () {
+    $scope.show1 = true;
+    $scope.show2 = false;
+    $scope.show3 = false;
+    $scope.show4 = false;
+  };
+  $scope.showRSVP = function () {
+    $scope.show1 = false;
+    $scope.show2 = true;
+    $scope.show3 = false;
+    $scope.show4 = false;
+    $scope.rsvp = {};
+    $scope.rsvp.attending = "true";
+  };
+
+  $scope.showGuestBook = function () {
+    $scope.show1 = false;
+    $scope.show2 = false;
+    $scope.show3 = true;
+    $scope.show4 = false;
+    $scope.getGuestWishes();
+  };
+
+  $scope.showGuests = function () {
+    $scope.show1 = false;
+    $scope.show2 = false;
+    $scope.show3 = false;
+    $scope.show4 = true;
+    $scope.getGuestList();
+  };
 
   $scope.updatedesired = function () {
     Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
       $scope.registry = res;
       toaster.pop('success', "Product desired count updated");
     });
+  };
+
+  $scope.saversvp = function (form) {
+
+    if (form.$valid) {
+      console.log($scope.rsvp);
+      $scope.rsvp.registryId = $scope.registry._id;
+      Registry.rsvpRegistry({ id: $scope.registry._id }, $scope.rsvp, function (resp) {
+        toaster.pop('success', "Thank you for your Response");
+        $timeout(function () {
+          $scope.showWishlist();
+        }, 1000);
+      }, function (err) {
+
+        toaster.pop('error', "Some error occured");
+      });
+    }
+  };
+
+  $scope.saveGuestWish = function (form) {
+
+    if ($scope.guestbook.by && $scope.guestbook.wishes) {
+      $scope.guestbook.registryId = $scope.registry._id;
+      Registry.guestBookRegistry({ id: $scope.registry._id }, $scope.guestbook, function (resp) {
+        toaster.pop('success', "Thank you for sharing your wishes");
+        $scope.guestbook.wishes = "";
+        $scope.guestbook.by = "";
+        $scope.getGuestWishes();
+      }, function (err) {
+
+        toaster.pop('error', "Some error occured");
+      });
+    }
+  };
+
+  $scope.getGuestWishes = function () {
+    $scope.guestWishes = Registry.registryGuestBook({ id: $scope.registry._id });
+    console.log($scope.guestWishes);
+    /*  Registry.registryGuestBook({ id: $scope.registry._id }, function(resp) {
+         $scope.guest.guestWishes = resp;
+         console.log($scope.guest.guestWishes)
+         
+     }, function(err) {
+       
+       toaster.pop('error', "Some error occured");
+     });*/
+  };
+
+  $scope.getGuestList = function () {
+    $scope.guests = Registry.registryGuest({ id: $scope.registry._id });
   };
 
   $scope.inviteFriends = function () {
