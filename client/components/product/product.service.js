@@ -132,6 +132,34 @@ angular.module('bhcmartApp')
         limit: null
       }
     },
+    'accomodation': {
+      method: 'POST',
+      params: {
+        controller: 'accomodation',
+        limit: null
+      }
+    },
+    'accomodationDetails': {
+      method: 'GET',
+      params: {
+        controller: 'accomodation',
+        limit: null
+      }
+    },
+    'contribution': {
+      method: 'POST',
+      params: {
+        controller: 'contribution',
+        limit: null
+      }
+    },
+    'contributionDetails': {
+      method: 'GET',
+      params: {
+        controller: 'contribution',
+        limit: null
+      }
+    },
     'guestBookRegistry': {
       method: 'POST',
       params: {
