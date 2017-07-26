@@ -5,6 +5,8 @@ var _ = require('lodash');
 var Registry = require('./registry.model').registry;
 var Rsvp = require('./registry.model').rsvp;
 var GuestBook = require('./registry.model').guestBook;
+var Contribution = require('./registry.model').contribution;
+var Accomodation = require('./registry.model').accomodation;
 var mail = require('../mail/sendmail');
 
 
@@ -213,6 +215,44 @@ exports.indexGuestBookRegistry = function(req, res) {
       return res.status(200).json(wishes);
     });
 };
+
+exports.createAccomodation = function(req, res) {
+
+  Accomodation.create(req.body, function(err, registry) {
+    if(err) { return handleError(res, err); }
+    
+    return res.status(201).json(registry);
+  });
+};
+
+exports.indexAccomodation = function(req, res) {
+
+  Accomodation.find({registryId:req.params.id}).exec(function (err, wishes) {
+    if(err) { console.log(err);
+      return handleError(res, err); }
+      return res.status(200).json(wishes);
+    });
+};
+
+exports.createContribution = function(req, res) {
+
+  Contribution.create(req.body, function(err, registry) {
+    if(err) { return handleError(res, err); }
+    
+    return res.status(201).json(registry);
+  });
+};
+
+exports.indexContribution = function(req, res) {
+
+  Contribution.find({registryId:req.params.id}).exec(function (err, wishes) {
+    if(err) { console.log(err);
+      return handleError(res, err); }
+      return res.status(200).json(wishes);
+    });
+};
+
+
 
 function handleEntityNotFound(res) {
   return function(entity) {
