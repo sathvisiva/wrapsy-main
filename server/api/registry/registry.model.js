@@ -6,8 +6,7 @@ var Product = require('../product/product.model').product;
 
 var RsvpSchema = new Schema({
   name: {
-    type: String,
-    
+    type: String,    
     trim: true
   },
   email: {
@@ -19,11 +18,6 @@ var RsvpSchema = new Schema({
   attending:  {
     type: Boolean,
     default: true
-  },
-  people: {
-    type: Number,
-    min: 1,
-    max: 10
   },
   posted: {
     type: Date,
@@ -40,6 +34,46 @@ var GuestBookSchema = new Schema({
   },
   by: {
     type: String
+  },
+  posted: {
+    type: Date,
+    default: Date.now
+  },
+  registryId : {
+    type: String
+  }
+});
+
+var ContributionsSchema = new Schema({
+  Name: {
+    type: String
+  },
+  productId: {
+    type: String
+  },
+  contribution: {
+    type: Number
+  },
+   registryId : {
+    type: String
+  }
+});
+
+var AccomodationSchema = new Schema({
+  Name: {
+    type: String
+  },
+  Address: {
+    type: String
+  },
+  email: {
+    type: String
+  },
+  phone : {
+    type : Number
+  },
+  website : {
+    type : Number
   },
   posted: {
     type: Date,
@@ -70,7 +104,6 @@ var RegistrySchema = new Schema({
   greeting: {
     type: String
   },
-
   thankyou: {
     type: String
   },
@@ -119,7 +152,12 @@ var RegistrySchema = new Schema({
     affiliate : {
       type: Boolean,
       default: false
-    }
+    },
+    multiple : {
+      type: Boolean,
+      default: false
+    },
+    paid : Number
 
 
   }]
@@ -132,5 +170,6 @@ var RegistrySchema = new Schema({
 module.exports = {
   registry: mongoose.model('Registry', RegistrySchema),
   rsvp: mongoose.model('Rsvp', RsvpSchema),
-  guestBook: mongoose.model('GuestBook', GuestBookSchema)
+  contribution: mongoose.model('Contribution', ContributionsSchema),
+  accomodation: mongoose.model('Accomodation', AccomodationSchema)
 }
