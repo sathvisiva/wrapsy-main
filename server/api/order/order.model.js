@@ -31,15 +31,15 @@ var OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  customerName: String,
-  customerEmail: String,
-  customerAddress: String,
-  customerAddress1 : String,
-  customerlandmark : String,
-  customerPhone: String,
-  customerCity: String,
-  customerState: String,
-  customerCountry: String,
+  address: {
+    type: Schema.Types.ObjectId,
+    ref: 'Address'
+  },
+  vouchers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Voucher'
+  }],
+  
   delivered: {
     type: Boolean,
     default: false
@@ -52,7 +52,7 @@ var OrderSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  paif : {
+  paid : {
     type: Boolean,
     default: false
   }
