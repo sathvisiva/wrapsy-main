@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('bhcmartApp')
-.controller('ProductCtrl', ['$scope', '$stateParams', '$state', 'Product', 'Registry','$rootScope','ngCart','Auth','toaster','$timeout',
-  function($scope, $stateParams, $state, Product, Registry, $rootScope, ngCart,Auth, toaster, $timeout) {
+.controller('ProductCtrl', ['$scope', '$stateParams', '$state', 'Product', 'Registry','$rootScope','ngCart','Auth','toaster','$mdDialog','$timeout',
+  function($scope, $stateParams, $state, Product, Registry, $rootScope, ngCart,Auth, toaster,$mdDialog, $timeout) {
 
       //Get product and fetch related products based on category
       $scope.product = Product.get({ id: $stateParams.id }, function(p) {
@@ -28,7 +28,8 @@ angular.module('bhcmartApp')
       $scope.registry.registryId = ""
 
       $scope.addtoRegistry = function(product, qty,registryId){
-
+        
+        
         if(!Auth.isLoggedIn()){
           toaster.pop('error', "Please login to add Registry");
         }else if($scope.registryOptions.length <1){
@@ -36,6 +37,23 @@ angular.module('bhcmartApp')
         }else if(!registryId){
          toaster.pop('error', "Please choose a Registry");
        }else if($scope.registry.registryId){
+         
+        if(product.price > 5000){
+           var confirm = $mdDialog.confirm()
+          .title('Would you like to delete your debt?')
+          .textContent('All of the banks have agreed to forgive you your debts.')
+          .ariaLabel('Lucky day')
+          .targetEvent(ev)
+          .ok('solo')
+          .cancel('Chip In');
+
+    $mdDialog.show(confirm).then(function() {
+      $scope.products.multiple = true;
+    }, function() {
+       $scope.products.multiple = false;
+    }); 
+          
+        }
 
 
         $scope.products = {}
