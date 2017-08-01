@@ -7,8 +7,8 @@
   "cgst" : 5,
   "sgst" : 5,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Portable front laser laptop",
   "slug": "dell-laptop",
   "categories": [
@@ -75,8 +75,8 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "Red", "Gold"],
+  "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop",
   "slug": "spark-fun-laptop",
   "categories": [
@@ -110,12 +110,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop",
   "slug": "spark-intel-laptop",
   "categories": [
-    "56f24ce1f0b74ee730de532b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -145,12 +145,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "Red", "Gold"],
+  "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop",
   "slug": "spark-mini-laptop",
   "categories": [
-    "56f24ce1f0b74ee730de532b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -180,12 +180,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "Red", "Gold"],
+  "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop Model",
   "slug": "spark-mini-laptop-model",
   "categories": [
-    "56f24ce1f0b74ee730de532b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -215,12 +215,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "SparkFun Laptop Model",
   "slug": "mini-laptop-model",
   "categories": [
-    "56f24ce1f0b74ee730de532b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -251,7 +251,7 @@
   "description": "Durable office laptops",
   "slug": "hp-344-desktops",
   "categories": [
-    "56f24ce1f0b74ee730de531b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -284,7 +284,7 @@
   "description": "Durable office Desktops",
   "slug": "hp-344-desktops-1",
   "categories": [
-    "56f24ce1f0b74ee730de531b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -316,12 +316,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Durable office Desktops",
   "slug": "hp-344-desktops-2",
   "categories": [
-    "56f24ce1f0b74ee730de531b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -357,12 +357,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Durable office Desktops",
   "slug": "hp-344-desktops-3",
   "categories": [
-    "56f24ce1f0b74ee730de530b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -398,12 +398,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Build a powerful e-commerce application quickly with MEAN, a leading full-JavaScript stack.",
   "slug": "mean-ecommerce-book",
   "categories": [
-    "56f24ce1f0b74ee730de530b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -435,12 +435,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-b",
   "categories": [
-    "56f24ce1f0b74ee730de530b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -472,12 +472,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-a",
   "categories": [
-    "56f24ce1f0b74ee730de530b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -500,7 +500,52 @@
   "hot": false,
   "featured": true,
   "stock": 100
-}, {
+}, 
+ {
+  "_id": "56f24ee1f0e74ee730de5ikf",
+  "title": "T-shirt 1",
+  "imageUrl": "assets/uploads/fashion/2.jpg",
+  "price": 200,
+  "sellingPrice" : 1,
+  "cgst" : 6,
+  "sgst" : 6,
+  "size" : "L, XL, XXL",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
+  "description": "T-shirt with the MEAN stack logo",
+  "slug": "t-shirt-a",
+  "categories": [
+    "56f24ce1f0b74ee730de533c"
+  ],
+  "reviews": [
+    "56f6d0b2d747e8b59b772d24",
+    "56f6d0b2d747e8b59b772d25",
+    "56f6d0b2d747e8b59b772d26",
+    "56f6d0b2d747e8b59b772d27",
+    "56f6d0b2d747e8b59b772d28",
+    "56f6d0b2d747e8b59b772d29",
+    "56f6d0b2d747e8b59b772d2a",
+    "56f6d0b2d747e8b59b772d2b",
+    "56f6d0b2d747e8b59b772d2c",
+    "56f6d0b2d747e8b59b772d2d",
+    "56f6d0b2d747e8b59b772d2e"
+  ],
+  "variants": [
+    "56f24ce1f0b74ee730de5259"
+  ],
+  "images": [],
+  "new": false,
+  "hot": false,
+  "featured": true,
+  "stock": 100
+},
+
+
+
+
+
+
+{
   "_id": "56f24de1f0b74er730te525f",
   "title": "T-shirt 3",
   "imageUrl": "assets/uploads/fashion/3.jpg",
@@ -509,12 +554,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-e",
   "categories": [
-    "56f24ce1f0b74ee730de530b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -546,12 +591,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-d",
   "categories": [
-    "56f24ce1f0b74ee730de530b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -583,12 +628,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-k",
   "categories": [
-    "56f24ce1f0b74ee730de530b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -621,7 +666,7 @@
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-z",
   "categories": [
-    "56f24ce1f0b74ee730de528b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -654,7 +699,7 @@
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-s",
   "categories": [
-    "56f24ce1f0b74ee730de528b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -687,7 +732,7 @@
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-s",
   "categories": [
-    "56f24ce1f0b74ee730de528b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -721,7 +766,7 @@
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-t",
   "categories": [
-    "56f24ce1f0b74ee730de528b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -754,7 +799,7 @@
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-t-2",
   "categories": [
-    "56f24ce1f0b74ee730de528b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -787,7 +832,7 @@
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-f-2",
   "categories": [
-    "56f24ce1f0b74ee730de528b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -820,7 +865,7 @@
   "description": "Kitchen ware",
   "slug": "kitchen-f-2",
   "categories": [
-    "56f24ce1f0b74ee730de527b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -853,7 +898,7 @@
   "description": "Kitchen ware",
   "slug": "kitchen-f-1",
   "categories": [
-    "56f24ce1f0b74ee730de527b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -885,12 +930,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Kitchen ware 1",
   "slug": "kitchen-k-2",
   "categories": [
-    "56f24ce1f0b74ee730de527b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -922,12 +967,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Kitchen ware 1",
   "slug": "kitchen-2",
   "categories": [
-    "56f24ce1f0b74ee730de527b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -960,7 +1005,7 @@
   "description": "Home ware",
   "slug": "home-f-2",
   "categories": [
-    "56f24ce1f0b74ee730de527b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -992,12 +1037,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Home ware",
   "slug": "home-f-1",
   "categories": [
-    "56f24ce1f0b74ee730de525b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1030,7 +1075,7 @@
   "description": "Home ware 1",
   "slug": "home-k-2",
   "categories": [
-    "56f24ce1f0b74ee730de525b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1062,12 +1107,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Home ware 1",
   "slug": "home-2",
   "categories": [
-    "56f24ce1f0b74ee730de525b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1100,7 +1145,7 @@
   "description": "Art work 1",
   "slug": "artwork-2",
   "categories": [
-    "56f24ce1f0b74ee730de525b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1132,12 +1177,12 @@
   "sgst" : 6,
   "sellingPrice" : 1,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Art works 1",
   "slug": "artwork-1",
   "categories": [
-    "56f24ce1f0b74ee730de525b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1170,7 +1215,7 @@
   "description": "Foreign Art work 1",
   "slug": "foreign-artwork-2",
   "categories": [
-    "56f24ce1f0b74ee730de524b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1202,12 +1247,12 @@
   "sgst" : 6,
   "sellingPrice" : 1,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Foreign Art works 1",
   "slug": "foreign-artwork-1",
   "categories": [
-    "56f24ce1f0b74ee730de524b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1239,12 +1284,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Foreign Art work 3",
   "slug": "foreign-artwork-3",
   "categories": [
-    "56f24ce1f0b74ee730de524b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1276,12 +1321,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Foreign Art works 4",
   "slug": "foreign-artwork-4",
   "categories": [
-    "56f24ce1f0b74ee730de524b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1313,12 +1358,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "description": "Convert coffee into MEAN code",
   "slug": "coffee-mug",
   "categories": [
-    "56f24ce1f0b74ee730de524b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews": [
     "56f6d0b2d747e8b59b772d24",
@@ -1354,7 +1399,7 @@
   "slug" : "puma-men-s-atom-fashion",
   "affiliate" : true,
   "categories" : [
-    "56f24ce1f0b74ee730de524b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews" : [ ],
   "variants" : [ ],
@@ -1377,12 +1422,12 @@
   "cgst" : 6,
   "sgst" : 6,
   "size" : "L, XL, XXL",
-  "color" : "Blue, White, Gold",
-  "brand" : "wrapsy",
+  "color" : ["Blue", "White", "Gold"],
+  "vendor" : "wrapsy",
   "slug" : "puma-men-s-atom-fashion",
   "affiliate" : true,
   "categories" : [
-    "56f24ce1f0b74ee730de524b"
+    "56f24ce1f0b74ee730de533c"
   ],
   "reviews" : [ ],
   "variants" : [ ],

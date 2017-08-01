@@ -4,11 +4,18 @@ angular.module('bhcmartApp')
 .controller('CategoryCtrl', ['$scope', '$stateParams', 'Product','$rootScope','$state', 'Catalog',function($scope, $stateParams, Product, $rootScope, $state, Catalog) {
 
   $scope.categoryTitle = $stateParams.slug;
-  $scope.addtoRegistry = function(productId){
+  
+  $scope.page = 0;
 
-    var result = { id:productId, registryId: $scope.registryId, registryTitle:$scope.registrytitle };
-    $state.go('product', result);
-  }
+  $scope.priceSlider = {};
+
+  $scope.priceSlider = {
+    min: 0,
+    max: 10000,
+    ceil: 10000,
+    floor: 0,
+    step:100
+  };
 
   Catalog.query(function(categories) {
     $scope.categories = categories;
@@ -16,13 +23,37 @@ angular.module('bhcmartApp')
       return category.ancestors.length == 1;
     })
 
+    console.log($scope.parentCategories);
+
   });
 
-  $scope.filter = function(){
+  $scope.productCount = Product.productCount();
+  console.log($scope.productCount);
+
+  $scope.nextPage = function(){
+    $scope.page = $scope.page + 1;
+    $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 4, page : $scope.page  }, process($scope));
+
+
+  }
+
+  $scope.previousPage = function(){
+    $scope.page = $scope.page - 1;
+    $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 4, page : $scope.page  }, process($scope));
+  }
+
+
+  $scope.test = function(){
     console.log("inside filter")
   }
 
-  $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 0 }, process($scope));
+  function test(){
+    alert("inside test");
+  }
+
+    
+
+  $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 4, page : $scope.page  }, process($scope));
 
   $scope.registryId = $rootScope.registryId;
   $scope.registrytitle = $rootScope.registryTitle;
@@ -31,12 +62,12 @@ angular.module('bhcmartApp')
   $scope.asc = false;
 
   $scope.minRangeSlider = {
-    minValue: 10,
-    maxValue: 90,
+    minValue: 100,
+    maxValue: 180,
     options: {
       floor: 0,
-      ceil: 100,
-      step: 1
+      ceil: 1000000,
+      step : 100
     }
   };
 

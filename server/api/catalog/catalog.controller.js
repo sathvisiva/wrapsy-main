@@ -61,7 +61,7 @@ function removeEntity(res) {
 
 // Gets a list of Catalogs
 exports.index = function(req, res) {
-  Catalog.find().sort({ parent: 1 }).populate('parent').execAsync()
+  Catalog.find().sort({ parent: 1 }).populate('children').execAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 };

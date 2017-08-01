@@ -29,7 +29,7 @@ angular.module('bhcmartApp', [
 
 })
 
-.run(function($rootScope, $state, ngCart) {
+.run(function($rootScope, $state, ngCart,$location) {
   $.scrollUp({
     scrollName: 'scrollUp',
     scrollText: '<i class="fa fa-angle-up"></i>',
@@ -42,6 +42,7 @@ angular.module('bhcmartApp', [
   $rootScope.ngCart = ngCart;
   $rootScope.$state = $state;
   $rootScope._ = _;
+  $rootScope.location = $location;
 })
 .directive('myTab', function($timeout) {
   return {
@@ -88,104 +89,8 @@ angular.module('bhcmartApp', [
       });
     }
   }
-}).directive('newArrivalCarousel', function() {
-  return {
-    link: function(scope, element, attrs) {
-        //New Arrival Carousel Area
-        $(element).owlCarousel({
-          autoPlay: false,
-          slideSpeed: 2000,
-          items: 5,
-          pagination: false,
-          navigation: true,
-          navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-          itemsDesktop: [1199, 4],
-          itemsDesktopSmall: [979, 3],
-          itemsTablet: [768, 2],
-          itemsMobile: [479, 1]
-        });
-      }
-    }
-  })
-.directive('singlePSlide', function($timeout) {
-  return {
-    link: function(scope, element, attrs) {
-        //Features Tab Carousel
-        $timeout(function() {
-          $(element).owlCarousel({
-            autoPlay: false,
-            slideSpeed: 2000,
-            items: 4,
-            pagination: false,
-            navigation: true,
-            navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-            itemsDesktop: [1199, 3],
-            itemsDesktopSmall: [979, 2],
-            itemsLargeMobile: [767, 2],
-            itemsMobile: [450, 1]
-          });
-        }, 0);
-      }
-    }
-  })
-.directive('singlePSlideBottom', function($timeout) {
-  return {
-    link: function(scope, element, attrs) {
-        //Features Tab Bottom Carousel
-        $timeout(function() {
-          $(element).owlCarousel({
-            autoPlay: false,
-            slideSpeed: 2000,
-            items: 4,
-            pagination: false,
-            navigation: true,
-            navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-            itemsDesktop: [1199, 3],
-            itemsDesktopSmall: [979, 3],
-            itemsLargeMobile: [767, 2],
-            itemsMobile: [450, 1]
-          });
-        }, 0);
-      }
-    }
-  })
-.directive('brandWrapper', function() {
-  return {
-    link: function(scope, element, attrs) {
-        // Brand Carousel
-        $(element).owlCarousel({
-          autoPlay: false,
-          slideSpeed: 2000,
-          items: 5,
-          pagination: false,
-          navigation: false,
-          itemsDesktop: [1199, 4],
-          itemsDesktopSmall: [979, 3],
-          itemsLargeMobile: [767, 2],
-          itemsMobile: [450, 1]
-        });
-      }
-    }
-  })
-.directive('singlePSlideFive', function() {
-  return {
-    link: function(scope, element, attrs) {
-        //Home five Hot Tab
-        $(element).owlCarousel({
-          autoPlay: false,
-          slideSpeed: 2000,
-          items: 5,
-          pagination: false,
-          navigation: true,
-          navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-          itemsDesktop: [1199, 4],
-          itemsDesktopSmall: [979, 3],
-          itemsLargeMobile: [767, 1],
-          itemsMobile: [450, 1]
-        });
-      }
-    }
-  })
+})
+
 .directive('countdowner', function() {
   return {
     link: function(scope, element, attrs) {
@@ -305,7 +210,10 @@ angular.module('bhcmartApp', [
         }, 0);
       }
     }
-  }).directive('phone', function() {
+  })
+
+
+  .directive('phone', function() {
     return {
       restrice: 'A',
       require: 'ngModel',

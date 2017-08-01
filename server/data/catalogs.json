@@ -256,7 +256,10 @@
   "name": "Men",
   "parent": "56f24ce1f0b74ee730de527b",
   "slug": "men",
-  "children": [
+  "children": [ 
+    "56f24ce1f0b74ee730de546b",
+    "56f24ce1f0b74ee730de547b"
+
   ],
   "ancestors": [
     "56f24ce1f0b74ee730de5242",
@@ -271,6 +274,9 @@
   "parent": "56f24ce1f0b74ee730de527b",
   "slug": "women",
   "children": [
+    "56f24ce1f0b74ee730de548b",
+    "56f24ce1f0b74ee730de549b",
+    "56f24ce1f0b74ee730de550b"
   ],
   "ancestors": [
     "56f24ce1f0b74ee730de5242",

@@ -7,19 +7,19 @@
  * DELETE  /api/products/:id          ->  destroy
  */
 
-'use strict';
+ 'use strict';
 
-var _ = require('lodash');
+ var _ = require('lodash');
 
 
-var Product = require('./product.model').product;
-var Image = require('./product.model').image;
-var Variant = require('./product.model').variant;
-var Review = require('./product.model').review;
-var Catalog = require('../catalog/catalog.model');
-var path = require('path');
+ var Product = require('./product.model').product;
+ var Image = require('./product.model').image;
+ var Variant = require('./product.model').variant;
+ var Review = require('./product.model').review;
+ var Catalog = require('../catalog/catalog.model');
+ var path = require('path');
 
-function handleError(res, statusCode) {
+ function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
     console.error(err, statusCode);
@@ -28,9 +28,11 @@ function handleError(res, statusCode) {
 }
 
 function responseWithResult(res, statusCode) {
+
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
+      console.log(entity.length);
       res.status(statusCode).json(entity);
     }
   };
@@ -50,9 +52,9 @@ function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
     return updated.saveAsync()
-      .spread(function(updated) {
-        return updated;
-      });
+    .spread(function(updated) {
+      return updated;
+    });
   };
 }
 
@@ -60,9 +62,9 @@ function removeEntity(res) {
   return function(entity) {
     if (entity) {
       return entity.removeAsync()
-        .then(function() {
-          res.status(204).end();
-        });
+      .then(function() {
+        res.status(204).end();
+      });
     }
   };
 }
@@ -77,21 +79,24 @@ function saveFeaturedImage(res, file) {
   }
 }
 
-function productsInCategory(limit) {
+function productsInCategory(limit,page) {
   limit = Number(limit) || null;
   return function(catalog) {
     var catalog_ids = [catalog._id].concat(catalog.children);
+    console.log(catalog_ids);
     return Product
-      .find({
-        'categories': {
-          $in: catalog_ids
-        }
-      })
-      .limit(limit)
-      .populate({ path: 'categories', select: 'name' })
-      .populate({ path: 'reviews', select: 'rating' })
-      .populate({ path: 'images', select: 'imageUrl' })
-      .execAsync();
+    .find({
+      'categories': {
+        $in: catalog_ids
+      }
+    })
+    .skip(page*limit)
+    .limit(limit)
+    .sort({title: 'asc'})
+    .populate({ path: 'categories', select: 'name' })
+    .populate({ path: 'reviews', select: 'rating' })
+    .populate({ path: 'images', select: 'imageUrl' })
+    .execAsync();
   }
 }
 
@@ -106,59 +111,79 @@ function productsInSearchCategory(term) {
           $search: term
         }
       };
-    else
-      option = {
-        'categories': {
-          $in: catalog_ids
-        },
-        $text: {
-          $search: term
-        }
-      };
+      else
+        option = {
+          'categories': {
+            $in: catalog_ids
+          },
+          $text: {
+            $search: term
+          }
+        };
 
-    return Product
-      .find(option)
-      .populate({ path: 'categories', select: 'name' })
-      .populate({ path: 'reviews', select: 'rating' })
-      .populate({ path: 'images', select: 'imageUrl' })
-      .execAsync();
-  }
-}
+        return Product
+        .find(option)
+        .populate({ path: 'categories', select: 'name' })
+        .populate({ path: 'reviews', select: 'rating' })
+        .populate({ path: 'images', select: 'imageUrl' })
+        .execAsync();
+      }
+    }
 
 // Gets a list of Products
 exports.index = function(req, res) {
   Product.find().sort({ stock: 1 }).populate({ path: "categories", select: "name" }).execAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 exports.indexAffiliateProduct = function(req, res){
   Product.find({affiliate:true}).sort({ stock: 1 }).populate({ path: "categories", select: "name" }).execAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 }
+
+exports.count = function(req, res) {
+  
+  if(req.query){
+    var q = isJson(req.query.where);
+    Product.find(q).count().exec(function (err, count) {
+      if(err) { 
+        console.log(err)
+        return handleError(res, err); }
+        return res.status(200).json([{count:count}]);
+      });
+  }else{
+      Product.count().exec(function (err, count) {
+      if(err) { 
+        console.log(err)
+        return handleError(res, err); }
+        return res.status(200).json([{count:count}]);
+      });
+  }
+};
 // Gets a single Product from the DB
 exports.show = function(req, res) {
   Product.findOne({
-      slug: req.params.slug
-    })
-    .populate('images')
-    .populate({ path: 'reviews' }).populate({ path: 'categories', select: 'slug' })
-    .execAsync()
-    .then(handleEntityNotFound(res))
-    .then(function(entity) {
-      if (entity) {
-        res.status(200).json(entity);
-      }
-    })
-    .catch(handleError(res));
+    slug: req.params.slug
+  })
+  .populate('images')
+  .populate({ path: 'reviews' }).populate({ path: 'categories', select: 'slug' })
+  .execAsync()
+  .then(handleEntityNotFound(res))
+  .then(function(entity) {
+    if (entity) {
+      res.status(200).json(entity);
+    }
+  })
+  .catch(handleError(res));
 };
 
 // Creates a new Product in the DB
 exports.create = function(req, res) {
   Product.createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  .then(responseWithResult(res, 201))
+  .catch(handleError(res));
 };
 
 // Updates an existing Product in the DB
@@ -167,18 +192,18 @@ exports.update = function(req, res) {
     delete req.body._id;
   }
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(saveUpdates(req.body))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 // Deletes a Product from the DB
 exports.destroy = function(req, res) {
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
 };
 
 // Uploads a new Product's featured image in the DB
@@ -189,34 +214,35 @@ exports.upload = function(req, res) {
   }
 
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveFeaturedImage(res, file))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(saveFeaturedImage(res, file))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 exports.catalog = function(req, res) {
   var limit = req.params.limit;
+  var page = req.params.page || 0;
   Catalog
-    .findOne({
-      slug: req.params.slug
-    })
-    .execAsync()
-    .then(productsInCategory(limit))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .findOne({
+    slug: req.params.slug
+  })
+  .execAsync()
+  .then(productsInCategory(limit,page))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 exports.search = function(req, res) {
   var term = req.params.term;
   Catalog
-    .findOne({
-      slug: req.params.slug
-    })
-    .execAsync()
-    .then(productsInSearchCategory(term))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .findOne({
+    slug: req.params.slug
+  })
+  .execAsync()
+  .then(productsInSearchCategory(term))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 /*images*/
@@ -224,13 +250,13 @@ function linkImageProduct(req, res, productId) {
   return function(entity) {
     var image = entity;
     return Product.findByIdAsync(req.params.id)
-      .then(handleEntityNotFound(res))
-      .then(function(entity) {
-        entity.images.push(image._id);
-        return entity.saveAsync().spread(function() {
-          return image;
-        });
-      })
+    .then(handleEntityNotFound(res))
+    .then(function(entity) {
+      entity.images.push(image._id);
+      return entity.saveAsync().spread(function() {
+        return image;
+      });
+    })
   }
 }
 
@@ -239,7 +265,7 @@ function getImages(res) {
     if (entity) {
       var images = _.map(entity.images, function(imageId) {
         return Image.findByIdAsync(imageId)
-          .then(handleEntityNotFound(res));
+        .then(handleEntityNotFound(res));
       })
       return Promise.all(images);
     } else {
@@ -256,9 +282,9 @@ function saveImageUpdates(file) {
     });
 
     return updated.saveAsync()
-      .spread(function(updated) {
-        return updated;
-      });
+    .spread(function(updated) {
+      return updated;
+    });
   };
 }
 
@@ -272,19 +298,19 @@ exports.uploadImage = function(req, res) {
   var newPath = '/assets/uploads/' + path.basename(file.path);
 
   Image.createAsync({
-      imageUrl: newPath
-    }).then(linkImageProduct(req, res, req.params.id))
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+    imageUrl: newPath
+  }).then(linkImageProduct(req, res, req.params.id))
+  .then(responseWithResult(res, 201))
+  .catch(handleError(res));
 };
 
 // Gets images for a single Product from the DB
 exports.indexImage = function(req, res) {
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(getImages(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(getImages(res))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 // Updates an existing Product image in the DB
@@ -295,10 +321,10 @@ exports.updateImage = function(req, res) {
   }
 
   Image.findByIdAsync(req.params.image_id)
-    .then(handleEntityNotFound(res))
-    .then(saveImageUpdates(file))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(saveImageUpdates(file))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 /*Variants*/
@@ -307,7 +333,7 @@ function getVariants(res) {
     if (entity) {
       var variants = _.map(entity.variants, function(variantId) {
         return Variant.findByIdAsync(variantId)
-          .then(handleEntityNotFound(res));
+        .then(handleEntityNotFound(res));
       })
       return Promise.all(variants);
     } else {
@@ -320,13 +346,13 @@ function linkVariantProduct(res, productId) {
   return function(entity) {
     var variant = entity;
     return Product.findByIdAsync(productId)
-      .then(handleEntityNotFound(res))
-      .then(function(entity) {
-        entity.variants.push(variant._id);
-        return entity.saveAsync().spread(function() {
-          return variant;
-        });
-      })
+    .then(handleEntityNotFound(res))
+    .then(function(entity) {
+      entity.variants.push(variant._id);
+      return entity.saveAsync().spread(function() {
+        return variant;
+      });
+    })
   }
 }
 
@@ -335,26 +361,26 @@ function removeVariantId(variantId, variant) {
     var variantIndex = entity.variants.indexOf(variantId);
     entity.variants.splice(variantIndex, 1);
     return entity.saveAsync()
-      .then(function() {
-        return variant;
-      });
+    .then(function() {
+      return variant;
+    });
   };
 }
 
 exports.createVariant = function(req, res) {
   Variant.createAsync(req.body)
-    .then(linkVariantProduct(res, req.params.id))
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  .then(linkVariantProduct(res, req.params.id))
+  .then(responseWithResult(res, 201))
+  .catch(handleError(res));
 }
 
 // Gets variants for a single Product from the DB
 exports.indexVariant = function(req, res) {
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(getVariants(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(getVariants(res))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 // Updates an existing Variant in the DB
 exports.updateVariant = function(req, res) {
@@ -362,25 +388,25 @@ exports.updateVariant = function(req, res) {
     delete req.body._id;
   }
   Variant.findByIdAsync(req.params.variant_id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(saveUpdates(req.body))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 // Deletes a variant from the DB
 exports.destroyVariant = function(req, res) {
 
   Variant.findByIdAsync(req.params.id)
+  .then(handleEntityNotFound(res))
+  .then(function(entity) {
+    var variant = entity;
+    return Product.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(function(entity) {
-      var variant = entity;
-      return Product.findByIdAsync(req.params.id)
-        .then(handleEntityNotFound(res))
-        .then(removeVariantId(req.params.variant_id, variant));
-    })
-    .then(removeEntity(res))
-    .catch(handleError(res));
+    .then(removeVariantId(req.params.variant_id, variant));
+  })
+  .then(removeEntity(res))
+  .catch(handleError(res));
 };
 
 /*Reviews*/
@@ -389,7 +415,7 @@ function getReviews(res) {
     if (entity) {
       var reviews = _.map(entity.reviews, function(reviewId) {
         return Review.findByIdAsync(reviewId)
-          .then(handleEntityNotFound(res));
+        .then(handleEntityNotFound(res));
       })
       return Promise.all(reviews);
     } else {
@@ -402,13 +428,13 @@ function linkReviewProduct(res, productId) {
   return function(entity) {
     var review = entity;
     return Product.findByIdAsync(productId)
-      .then(handleEntityNotFound(res))
-      .then(function(entity) {
-        entity.reviews.push(review._id);
-        return entity.saveAsync().spread(function() {
-          return review;
-        });
-      })
+    .then(handleEntityNotFound(res))
+    .then(function(entity) {
+      entity.reviews.push(review._id);
+      return entity.saveAsync().spread(function() {
+        return review;
+      });
+    })
   }
 }
 
@@ -417,26 +443,26 @@ function removeReviewId(reviewId, review) {
     var reviewIndex = entity.reviews.indexOf(reviewId);
     entity.reviews.splice(reviewIndex, 1);
     return entity.saveAsync()
-      .then(function() {
-        return review;
-      });
+    .then(function() {
+      return review;
+    });
   };
 }
 
 exports.createReview = function(req, res) {
   Review.createAsync(req.body)
-    .then(linkReviewProduct(res, req.params.id))
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  .then(linkReviewProduct(res, req.params.id))
+  .then(responseWithResult(res, 201))
+  .catch(handleError(res));
 }
 
 // Gets reviews for a single Product from the DB
 exports.indexReview = function(req, res) {
   Product.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(getReviews(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(getReviews(res))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 // Updates an existing Variant in the DB
 exports.updateReview = function(req, res) {
@@ -444,23 +470,23 @@ exports.updateReview = function(req, res) {
     delete req.body._id;
   }
   Review.findByIdAsync(req.params.review_id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(saveUpdates(req.body))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 // Deletes a variant from the DB
 exports.destroyReview = function(req, res) {
 
   Review.findByIdAsync(req.params.id)
+  .then(handleEntityNotFound(res))
+  .then(function(entity) {
+    var review = entity;
+    return Product.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
-    .then(function(entity) {
-      var review = entity;
-      return Product.findByIdAsync(req.params.id)
-        .then(handleEntityNotFound(res))
-        .then(removeReviewId(req.params.review_id, review));
-    })
-    .then(removeEntity(res))
-    .catch(handleError(res));
+    .then(removeReviewId(req.params.review_id, review));
+  })
+  .then(removeEntity(res))
+  .catch(handleError(res));
 };

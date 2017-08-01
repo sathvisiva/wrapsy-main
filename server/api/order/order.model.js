@@ -40,13 +40,9 @@ var OrderSchema = new Schema({
     ref: 'Voucher'
   }],
   
-  delivered: {
-    type: Boolean,
-    default: false
-  },
-  cancel : {
-  	type: Boolean,
-    default: false
+  status: {
+    type: Number,
+    default: 1
   },
   created: {
     type: Date,

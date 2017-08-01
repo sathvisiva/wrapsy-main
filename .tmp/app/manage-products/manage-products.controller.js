@@ -21,6 +21,7 @@ angular.module('bhcmartApp').controller('ManageProductsCtrl', ['$scope', 'Produc
 
   $scope.categories = categories;
   $scope.product = product;
+  console.log($scope.product);
   // upload on file select or drop
   $scope.upload = function (file) {
     if ($scope.form.imageUrl.$valid && file) {
@@ -81,6 +82,8 @@ angular.module('bhcmartApp').controller('ManageProductsCtrl', ['$scope', 'Produc
   };
 
   $scope.save = function (form) {
+    $scope.product.color = $scope.product.color.split(',');
+    $scope.product.size = $scope.product.size.split(',');
     if (form.$valid) {
       Product.save($scope.product, function (resp) {
         console.log(resp);

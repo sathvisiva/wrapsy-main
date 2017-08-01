@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart', 'toaster', 'Voucher', function ($scope, Auth, $state, Order, ngCart, toaster, Voucher) {
+angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart', 'toaster', 'Voucher', 'Address', 'Payment', function ($scope, Auth, $state, Order, ngCart, toaster, Voucher, Address, Payment) {
   $state.go('checkout.shipping');
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.country = "In";
@@ -11,6 +11,7 @@ angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$sta
 
   $scope.disableorder = true;
   $scope.disablepayment = true;
+  $scope.address = {};
 
   var q = { where: { email: Auth.getCurrentUser().email } };
   /* $scope.vouchers =  Voucher.query(q);
@@ -49,9 +50,80 @@ angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$sta
     }
   };
 
-  $scope.checkout = function (cart, user) {
+  function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    if (user.name && user.email && user.phone && user.address && user.city && user.country) {
+    for (var i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
+  /*
+    $scope.checkout = (cart, user) => {
+  
+  
+      if (user.name && user.email && user.phone && user.address && user.city && user.country) {
+        _.map(cart.items, i => {
+          i.productId = i.id;
+          delete i.data;
+          delete i.id;
+          return i;
+        })
+  
+        cart = _.extend(cart, {
+          customerId: user._id ? user._id : '',
+          customerName: user.name,
+          customerEmail: $scope.user.email,
+          customerAddress: user.address,
+          customerAddress1: user.address1,
+          customerlandmark : user.landmark,
+          customerPhone: user.phone,
+          customerCity: user.city,
+          customerState: user.state ? user.state : '',
+          customerCountry: 'India'
+        });
+  
+        Order.save(cart,
+          function(resp) {
+            ngCart.empty();
+            $state.go('invoice', {id: resp._id});
+          },
+          function(err) {
+            toaster.pop('error', "Please Try again later");
+          });
+      } else {
+        $scope.message = 'Please, complete the shipping section and click on continue'
+      }
+    }*/
+
+  $scope.presubmit = function () {
+    var data = { preHashString: $scope.mkey + '|' + $scope.txnid + '|' + $scope.amount + '|' + $scope.productInfo + '|' + $scope.firstName + '|' + $scope.email + '|' + $scope.id + '||||||||||' };
+    Payment.createHash(data, function (resp) {
+      document.getElementById('hash').value = resp.hash;
+      document.getElementById('paymentForm').submit();
+    }, function (err) {
+      console.log(err);
+    });
+  };
+
+  $scope.message = 'Everyone come and see how good I look!';
+  $scope.mkey = 'gtKFFx';
+  $scope.productInfo = 'Verification order';
+  $scope.txnid = makeid();
+  $scope.amount = 234.99;
+  $scope.id = '2222222';
+  $scope.type = '2';
+  $scope.email = 'sathvisiva@gmail.com';
+  $scope.phone = 9176464641;
+  $scope.lastName = 'test';
+  $scope.firstName = 'fname';
+  $scope.surl = "http://localhost:9000/PaymentStatus";
+  $scope.hash = '';
+
+  $scope.checkoutorder = function (cart, user) {
+
+    if (user.name && user.email) {
       _.map(cart.items, function (i) {
         i.productId = i.id;
         delete i.data;
@@ -59,24 +131,23 @@ angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$sta
         return i;
       });
 
-      cart = _.extend(cart, {
-        customerId: user._id ? user._id : '',
-        customerName: user.name,
-        customerEmail: $scope.user.email,
-        customerAddress: user.address,
-        customerAddress1: user.address1,
-        customerlandmark: user.landmark,
-        customerPhone: user.phone,
-        customerCity: user.city,
-        customerState: user.state ? user.state : '',
-        customerCountry: 'India'
-      });
+      Address.save($scope.address, function (resp) {
+        cart = _.extend(cart, {
+          customerId: user._id ? user._id : '',
+          customerName: user.name,
+          customerEmail: $scope.user.email,
+          customerAddress: user.address });
 
-      Order.save(cart, function (resp) {
-        ngCart.empty();
-        $state.go('invoice', { id: resp._id });
+        Order.save(cart, function (resp) {
+          $scope.amount = resp.totalCost;
+          $scope.productInfo = resp._id;
+          $scope.presubmit();
+          ngCart.empty();
+        }, function (err) {
+          toaster.pop('error', "Please Try again later");
+        });
       }, function (err) {
-        toaster.pop('error', "Please Try again later");
+        console.log(err);
       });
     } else {
       $scope.message = 'Please, complete the shipping section and click on continue';

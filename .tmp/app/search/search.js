@@ -9,7 +9,7 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
       products: ['Product', '$stateParams', function (Product, $stateParams) {
         return Product.search({
           limit: $stateParams.term,
-          id: $stateParams.category
+          id: "all"
         });
       }]
     }

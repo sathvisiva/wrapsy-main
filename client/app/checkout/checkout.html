@@ -1,33 +1,6 @@
 <navbar></navbar>
 <section class="event-details">
   <div class="container">
-    <!-- <div class="row">
-      <div class="col-md-12">
-        <div id="form-container">                  
-          <div class="page-header text-center">
-            <div id="status-buttons" class="text-center">
-              <div class="col-md-4 col-sm-2">
-                <md-button class="md-fab md-primary" ng-click="registryType('registryType')" aria-label="Registry Type">  1</md-button>
-                <div>Shipping Address</div>
-              </div>
-              <div class="col-md-4 col-sm-2">
-                <md-button class="md-fab md-primary" ng-click="registryType('eventDetails')" ng-disabled = "disableorder" aria-label="Event Details">  2</md-button>
-                <div>Order Review</div>
-              </div>
-              <div class="col-md-4 col-sm-2">
-                <md-button class="md-fab md-primary" ng-click="registryType('location')" ng-disabled = "disablepayment"  aria-label="location">  3</md-button>
-                <div>Payment Options</div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div id="form-views" ui-view></div>        
-      </div>
-    </div> -->
-
     <div ng-cloak>
       <md-content class="checkout">
         <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" md-selected="myTabIndex">
@@ -54,7 +27,7 @@
                             <div class="row grid-container grid-spacing-half">
                               <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
                                 <input type="text"  class="form-control" placeholder="Name" id="name" name="name"
-                                ng-model="user.name" required>
+                                ng-model="address.name" required>
                                 <p ng-show="(form1.name.$invalid && !form1.name.$pristine) || (form1.name.$invalid && form1.name.$touched) || (form1.name.$invalid && locationformsubmitted)" class="help-block">Name is required.</p>                                
                               </div>
 
@@ -66,7 +39,7 @@
                             <label>Mobile Number</label>
                             <div class="row grid-container grid-spacing-half">
                               <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                <input type="text" name="phoneNumber" placeholder="9999999999" class="form-control" ng-model="user.phone" ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" required/>
+                                <input type="text" name="phoneNumber" placeholder="9999999999" class="form-control" ng-model="address.phoneNumber" ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" required/>
                                 <span class="help-block" ng-show="(form1.phoneNumber.$invalid && !form1.phoneNumber.$pristine) || (form1.phoneNumber.$invalid && form1.phoneNumber.$touched) || (form1.phoneNumber.$invalid && locationformsubmitted) ">The phone number field should be 
                                   of 10 digits</span>              
                                 </div>
@@ -84,7 +57,7 @@
                               <div class="row grid-container grid-spacing-half">
                                 <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
                                   <input type="text"  class="form-control" placeholder="Address 1" id="name" name="address1"
-                                  ng-model="user.address" required>
+                                  ng-model="address.address1" required>
                                   <p ng-show="(form1.address1.$invalid && !form1.address1.$pristine) || (form1.address1.$invalid && form1.address1.$touched) || (form1.address1.$invalid && locationformsubmitted) " class="help-block">Address 1 is required.</p>                                
                                 </div>
 
@@ -97,7 +70,7 @@
                               <div class="row grid-container grid-spacing-half">
                                 <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
                                   <input type="text"  class="form-control" placeholder="Address 2" id="name" name="address2"
-                                  ng-model="user.address1" required>
+                                  ng-model="address.address2" required>
                                   <p ng-show="(form1.address2.$invalid && !form1.address2.$pristine) || (form1.address2.$invalid && form1.address2.$touched) || (form1.address2.$invalid && locationformsubmitted) " class="help-block">Address 2 is required.</p>                                
                                 </div>
 
@@ -241,24 +214,38 @@
                                 <div class="clearer"></div>
                               </div>
                               <div>
-                                <md-radio-group ng-model="user.payment">
-
-                                  <md-radio-button value="online" >Net Banking / Credit card / Debit Card</md-radio-button>
-                                  <md-radio-button value="cod"> Cash On Delivery </md-radio-button>
-                                  <md-radio-button value="gift">Gift Voucher</md-radio-button>
-
-                                </md-radio-group>
-                                
-
-                                <div >
-                                  <form class="form-inline">
-                                    <div class="form-group">
-                                      <input type="text" class="form-control" id="voucherno" ng-model="voucher1">
-                                    </div>
+                                <md-list ng-model="user.payment">
+                                <md-list-item  >
+                                    <p> <a ng-click="checkoutorder(ngCart.toObject(), user)"> Net Banking / Credit card / Debit Card </a></p>
                                     
-                                    <button ng-click="redeemVoucher(voucher1)" class="btn btn-default">Confirm</button>
-                                  </form>
-                                </div>
+                                  </md-list-item>
+
+                                  <md-divider></md-divider>
+                                  <md-list-item >
+                                    <p> Cash On Delivery </p>
+                                    
+                                  </md-list-item>
+                                  <md-divider></md-divider>
+                                  <md-list-item >
+                                    <p> Gift Voucher </p>
+                                    
+                                  </md-list-item>
+                                </md-list>  
+
+                                <form id="paymentForm" action='https://test.payu.in/_payment' method='post'>
+                                  <input type="hidden" name="key" value="{{mkey}}" />
+                                  <input type="hidden" name="txnid" value="{{txnid}}" />
+                                  <input type="hidden" name="amount" value="{{amount}}" />
+                                  <input type="hidden" name="productinfo" value="{{productInfo}}" />
+                                  <input type="hidden" name="firstname" value="{{firstName}}" />
+                                  <input type="hidden" name="udf1" value={{id}} />      
+                                  <input type="hidden" name="email" value="{{email}}" />
+                                  <input type="hidden" name="phone" value="{{phone}}" />
+                                  <input type="hidden" name="lastname" value="{{lastName}}" />
+                                  <input type="hidden" name="surl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
+                                  <input type="hidden" name="furl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
+                                  <input type="hidden" name="hash" id="hash" value="{{hash}}">
+                                </form>                            
 
                               </div>
                             </div>

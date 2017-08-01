@@ -67,15 +67,15 @@ var ProductSchema = new Schema({
   code: {
     type: String
   },
-  brand: {
+  vendor: {
     type: String
   },
-  size: {
+  size: [{
     type: String
-  },
-  color: {
+  }],
+  color: [{
     type: String
-  },
+  }],
   price: {
     type: Number,
     required: true,
@@ -146,6 +146,10 @@ var ProductSchema = new Schema({
   sgst: {
     type: Number,
     default: 1
+  },
+  dateadded: {
+    type: Date,
+    default: Date.now
   }
 
 }).index({

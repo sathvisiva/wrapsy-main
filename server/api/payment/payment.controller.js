@@ -14,6 +14,7 @@
  var sha512 = require('js-sha512');
  var cc = require('coupon-code');
  var Voucher = require('../voucher/voucher.model');
+ var Order = require('../order/order.model');
  var mail = require('../mail/sendmail');
 
  function handleError(res, statusCode) {
@@ -108,8 +109,17 @@ export function giftPaymentStatus(req, res) {
 
 
 export function pdtPaymentStatus(req, res) {
-  console.log(req.body);
-  res.redirect('/shop');
+  Order.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
+    if (err) {
+      responseObject.err = err;
+      responseObject.data = null;
+      responseObject.code = 422;
+
+      return res.json(responseObject);
+    }   
+
+    res.redirect('/orders');
+  });
 }
 
 

@@ -10,8 +10,7 @@ var CatalogSchema = new Schema({
     required: true
   },
   parent: {
-    type: Schema.Types.ObjectId,
-    ref: 'Catalog'
+    type: String
   },
   ancestors: [{
     type: Schema.Types.ObjectId,

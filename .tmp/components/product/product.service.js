@@ -54,7 +54,7 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
     }
   });
 }).factory('Product', function ($resource) {
-  return $resource('/api/products/:id/:controller/:limit', {
+  return $resource('/api/products/:id/:controller/:limit/:page', {
     id: '@_id'
   }, {
     'update': { method: 'PUT' },
@@ -77,6 +77,14 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
       params: {
         controller: 'reviews',
         limit: null
+      }
+    },
+
+    'productCount': {
+      method: 'GET',
+      isArray: false,
+      params: {
+        controller: 'productCount'
       }
     }
 
@@ -125,6 +133,34 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
       method: 'POST',
       params: {
         controller: 'rsvpRegistry',
+        limit: null
+      }
+    },
+    'accomodation': {
+      method: 'POST',
+      params: {
+        controller: 'accomodation',
+        limit: null
+      }
+    },
+    'accomodationDetails': {
+      method: 'GET',
+      params: {
+        controller: 'accomodation',
+        limit: null
+      }
+    },
+    'contribution': {
+      method: 'POST',
+      params: {
+        controller: 'contribution',
+        limit: null
+      }
+    },
+    'contributionDetails': {
+      method: 'GET',
+      params: {
+        controller: 'contribution',
         limit: null
       }
     },

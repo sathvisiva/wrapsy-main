@@ -1,0 +1,86 @@
+
+<section class="product-grid" style="min-height: 200px">
+    <div class="container">
+        <div class="row">
+      <!--       <div class="col-lg-3 col-md-3">
+                <div class="uimax-sidebar">
+                  <div class="product-filter">
+                    <div class="categories-list block">
+                        <div class="title">Options</div>
+
+                        <ul class="list" >
+                         <li  ui-sref-active="active">
+                                <a href="#">My account</a>
+                            </li>
+                            <li ui-sref-active="active" ng-show="isAdmin">
+                                <a ui-sref="manage-categories">Manage categories</a>
+                            </li>
+                            <li ui-sref-active="active" ng-show="isAdmin">
+                                <a ui-sref="manage-products">Manage products</a>
+                            </li>
+                            <li ui-sref-active="active" ng-show="isAdmin">
+                                <a ui-sref="manage-requests">Requests</a>
+                            </li>
+                            <li ui-sref-active="active" ng-show="isLoggedIn">
+                                <a ui-sref="orders">Orders</a>
+                            </li>
+
+                            <li ui-sref-active="active" ng-show="isAdmin">
+                                <a ui-sref="admin">Users</a>
+                            </li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+              <sidebar-account></sidebar-account> 
+          </div> -->
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="alert alert-warning" role="alert" ng-show="filtered.length === 0">
+                You do not have any order
+            </div>
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="input-group primary col-md-6" inputgroup>
+                        <span class="input-group-addon">
+                            <span class="arrow"></span>
+                            <i class="fa fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control search-page-input" placeholder="Search order" ng-model="search">
+                    </div>
+                </div>
+                <table class="table table-striped" ng-hide="filtered.length === 0">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>Order Number</td>
+                            <td>Customer Name</td>
+                            <td>Telephone</td>
+                            <td>Delivery Status</td>
+                            <td>Created on</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="o in filtered = orders | filter:search  | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="table-col">
+                            <td>{{$index + 1}}</td>
+                            <td>{{o.orderNumber}}</td>
+                            <td>{{o.customerName}}</td>
+                            <td>{{o.customerPhone}}</td>
+                            <td>
+                                <select ng-model="status">
+                                <option ng-repeat="x in orderstatus" value="{{x.id}}">{{x.status}}</option>
+                                </select>
+                            </td>
+                            <td>{{o.created | date}}</td>
+                            <td>₹{{o.totalCost}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+        </div>
+    </div>
+</div>
+</section>
+<br>
+

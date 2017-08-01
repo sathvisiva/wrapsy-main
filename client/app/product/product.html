@@ -87,7 +87,7 @@
                             <div class="product-prices">
 
                               <div class="product-price h5 has-discount">
-                                 <div class="current-price">
+                               <div class="current-price">
                                   <span itemprop="price" content="32">₹{{product.price | number}}</span>
                               </div>
 
@@ -116,6 +116,7 @@
 
         <div class="product-variants">
           <div class="clearfix product-variants-item" ng-if="colors">
+
             <span class="control-label">Color</span>
             <ul id="group_3">
               <li class="pull-xs-left input-container" ng-repeat="color in colors">
@@ -142,7 +143,7 @@
 
 
     <div class="clearfix product-variants-item" ng-if = "registryOptions.length > 0 ">
-        <span class="control-label">Select Registry</span>
+        <span class="control-label">Registry</span>
         <select id="test" name ="test" class="form-control-select"  ng-model="registry.registryId" ng-options="v._id as v.title for v in registryOptions" required>
             <option value="">- Please Choose -</option>
         </select>
@@ -158,9 +159,10 @@
     </div>
 
     <div class="col-md-6">
-        <button class="btn btn-primary btn-lg pdt-button" ng-click="addtoRegistry(product,qty,registry.registryId)">
+        <button class="btn btn-primary btn-lg pdt-button" ng-click="addtoRegistry($event,product,qty,registry.registryId)">
             Add to Registry
         </button>
+        <span class="help-block">{{message}}</span>
     </div>
 </div>
 </form>
@@ -180,23 +182,24 @@
 <div class="product-additional-info">
 
   <div class="social-sharing">
+
     <ul>
-      <li class="facebook"><a href="http://www.facebook.com/sharer.php?u=https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1"
-          class="text-hide" title="Share" target="_blank">Share</a></li>
-          <li class="twitter"><a href="https://twitter.com/intent/tweet?text=Google Nexus 9 Tablet https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1"
+
+        <li class="facebook"><a  class="md-fab md-mini" href="http://www.facebook.com/sharer.php?u={{location.absUrl()}}"
+           title="Share" target="_blank">f</a></li>
+           <li class="twitter"><a href="https://twitter.com/intent/tweet?text=Google Nexus 9 Tablet {{location.absUrl()}}"
               class="text-hide" title="Tweet" target="_blank">Tweet</a></li>
-              <li class="googleplus"><a href="https://plus.google.com/share?url=https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1" class="text-hide"
+              <li class="googleplus"><a href="https://plus.google.com/share?url={{location.absUrl()}}" class="text-hide"
                   title="Google+" target="_blank">Google+</a></li>
-                  <li class="pinterest"><a href="http://www.pinterest.com/pin/create/button/?media=https://ld-prestashop.template-help.com/prestashop_64444/img/p/1/7/9/179.jpg&amp;url=https://ld-prestashop.template-help.com/prestashop_64444/index.php?id_product=12&amp;id_product_attribute=0&amp;rewrite=printed-summer-dress&amp;controller=product&amp;id_lang=1"
-                      class="text-hide" title="Pinterest" target="_blank">Pinterest</a></li>
-                  </ul>
-              </div>
 
-
+              </ul>
           </div>
 
 
       </div>
+
+
+  </div>
                             <!-- <div class="product-right-details">
                                 <div class="product-info">
                                     <h4>{{product.title}}</h4>
@@ -279,11 +282,11 @@
                                   </md-tab>
                                   <md-tab label="Shipping">
                                     <md-content class="md-padding">
-                                       <p>Shipped by the seller.</p>
+                                     <p>Shipped by the seller.</p>
 
-                                   </md-content>
-                               </md-tab>
-                               <md-tab label="Ratings & Reviews">
+                                 </md-content>
+                             </md-tab>
+                             <md-tab label="Ratings & Reviews">
                                 <md-content class="md-padding">
 
                                   <h4 class="md-display-6 text-center"><span>Have you used this Product? <md-button class="md-raised md-accent" ng-click="addrating = true">Review</md-button></span></h4>
@@ -355,7 +358,7 @@
                                           </div>
                                           <div class="col-md-9">
                                             <div class="review-left">
-                                             <div class="rating">
+                                               <div class="rating">
                                                 <i class="fa fa-star" ng-class="{'grey': review.rating < 1}"></i>
                                                 <i class="fa fa-star" ng-class="{'grey': review.rating < 2}"></i>
                                                 <i class="fa fa-star" ng-class="{'grey': review.rating < 3}"></i>

@@ -4,7 +4,7 @@ angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
   $mdThemingProvider.theme('default').primaryPalette('cyan').accentPalette('pink');
-}).run(function ($rootScope, $state, ngCart) {
+}).run(function ($rootScope, $state, ngCart, $location) {
   $.scrollUp({
     scrollName: 'scrollUp',
     scrollText: '<i class="fa fa-angle-up"></i>',
@@ -17,6 +17,7 @@ angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp
   $rootScope.ngCart = ngCart;
   $rootScope.$state = $state;
   $rootScope._ = _;
+  $rootScope.location = $location;
 }).directive('myTab', function ($timeout) {
   return {
     link: function link(scope, element, attrs) {
@@ -56,99 +57,6 @@ angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp
         controlNavThumbs: false,
         pauseOnHover: true,
         manualAdvance: true
-      });
-    }
-  };
-}).directive('newArrivalCarousel', function () {
-  return {
-    link: function link(scope, element, attrs) {
-      //New Arrival Carousel Area
-      $(element).owlCarousel({
-        autoPlay: false,
-        slideSpeed: 2000,
-        items: 5,
-        pagination: false,
-        navigation: true,
-        navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-        itemsDesktop: [1199, 4],
-        itemsDesktopSmall: [979, 3],
-        itemsTablet: [768, 2],
-        itemsMobile: [479, 1]
-      });
-    }
-  };
-}).directive('singlePSlide', function ($timeout) {
-  return {
-    link: function link(scope, element, attrs) {
-      //Features Tab Carousel
-      $timeout(function () {
-        $(element).owlCarousel({
-          autoPlay: false,
-          slideSpeed: 2000,
-          items: 4,
-          pagination: false,
-          navigation: true,
-          navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-          itemsDesktop: [1199, 3],
-          itemsDesktopSmall: [979, 2],
-          itemsLargeMobile: [767, 2],
-          itemsMobile: [450, 1]
-        });
-      }, 0);
-    }
-  };
-}).directive('singlePSlideBottom', function ($timeout) {
-  return {
-    link: function link(scope, element, attrs) {
-      //Features Tab Bottom Carousel
-      $timeout(function () {
-        $(element).owlCarousel({
-          autoPlay: false,
-          slideSpeed: 2000,
-          items: 4,
-          pagination: false,
-          navigation: true,
-          navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-          itemsDesktop: [1199, 3],
-          itemsDesktopSmall: [979, 3],
-          itemsLargeMobile: [767, 2],
-          itemsMobile: [450, 1]
-        });
-      }, 0);
-    }
-  };
-}).directive('brandWrapper', function () {
-  return {
-    link: function link(scope, element, attrs) {
-      // Brand Carousel
-      $(element).owlCarousel({
-        autoPlay: false,
-        slideSpeed: 2000,
-        items: 5,
-        pagination: false,
-        navigation: false,
-        itemsDesktop: [1199, 4],
-        itemsDesktopSmall: [979, 3],
-        itemsLargeMobile: [767, 2],
-        itemsMobile: [450, 1]
-      });
-    }
-  };
-}).directive('singlePSlideFive', function () {
-  return {
-    link: function link(scope, element, attrs) {
-      //Home five Hot Tab
-      $(element).owlCarousel({
-        autoPlay: false,
-        slideSpeed: 2000,
-        items: 5,
-        pagination: false,
-        navigation: true,
-        navigationText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
-        itemsDesktop: [1199, 4],
-        itemsDesktopSmall: [979, 3],
-        itemsLargeMobile: [767, 1],
-        itemsMobile: [450, 1]
       });
     }
   };

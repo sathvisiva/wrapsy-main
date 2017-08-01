@@ -18,8 +18,9 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
-router.get('/:slug/catalog/:limit', controller.catalog);
+router.get('/:slug/catalog/:limit/:page', controller.catalog);
 router.get('/:slug/search/:term', controller.search);
+router.get('/:id/productCount', controller.count);
 
 
 //image

@@ -44,6 +44,7 @@ form .progress {
 
 // Component styles are injected through grunt
 // injector
+@import 'admin-console/admin.scss';
 @import 'admin/admin.scss';
 @import 'cart/cart.scss';
 @import 'category/category.scss';

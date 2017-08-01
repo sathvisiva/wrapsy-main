@@ -3,7 +3,7 @@
 angular.module('bhcmartApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('cart', {
+      .state('cart-details', {
         url: '/cart',
         templateUrl: 'app/cart/cart.html',
         controller: 'CartCtrl'

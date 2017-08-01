@@ -13,7 +13,7 @@ function NavbarController(Auth, Catalog, $scope, $mdDialog, $state, $stateParams
   $scope.isLoggedIn = Auth.isLoggedIn;
   $scope.isAdmin = Auth.isAdmin;
   $scope.getCurrentUser = Auth.getCurrentUser;
-  $scope.customFullscreen = false;
+  $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 
   $scope.createRegistry = function (ev) {
     if ($scope.isLoggedIn()) {
@@ -25,12 +25,13 @@ function NavbarController(Auth, Catalog, $scope, $mdDialog, $state, $stateParams
   };
 
   $scope.login = function (ev, data) {
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
     $mdDialog.show({
       controller: 'LoginController',
       templateUrl: 'app/account/login/login.html',
       parent: angular.element(document.body),
       targetEvent: ev,
-
+      fullscreen: useFullScreen,
       clickOutsideToClose: true,
       locals: {
         dataToPass: data
@@ -43,19 +44,6 @@ function NavbarController(Auth, Catalog, $scope, $mdDialog, $state, $stateParams
       $scope.customFullscreen = wantsFullScreen === true;
     });
   };
-
-  /*
-      $scope.login = function(ev,data) {
-        $mdDialog.show({
-          locals: {badStudents : [1]},    
-          templateUrl: 'app/account/login/login.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          hasBackdrop: true,
-          clickOutsideToClose:true,
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-      });
-    };*/
 };
 
 angular.module('bhcmartApp').controller('NavbarController', NavbarController);

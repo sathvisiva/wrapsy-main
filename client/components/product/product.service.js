@@ -58,7 +58,7 @@ angular.module('bhcmartApp')
     },
   });
 }).factory('Product', function($resource) {
-  return $resource('/api/products/:id/:controller/:limit', {
+  return $resource('/api/products/:id/:controller/:limit/:page', {
     id: '@_id'
   }, {
     'update': { method: 'PUT' },
@@ -81,6 +81,14 @@ angular.module('bhcmartApp')
       params: {
         controller: 'reviews',
         limit: null
+      }
+    }
+    ,
+    'productCount': {
+      method: 'GET',
+      isArray: false,
+      params: {
+        controller: 'productCount',
       }
     }
 

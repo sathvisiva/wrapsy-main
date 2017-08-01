@@ -103,6 +103,7 @@ export function show(req, res) {
 
 // Creates a new Order in the DB
 export function create(req, res) {
+  console.log(req.body)
   
   Order.createAsync(req.body)
     .then(entity => {
