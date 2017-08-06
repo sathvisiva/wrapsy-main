@@ -6,7 +6,8 @@
   "sellingPrice" : 1,
   "cgst" : 5,
   "sgst" : 5,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Portable front laser laptop",
@@ -42,6 +43,9 @@
   "price": 1156.87,
   "cgst" : 5,
   "sgst" : 5,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "SparkFun Badgers Intel",
   "slug": "spark-fun-intel",
   "categories": [
@@ -74,8 +78,9 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
-  "color" : ["Blue", "Red", "Gold"],
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop",
   "slug": "spark-fun-laptop",
@@ -109,7 +114,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop",
@@ -144,8 +150,9 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
-  "color" : ["Blue", "Red", "Gold"],
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop",
   "slug": "spark-mini-laptop",
@@ -179,8 +186,9 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
-  "color" : ["Blue", "Red", "Gold"],
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "SparkFun Badgers Laptop Model",
   "slug": "spark-mini-laptop-model",
@@ -214,7 +222,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "SparkFun Laptop Model",
@@ -248,6 +257,9 @@
   "price": 345,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Durable office laptops",
   "slug": "hp-344-desktops",
   "categories": [
@@ -281,6 +293,9 @@
   "price": 450,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Durable office Desktops",
   "slug": "hp-344-desktops-1",
   "categories": [
@@ -315,7 +330,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Durable office Desktops",
@@ -356,7 +372,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Durable office Desktops",
@@ -397,7 +414,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Build a powerful e-commerce application quickly with MEAN, a leading full-JavaScript stack.",
@@ -434,7 +452,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
@@ -471,7 +490,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
@@ -509,7 +529,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
@@ -553,7 +574,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
@@ -590,7 +612,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
@@ -627,7 +650,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "T-shirt with the MEAN stack logo",
@@ -663,6 +687,9 @@
   "price": 1750,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-z",
   "categories": [
@@ -696,6 +723,9 @@
   "price": 1650,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "T-shirt with the MEAN stack logo",
   "slug": "t-shirt-s",
   "categories": [
@@ -729,6 +759,9 @@
   "price": 1504,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-s",
   "categories": [
@@ -763,6 +796,9 @@
   "price": 3150,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-t",
   "categories": [
@@ -796,6 +832,9 @@
   "price": 1050,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-t-2",
   "categories": [
@@ -829,6 +868,9 @@
   "price": 1450,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "T-shirt with the MEAN stack logo",
   "slug": "fashion-f-2",
   "categories": [
@@ -862,6 +904,9 @@
   "price": 1450,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Kitchen ware",
   "slug": "kitchen-f-2",
   "categories": [
@@ -895,6 +940,9 @@
   "price": 2450,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Kitchen ware",
   "slug": "kitchen-f-1",
   "categories": [
@@ -929,7 +977,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Kitchen ware 1",
@@ -966,7 +1015,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Kitchen ware 1",
@@ -1002,6 +1052,9 @@
   "price": 1450,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Home ware",
   "slug": "home-f-2",
   "categories": [
@@ -1036,7 +1089,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Home ware",
@@ -1072,6 +1126,9 @@
   "price": 1250,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Home ware 1",
   "slug": "home-k-2",
   "categories": [
@@ -1106,7 +1163,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Home ware 1",
@@ -1142,6 +1200,9 @@
   "price": 1250,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Art work 1",
   "slug": "artwork-2",
   "categories": [
@@ -1176,7 +1237,8 @@
   "cgst" : 6,
   "sgst" : 6,
   "sellingPrice" : 1,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Art works 1",
@@ -1212,6 +1274,9 @@
   "price": 1250,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "description": "Foreign Art work 1",
   "slug": "foreign-artwork-2",
   "categories": [
@@ -1246,7 +1311,8 @@
   "cgst" : 6,
   "sgst" : 6,
   "sellingPrice" : 1,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Foreign Art works 1",
@@ -1283,7 +1349,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Foreign Art work 3",
@@ -1320,7 +1387,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Foreign Art works 4",
@@ -1357,7 +1425,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "description": "Convert coffee into MEAN code",
@@ -1396,6 +1465,9 @@
   "price" : 1399,
   "cgst" : 6,
   "sgst" : 6,
+  "size" : ["L", "XL", "XXL"],
+  
+  "color" : ["Blue", "White", "Gold"],
   "slug" : "puma-men-s-atom-fashion",
   "affiliate" : true,
   "categories" : [
@@ -1421,7 +1493,8 @@
   "sellingPrice" : 1,
   "cgst" : 6,
   "sgst" : 6,
-  "size" : "L, XL, XXL",
+  "size" : ["L", "XL", "XXL"],
+  
   "color" : ["Blue", "White", "Gold"],
   "vendor" : "wrapsy",
   "slug" : "puma-men-s-atom-fashion",

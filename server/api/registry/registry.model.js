@@ -45,7 +45,7 @@ var GuestBookSchema = new Schema({
 });
 
 var ContributionsSchema = new Schema({
-  Name: {
+  name: {
     type: String
   },
   productId: {
@@ -56,14 +56,18 @@ var ContributionsSchema = new Schema({
   },
    registryId : {
     type: String
-  }
+  },
+  vouchers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Voucher'
+  }]
 });
 
 var AccomodationSchema = new Schema({
-  Name: {
+  name: {
     type: String
   },
-  Address: {
+  address: {
     type: String
   },
   email: {
@@ -157,7 +161,10 @@ var RegistrySchema = new Schema({
       type: Boolean,
       default: false
     },
-    paid : Number
+    paid: {
+      type: Number,
+      default: 0
+    }
 
 
   }]

@@ -6,7 +6,6 @@ angular.module('bhcmartApp')
 
       //Get product and fetch related products based on category
       $scope.product = Product.get({ id: $stateParams.id }, function(p) {
-        console.log(p)
         if(p.color){
           $scope.colors = p.color;
           $scope.product.color = $scope.colors[0];
@@ -18,7 +17,7 @@ angular.module('bhcmartApp')
 
         $scope.qty = 1;
         $scope.product.averageRating = getAverageRating(p);
-        Product.catalog({ id: p.categories[0].slug, limit: 6 }, function(relatedProducts) {
+        Product.catalog({ id: p.categories[0].slug }, function(relatedProducts) {
           $scope.relatedProducts = _.filter(
             _.map(relatedProducts, relatedProduct =>
               _.extend(relatedProduct, { averageRating: getAverageRating(relatedProduct) })), rp => rp._id != p._id);
@@ -48,7 +47,7 @@ angular.module('bhcmartApp')
 
           $scope.multiple = false;
 
-          if(product.price > 5000){
+          if(product.price > 5000 && !product.affiliate){
            var confirm = $mdDialog.confirm()
            .textContent('Would you like to wishlist this item as a solo item or put it under a chip-in category so that multiple guests can chip- in towards it?')
            .ariaLabel('solo or multichipin')

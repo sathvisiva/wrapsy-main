@@ -101,9 +101,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   angular.module('bhcmartApp').controller('CreateRegistryController', CreateRegistryController);
 })();
 
-angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$stateParams', '$state', 'Registry', '$uibModal', 'Upload', 'RegistryService', 'Auth', 'toaster', '$timeout', function ($scope, $stateParams, $state, Registry, $uibModal, Upload, RegistryService, Auth, toaster, $timeout) {
+angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$stateParams', '$state', 'Registry', '$uibModal', 'Upload', 'RegistryService', 'Auth', 'toaster', '$timeout', '$mdDialog', function ($scope, $stateParams, $state, Registry, $uibModal, Upload, RegistryService, Auth, toaster, $timeout, $mdDialog) {
 
-  $scope.removeProduct = function (pid) {
+  $scope.queryRegistry = function () {
+
+    $scope.registry = Registry.get({ id: $stateParams.id }, function (resp) {
+      if (Auth.getCurrentUser().email == resp.username) {
+        $scope.editable = true;
+      }
+    });
+  };
+
+  $scope.queryRegistry();
+
+  $state.go('registry.home');
+
+  /*$scope.registry._id = $stateParams.id*/
+
+  $scope.registryPage = function (state) {
+    $scope.state = 'registry.' + state;
+    console.log($scope.registry);
+    $state.go($scope.state);
+  };
+
+  $scope.removeProduct = function (event, pid) {
+    var confirm = $mdDialog.confirm().title('Are you sure to delete the Product?').textContent('Product will be deleted permanently from the registry.').ariaLabel('Product deletion').targetEvent(event).ok('Yes').cancel('No');
+    $mdDialog.show(confirm).then(function () {
+      $scope.removeProductfromregistry(pid);
+    }, function () {
+      $scope.status = 'You decided to keep your record.';
+    });
+  };
+
+  $scope.removeProductfromregistry = function (pid) {
     for (var i = $scope.registry.products.length - 1; i >= 0; i--) {
       if ($scope.registry.products[i]._id == pid) {
         $scope.registry.products.splice(i, 1);
@@ -115,58 +145,44 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     });
   };
 
-  $scope.queryRegistry = function () {
-
-    $scope.registry = Registry.get({ id: $stateParams.id }, function (resp) {
-      if (Auth.getCurrentUser().email == resp.username) {
-        $scope.editable = true;
+  $scope.addcustomproducttoregistry = function (product, qty, registryId, multiple) {
+    $scope.products = {};
+    $scope.products._id = product._id;
+    $scope.products.name = product.title;
+    $scope.products.slug = product.slug;
+    $scope.products.price = product.price;
+    $scope.products.imageUrl = product.imageUrl;
+    $scope.products.desired = qty;
+    $scope.products.required = 0;
+    $scope.products.prodcode = product.prodcode;
+    $scope.products.linkId = product.linkId;
+    $scope.products.affiliate = product.affiliate;
+    $scope.products.multiple = multiple;
+    var q = {};
+    q.where = {};
+    var f = [];
+    f.push({ '_id': registryId });
+    f.push({ 'products._id': product._id });
+    q.where = { $and: f };
+    Registry.query(q, function (data) {
+      if (data.length == 0) {
+        Registry.registryProduct({ id: registryId }, $scope.products, function (resp) {
+          toaster.pop('success', "Product has been added successfully");
+          $timeout(function () {
+            window.history.back();
+          }, 1000);
+        }, function (err) {
+          console.log(err);
+        });
+      } else {
+        toaster.pop('error', "Sorry, Product is already available in the selected Registry");
       }
-      var registrydata = {};
-      registrydata._id = resp._id;
-      registrydata.title = resp.title;
-      RegistryService.addregistry(registrydata);
     });
   };
 
   $scope.ph_numbr = /^(\+?(\d{1}|\d{2}|\d{3})[- ]?)?\d{3}[- ]?\d{3}[- ]?\d{4}$/;
 
-  $scope.queryRegistry();
-
-  $scope.show1 = true;
-  $scope.show2 = false;
-  $scope.show3 = false;
-  $scope.show4 = false;
-
-  $scope.showWishlist = function () {
-    $scope.show1 = true;
-    $scope.show2 = false;
-    $scope.show3 = false;
-    $scope.show4 = false;
-  };
-  $scope.showRSVP = function () {
-    $scope.show1 = false;
-    $scope.show2 = true;
-    $scope.show3 = false;
-    $scope.show4 = false;
-    $scope.rsvp = {};
-    $scope.rsvp.attending = "true";
-  };
-
-  $scope.showGuestBook = function () {
-    $scope.show1 = false;
-    $scope.show2 = false;
-    $scope.show3 = true;
-    $scope.show4 = false;
-    $scope.getGuestWishes();
-  };
-
-  $scope.showGuests = function () {
-    $scope.show1 = false;
-    $scope.show2 = false;
-    $scope.show3 = false;
-    $scope.show4 = true;
-    $scope.getGuestList();
-  };
+  $scope.rsvp = {};
 
   $scope.updatedesired = function () {
     Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
@@ -178,6 +194,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
   $scope.saversvp = function (form) {
 
     if (form.$valid) {
+      console.log($scope.registry._id);
       console.log($scope.rsvp);
       $scope.rsvp.registryId = $scope.registry._id;
       Registry.rsvpRegistry({ id: $scope.registry._id }, $scope.rsvp, function (resp) {
@@ -248,10 +265,37 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     });
   };
 
+  $scope.showproductDetail = function (product, chipin) {
+    console.log(product);
+    if (chipin) {
+      $scope.chipinProductDetail(product);
+    } else {
+      $scope.productDetail(product);
+    }
+  };
+
   $scope.productDetail = function (product) {
     var modalInstance = $uibModal.open({
       templateUrl: 'app/registry/registry-product.html',
       controller: 'RegistryProductDetailCtrl',
+      size: 'md',
+      resolve: {
+        registry: function registry() {
+          return $scope.registry._id;
+        }, registryprod: function registryprod() {
+          return product;
+        }
+      }
+    }).result.then(function (result) {
+      console.log(result);
+      $scope.queryRegistry();
+    });
+  };
+
+  $scope.chipinProductDetail = function (product) {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'app/registry/registry-chipinproduct.html',
+      controller: 'RegistryChipinProductDetailCtrl',
       size: 'md',
       resolve: {
         registry: function registry() {
@@ -277,6 +321,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
   };
 
   $scope.upload = function (file) {
+    console.log(file);
     if (file) {
       Upload.upload({
         url: '/api/uploads',
@@ -305,12 +350,28 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
 
 angular.module('bhcmartApp').controller('backgroundImageCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', function ($scope, $stateParams, $state, Registry, $uibModalInstance) {
 
-  $scope.ok = function (imageUrl) {
-    $uibModalInstance.close(imageUrl);
+  $scope.myCroppedImage = '';
+  $scope.myImage = '';
+
+  $scope.upload = function (file) {
+    var selectedfile = file;
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+      $scope.$apply(function ($scope) {
+        $scope.myImage = evt.target.result;
+      });
+    };
+    reader.readAsDataURL(file);
   };
 
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
+  $scope.myCroppedImage = '';
+
+  $scope.Withoutcrop = function () {
+    $uibModalInstance.close($scope.myImage);
+  };
+
+  $scope.crop = function () {
+    $uibModalInstance.close($scope.myCroppedImage);
   };
 }]);
 
@@ -332,7 +393,6 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
       $scope.message = "An error occured!";
     });
   };
-
   $scope.product = Product.get({ id: registryprod.slug });
 
   $scope.max = parseInt(registryprod.desired) - parseInt(registryprod.required);
@@ -345,6 +405,130 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
     $uibModalInstance.dismiss('cancel');
   };
 }]);
+
+angular.module('bhcmartApp').controller('RegistryChipinProductDetailCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', 'registry', 'registryprod', 'Product', 'ngCart', function ($scope, $stateParams, $state, Registry, $uibModalInstance, registry, registryprod, Product, ngCart) {
+
+  $scope.registryid = registry;
+  $scope.registryprod = registryprod;
+  console.log($scope.registryprod);
+
+  $scope.paidpercent = parseInt(registryprod.price) * (parseInt(registryprod.paid) / 100);
+  $scope.total = parseInt(registryprod.price) * parseInt(registryprod.desired);
+  $scope.remaining = parseInt(registryprod.price) - parseInt(registryprod.paid);
+
+  $scope.contribute = function (registryid, product, contribution) {
+    $uibModalInstance.close();
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+}]);
+
+angular.module('bhcmartApp').controller('contributioncartController', ['$scope', '$stateParams', '$state', 'Payment', 'Auth', 'Registry', function ($scope, $stateParams, $state, Payment, Auth, Registry) {
+
+  console.log($stateParams.registryId);
+  console.log($stateParams.product);
+  console.log($stateParams.contribution);
+  $scope.registryId = $stateParams.registryId;
+  $scope.product = $stateParams.product;
+  $scope.contributionamount = $stateParams.contribution;
+
+  function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
+  $scope.message = 'Everyone come and see how good I look!';
+  $scope.mkey = 'gtKFFx';
+  $scope.productInfo = 'Verification order';
+  $scope.txnid = makeid();
+  $scope.amount = 234.99;
+  $scope.id = '2222222';
+  $scope.type = '2';
+  $scope.email = 'sathvisiva@gmail.com';
+  $scope.phone = 9176464641;
+  $scope.lastName = 'test';
+  $scope.firstName = 'fname';
+  $scope.surl = "http://localhost:9000/PaymentStatus";
+  $scope.hash = '';
+
+  $scope.presubmit = function () {
+    var data = { preHashString: $scope.mkey + '|' + $scope.txnid + '|' + $scope.amount + '|' + $scope.productInfo + '|' + $scope.firstName + '|' + $scope.email + '|' + $scope.id + '||||||||||' };
+    Payment.createHash(data, function (resp) {
+      document.getElementById('hash').value = resp.hash;
+      document.getElementById('contributepaymentForm').submit();
+    }, function (err) {
+      console.log(err);
+    });
+  };
+
+  $scope.saveContribution = function (ev) {
+    $scope.contribution = {};
+    if ($scope.isLoggedIn()) {
+      $scope.name = Auth.getCurrentUser() || {};
+      $scope.contribution.productId = $scope.product._id;
+      $scope.contribution.contribution = $scope.contributionamount;
+      $scope.contribution.registryId = $scope.registryId;
+      $scope.amount = $scope.contributionamount;
+      $scope.productInfo = JSON.stringify(req.body.productinfo);
+      console.log($scope.productInfo);
+      $scope.presubmit();
+      /* Registry.contribution($scope.contribution, function(resp) {
+         $scope.amount = resp.amount;
+         $scope.productInfo = resp._id;
+         $scope.presubmit()
+       }, function(err) {
+         console.log(err)
+       })*/
+    } else {
+        $scope.data = { 'event': 'login' };
+        $scope.login(ev, $scope.data);
+      }
+  };
+
+  $scope.login = function (ev, data) {
+    $mdDialog.show({
+      controller: 'LoginController',
+      templateUrl: 'app/account/login/login.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+
+      clickOutsideToClose: true,
+      locals: {
+        dataToPass: data
+      }
+    });
+
+    $scope.$watch(function () {
+      return $mdMedia('xs') || $mdMedia('sm');
+    }, function (wantsFullScreen) {
+      $scope.customFullscreen = wantsFullScreen === true;
+    });
+  };
+
+  $scope.contribute = function (registryid, productid, contribution) {
+    console.log(productid);
+    console.log(contribution);
+  };
+
+  $scope.ok = function () {
+    $uibModalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+}]);
+
 angular.module('bhcmartApp').controller('FindRegistryController', ['$scope', '$stateParams', '$state', 'Registry', function ($scope, $stateParams, $state, Registry) {
 
   $scope.searchRegistry = function () {

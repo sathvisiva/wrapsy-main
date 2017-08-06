@@ -342,8 +342,6 @@ exports.getRegistryProduct = function(req, res) {
   var registryId = req.params.id;
   var productId = req.body._id;
   Registry.findOne({'products._id': productId}, {'products.$': 1}, function(err, product){
-    console.log(product.products[0]._id)
-    console.log(product.products[0].desired)
     return res.status(201).json(product);
   });
 };
@@ -386,9 +384,9 @@ exports.getRegistryProduct = function(req, res) {
       });
     });
 
-
-
   }
+
+
 
 
 

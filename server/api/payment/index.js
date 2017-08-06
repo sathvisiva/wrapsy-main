@@ -11,6 +11,7 @@ router.post('/', controller.create);
 router.post('/createHash', controller.createHash);
 router.post('/pdtPaymentStatus', controller.pdtPaymentStatus);
 router.post('/giftPaymentStatus', controller.giftPaymentStatus);
+router.post('/contributionStatus',controller.contributionStatus)
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);

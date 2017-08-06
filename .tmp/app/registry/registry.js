@@ -35,27 +35,31 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
     url: '/registry/{id}',
     templateUrl: 'app/registry/registry.html',
     controller: 'RegistryController'
-  });
-  /*.state('registry.home', {
+  }).state('registry.home', {
     url: '/home',
     templateUrl: 'app/registry/home.html'
-  })
-  .state('registry.registrypdts', {
+  }).state('registry.registrypdts', {
     url: '/registry',
     templateUrl: 'app/registry/registry-products.html'
-  })
-  .state('registry.guestbook', {
+  }).state('registry.guestbook', {
     url: '/guestbook',
     templateUrl: 'app/registry/guestbook.html'
-  })
-  .state('registry.rsvp', {
+  }).state('registry.rsvp', {
     url: '/rsvp',
     templateUrl: 'app/registry/rsvp.html'
-  })
-  .state('findregistry', {
+  }).state('findregistry', {
     url: '/find-registry',
     templateUrl: 'app/registry/find-registry.html',
     controller: 'FindRegistryController'
-  });*/
+  }).state('contributioncart', {
+    url: '/contribution_cart',
+    templateUrl: 'app/registry/contribution_cart.html',
+    controller: 'contributioncartController',
+    params: {
+      registryId: null,
+      product: null,
+      contribution: null
+    }
+  });
 });
 //# sourceMappingURL=registry.js.map

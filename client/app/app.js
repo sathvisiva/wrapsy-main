@@ -17,7 +17,8 @@ angular.module('bhcmartApp', [
   'slickCarousel',
   'ngMaterial',
   'ngMessages',
-  'rzModule'
+  'rzModule',
+  'uiCropper'
   ])
 .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
   $urlRouterProvider

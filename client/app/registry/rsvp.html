@@ -1,0 +1,83 @@
+<div class="rsvpform">
+	<div class="row">
+		<form class="form" name="form" ng-submit="saversvp(form)" novalidate>
+			
+				<div class = "row">
+					<div class = "col-md-12">
+						<div class="form-group">
+							<label for="firstName" class="registry-label">YOUR NAME:</label>
+							<input type="text" class="form-control  registry-form" id="firstName" name="name" ng-model="rsvp.name" required/>
+							<p class="help-block" ng-show="form.name.$error.required && form.name.$touched && form.name.$invalid">
+								Name is required
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="firstName" class="registry-label">YOUR EMAIL :</label>
+							<input type="email" class="form-control registry-form" id="email" name="email" ng-model="rsvp.email" required/>
+							<p class="help-block" ng-show="form.email.$dirty && form.email.$invalid"
+							>
+							Doesn't look like a valid email.
+						</p>
+						<p class="help-block" ng-show="form.email.$error.required && form.email.$touched && form.email.$invalid">
+							Email address is required
+						</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="registry-label" for="LastName">YOUR PHONE </label>
+						<input type="text" class="form-control registry-form" id="phone" ng-pattern="ph_numbr" name="phone" ng-model="rsvp.phone"
+						required />
+						<p class="help-block" ng-show="form.phone.$error.required && form.phone.$touched && form.phone.$invalid">
+							Phone number is required.
+
+						</p>
+						<p class="help-block" ng-show="form.phone.$error.pattern && form.phone.$touched && form.phone.$invalid">
+							Invalid Phone Number
+
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="firstName" class="registry-label" >NO OF GUESTS:</label>
+						<input type="number" class="form-control registry-form" min="{{0}}" id="firstName" ng-model="rsvp.people" name="firstName" >
+
+					</div>
+				</div>
+
+			</div>
+			<div class="form-group">
+				<div class="radio">
+
+					<label>
+						<input type="radio" name="attending" value="true" ng-model="rsvp.attending" checked="checked" ng-checked = true>
+						Attending
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="attending" value="false" ng-model="rsvp.attending">
+						Not Attending
+					</label>
+				</div>
+			</div>
+
+			<div class="row text-center">
+				<div class="col-md-12">
+					<p class="help-block"> {{ message }} </p>
+					<button class="btn btn-primary" ng-click="submitted = true" ng-disabled="form.$invalid" type="submit">RSVP</button>
+				</div>
+			</div>
+		
+	</form>
+</div>
+
+
+</div>

@@ -1,49 +1,48 @@
-<div class="registry-hero" >
+<div class="registry-products" >
 	<div class="row" ng-show="registry.products.length < 1">
 		<div class="col-md-12">
 			<a ui-sref="main">
-			<img class="img-responsive" src="/assets/img/reg-empty.png">
+				<img class="img-responsive" src="/assets/img/reg-empty.png">
 			</a>
 		</div>
 	</div>
 
-<div class="registry-items">
-	<div class="row ">
-		<div class="col-md-3" ng-repeat="item in registry.products" >
-			<div class="thumbnail" >
+	<div class="row">
+		<div class="col-md-6">
+			<a ui-sref="main">
+				<img class="img-responsive" src="/assets/img/manual_gifts.jpg">
+			</a>
+		</div>
+		<div class="col-md-6">
+			<a ui-sref="main">
+				<img class="img-responsive" src="/assets/img/Add-gifts.png">
+			</a>
+		</div>
+	</div>
 
-				<img ng-src="{{item.imageUrl}}" class="registry-image" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "!item.affiliate" ng-click="productDetail(item)"/>
+	<div class="product-list" >
+		<div class="col-md-4 col-sm-12 col-xs-12 item" ng-repeat="item in registry.products">
+			<div class="product-item">
+				<span class="delete" ng-if="editable" ng-click="removeProduct($event,item._id)"><i class="fa fa-remove"></i></span>
 
-				<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="registry-image" style="margin-top:35px; min-height: 165px" alt="{{item.name}}" data-err-src="images/product.jpg" ng-if = "item.affiliate" ng-click="productDetail(item)"/>
-
-				<div class="ribbon sale" ng-show="item.desired<=item.required">
-					<div class="theribbon">FullFilled</div>
-					<div class="ribbon-background"></div>
-				</div>
-
-				<div class="caption text-center">
-					<h5>{{item.name}}</h5>
-					<p>₹ {{item.price}}</p>
-					<p>Desired : 
-						<input type=number ng-model="item.desired" ng-if="editable" style="width: 50px;" min = {{item.required}} />
-						<span ng-if="!editable" >{{item.desired}}</span>&nbsp;&nbsp;Received : <span ng-if="item.desired >= item.required">{{item.required}}</span>
-						<span ng-if="item.desired < item.required">{{item.desired}}</span>
-					</p>
-
-
-								<!-- <a class="btn btn-primary" ng-if="item.affiliate" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{item.prodcode}}/
-								ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{item.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{item.linkId}}linkId" ng-click="productDetail(item)">Buy Now</a>
-
-								<button ng-if="!item.affiliate && !editable"  class="btn btn-primary"  ng-click="productDetail(item)">Buy Now</button> -->
-								<button   class="btn btn-primary btn-sm" ng-if="editable" ng-click="removeProduct(item._id)">Delete item </button>
-								<button   class="btn btn-primary btn-sm" ng-if="editable" ng-click="updatedesired()">Update desired</button>
-
-							</div>
-						</div>
-
-					</div>
+				<div class="pic-wrapper">
+					<a ng-click="showproductDetail(item, item.multiple)" ng-if = "!item.affiliate" class="inner">
+						<img ng-src="{{item.imageUrl}}" alt="" class="pic" />
+					</a>
+					<a ng-click="showproductDetail(item, item.multiple)" ng-if = "item.affiliate" class="inner">
+						<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="pic" alt="{{item.name}}" data-err-src="images/product.jpg" />
+					</a>
 
 				</div>
-			</div> 
+				<div class="product-desc">
+					<h2 class="name"><a ng-click="showproductDetail(item, item.multiple)" >{{item.name}}</a></h2>
+					<div class="name">Needs : {{item.desired}} Has : {{item.required}}</div>
+					<span class="chipin" ng-if="item.multiple"><i class="fa fa-gift"></i>&nbsp;chipin</span>
 
+				</div>
+
+				<span class="fulfilled">fulfilled</span>
 			</div>
+		</div>          
+	</div>
+</div>

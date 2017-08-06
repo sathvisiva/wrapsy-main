@@ -48,16 +48,16 @@
                 </select>
               </div>
             </div>
-             <div class="block price-filter">
+            <div class="block price-filter">
               <div class="title">Price</div>
               <rzslider
-                     rz-slider-floor="priceSlider.floor"
-                     rz-slider-ceil="priceSlider.ceil"
-                     rz-slider-model="priceSlider.min"
-                     rz-slider-high="priceSlider.max"
-                     rz-slider-on-end="test()"></rzslider>
+              rz-slider-floor="priceSlider.floor"
+              rz-slider-ceil="priceSlider.ceil"
+              rz-slider-model="priceSlider.min"
+              rz-slider-high="priceSlider.max"
+              rz-slider-on-end="test()"></rzslider>
 
-                    <strong>{{priceSlider.min}}</strong> &nbsp;-&nbsp; $<strong>{{priceSlider.max}}</strong>
+              <strong>{{priceSlider.min}}</strong> &nbsp;-&nbsp; $<strong>{{priceSlider.max}}</strong>
             </div>
       <!--       <div class="block brands">
               <div class="title">Brands</div>
@@ -116,6 +116,9 @@
               <div class="pic-wrapper">
                 <a ui-sref="product({id: product.slug})" class="inner">
                   <img ng-src="{{product.imageUrl}}" alt="" class="pic" />
+                </a>
+                <a  ng-if = "product.affiliate" ui-sref="product({id: product.slug})" class="inner">
+                  <img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="pic" alt="{{product.name}}" data-err-src="images/product.jpg" />
                 </a>
               </div>
               <div class="product-desc">

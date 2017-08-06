@@ -1,8 +1,32 @@
-	 <div id="cover-image">
-							<img class="wide-cover-image" data-full-width="620" src="//media.xogrp.com/images/85ae508c-45f3-4c7c-ba6f-49ed335627f4~rt_0-cr_0.0.620.620-rs_1024.h?compress=true"><img class="hidden" src="https://static.xoedge.com/xo-guest-services/assets/guest/themes/birch_monarch/background_image-fa02baa75ff56995e1315f4bbcf850c2.png">
+<div class="row ">
+					
+					<section class="registry-top">
+						<div class="registry-hero" ng-style="{'background-image': 'url(' + registry.backgroundImageUrl + ')'}">
+							<div class="registry-hero-gradient"></div>
+							<div class="hero-buttons">
+								<button class="btn btn-md btn-tertiary pull-left" ng-click="selectBackgroundImage()" ng-if="editable">
+									Edit Background
+								</button>
+
+								<a  class="btn btn-md btn-tertiary pull-right" ng-if="editable" ui-sref="manageregistry({id:registry._id})">
+									Edit Registry
+								</a> 
+							</div>
+							<div class="hero-cta text-center">
+								<!-- ngIf: !regEdCtrl.isPublic --><div class="hidden-sm hidden-xs" ng-if="!registry.visible && editable">
+								<a class="btn btn-md btn-danger publish-registry-button" ng-click="setVisible()">Make It Visible</a>
+								<p>Guests cannot view your registry</p>
+							</div><!-- end ngIf: !regEdCtrl.isPublic -->
+
+
 						</div>
-						<div id="title-container"><h1 id="wedding-title">{{registry.title}}</h1><h2 id="wedding-date-location">
-							<span class="date-spacing" style="display: none;"> &emsp; </span><span id="wedding-date">{{registry.date  | date : "longDate"}}</span>
-							<span class="date-spacing" style="display: none;"> &emsp; </span><span id="separator"> • </span>
-							<span id="wedding-location">Chennai</span></h2><h2 id="wedding-countdown">10 days to go!</h2>
-						</div> 
+					</div>
+				</section>
+
+			</div>
+
+			<div class="row text-center registry-container registry-details" ng-if="editable">
+				<h1 id="wedding-title">{{registry.title}}</h1>
+				<h2 id="wedding-date-location"><span class="date-spacing" style="display: none;">   </span><span id="wedding-date">{{registry.date  | date : "longDate"}}</span><span class="date-spacing" style="display: none;">   </span><span id="separator"> • </span><span id="wedding-location">{{registry.location}}</span></h2>
+				<h2 id="wedding-countdown">{{registry.greeting}}</h2>
+			</div>

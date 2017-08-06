@@ -16,6 +16,7 @@
  var Voucher = require('../voucher/voucher.model');
  var Order = require('../order/order.model');
  var mail = require('../mail/sendmail');
+ var Registry = require('../registry/registry.model').registry;
 
  function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -73,6 +74,8 @@ export function createHash(req, res) {
 }
 
 export function giftPaymentStatus(req, res) {
+
+  console.log(res);
   
   Voucher.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
     if (err) {
@@ -122,6 +125,38 @@ export function pdtPaymentStatus(req, res) {
   });
 }
 
+export function contributionStatus(req, res) {
+  console.log('payment success')
+  console.log(JSON.stringify(req.body.productinfo));
+  var str = JSON.stringify(req.body.productinfo);
+  console.log(str);
+  var obj = JSON.parse(str);
+  console.log(obj["productId"]);
+  console.log(obj.productId);
+  console.log("converted String");
+/*    Registry.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
+    if (err) {
+      responseObject.err = err;
+      responseObject.data = null;
+      responseObject.code = 422;
+
+      return res.json(responseObject);
+    }   
+
+    res.redirect('/orders');
+  });*/
+/*  Order.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
+    if (err) {
+      responseObject.err = err;
+      responseObject.data = null;
+      responseObject.code = 422;
+
+      return res.json(responseObject);
+    }   
+
+    res.redirect('/');
+  });*/
+}
 
 // Gets a list of Vouchers
 export function index(req, res) {

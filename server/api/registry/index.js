@@ -24,9 +24,6 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id',  controller.destroy);
 router.get('/search/:term', controller.search);
-router.post('/:id/updatePdtcnt', controller.updatePdtcnt)
-
-
-
+router.post('/:id/updatePdtcnt', controller.updatePdtcnt);
 
 module.exports = router;

@@ -44,7 +44,7 @@ angular.module('bhcmartApp')
     templateUrl: 'app/registry/registry.html',
     controller: 'RegistryController'
   })
-  /*.state('registry.home', {
+  .state('registry.home', {
     url: '/home',
     templateUrl: 'app/registry/home.html'
   })
@@ -64,5 +64,15 @@ angular.module('bhcmartApp')
     url: '/find-registry',
     templateUrl: 'app/registry/find-registry.html',
     controller: 'FindRegistryController'
-  });*/
+  })
+  .state('contributioncart', {
+    url: '/contribution_cart',
+    templateUrl: 'app/registry/contribution_cart.html',
+    controller: 'contributioncartController',
+    params: {
+     registryId: null,
+     product : null,
+     contribution : null
+   }
+ });
 });

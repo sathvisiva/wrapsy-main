@@ -1,0 +1,76 @@
+<navbar></navbar>
+
+
+<section class="cart-main-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 cart-details">
+                <div class="s-title">
+                    <h1>Contribution Cart</h1>
+                </div>
+
+                <div class="cart-table table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="p-image">Product</th>
+                                <th class="p-name">Product Name</th>
+                                <th class="p-amount">Contribution</th>
+                                <th class="p-times">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-image">
+                                    <a ui-sref="registry({id:registry._id})"><img alt="" width="100" src="{{product.imageUrl}}"></a>
+
+                                </td>
+                                <td class="p-name"><a ui-sref="product({id: item.getData().slug})">{{ product.name }}</a></td>
+                               <!--  <td class="p-amount"><span class="amount">₹{{ item.getPrice() | number:2}}</span></td>
+                                <td class="p-quantity"><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span>
+                                </td> -->
+                                <td class="p-total">₹{{ contributionamount | number:2}}</td>
+                                <td class="p-action"><a ui-sref="registry({id:registry._id})"><i class="fa fa-trash"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="all-cart-buttons">
+                        <a ui-sref="main">Add vouchers</a>
+                        <div class="float-right">
+
+                        <a href="#" ng-click="saveContribution($event)">Proceed to Pay</a>
+                        </div>
+                    </div> 
+                </div>
+          <!--    <div class="row" ng-show="ngCart.getTotalItems() > 0">
+                    <div class="col-md-4 col-md-offset-8">
+                        <div class="amount-totals">
+                            <p class="total">Subtotal: <span>₹{{ ngCart.getSubTotal() | number:2}}</span></p>
+                            <p class="total">Tax(0%): <span>₹{{ ngCart.getTax() | number:2}}</span></p>
+                            <p class="total">Grandtotal: <span>₹{{ ngCart.totalCost() | number:2}}</span></p>
+                            <a ui-sref="checkout" class="button">PROCEED TO CHECKOUT</a>
+                        </div>
+                    </div>
+                </div>  -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<form id="contributepaymentForm" action='https://test.payu.in/_payment' method='post'>
+  <input type="hidden" name="key" value="{{mkey}}" />
+  <input type="hidden" name="txnid" value="{{txnid}}" />
+  <input type="hidden" name="amount" value="{{amount}}" />
+  <input type="hidden" name="productinfo" value="{{productInfo}}" />
+  <input type="hidden" name="firstname" value="{{firstName}}" />
+  <input type="hidden" name="udf1" value={{id}} />      
+  <input type="hidden" name="email" value="{{email}}" />
+  <input type="hidden" name="phone" value="{{phone}}" />
+  <input type="hidden" name="lastname" value="{{lastName}}" />
+  <input type="hidden" name="surl" value="http://localhost:9000/api/payment/contributionStatus" />
+  <input type="hidden" name="furl" value="http://localhost:9000/api/payment/contributionStatus" />
+  <input type="hidden" name="hash" id="hash" value="{{hash}}">
+</form>
+<!--End of Cart Main Area-->
+<footer></footer>
