@@ -16,6 +16,7 @@
  var Image = require('./product.model').image;
  var Variant = require('./product.model').variant;
  var Review = require('./product.model').review;
+ var Feature = require('./product.model').feature;
  var Catalog = require('../catalog/catalog.model');
  var path = require('path');
 
@@ -96,6 +97,7 @@ function productsInCategory(limit,page) {
     .populate({ path: 'categories', select: 'name' })
     .populate({ path: 'reviews', select: 'rating' })
     .populate({ path: 'images', select: 'imageUrl' })
+    .populate({ path: 'feature ', select: 'name' })
     .execAsync();
   }
 }
@@ -143,6 +145,12 @@ exports.indexAffiliateProduct = function(req, res){
   .catch(handleError(res));
 }
 
+exports.indexFeatures = function(req, res) {
+  Feature.find().execAsync()
+  .then(responseWithResult(res))
+  .catch(handleError(res));
+};
+
 exports.count = function(req, res) {
   
   if(req.query){
@@ -168,6 +176,7 @@ exports.show = function(req, res) {
     slug: req.params.slug
   })
   .populate('images')
+  .populate({ path: 'features' })
   .populate({ path: 'reviews' }).populate({ path: 'categories', select: 'slug' })
   .execAsync()
   .then(handleEntityNotFound(res))
@@ -186,6 +195,12 @@ exports.create = function(req, res) {
   .catch(handleError(res));
 };
 
+exports.createFeature = function(req, res) {
+  Feature.createAsync(req.body)
+  .then(responseWithResult(res, 201))
+  .catch(handleError(res));
+};
+
 // Updates an existing Product in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
@@ -198,9 +213,27 @@ exports.update = function(req, res) {
   .catch(handleError(res));
 };
 
+exports.updateFeature = function(req, res) {
+  if (req.body._id) {
+    delete req.body._id;
+  }
+  Feature.findByIdAsync(req.params.id)
+  .then(handleEntityNotFound(res))
+  .then(saveUpdates(req.body))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
+};
+
 // Deletes a Product from the DB
 exports.destroy = function(req, res) {
   Product.findByIdAsync(req.params.id)
+  .then(handleEntityNotFound(res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
+};
+
+exports.destroyFeature = function(req, res) {
+  Feature.findByIdAsync(req.params.id)
   .then(handleEntityNotFound(res))
   .then(removeEntity(res))
   .catch(handleError(res));
