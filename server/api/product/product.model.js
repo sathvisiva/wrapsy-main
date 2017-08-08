@@ -58,6 +58,21 @@ var ReviewSchema = new Schema({
   }
 });
 
+var FeatureSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
 var ProductSchema = new Schema({
   title: {
     type: String,
@@ -119,6 +134,11 @@ var ProductSchema = new Schema({
     ref: 'Variant',
     index: true
   }],
+  features: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Feature',
+    index: true
+  }],
   reviews: [{
     type: Schema.Types.ObjectId,
     ref: 'Review',
@@ -167,6 +187,7 @@ module.exports = {
   product: mongoose.model('Product', ProductSchema),
   variant: mongoose.model('Variant', VariantSchema),
   image: mongoose.model('Image', ImageSchema),
-  review: mongoose.model('Review', ReviewSchema)
+  review: mongoose.model('Review', ReviewSchema),
+  feature : mongoose.model('Feature', FeatureSchema)
   
 }
