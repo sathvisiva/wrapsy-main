@@ -41,6 +41,11 @@ router.get('/:id/reviews', controller.indexReview);
 router.put('/:id/reviews/:review_id', controller.updateReview);
 router.patch('/:id/reviews/:review_id', controller.updateReview);
 
+// Features
+router.post('/features', controller.createFeature );
+router.get('/features', controller.indexFeatures);
+router.put('/:id/features', controller.updateFeature);
+router.delete('/:id/features', controller.destroyFeature);
 
 
 
