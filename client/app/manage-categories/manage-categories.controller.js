@@ -110,3 +110,67 @@ angular.module('bhcmartApp')
     }
   }
   ]);
+
+.controller('ManageFeaturesCtrl', ['$scope', 'Features', 'Modal',
+  function($scope, Features, Modal) {
+    Features.query(function(features) {
+      $scope.features = features;
+        // pagination controls
+        $scope.currentPage = 1;
+        $scope.totalItems = $scope.features.length;
+        $scope.itemsPerPage = 10; // items per page
+        $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
+      });
+
+    $scope.deleteFeatures = Modal.confirm.delete(function(c) {
+      if (c.slug == 'all') return;
+      c.$remove(c._id, function(resp) {
+        console.log(resp)
+        $scope.features.splice($scope.features.indexOf(c), 1);
+      })
+    });
+  }
+  ])
+
+.controller('ManageFeaturesEditCtrl', ['$scope', '$state', 'Features', '$stateParams',
+  function($scope, $state, Features, $stateParams) {
+
+    Features.query(function(features) {
+      $scope.features = features;
+      $scope.feature = Features.get({ id: $stateParams.id });
+    });
+
+    $scope.save = function(form) {
+      if (form.$valid) {
+        Features.update({ id: $scope.feature._id }, $scope.feature, function(resp) {
+          console.log('updated', resp);
+          $state.go('manage-features');
+        }, function(err) {
+          console.log(err);
+        });
+      }
+    }
+  }
+  ])
+
+.controller('ManageFeaturesAddCtrl', ['$scope', '$state', 'Features', '$stateParams',
+  function($scope, $state, Features, $stateParams) {
+
+    Features.query(function(features) {
+      $scope.features = features;
+    });   
+
+    $scope.save = function(form) {
+      if (form.$valid) {
+        console.log($scope.features)
+        Features.save($scope.features, function(resp) {
+          console.log('created', resp);
+          $state.go('manage-features');
+        }, function(err) {
+          console.log(err);
+          $scope.message == err;
+        });
+      }
+    }
+  }
+  ]);
