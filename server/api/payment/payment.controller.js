@@ -17,6 +17,8 @@
  var Order = require('../order/order.model');
  var mail = require('../mail/sendmail');
  var Registry = require('../registry/registry.model').registry;
+ var Contribution = require('../registry/registry.model').contribution
+ var Registrycontroller = require('../registry/registry.controller');
 
  function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -129,34 +131,35 @@ export function contributionStatus(req, res) {
   console.log('payment success')
   console.log(JSON.stringify(req.body.productinfo));
   var str = JSON.stringify(req.body.productinfo);
-  console.log(str);
-  var obj = JSON.parse(str);
-  console.log(obj["productId"]);
-  console.log(obj.productId);
-  console.log("converted String");
-/*    Registry.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
-    if (err) {
-      responseObject.err = err;
-      responseObject.data = null;
-      responseObject.code = 422;
+  var productInfo = str.split(" ");
+  var contribution = {}
+  contribution.productId = productInfo[0].slice(1);
+  contribution.contribution = productInfo[1];
+  contribution.registryId = productInfo[2];
+  contribution.name = productInfo[3];
+  Contribution.create(contribution, function(err, registry) {
+    if(err) { return handleError(res, err); }
+    
+  });
 
-      return res.json(responseObject);
-    }   
+  console.log(contribution.contribution);
+  console.log(contribution.registryId);
+  console.log(contribution.productId);
 
-    res.redirect('/orders');
-  });*/
-/*  Order.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
-    if (err) {
-      responseObject.err = err;
-      responseObject.data = null;
-      responseObject.code = 422;
+  var increment = {
+    $inc: {
+      'products.$.paid': parseInt(contribution.contribution)
+    }
+  };
+  var query = {
+    '_id': contribution.registryId.toString(),
+    'products._id': contribution.productId.toString()
 
-      return res.json(responseObject);
-    }   
+  };
 
-    res.redirect('/');
-  });*/
-}
+  Registry.update(query, increment, function(err,registry){
+    console.log(registry);
+  });}
 
 // Gets a list of Vouchers
 export function index(req, res) {

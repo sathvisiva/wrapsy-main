@@ -19,6 +19,15 @@ function handleError(res, statusCode) {
   };
 }
 
+function isJson(str) {
+  try {
+    str = JSON.parse(str);
+  } catch (e) {
+    str = str;
+  }
+  return str
+}
+
 function responseWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
@@ -58,6 +67,27 @@ function removeEntity(res) {
     }
   };
 }
+
+exports.count = function(req, res) {
+  
+  if(req.query){
+    var q = isJson(req.query.where);
+    Catalog.find(q).count().exec(function (err, count) {
+      if(err) { 
+        console.log(err)
+        return handleError(res, err); }
+        return res.status(200).json([{count:count}]);
+      });
+  }else{
+      Catalog.count().exec(function (err, count) {
+      if(err) { 
+        console.log(err)
+        return handleError(res, err); }
+        return res.status(200).json([{count:count}]);
+      });
+  }
+};
+
 
 // Gets a list of Catalogs
 exports.index = function(req, res) {

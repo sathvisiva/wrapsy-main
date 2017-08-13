@@ -212,6 +212,26 @@ export function getresetuser(req, res, next) {
 
 }
 
+exports.count = function(req, res) {
+  
+  if(req.query){
+    var q = isJson(req.query.where);
+    User.find(q).count().exec(function (err, count) {
+      if(err) { 
+        console.log(err)
+        return handleError(res, err); }
+        return res.status(200).json([{count:count}]);
+      });
+  }else{
+      User.count().exec(function (err, count) {
+      if(err) { 
+        console.log(err)
+        return handleError(res, err); }
+        return res.status(200).json([{count:count}]);
+      });
+  }
+};
+
 
 export function forgot(req, res, next) {
   var emailid = String(req.body.id);

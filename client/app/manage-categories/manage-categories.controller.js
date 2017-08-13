@@ -109,7 +109,7 @@ angular.module('bhcmartApp')
       }
     }
   }
-  ]);
+  ])
 
 .controller('ManageFeaturesCtrl', ['$scope', 'Features', 'Modal',
   function($scope, Features, Modal) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider) {
+angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
   $mdThemingProvider.theme('default').primaryPalette('cyan').accentPalette('pink');
@@ -18,6 +18,9 @@ angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp
   $rootScope.$state = $state;
   $rootScope._ = _;
   $rootScope.location = $location;
+  $rootScope.$on('$stateChangeSuccess', function () {
+    $("html, body").animate({ scrollTop: 0 }, 200);
+  });
 }).directive('myTab', function ($timeout) {
   return {
     link: function link(scope, element, attrs) {

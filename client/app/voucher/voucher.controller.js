@@ -86,6 +86,15 @@ angular.module('bhcmartApp')
 			$scope.customFullscreen = (wantsFullScreen === true);
 		});
 	}
+
+
+	$scope.redeemVoucher = function(){
+		var q = {where:{code:$scope.code}};
+
+		Voucher.redeem(q, function(resp){
+			console.log(resp);
+		});
+	}
 });
 
 
@@ -98,4 +107,29 @@ angular.module('bhcmartApp')
 	console.log($scope.vouchers)
 
 	
+});
+angular.module('bhcmartApp')
+.controller('VoucherRedeemCtrl',function ($scope,$rootScope,$state, $stateParams,Registry,Auth,$location, $uibModalInstance, Voucher,amount) {
+
+
+	$scope.cancel = function () {
+		$uibModalInstance.dismiss('Close');
+	};
+	$scope.ok = function () {
+		$scope.voucher = {};
+		$scope.voucher.code = $scope.voucherCode;
+		$scope.voucher.amount = amount;
+		Voucher.redeem($scope.voucher, function(resp){
+			console.log(resp);
+			console.log(resp.errorcode);
+			if(resp.errorcode == 0 || resp.errorcode == 1 || resp.errorcode == 2){
+				console.log("inside if")
+				$uibModalInstance.close(resp.errorcode);
+			}else{
+				$uibModalInstance.close($scope.voucher);	
+			}
+		});
+		
+	};
+
 });

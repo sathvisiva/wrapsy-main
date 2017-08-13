@@ -23,11 +23,18 @@
         params: {
           id: 'me'
         }
+      },
+      'userCount': {
+        method: 'post',
+        isArray: true,
+        params: {
+          controller: 'userCount',
+        }
       }
     });
   }
 
   angular.module('bhcmartApp.auth')
-    .factory('User', UserResource);
+  .factory('User', UserResource);
 
 })();

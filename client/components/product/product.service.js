@@ -2,11 +2,19 @@
 
 angular.module('bhcmartApp')
 .factory('Catalog', function($resource) {
-  return $resource('/api/catalogs/:id', {
+  return $resource('/api/catalogs/:id/:controller', {
     id: '@_id'
   }, {
     'update': {
       method: 'PUT'
+    }
+    ,
+    'catalogCount': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'catalogCount',
+      }
     }
   });
 })
@@ -20,7 +28,7 @@ angular.module('bhcmartApp')
   });
 })
 .factory('Voucher', function($resource) {
-  return $resource('/api/voucher/:id', {
+  return $resource('/api/voucher/:id/:controller', {
     id: '@_id'
   }, {
     'update': {
@@ -29,8 +37,7 @@ angular.module('bhcmartApp')
     'redeem': {
       method: 'POST',
       params: {
-        controller: 'redeem',
-        limit: null
+        controller: 'redeem'
       }        
     }
   });
@@ -85,8 +92,8 @@ angular.module('bhcmartApp')
     }
     ,
     'productCount': {
-      method: 'GET',
-      isArray: false,
+      method: 'post',
+      isArray: true,
       params: {
         controller: 'productCount',
       }
@@ -149,6 +156,7 @@ angular.module('bhcmartApp')
     },
     'accomodationDetails': {
       method: 'GET',
+      isArray: true,
       params: {
         controller: 'accomodation',
         limit: null

@@ -9,7 +9,7 @@
 
 	<div class="row">
 		<div class="col-md-6">
-			<a ui-sref="main">
+			<a ng-click="addCustomProduct()" class="cursorpointer">
 				<img class="img-responsive" src="/assets/img/manual_gifts.jpg">
 			</a>
 		</div>
@@ -24,6 +24,7 @@
 		<div class="col-md-4 col-sm-12 col-xs-12 item" ng-repeat="item in registry.products">
 			<div class="product-item">
 				<span class="delete" ng-if="editable" ng-click="removeProduct($event,item._id)"><i class="fa fa-remove"></i></span>
+				<span class="chipin" ng-if="item.multiple"><i class="fa fa-gift"></i>&nbsp;chipin</span>
 
 				<div class="pic-wrapper">
 					<a ng-click="showproductDetail(item, item.multiple)" ng-if = "!item.affiliate" class="inner">
@@ -35,13 +36,14 @@
 
 				</div>
 				<div class="product-desc">
-					<h2 class="name"><a ng-click="showproductDetail(item, item.multiple)" >{{item.name}}</a></h2>
-					<div class="name">Needs : {{item.desired}} Has : {{item.required}}</div>
-					<span class="chipin" ng-if="item.multiple"><i class="fa fa-gift"></i>&nbsp;chipin</span>
+					<h2 class="name cursorpointer"><a ng-click="showproductDetail(item, item.multiple)" >{{item.name}}</a></h2>
+					<div class="name" ng-hide="item.multiple">Needs : {{item.desired}} Has : {{item.required}}</div>
+					<div class="name" ng-if="item.multiple">₹{{item.price | number}}</div>
+					
 
 				</div>
 
-				<span class="fulfilled">fulfilled</span>
+				<span ng-if="item.desired == item.required" class="fulfilled">fulfilled</span>
 			</div>
 		</div>          
 	</div>

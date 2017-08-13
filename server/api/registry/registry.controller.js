@@ -119,22 +119,27 @@ exports.show = function(req, res) {
 
   exports.create = function(req, res) {
 
-   Registry.create(req.body, function(err, registry) {
-    if(err) { return handleError(res, err); }
-    let users = [
-    {
-      'name': registry.youfirstName,
-      'email': registry.username,
-    }
-    ];
-    mail.sendmail('registry',users);
-    
 
-    return res.status(201).json(registry);
-  });
- };
+    Registry.create(req.body, function(err, registry) {
+      if(err) { return handleError(res, err); }
+      let users = [
+      {
+        'name': registry.youfirstName,
+        'email': registry.username,
+      }
+      ];
+      mail.sendmail('registry',users);
 
- exports.createregistryProduct = function(req, res) {
+
+      return res.status(201).json(registry);
+    });
+
+
+
+
+  };
+
+  exports.createregistryProduct = function(req, res) {
 
 	/*RegistryProduct.create(req.body, function(err, registry) {
 		if(err) { return handleError(res, err); }
@@ -199,7 +204,7 @@ exports.indexrsvpRegistry = function(req, res) {
 };
 
 exports.createGuestBookRegistry = function(req, res) {
-
+  
   GuestBook.create(req.body, function(err, registry) {
     if(err) { return handleError(res, err); }
     
@@ -380,7 +385,6 @@ exports.getRegistryProduct = function(req, res) {
 
       Registry.update(query, increment, function(err,registry){
 
-        sendThankyouMessage(email,name, "Thank you")
       });
     });
 

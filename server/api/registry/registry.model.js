@@ -77,7 +77,7 @@ var AccomodationSchema = new Schema({
     type : Number
   },
   website : {
-    type : Number
+    type : String
   },
   posted: {
     type: Date,
@@ -141,11 +141,13 @@ var RegistrySchema = new Schema({
     price : Number,
     desired: {
       type: Number,
-      min: 0
+      min: 1,
+      default : 1
     },
     required: {
       type: Number,
-      min: 0
+      min: 0,
+      default : 0
     },
     prodcode: {
       type: String
@@ -157,14 +159,28 @@ var RegistrySchema = new Schema({
       type: Boolean,
       default: false
     },
+    custom : {
+      type: Boolean,
+      default: false
+    },
     multiple : {
       type: Boolean,
       default: false
     },
+    description: {
+     type: String 
+    },
     paid: {
       type: Number,
       default: 0
+    },
+    size : {
+      type : String
+    },
+    color : {
+      type : String
     }
+
 
 
   }]
@@ -177,6 +193,7 @@ var RegistrySchema = new Schema({
 module.exports = {
   registry: mongoose.model('Registry', RegistrySchema),
   rsvp: mongoose.model('Rsvp', RsvpSchema),
+  guestBook : mongoose.model('GuestBook', GuestBookSchema),
   contribution: mongoose.model('Contribution', ContributionsSchema),
   accomodation: mongoose.model('Accomodation', AccomodationSchema)
 }

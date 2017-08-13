@@ -28,6 +28,15 @@
   };
 }
 
+function isJson(str) {
+  try {
+    str = JSON.parse(str);
+  } catch (e) {
+    str = str;
+  }
+  return str
+}
+
 function responseWithResult(res, statusCode) {
 
   statusCode = statusCode || 200;

@@ -7,15 +7,19 @@ angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams'
     if (p.color) {
       $scope.colors = p.color;
       $scope.product.color = $scope.colors[0];
+    } else {
+      $scope.product.color = '';
     }
     if (p.size) {
       $scope.sizes = p.size;
       $scope.product.size = $scope.sizes[0];
+    } else {
+      $scope.product.size = '';
     }
-
+    console.log(p);
     $scope.qty = 1;
     $scope.product.averageRating = getAverageRating(p);
-    Product.catalog({ id: p.categories[0].slug }, function (relatedProducts) {
+    Product.catalog({ id: p.categories[0].slug, limit: 10, page: 0 }, function (relatedProducts) {
       $scope.relatedProducts = _.filter(_.map(relatedProducts, function (relatedProduct) {
         return _.extend(relatedProduct, { averageRating: getAverageRating(relatedProduct) });
       }), function (rp) {
@@ -75,6 +79,11 @@ angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams'
     $scope.products.linkId = product.linkId;
     $scope.products.affiliate = product.affiliate;
     $scope.products.multiple = multiple;
+    $scope.products.color = product.color;
+    $scope.products.size = product.size;
+    if (multiple) {
+      $scope.products.price = $scope.products.price * qty;
+    }
     var q = {};
     q.where = {};
     var f = [];
@@ -98,7 +107,9 @@ angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams'
   };
 
   $scope.addtocart = function (product, qty) {
-    ngCart.addItem(product._id, product.title, product.price, qty, product);
+    var gst = parseInt(product.sgst) + parseInt(product.cgst);
+    var gstamount = parseInt(gst) * parseInt(qty) * parseInt(product.price) / 100;
+    ngCart.addItem(product._id, product.title, product.price, qty, product, product.color, product.size, gstamount);
     $state.go('cart');
   };
 

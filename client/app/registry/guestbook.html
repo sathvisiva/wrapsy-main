@@ -1,4 +1,4 @@
-	<div class="registry-items" >
+<!-- 	<div class="registry-items" >
 		<div class="row" ng-show="!editable">
 			<div class="form-group col-sm-3 col-md-3 col-lg-3">
 				<label>Nickname<span title="required" class="required">*</span></label>
@@ -20,4 +20,70 @@
 		<div class="text-center" ng-show="guestWishes.length < 1">
 			No Messages
 		</div>
+	</div> -->
+
+	<div class="rsvpform">
+		<div class="row">
+			<toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
+			<form class="form" name="form" ng-submit="saveGuestWish(form)" novalidate>
+
+				<div class = "row">
+					<div class = "col-md-4">
+						<div class="form-group">
+							<label for="firstName" class="registry-label">NICKNAME:</label>
+							<input type="text" class="form-control  registry-form" id="firstName" name="name" ng-model="guestbook.by" required/>
+							<p class="help-block" ng-show="form.name.$error.required && form.name.$touched && form.name.$invalid">
+								Wishe is required
+							</p>
+						</div>
+					</div>
+					<div class = "col-md-8">
+						<div class="form-group">
+							<label for="firstName" class="registry-label">YOUR WISHES:</label>
+							<input type="text" class="form-control  registry-form" id="firstName" name="wish" ng-model="guestbook.wishes" required/>
+							<p class="help-block" ng-show="form.wish.$error.required && form.wish.$touched && form.wish.$invalid">
+								Wish is required
+							</p>
+						</div>
+					</div>
+
+					
+				</div>
+				<div class="row text-center">
+					<div class="col-md-12">
+						<p class="help-block"> {{ message }} </p>
+						<button class="btn btn-primary" ng-click="submitted = true" ng-disabled="form.$invalid" type="submit">POST MESSAGE</button>
+					</div>
+				</div>
+
+			</form>
+
+			<!-- <div ng-repeat = "wish in guestWishes| orderBy: '-posted'">
+				<div class="wishname">{{wish.by}}</div>
+				<div class="wishcontent">{{wish.wishes}}</div>
+				<br>
+			</div> -->
+
+			<div class="review" ng-repeat="wish in guestWishes| orderBy: '-posted'">
+				<div class="row">
+					<div class="col-md-1">
+						<md-button random-backgroundcolor class="md-fab" aria-label="Eat cake">
+							{{ wish.by | limitTo:1 }}
+						</md-button>
+					</div>
+					<div class="col-md-9">
+
+						<div> {{wish.wishes}} </div>
+						<div class="posted" ><span class="italic">by  {{wish.by }} </span></div>
+					
+					</div>
+				</div>
+				<md-divider ng-if="!$last"></md-divider>
+			</div>
+			<div class="text-center" ng-show="guestWishes.length < 1">
+				No Messages
+			</div>
+		</div>
+
+
 	</div>

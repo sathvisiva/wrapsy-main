@@ -1,74 +1,3 @@
-<!-- <div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
-  <h3 class="list-title text-center">{{product.title}}</h3>
-  
-  
-</div>
-<div class="modal-body">
-  <div class="row">
-  <div class="col-md-4">
-    <div class="single-product">
-            
-            <img class="primary-img" src="{{product.imageUrl}}" alt="">
-  </div>
-  </div>
-  <div class="col-md-8">
-  <div class="row">
-    <h4 class="list-title" style="margin-left: 10px;
-    font-size: 18px;">Quantity</h4>
-  </div>
-  
-    <div class="row">
-      <div class="col-md-6">
-      <form action="#">
-        <div class="select-filter number" ng-init="qty = 1">
-        <div class="inc qtybutton" qtybutton>+</div>
-        <input type="text" ng-model="qty" max="{{product.stock}}" min="1" name="qtybutton" class="cart-plus-minus-box">
-        <div class="dec qtybutton" qtybutton>-</div>
-        </div>
-        </form>
-       <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary" ng-click="count = count+1" ng-init="count=1" style="float: left;">+ </button>
-                        <input type="number" class="form-control" ng-model=count min="1" max="{{registryprod.desired}}"style="width: 50px;">
-                        <button type="button" class="btn btn-secondary" ng-click="count = count-1" >-</button>
-                    </span>
-                    
-                </div>
-    </div>
-    <div class = "col-md-6">
-      <button class="btn btn-primary" ng-click="addtocart(count)"></i>Add to cart</button>
-
-      {{registryprod.desired}}
-      </div>
-
-  </div>
-  <br>
-  <div class="row">
-    <h2 class="list-title" style="margin-left: 10px;
-    font-size: 18px;">Price</h2>
-  </div>
-  <div class="row">
-  <div class="col-md-8">
-    <h5 >{{product.price | number}}</h5>
-    </div>
-  </div>
-  
-  <div class="row">
-    <h2 class="list-title" style="margin-left: 10px;
-    font-size: 18px;">Description</h2>
-  </div>
-  <div class="row">
-  <div class="col-md-8">
-    <h5 >{{product.description}}</h5>
-    </div>
-  </div>
-
-
-  
-
-</div>
--->
 
 <div class = "modal-body">
  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
@@ -76,8 +5,8 @@
 
 
   <div class="col-md-12 text-center">
-    <h3 class="list-title">{{product.title}}</h3>
-    <h3><strong>₹{{product.price | number}}</strong></h3>
+    <h3 class="list-title">{{registryprod.name}}</h3>
+    <h3 ng-if = "!registryprod.custom"><strong>₹{{product.price | number}}</strong></h3>
     <hr>
   </div>
 
@@ -87,7 +16,7 @@
   <div class="col-md-4">
     <div class="product" ng-if= "!product.affiliate">
 
-      <img class="img-responsive" src="{{product.imageUrl}}" alt="">
+      <img class="img-responsive" src="{{registryprod.imageUrl}}" alt="">
     </div>
 
     <div class="product" ng-if= "product.affiliate">
@@ -121,7 +50,7 @@
 <div class="row">
 <div class="col-md-12 text-center">
 
-      <button class="btn btn-primary" ng-click="addtocart(qty)" ng-if="!product.affiliate" ng-show = "max > 0"></i>Add to cart</button>
+      <button class="btn btn-primary" ng-click="addtocart(qty)" ng-if="!product.affiliate" ng-show = "max > 0"></i>Buy Now</button>
 
       <a class="btn btn-primary" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
             ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate"></i>Buy Now</a>

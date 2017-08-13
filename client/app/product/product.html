@@ -26,14 +26,16 @@
                                 <div class="product-large">
                                     <div class="tab-content">
                                         <div class="tab-pane active in" id="img-1">
-                                            <a href="#"><img alt="" class="zoom_01" src="{{product.imageUrl}}" data-zoom-image="{{product.imageUrl}}" zoom></a>
+                                            <img ng-if="!product.affiliate" src="{{product.imageUrl}}"/>
+                                            <a ng-if="product.affiliate"><img alt="" class="zoom_01" ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL250_&tag=sathviprasi-21" style="min-width: 450px;min-height: 450px;"></a>
+                                            <!-- <a href="#"><img alt="" class="zoom_01" src="{{product.imageUrl}}" data-zoom-image="{{product.imageUrl}}" ></a> -->
                                         </div>
                                         <div class="tab-pane" ng-repeat="img in product.images" id="img-{{$index + 2}}">
-                                            <a href="#"><img alt="" class="zoom_01" src="{{img.imageUrl}}" data-zoom-image="{{img.imageUrl}}" zoom></a>
+                                            <a href="#"><img alt="" class="zoom_01" src="{{img.imageUrl}}" data-zoom-image="{{img.imageUrl}}" ></a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-small" ng-if="product.images.length > 0">
+                           <!--      <div class="product-small" ng-if="product.images.length > 0">
                                     <ul class="nav nav-tabs bxslider" role="tablist" bxslider>
                                         <li class="active">
                                             <a href="#img-1" data-toggle="tab" my-tab>
@@ -46,12 +48,12 @@
                                             </a>
                                         </li>
                                     </ul>
-                                    <!-- BX Slider Navigation -->
+                                    
                                     <div class="outside">
                                         <p><span id="slider-prev"></span> <span id="slider-next"></span></p>
                                     </div>
-                                    <!-- BX Slider Navigation -->
-                                </div>
+                                    
+                                </div> -->
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -154,9 +156,13 @@
 
 <div class="pdt-button">
     <div class="col-md-6">
-        <button class="btn btn-primary btn-lg pdt-button" ng-if="!product.affiliate" ng-click="addtocart(product, qty)">
+        <button class="btn btn-primary btn-lg pdt-button cart-btn" ng-if="!ngCart.getItemById(product._id) && !product.affiliate" ng-click="addtocart(product, qty)">
             Add to cart
         </button>
+        <a ng-if="product.affiliate" class="btn btn-primary btn-lg pdt-button cart-btn" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
+        ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId">Buy Now </a>
+
+        <a ng-show="ngCart.getItemById(product._id)" class="btn btn-primary btn-lg pdt-button cart-btn" ui-sref="cart-details">View Cart</a>
     </div>
 
     <div class="col-md-6">

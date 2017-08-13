@@ -13,7 +13,16 @@
  var Voucher = require('./voucher.model');
  var cc = require('coupon-code');
 
- function handleError(res, statusCode) {
+ function isJson(str) {
+  try {
+    str = JSON.parse(str);
+  } catch (e) {
+    str = str;
+  }
+  return str
+}
+
+function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
     res.status(statusCode).send(err);
@@ -62,9 +71,16 @@ function removeEntity(res) {
 
 // Gets a list of Vouchers
 export function index(req, res) {
-  Voucher.findAsync()
-  .then(responseWithResult(res))
-  .catch(handleError(res));
+  if(req.query){
+    var q = isJson(req.query.where);
+    Voucher.findAsync(q)
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+  }else{
+    Voucher.findAsync()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+  }
 }
 
 // Gets a single Voucher from the DB
@@ -89,41 +105,42 @@ export function create(req, res) {
 
 
 export function checkredeem(req,res){
-  
+
 }
 
 
 export function redeem(req, res) {
-    console.log(req.body);
-  /*Voucher.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
-    if (err) {
-      responseObject.err = err;
-      responseObject.data = null;
-      responseObject.code = 422;
+  console.log(req.body);
+  var code = req.body.code;
 
-      return res.json(responseObject);
-    }
-
-    Voucher.findById(req.body.productinfo, function (err, voucher) {
-
-      if(err) { return handleError(res, err); }
-      let voucherdetails = [
-      {
-        'email': voucher.email,
-        'amount': voucher.amount,
-        'vouchercode': voucher.code,
-      }
-      ];
-
-      console.log(voucherdetails);
-      mail.sendmail('voucher',voucherdetails);
-      
-    });
-
+  Voucher.findOne({'code' : code},function(err,voucher){
+    console.log(voucher);
+    var todayDate = new Date();
+    var validDatae = new Date(voucher.validuntil)
     
+    console.log(todayDate);
+    console.log(validDatae);
+    if(voucher.redeemed){
+      return res.json({'errorcode' : 0});
+    }else if((new Date().getTime() > new Date(voucher.validuntil).getTime())){
+      return res.json({'errorcode' : 1});
+    }else if(parseInt(voucher.amount) > parseInt(req.body.amount)){
+      return res.json({'errorcode' :2});
+    }else{
+      Voucher.update({ 'code' : code }, { $set: { redeemed: true }}, function (err, voucher) {
+        if (err) {
+          responseObject.err = err;
+          responseObject.data = null;
+          responseObject.code = 422;
 
-    res.redirect('/myvouchers');
-  });*/
+          return res.json(responseObject);
+        }
+
+        return res.json(voucher);
+      });
+    }
+  })
+  /**/
 }
 
 

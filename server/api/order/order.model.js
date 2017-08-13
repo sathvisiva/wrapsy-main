@@ -13,6 +13,8 @@ var OrderItemSchema = new Schema({
   quantity: Number,
   total: Number,
   registry :  String,
+  size : String,
+  color : String,
   productId: {
     type: Schema.Types.ObjectId,
     ref: 'Product'
@@ -23,7 +25,6 @@ var OrderSchema = new Schema({
   orderNumber: String,
   shipping: Number,
   tax: Number,
-  taxRate: Number,
   subTotal: Number,
   totalCost: Number,
   items: [OrderItemSchema],
@@ -35,16 +36,15 @@ var OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Address'
   },
-  vouchers: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Voucher'
-  }],
-  
+  vouchers: [],  
   status: {
-    type: Number,
-    default: 1
+    type: String
   },
   created: {
+    type: Date,
+    default: Date.now
+  },
+  delivered: {
     type: Date,
     default: Date.now
   },

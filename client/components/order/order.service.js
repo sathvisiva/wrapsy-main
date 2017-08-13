@@ -13,12 +13,25 @@ angular.module('bhcmartApp')
           controller: 'myorders'
         }
       },
-       'updateCancel': {
+      'countorders': {
         method: 'POST',
-        
+        isArray: true,
+        params: {
+          controller: 'countorders'
+        }
+      },
+       'updateCancel': {
+        method: 'POST',        
         params: {
           controller: 'updateCancel'
         }
+      },
+       'countorder': {
+        method: 'GET',        
+        params: {
+          controller: 'countorder'
+        }
       }
+
     });
   });

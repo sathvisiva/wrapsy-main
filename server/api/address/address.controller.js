@@ -7,10 +7,19 @@
  * DELETE  /api/Addresss/:id          ->  destroy
  */
 
-'use strict';
+ 'use strict';
 
-import _ from 'lodash';
-var Address = require('./address.model');
+ import _ from 'lodash';
+ var Address = require('./address.model');
+
+ function isJson(str) {
+  try {
+    str = JSON.parse(str);
+  } catch (e) {
+    str = str;
+  }
+  return str
+}
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -42,9 +51,9 @@ function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
     return updated.saveAsync()
-      .spread(updated => {
-        return updated;
-      });
+    .spread(updated => {
+      return updated;
+    });
   };
 }
 
@@ -52,33 +61,40 @@ function removeEntity(res) {
   return function(entity) {
     if (entity) {
       return entity.removeAsync()
-        .then(() => {
-          res.status(204).end();
-        });
+      .then(() => {
+        res.status(204).end();
+      });
     }
   };
 }
 
 // Gets a list of Addresss
 export function index(req, res) {
-  Address.findAsync()
+  if(req.query){
+    var q = isJson(req.query.where);
+    Address.findOne(q)
     .then(responseWithResult(res))
     .catch(handleError(res));
+  }else{
+    Address.findAsync()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+  }
 }
 
 // Gets a single Address from the DB
 export function show(req, res) {
   Address.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 }
 
 // Creates a new Address in the DB
 export function create(req, res) {
   Address.createAsync(req.body)
-    .then(responseWithResult(res, 201))
-    .catch(handleError(res));
+  .then(responseWithResult(res, 201))
+  .catch(handleError(res));
 }
 
 // Updates an existing Address in the DB
@@ -87,16 +103,16 @@ export function update(req, res) {
     delete req.body._id;
   }
   Address.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(saveUpdates(req.body))
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 }
 
 // Deletes a Address from the DB
 export function destroy(req, res) {
   Address.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
 }

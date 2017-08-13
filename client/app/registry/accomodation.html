@@ -1,0 +1,85 @@
+<div class="rsvpform">
+	<div class="row">
+	 <toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
+		<form class="form" name="form" ng-submit="saveaccomodation(form)" novalidate>
+			
+			<div class = "row">
+				<div class = "col-md-6">
+					<div class="form-group">
+						<label for="firstName" class="registry-label">NAME</label>
+						<input type="text" class="form-control  registry-form" id="firstName" name="name" ng-model="accomodation.name" required/>
+						<p class="help-block" ng-show="form.name.$error.required && form.name.$touched && form.name.$invalid">
+							Name is required
+						</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="firstName" class="registry-label">EMAIL :</label>
+						<input type="email" class="form-control registry-form" id="email" name="email" ng-model="accomodation.email" required/>
+						<p class="help-block" ng-show="form.email.$dirty && form.email.$invalid"
+						>
+						Doesn't look like a valid email.
+					</p>
+					<p class="help-block" ng-show="form.email.$error.required && form.email.$touched && form.email.$invalid">
+						Email address is required
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+
+			<div class="col-md-6">
+				<div class="form-group">
+					<label class="registry-label" for="LastName">PHONE :</label>
+					<input type="text" class="form-control registry-form" id="phone" ng-pattern="ph_numbr" name="phone" ng-model="accomodation.phone"
+					required />
+					<p class="help-block" ng-show="form.phone.$error.required && form.phone.$touched && form.phone.$invalid">
+						Phone number is required.
+
+					</p>
+					<p class="help-block" ng-show="form.phone.$error.pattern && form.phone.$touched && form.phone.$invalid">
+						Invalid Phone Number
+
+					</p>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="firstName" class="registry-label">WEBSITE :</label>
+					<input type="url" class="form-control registry-form" id="email" name="website" ng-model="accomodation.website" required/>
+					<p class="help-block" ng-show="form.website.$dirty && form.website.$invalid"
+					>
+					Doesn't look like a valid website.
+				</p>
+				<p class="help-block" ng-show="form.website.$error.required && form.website.$touched && form.website.$invalid">
+					website address is required
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="row" >
+		<div class="col-md-12">
+			<div class="form-group">
+				<label for="firstName" class="registry-label" >ADDRESS:</label>
+				<textarea id="TextArea" class="form-control"  ng-model="accomodation.address" >
+				</textarea> 
+
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="row text-center">
+		<div class="col-md-12">
+			<p class="help-block"> {{ message }} </p>
+			<button class="btn btn-primary" ng-click="submitted = true" ng-disabled="form.$invalid" type="submit">Save Accomodation </button>
+		</div>
+	</div>
+
+</form>
+</div>
+
+
+</div>

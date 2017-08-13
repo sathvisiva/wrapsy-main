@@ -23,6 +23,13 @@
         params: {
           id: 'me'
         }
+      },
+      'userCount': {
+        method: 'post',
+        isArray: true,
+        params: {
+          controller: 'userCount'
+        }
       }
     });
   }

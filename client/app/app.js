@@ -20,13 +20,14 @@ angular.module('bhcmartApp', [
   'rzModule',
   'uiCropper'
   ])
-.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider) {
+.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider) {
   $urlRouterProvider
   .otherwise('/');
   $locationProvider.html5Mode(true);
   $mdThemingProvider.theme('default')
   .primaryPalette('cyan')
   .accentPalette('pink');
+  
 
 })
 
@@ -44,6 +45,9 @@ angular.module('bhcmartApp', [
   $rootScope.$state = $state;
   $rootScope._ = _;
   $rootScope.location = $location;
+  $rootScope.$on('$stateChangeSuccess',function(){
+    $("html, body").animate({ scrollTop: 0 }, 200);
+  });
 })
 .directive('myTab', function($timeout) {
   return {

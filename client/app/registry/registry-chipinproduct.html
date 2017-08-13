@@ -1,7 +1,7 @@
 <div class = "modal-body">
  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
  <div class="row">
-
+  <toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
 
   <div class="col-md-12 text-center">
     <h3 class="list-title">{{registryprod.name}}</h3>
@@ -26,33 +26,33 @@
      <span>Remaining : </span>{{(registryprod.price-0) - (registryprod.paid-0)}}
    </div>
 
-   <div class="progress">
+  <!--  <div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="{{paidpercent}}"
     aria-valuemin="0" aria-valuemax="{{registryprod.price | number}}" style="width:70%">
     <span class="sr-only">{{paidpercent}}% Complete</span>
   </div>
-</div>
+  <uib-progressbar max="maxprice" value="dynamic" value="paidPercent"><span style="color:white; white-space:nowrap;">{{paidPercent}}</span></uib-progressbar>
+</div> -->
 
 <br>
-<div class="form-group form-group-lg">
-  <label>Price</label>
-  <div class="row grid-container grid-spacing-half">
-    <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-      <input type="text"  class="form-control" placeholder="1000" id="price" name="price"
-      ng-model="contribution" required>
-      <p ng-show="(form1.price.$invalid && !form1.price.$pristine) || (form1.price.$invalid && form1.price.$touched) || (form1.price.$invalid && locationformsubmitted)" class="help-block">Price is required.</p>                                
-    </div>
+<form name="form1" ng-submit="save(form1)">
+  <div class="form-group form-group-lg">
+    <label>Price</label>
+    <div class="row grid-container grid-spacing-half">
+      <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+        <input type="number"  class="form-control" placeholder="1000" id="price" name="price"
+        ng-model="contribution" max={{remaining}} min="100" required>
+        <div data-ng-if="form1.price.$error.max" class="help-block">Contribution amount cannot be more than required amount</div>  
+        <div data-ng-if="form1.price.$error.min" class="help-block">Minimum Contribution amount is 100</div>                               
+      </div>
 
+    </div>
   </div>
-</div>
 </div>
 <div class="row">
-  <div class="col-md-12 text-center">
-
-    <a class="btn btn-primary" ng-click="ok()" ui-sref="contributioncart({registryId: registryid, product : registryprod, contribution : contribution})"></i>Contribute</a>
-  </div>
+  <div class="col-md-12 text-center">    
+   <button  class="btn btn-primary" ng-click="ok()"></i>Contribute</button> 
+ </div>
 </div>
-
-
-
+</form>
 </div>
