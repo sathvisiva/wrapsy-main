@@ -1,5 +1,5 @@
 <div class="registry-products" >
-	<div class="row" ng-show="registry.products.length < 1">
+	<div class="row" ng-show="registry.products.length < 1" ng-if="editable">
 		<div class="col-md-12">
 			<a ui-sref="main">
 				<img class="img-responsive" src="/assets/img/reg-empty.png">
@@ -7,7 +7,7 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" ng-if="editable">
 		<div class="col-md-6">
 			<a ng-click="addCustomProduct()" class="cursorpointer">
 				<img class="img-responsive" src="/assets/img/manual_gifts.jpg">
@@ -19,6 +19,13 @@
 			</a>
 		</div>
 	</div>
+
+		<div class="product-list" >
+		<div class="col-md-12 col-sm-12 col-xs-12  text-center" ng-show="registry.products.length < 1" >
+			No Products Added to Registry
+		</div>          
+	</div>
+
 
 	<div class="product-list" >
 		<div class="col-md-4 col-sm-12 col-xs-12 item" ng-repeat="item in registry.products">

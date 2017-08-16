@@ -18,20 +18,27 @@ var ImageSchema = new Schema({
   }
 });
 
-var VariantSchema = new Schema({
-  code: {
+var FeatureSchema = new Schema({
+  key: {
     type: String
   },
-  price: {
-    type: Number,
-    min: 0
-  },
-  stock: {
-    type: Number,
-    min: 0
-  },
-  description: {
+  value: [{
     type: String
+  }]
+
+});
+
+var FilterSchema = new Schema({
+  label: {
+    type: String
+  },
+  value: [{
+    type: String
+  }],
+  categories: {
+    type: Schema.Types.ObjectId,
+    ref: 'Catalog',
+    index: true
   }
 });
 
@@ -58,20 +65,6 @@ var ReviewSchema = new Schema({
   }
 });
 
-var FeatureSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  }
-});
 
 var ProductSchema = new Schema({
   title: {
@@ -94,10 +87,6 @@ var ProductSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    min: 0
-  },
-  sellingPrice: {
-    type: Number,
     min: 0
   },
   stock: {
@@ -129,11 +118,6 @@ var ProductSchema = new Schema({
     ref: 'Image',
     index: true
   }],
-  variants: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Variant',
-    index: true
-  }],
   features: [{
     type: Schema.Types.ObjectId,
     ref: 'Feature',
@@ -144,11 +128,11 @@ var ProductSchema = new Schema({
     ref: 'Review',
     index: true
   }],
-  categories: [{
+  categories: {
     type: Schema.Types.ObjectId,
     ref: 'Catalog',
     index: true
-  }],
+  },
   prodcode: {
     type: String
   },
@@ -185,9 +169,9 @@ ProductSchema.plugin(slugs('title'));
 
 module.exports = {
   product: mongoose.model('Product', ProductSchema),
-  variant: mongoose.model('Variant', VariantSchema),
+  feature: mongoose.model('Feature', FeatureSchema),
+  filter: mongoose.model('Filter', FilterSchema),
   image: mongoose.model('Image', ImageSchema),
-  review: mongoose.model('Review', ReviewSchema),
-  feature : mongoose.model('Feature', FeatureSchema)
-  
+  review: mongoose.model('Review', ReviewSchema)
+  //FilterSchema
 }

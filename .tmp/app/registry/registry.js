@@ -48,7 +48,7 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
     url: '/rsvp',
     templateUrl: 'app/registry/rsvp.html'
   }).state('registry.accomodation', {
-    url: '/rsvp',
+    url: '/accomodation',
     templateUrl: 'app/registry/accomodation.html'
   }).state('findregistry', {
     url: '/find-registry',

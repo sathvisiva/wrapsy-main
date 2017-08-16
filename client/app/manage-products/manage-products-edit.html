@@ -1,24 +1,17 @@
-<navbar></navbar>
-<div class="breadcrumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 col-md-offset-3">
-                <ul class="breadcrumb">
-                    <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-                    <li class="active">edit-product</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+
 <section class="product-grid" style="min-height: 200px">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <!-- <sidebar-account></sidebar-account> -->
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <form class="form" name="form" ng-submit="save(form)" novalidate>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="product.affiliate" ng-disabled = true> Affiliate
+                            </label>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label>Title</label>
                         <input type="text" name="name" class="form-control" ng-model="product.title" required/>
@@ -26,10 +19,24 @@
                             Title is required
                         </p>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-if="product.affiliate">
+                        <label>Link Id</label>
+                        <input type="text" name="linkId" class="form-control" ng-model="product.linkId" required/>
+                        <p class="help-block" ng-show="form.linkId.$error.required">
+                            Link Id is required
+                        </p>
+                    </div>
+                    <div class="form-group" ng-if="product.affiliate">
+                        <label>Product Code</label>
+                        <input type="text" name="prodcode" class="form-control" ng-model="product.prodcode" required/>
+                        <p class="help-block" ng-show="form.prodcode.$error.required">
+                            Product code is required
+                        </p>
+                    </div>
+                    <div class="form-group" >
                         <label>Description</label>
-                        <textarea name="name" class="form-control" ng-model="product.description" required></textarea>
-                        <p class="help-block" ng-show="form.name.$error.required">
+                        <textarea name="description" class="form-control" ng-model="product.description" required></textarea>
+                        <p class="help-block" ng-show="form.description.$error.required">
                             Description is required
                         </p>
                     </div>
@@ -55,23 +62,62 @@
                         </div>
                     </div>
                     <div class="row" >
+                        <div class="form-group col-md-4">
+                            <label>CGST(%)</label>
+                            <input type="number" name="cgst" class="form-control" ng-model="product.cgst" required/>
+                            <p class="help-block" ng-show="form.cgst.$error.required">
+                                Price is required
+                            </p>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>sgst(%)</label>
+                            <input type="number" name="sgst" class="form-control" ng-model="product.sgst"/>
+                            
+                        </div>
+                        
+                    </div>
+
+                    <div class="row" >
                         <div class="form-group col-md-6">
                             <label>Size</label>
                             <input type="text" name="size" class="form-control" ng-model="product.size"/>
-
+                            
                         </div>
-
-                        <div class="form-group col-md-6" >
+                        
+                        <div class="form-group col-md-6" ng-if="!product.affiliate">
                             <label>Color</label>
                             <input type="text" name="color" class="form-control" ng-model="product.color" required/>
-
+                            
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" >
                         <label>Categories</label>
                         <select class="form-control" name="categories" ng-model="product.categories" data-live-search="true">
                             <option ng-repeat="cat in categories" value="{{cat._id}}" ng-selected="{{_.size(_.findWhere(product.categories, {_id: cat._id})) > 0}}">{{cat.name}}</option>
                         </select>
+                    </div>
+
+                    <div class="row" >
+                        <div class="form-group col-md-6">
+                            <label>Features</label>                 
+                            <select class="form-control" name="categories" ng-model="productfeatures" >
+                                <option ng-repeat="feature in features" value="{{feature._id}}">{{feature.key}} - {{feature.value}}</option>
+                            </select>
+                            
+                        </div>
+                        
+                        <div class="form-group col-md-6" style="margin-top: 20px;">
+                            <a class="btn btn-primary" ng-click="addFeatures(productfeatures)">Add feature to product</a>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-repeat="feature in product.features">
+                        <div class="col-md-6">
+                            {{(features | filter: {_id:feature})[0].key}} &nbsp; {{(features | filter: {_id:feature})[0].value}}
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-primary btn-sm" ng-click='del(feature._id)'>Remove</a>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
@@ -84,30 +130,32 @@
                                 <input type="checkbox" ng-model="product.new"> New
                             </label>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" ng-model="product.featured"> Featured
-                            </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img ng-src="{{product.imageUrl}}" class="img-responsive " width="200px" height="200px">
                         </div>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-success': form.imageUrl.$valid && submitted,
+                    <div class="form-group" ng-if="!product.affiliate" ng-class="{ 'has-success': form.imageUrl.$valid && submitted,
                     'has-error': form.imageUrl.$invalid && submitted }">
                     <label class="form-label" for="imageUrl">Featured Image</label>
                     <span class="desc"></span>
                     <div class="controls">
                         <input type="file" ng-hide="imageUrl" ngf-select="upload($file, $invalidFiles)" ng-model="imageUrl" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-resize="{width: 606, height: 780, quality: .8, type: 'image/jpeg', centerCrop: true, restoreExif: false}" ngf-model-invalid="errorFile" />
-                        <i ng-show="form.imageUrl.$error.required && submitted">*required</i>
-                        <i ng-show="form.imageUrl.$error.maxSize">File too large  {{errorFile.size / 1000000|number:1}}MB: max 2M<br></i>
+                        <i ng-show="form.imageUrl.$error.required">*required</i>
+                        <i ng-show="form.imageUrl.$error.maxSize">File too large  {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
                         <img ng-show="form.imageUrl.$valid" ngf-thumbnail="imageUrl" class="thumb">
-                        <img ng-hide="imageUrl" src="{{product.imageUrl}}" class="thumb padding">
                         <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                        <div ng-show="imageUrl" class="remove-btn">
+                            <button class="btn btn-danger btn-xs" ng-click="imageUrl = null"> <span class="glyphicon glyphicon-trash"></span> Remove</button>
+                        </div>
                     </div>
                 </div>
-                <p class="help-block"> {{ vm.message }} </p>
+                <p class="help-block"> {{ message }} </p>
                 <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
             </form>
         </div>
     </div>
 </div>
 </section>
-<footer></footer>
+

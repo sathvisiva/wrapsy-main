@@ -116,7 +116,7 @@ angular.module('bhcmartApp')
 
 
 
-
+    $scope.form = {};
     $scope.queryRegistry = function(){
 
       $scope.registry = Registry.get({ id: $stateParams.id }, function(resp) {
@@ -217,10 +217,9 @@ angular.module('bhcmartApp')
       console.log($scope.registry._id);
       Registry.guestBookRegistry({ id: $scope.registry._id }, $scope.guestbook, function(resp) {
         toaster.pop('success', "Thank you for sharing your wishes");
-        $scope.guestbook.wishes = ""
-        $scope.guestbook.by = ""
-        $scope.form.$setUntouched();
-        $scope.form.$setPristine();
+        $scope.guestbook = {};
+        form.$setPristine();
+        form.$setUntouched();
         $scope.getGuestWishes()
       }, function(err) {
 
@@ -234,10 +233,11 @@ angular.module('bhcmartApp')
 
     $scope.accomodation.registryId = $scope.registry._id
     Registry.accomodation({ id: $scope.registry._id }, $scope.accomodation, function(resp) {
-      toaster.pop('success', "Thank you for sharing your wishes");
-      $scope.guestbook.wishes = ""
-      $scope.guestbook.by = ""
-      $scope.getGuestWishes()
+      toaster.pop('success', "Thank you for sharing accomodation details");
+        form.$setPristine();
+        form.$setUntouched();
+        $scope.accomodation = {};
+      $scope.getAccomodations()
     }, function(err) {
 
       toaster.pop('error', "Some error occured");

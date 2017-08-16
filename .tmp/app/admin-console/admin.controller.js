@@ -1,13 +1,68 @@
 'use strict';
 
-angular.module('bhcmartApp').controller('AdminCtrl', function ($scope, Modal, ngCart, $state, $mdDialog, Order, Product, Catalog, User, $mdSidenav) {
+angular.module('bhcmartApp').controller('FeaturedProductsCtrl', ['$scope', 'Product', 'Modal', function ($scope, Product, Modal) {
 
-  $state.go('admin-console.dashboard');
+  Product.query(function (products) {
+    console.log(products);
+    $scope.products = products;
+    $scope.currentPage = 1;
+    $scope.totalItems = $scope.products.length;
+    $scope.itemsPerPage = 10; // items per page
+    $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
+  });
+
+  $scope.addtoFeaturedProducts = function (id, p) {
+    console.log(id);
+    Product.addfeaturedPdt({ id: id }, p).$promise.then(function (products) {
+      $scope.products = products;
+      $scope.currentPage = 1;
+      $scope.totalItems = $scope.products.length;
+      $scope.itemsPerPage = 10; // items per page
+      $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
+    });
+  };
+
+  $scope.removefromFeaturedProducts = function (id, p) {
+    console.log(id);
+    Product.removefeaturedPdt({ id: id }, p).$promise.then(function (products) {
+      $scope.products = products;
+      $scope.currentPage = 1;
+      $scope.totalItems = $scope.products.length;
+      $scope.itemsPerPage = 10; // items per page
+      $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
+    });
+  };
+
+  /*     Product.query(function(products) {
+         $scope.products = products;
+         // pagination controls
+         $scope.currentPage = 1;
+         $scope.totalItems = $scope.products.length;
+         $scope.itemsPerPage = 10; // items per page
+         $scope.noOfPages = Math.ceil($scope.totalItems / $scope.itemsPerPage);
+       });*/
+
+  $scope.deleteFeature = Modal.confirm['delete'](function (f) {
+    Product.destroyFeature({ id: f._id }, f).$promise.then(function (res) {
+      console.log(res);
+      $scope.features.splice($scope.features.indexOf(f), 1);
+    });
+
+    /*  f.$remove(f._id, function(resp) {
+        console.log(resp)
+        
+      })*/
+  });
+}]).controller('AdminCtrl', function ($scope, Auth, Modal, ngCart, $state, $mdDialog, Order, Product, Catalog, User, $mdSidenav) {
+
+  $scope.isLoggedIn = Auth.isLoggedIn;
+  $scope.isAdmin = Auth.isAdmin;
+  $scope.getCurrentUser = Auth.getCurrentUser;
 
   /*$scope.registry._id = $stateParams.id*/
 
   $scope.adminPage = function (state) {
-    $scope.state = 'admin-console.' + state;
+    $scope.state = 'adminconsole.' + state;
     $state.go($scope.state);
   };
 
@@ -39,6 +94,9 @@ angular.module('bhcmartApp').controller('AdminCtrl', function ($scope, Modal, ng
     $scope.userCount = user[0].count;
   });
 
+  $scope.features = Product.indexFeatures();
+  console.log($scope.features.length);
+
   $scope.orderstatus = [{ id: 1, status: "Processed" }, { id: 2, status: "Complete" }, { id: 3, status: "Open" }, { id: 3, status: "Canceled" }];
 
   $scope.viewOrders = function () {
@@ -61,8 +119,6 @@ angular.module('bhcmartApp').controller('AdminCtrl', function ($scope, Modal, ng
       ngCart.removeItemById(product.getId());
     }, function () {});
   };
-
-  /*ui-sref="checkout"*/
 
   $scope.checkout = function (ev) {
     if ($scope.isLoggedIn()) {

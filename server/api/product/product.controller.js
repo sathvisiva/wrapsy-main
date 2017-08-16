@@ -14,11 +14,13 @@
 
  var Product = require('./product.model').product;
  var Image = require('./product.model').image;
- var Variant = require('./product.model').variant;
  var Review = require('./product.model').review;
  var Feature = require('./product.model').feature;
+ var Filter = require('./product.model').filter;
  var Catalog = require('../catalog/catalog.model');
  var path = require('path');
+
+
 
  function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -143,10 +145,52 @@ function productsInSearchCategory(term) {
 
 // Gets a list of Products
 exports.index = function(req, res) {
-  Product.find().sort({ stock: 1 }).populate({ path: "categories", select: "name" }).execAsync()
+  if(req.query){
+    var q = isJson(req.query.where);
+    console.log("inside index");
+    console.log(q)
+    Product.find(q).populate({ path: "categories", select: "name" }).execAsync()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+
+  }else{
+    Product.find().sort({ featured: 1 }).populate({ path: "categories", select: "name" }).execAsync()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+  }
+};
+
+exports.addtofeaturedproducts = function(req,res){
+ Product.update({ _id: req.params.id }, { $set: { featured: true }}, function (err, product) {
+  if (err) {
+    responseObject.err = err;
+    responseObject.data = null;
+    responseObject.code = 422;
+
+    return res.json(responseObject);
+  }   
+  Product.find().sort({ featured: 1 }).populate({ path: "categories", select: "name" }).execAsync()
   .then(responseWithResult(res))
   .catch(handleError(res));
-};
+
+});
+}
+
+exports.removefromfeaturedproducts = function(req,res){
+ Product.update({ _id: req.params.id }, { $set: { featured: false }}, function (err, product) {
+  if (err) {
+    responseObject.err = err;
+    responseObject.data = null;
+    responseObject.code = 422;
+
+    return res.json(responseObject);
+  }   
+  Product.find().sort({ featured: 1 }).populate({ path: "categories", select: "name" }).execAsync()
+  .then(responseWithResult(res))
+  .catch(handleError(res));
+  
+});
+}
 
 exports.indexAffiliateProduct = function(req, res){
   Product.find({affiliate:true}).sort({ stock: 1 }).populate({ path: "categories", select: "name" }).execAsync()
@@ -160,8 +204,14 @@ exports.indexFeatures = function(req, res) {
   .catch(handleError(res));
 };
 
+exports.indexFilters = function(req, res) {
+  Filter.find().execAsync()
+  .then(responseWithResult(res))
+  .catch(handleError(res));
+};
+
 exports.count = function(req, res) {
-  
+
   if(req.query){
     var q = isJson(req.query.where);
     Product.find(q).count().exec(function (err, count) {
@@ -171,7 +221,7 @@ exports.count = function(req, res) {
         return res.status(200).json([{count:count}]);
       });
   }else{
-      Product.count().exec(function (err, count) {
+    Product.count().exec(function (err, count) {
       if(err) { 
         console.log(err)
         return handleError(res, err); }
@@ -185,7 +235,6 @@ exports.show = function(req, res) {
     slug: req.params.slug
   })
   .populate('images')
-  .populate({ path: 'features' })
   .populate({ path: 'reviews' }).populate({ path: 'categories', select: 'slug' })
   .execAsync()
   .then(handleEntityNotFound(res))
@@ -205,7 +254,17 @@ exports.create = function(req, res) {
 };
 
 exports.createFeature = function(req, res) {
+  console.log("inside create feature");
+  console.log(req.body);
   Feature.createAsync(req.body)
+  .then(responseWithResult(res, 201))
+  .catch(handleError(res));
+};
+
+exports.createFilter = function(req, res) {
+  console.log("inside create createFilter");
+  console.log(req.body);
+  Filter.createAsync(req.body)
   .then(responseWithResult(res, 201))
   .catch(handleError(res));
 };
@@ -248,6 +307,13 @@ exports.destroyFeature = function(req, res) {
   .catch(handleError(res));
 };
 
+exports.destroyFilter = function(req, res) {
+  Filter.findByIdAsync(req.params.id)
+  .then(handleEntityNotFound(res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
+};
+
 // Uploads a new Product's featured image in the DB
 exports.upload = function(req, res) {
   var file = req.files.file;
@@ -263,6 +329,8 @@ exports.upload = function(req, res) {
 };
 
 exports.catalog = function(req, res) {
+  console.log("inside catalog");
+  console.log(req.body);
   var limit = req.params.limit;
   var page = req.params.page || 0;
   Catalog
@@ -370,7 +438,7 @@ exports.updateImage = function(req, res) {
 };
 
 /*Variants*/
-function getVariants(res) {
+/*function getVariants(res) {
   return function(entity) {
     if (entity) {
       var variants = _.map(entity.variants, function(variantId) {
@@ -449,7 +517,7 @@ exports.destroyVariant = function(req, res) {
   })
   .then(removeEntity(res))
   .catch(handleError(res));
-};
+};*/
 
 /*Reviews*/
 function getReviews(res) {

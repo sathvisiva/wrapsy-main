@@ -1,0 +1,53 @@
+
+<section class="product-grid" style="min-height: 200px">
+	<div class="container">
+		<div class="category-title-header">
+			<div class="title-center">
+			<div class="title"><h1>Add Filter</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row">
+			
+			<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+				<form class="form" name="form" ng-submit="save(form)" novalidate>
+
+					<div class="form-group">
+						<label>Filter Label</label>
+						<input type="text" name="name" class="form-control" ng-model="filter.label" required/>
+						<p class="help-block" ng-show="form.name.$error.required">
+							key is required
+						</p>
+					</div>
+
+					<div class="form-group">
+						<label>Filter Value</label>
+						<input type="text" name="value" class="form-control" ng-model="filter.value" required/>
+						<p class="help-block" ng-show="form.name.$error.required">
+							value is required
+						</p>
+					</div>
+
+
+					<div class="form-group">
+						<label>Visible in </label>
+						<select class="form-control" name="categories" ng-model="filter.categories" data-live-search="true">
+							<option ng-repeat="cat in categories" value="{{cat._id}}" ng-selected="{{_.size(_.findWhere(product.categories, {_id: cat._id})) > 0}}">{{cat.name}}</option>
+						</select>
+						<p class="help-block" ng-show="form.name.$error.required">
+							value is required
+						</p>
+					</div>
+
+					<p class="help-block"> {{ message }} </p>
+					<button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<footer></footer>

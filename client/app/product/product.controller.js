@@ -21,7 +21,7 @@ angular.module('bhcmartApp')
         console.log(p)
         $scope.qty = 1;
         $scope.product.averageRating = getAverageRating(p);
-        Product.catalog({ id: p.categories[0].slug, limit: 10, page : 0  }, function(relatedProducts) {
+        Product.catalog({ id: p.categories.slug, limit: 10, page : 0  }, function(relatedProducts) {
           $scope.relatedProducts = _.filter(
             _.map(relatedProducts, relatedProduct =>
               _.extend(relatedProduct, { averageRating: getAverageRating(relatedProduct) })), rp => rp._id != p._id);

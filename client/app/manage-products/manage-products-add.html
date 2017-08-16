@@ -1,23 +1,9 @@
-<navbar></navbar>
-<div class="breadcrumb">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-7 col-md-offset-3">
-				<ul class="breadcrumb">
-					<li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-					<li class="active">add-product</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
+
 <section class="product-grid" style="min-height: 200px">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-3 col-md-3">
-				<!-- <sidebar-account></sidebar-account> -->
-			</div>
-			<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<form class="form" name="form" ng-submit="save(form)" novalidate>
 					<div class="form-group">
 						<div class="checkbox">
@@ -104,12 +90,42 @@
 							
 						</div>
 					</div>
+					
 					<div class="form-group" >
 						<label>Categories</label>
 						<select class="form-control" name="categories" ng-model="product.categories" data-live-search="true">
 							<option ng-repeat="cat in categories" value="{{cat._id}}" ng-selected="{{_.size(_.findWhere(product.categories, {_id: cat._id})) > 0}}">{{cat.name}}</option>
 						</select>
 					</div>
+
+					<div class="row" >
+						<div class="form-group col-md-6">
+							<label>Features</label>					
+							<select class="form-control" name="categories" ng-model="productfeatures" >
+								<option ng-repeat="feature in features" value="{{feature._id}}">{{feature.key}} - {{feature.value}}</option>
+							</select>
+							
+						</div>
+						
+						<div class="form-group col-md-6" style="margin-top: 20px;">
+							<a class="btn btn-primary" ng-click="addFeatures(productfeatures)">Add feature to product</a>
+						</div>
+					</div>
+
+					<div class="row" ng-repeat="feature in product.features">
+					<div class="col-md-6">
+						{{(features | filter: {_id:feature})[0].key}} &nbsp; {{(features | filter: {_id:feature})[0].value}}
+					</div>
+					<div class="col-md-6">
+						<a class="btn btn-primary btn-sm" ng-click='del(feature._id)'>Remove</a>
+					</div>
+					</div>
+					
+					<!-- <div class="form-group" col-md-6>	
+
+						
+					</div> -->
+
 					<div class="form-group">
 						<div class="checkbox">
 							<label>
@@ -119,11 +135,6 @@
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" ng-model="product.new"> New
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" ng-model="product.featured"> Featured
 							</label>
 						</div>
 					</div>
@@ -149,4 +160,4 @@
 	</div>
 </div>
 </section>
-<footer></footer>
+

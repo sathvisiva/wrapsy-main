@@ -91,6 +91,69 @@ angular.module('bhcmartApp')
       }
     }
     ,
+    'features': {
+      method: 'POST',
+      params: {
+        controller: 'features',
+        limit: null
+      }
+    }
+    ,
+    'indexFeatures': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'indexFeatures',
+        limit: null
+      }
+    }
+    ,
+    'filters': {
+      method: 'POST',
+      params: {
+        controller: 'filters',
+        limit: null
+      }
+    }
+    ,
+    'indexFilters': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'indexFilters',
+        limit: null
+      }
+    } ,
+    'addfeaturedPdt': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'addfeaturedPdt',
+        limit: null
+      }
+    }
+    ,
+    'removefeaturedPdt': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'removefeaturedPdt',
+        limit: null
+      }
+    }
+    ,'destroyFeature': {
+      method: 'post',
+      params: {
+        controller: 'destroyFeature'
+      }
+    }
+    ,'destroyFilter': {
+      method: 'post',
+      params: {
+        controller: 'destroyFilter'
+      }
+    }
+    ,
     'productCount': {
       method: 'post',
       isArray: true,

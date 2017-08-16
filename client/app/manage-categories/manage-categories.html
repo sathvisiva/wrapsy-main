@@ -1,47 +1,3 @@
-<navbar></navbar>
-<div class="breadcrumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 col-md-offset-3">
-                <ul class="breadcrumb">
-                    <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-                    <li class="active">manage-categories</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<nav class="navbar navbar-default" ng-show="isAdmin">
-  <div class="container-fluid">
-
-      <ul class="nav navbar-nav">
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-categories">Manage categories</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-products">Manage products</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-products">Features</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-products">Filters</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-requests">Requests</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isLoggedIn">
-            <a ui-sref="orders">Orders</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="sales">Sales Reports</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="admin">Users</a>
-        </li> 
-    </ul>
-</div>
-</nav>
 <section class="product-grid" style="min-height: 200px">
     <div class="container">
         <div class="row">
@@ -51,8 +7,8 @@
         </div>
         <div class="table-responsive" ng-hide="categories.length === 0">
             <div class="row">
-                <div ng-show="isAdmin" class="col-md-6 pull-right">
-                    <a ui-sref=" add-category" class="btn btn-xs btn-success pull-right"><span class="fa fa-plus fa-2x"></span></a>
+                <div  class="col-md-6 pull-right">
+                    <a ui-sref="adminconsole.add-category" class="btn btn-xs btn-success pull-right"><span class="fa fa-plus fa-2x"></span></a>
                 </div>
                 <div class="input-group primary col-md-6" inputgroup>
                     <span class="input-group-addon">
@@ -78,10 +34,10 @@
                                <!--  <td ng-show="isAdmin">
                                     <a ui-sref=" add-category" class="btn btn-xs btn-success"><span class="fa fa-plus fa-2x"></span></a>
                                 </td> -->
-                                <td ng-show="isAdmin">
-                                    <a ui-sref=" edit-category({id: c.slug})" class=""><span class="fa fa-edit fa-2x"></span></a>
+                                <td >
+                                    <a ui-sref=" adminconsole.edit-category({id: c.slug})" class=""><span class="fa fa-edit fa-2x"></span></a>
                                 </td>
-                                <td ng-show="isAdmin">
+                                <td >
                                     <a ng-click="deleteCatalog('Category ' + c.name, c)" class="trash"><span class="fa fa-trash fa-2x">                                </span></a>
                                 </td>
                             </tr>

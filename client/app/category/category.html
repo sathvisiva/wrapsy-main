@@ -37,70 +37,34 @@
             </div>
             <div class="block size-filter">
               <div class="title">size</div>
-              <div class="select-group">
-                <select name="size" id="" class="form-control">
-                  <option value="S">XS</option>
-                  <option value="S">S</option>
-                  <option value="S">M</option>
-                  <option value="S">L</option>
-                  <option value="S">XL</option>
-                  <option value="S">XXL</option>
-                </select>
-              </div>
-            </div>
-            <div class="block price-filter">
-              <div class="title">Price</div>
-              <rzslider
-              rz-slider-floor="priceSlider.floor"
-              rz-slider-ceil="priceSlider.ceil"
-              rz-slider-model="priceSlider.min"
-              rz-slider-high="priceSlider.max"
-              rz-slider-on-end="test()"></rzslider>
+              <div class="select-group" ng-repeat = "size in sizes">
+               <md-checkbox>
+                 {{ size }}
+               </md-checkbox>
+             </div>
+           </div>
+           <div class="block price-filter">
+            <div class="title">Price</div>
+            <rzslider
+            rz-slider-floor="priceSlider.floor"
+            rz-slider-ceil="priceSlider.ceil"
+            rz-slider-model="priceSlider.min"
+            rz-slider-high="priceSlider.max"
+            rz-slider-on-end="test()"></rzslider>
 
-              <strong>{{priceSlider.min}}</strong> &nbsp;-&nbsp; $<strong>{{priceSlider.max}}</strong>
-            </div>
-      <!--       <div class="block brands">
-              <div class="title">Brands</div>
-              <div class="list-brands">
-                <div class="checkbox checkbox-primary">
-                  <input id="checkbox1" type="checkbox" class="styled">
-                  <label for="checkbox1">ASOS</label>
-                </div>
-                <div class="checkbox checkbox-primary">
-                  <input id="checkbox2" type="checkbox" class="styled">
-                  <label for="checkbox2">Versace</label>
-                </div>
-                <div class="checkbox checkbox-primary">
-                  <input id="checkbox3" type="checkbox" class="styled">
-                  <label for="checkbox3">Zara</label>
-                </div>
-                <div class="checkbox checkbox-primary">
-                  <input id="checkbox4" type="checkbox" class="styled">
-                  <label for="checkbox4">Topshop</label>
-                </div>
-                <div class="checkbox checkbox-primary">
-                  <input id="checkbox5" type="checkbox" class="styled">
-                  <label for="checkbox5">George at Asda</label>
-                </div>
-              </div>
-            </div> -->
-            <div class="block color-filter">
-              <div class="title">Color</div>
-              <div class="color-list">
-                <a href="javascript:void(0)" class="color active" style="background-color:#C51162"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#1565C0"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#FFCA28"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#000000"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#4DB6AC"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#E57373"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#BCAAA4"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#78909C"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#9CCC65"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#1A237E"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#FFEB3B"></a>
-                <a href="javascript:void(0)" class="color" style="background-color:#FF7043"></a>
-              </div>
-            </div>
+            <strong>{{priceSlider.min}}</strong> &nbsp;-&nbsp; $<strong>{{priceSlider.max}}</strong>
+          </div>
+
+          <div class="block color-filter">
+            <div class="title">Color</div>
+            <div class="select-group" ng-repeat = "color in colors">
+             <md-checkbox>
+               {{ color }}
+             </md-checkbox>
+           </div>
+         </div>
+
+         
             <!-- <div class="block price-range">
               <div class="title">Price</div>
               <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="minRangeSlider.options"></rzslider>

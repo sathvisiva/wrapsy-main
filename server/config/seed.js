@@ -7,7 +7,7 @@
 import _ from 'lodash';
 var User = require('../api/user/user.model');
 var Product = require('../api/product/product.model').product;
-var Variant = require('../api/product/product.model').variant;
+
 var Review = require('../api/product/product.model').review;
 var Image = require('../api/product/product.model').image;
 var Catalog = require('../api/catalog/catalog.model');
@@ -18,7 +18,6 @@ import mongoose from 'mongoose';
 
 var users = require('../data/users.json');
 var catalogs = require('../data/catalogs.json');
-var variants = require('../data/variants.json');
 var images = require('../data/images.json');
 var reviews = require('../data/reviews.json');
 var products = require('../data/products.json');
@@ -59,15 +58,6 @@ Catalog.find({}).removeAsync()
     })
   }).then(() => {
     console.log('finished populating catalogs');
-  });
-
-Variant.find({}).removeAsync()
-  .then(() => {
-    _.each(variants, function(variant) {
-      Variant.create(variant);
-    })
-  }).then(() => {
-    console.log('finished populating variants ');
   });
 
 Image.find({}).removeAsync()

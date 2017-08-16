@@ -13,6 +13,15 @@ class NavbarController {
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 
+    $scope.showSearch = false;
+
+    $scope.toggleSearch = function(){
+      if($scope.showSearch){
+        $scope.showSearch = false;
+      }else{
+        $scope.showSearch = true;
+      }
+    }
 
 
     $scope.createRegistry = function(ev){

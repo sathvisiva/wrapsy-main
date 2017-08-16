@@ -21,19 +21,15 @@ router.delete('/:id', controller.destroy);
 router.get('/:slug/catalog/:limit/:page', controller.catalog);
 router.get('/:slug/search/:term', controller.search);
 router.post('/productCount', controller.count);
+router.post('/:id/addfeaturedPdt', controller.addtofeaturedproducts);
+router.post('/:id/removefeaturedPdt', controller.removefromfeaturedproducts);
+//addtofeaturedproducts
 
 
 //image
 router.post('/:id/images', multiparty(uploadOptions), controller.uploadImage);
 router.get('/:id/images', controller.indexImage);
 router.put('/:id/images/:image_id', controller.updateImage);
-
-// Variants
-router.post('/:id/variants', controller.createVariant);
-router.get('/:id/variants', controller.indexVariant);
-router.put('/:id/variants/:variant_id', controller.updateVariant);
-router.patch('/:id/variants/:variant_id', controller.updateVariant);
-router.delete('/:id/variants/:variant_id', controller.destroyVariant);
 
 // Reviews
 router.post('/:id/reviews', controller.createReview);
@@ -43,10 +39,12 @@ router.patch('/:id/reviews/:review_id', controller.updateReview);
 
 // Features
 router.post('/features', controller.createFeature );
-router.get('/features', controller.indexFeatures);
+router.post('/indexFeatures', controller.indexFeatures);
 router.put('/:id/features', controller.updateFeature);
-router.delete('/:id/features', controller.destroyFeature);
+router.post('/:id/destroyFeature', controller.destroyFeature);
 
-
+router.post('/filters', controller.createFilter );
+router.post('/indexFilters', controller.indexFilters);
+router.post('/:id/destroyFilter', controller.destroyFilter);
 
 module.exports = router;

@@ -232,10 +232,11 @@ exports.createAccomodation = function(req, res) {
 
 exports.indexAccomodation = function(req, res) {
 
-  Accomodation.find({registryId:req.params.id}).exec(function (err, wishes) {
+  Accomodation.find({registryId:req.params.id}).exec(function (err, accomodation) {
+    console.log(accomodation)
     if(err) { console.log(err);
       return handleError(res, err); }
-      return res.status(200).json(wishes);
+      return res.status(200).json(accomodation);
     });
 };
 

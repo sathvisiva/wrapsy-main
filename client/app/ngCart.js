@@ -270,7 +270,7 @@ angular.module('ngCart', ['ngCart.directives'])
         return this._color;
     };
 
-     item.prototype.setRegistry = function(registry){
+    item.prototype.setRegistry = function(registry){
         if (registry)  this._registry = registry;
     };
     item.prototype.getRegistry = function(){

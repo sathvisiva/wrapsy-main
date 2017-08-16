@@ -147,7 +147,7 @@ angular.module('bhcmartApp')
           customerAddress: user.address
           });
           console.log(cart)
-        Order.save(cart,function(resp) {
+          Order.save(cart,function(resp) {
           $scope.amount = resp.totalCost;
           $scope.productInfo = resp._id;
           /*$scope.presubmit();*/

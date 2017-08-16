@@ -5,7 +5,7 @@
 							<div class="registry-hero-gradient"></div>
 							<div class="hero-buttons">
 								<button class="btn btn-md btn-tertiary pull-left" ng-click="selectBackgroundImage()" ng-if="editable">
-									Edit Background
+									Edit cover picture
 								</button>
 
 								<a  class="btn btn-md btn-tertiary pull-right" ng-if="editable" ui-sref="manageregistry({id:registry._id})">
@@ -25,7 +25,7 @@
 
 			</div>
 
-			<div class="row text-center registry-container registry-details" ng-if="editable">
+			<div class="row text-center registry-container registry-details" >
 				<h1 id="wedding-title">{{registry.title}}</h1>
 				<h2 id="wedding-date-location"><span class="date-spacing" style="display: none;">   </span><span id="wedding-date">{{registry.date  | date : "longDate"}}</span><span class="date-spacing" style="display: none;">   </span><span id="separator"> • </span><span id="wedding-location">{{registry.location}}</span></h2>
 				<h2 id="wedding-countdown">{{registry.greeting}}</h2>

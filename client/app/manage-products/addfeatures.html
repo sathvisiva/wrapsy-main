@@ -1,0 +1,40 @@
+<!--  -->
+
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+    <h4 class="modal-title registry-title" id="wishlistList">Add Features to product</h4>
+  </div>
+  <div class="modal-body">
+
+    <div layout="row" layout-wrap>
+      <div flex="100" layout="column">
+        <div>
+          <fieldset class="demo-fieldset" >
+            <div layout="row" layout-wrap flex>
+              <div flex-xs flex="50">
+                <md-checkbox aria-label="Select All"
+                ng-checked="isChecked()"
+                md-indeterminate="isIndeterminate()"
+                ng-click="toggleAll()">
+                <span ng-if="isChecked()">Un-</span>Select All
+              </md-checkbox>
+            </div>
+            <div class="demo-select-all-checkboxes" flex="100" ng-repeat="item in features">
+              <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                {{ item.key }}&nbsp;- {{ item.value }}
+              </md-checkbox>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" ng-click="ok()">Add to Products</button>
+</div>
+</div>
+
+
+
+</div>
+</div>

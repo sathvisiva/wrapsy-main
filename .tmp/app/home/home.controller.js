@@ -107,12 +107,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       });
     };
 
-    $scope.slickslides = [{ image: 'assets/uploads/p-3.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-4.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-5.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-1.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-2.jpg', title: 'Pic 1' }, { image: 'assets/uploads/p-d-3.jpg', title: 'Pic 6' }, { image: 'assets/uploads/p-d-4.jpg', title: 'Pic 6' }, { image: 'assets/uploads/tab-1.jpg', title: 'Pic 6' }];
-
     $scope.registryslides = [{ image: 'assets/img/sampleWedding.jpg', registry: '59177dd6fb639b354f5e9d63', text: "Wedding Registry" }, { image: 'assets/img/sampleBaby.jpg', registry: '59177e86fb639b354f5e9d65', text: "Baby Registry" }, { image: 'assets/img/sampleWishlist.jpg', registry: '59177eebfb639b354f5e9d67', text: "House Warming Registry" }, { image: 'assets/img/samplebirthday.jpg', registry: '59177e86fb639b354f5e9d65', text: "Birthday Registry" }];
 
-    $scope.products = Product.query();
-    console.log($scope.products);
+    var q = { where: { featured: true } };
+    $scope.products = Product.query(q, function (products) {
+
+      $scope.products = products;
+      console.log($scope.products.length);
+    });
   };
 
   angular.module('bhcmartApp').controller('HomeController', HomeController);

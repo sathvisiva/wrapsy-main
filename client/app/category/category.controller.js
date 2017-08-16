@@ -4,6 +4,10 @@ angular.module('bhcmartApp')
 .controller('CategoryCtrl', ['$scope', '$stateParams', 'Product','$rootScope','$state', 'Catalog',function($scope, $stateParams, Product, $rootScope, $state, Catalog) {
 
   $scope.categoryTitle = $stateParams.slug;
+
+  $scope.sizes = ["S","M","L","XL","XXL"];
+  $scope.colors = ["Blue","Brown","Green","Red"];
+  $scope.pricerange = ["0 -500" , "500-5000", "5000 +"];
   
   $scope.page = 0;
 
@@ -39,7 +43,8 @@ angular.module('bhcmartApp')
 
   $scope.previousPage = function(){
     $scope.page = $scope.page - 1;
-    $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 4, page : $scope.page  }, process($scope));
+    
+    $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 4, page : $scope.page  },q);
   }
 
 
@@ -51,17 +56,28 @@ angular.module('bhcmartApp')
     alert("inside test");
   }
 
-    
 
-  $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 4, page : $scope.page  }, process($scope));
+  
+
+  var q = {};
+  var f = [];
+  f.push({'color' : { $in: ["pale", "bown"] } });
+  f.push({'size' : { $in: ["S", "M"] } });
+  q.where = { 'color' : { $in: ["pale", "bown"] } };
+
+  $scope.searchProducts = Product.query(q);
+  console.log("searchProd");
+  console.log($scope.searchProducts);
+
+  $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 20, page : $scope.page  }, process($scope));
 
   $scope.registryId = $rootScope.registryId;
   $scope.registrytitle = $rootScope.registryTitle;
 
-  $scope.pricerange = "price";
+  /*$scope.pricerange = "price";*/
   $scope.asc = false;
 
-  $scope.minRangeSlider = {
+  /*$scope.minRangeSlider = {
     minValue: 100,
     maxValue: 180,
     options: {
@@ -69,7 +85,7 @@ angular.module('bhcmartApp')
       ceil: 1000000,
       step : 100
     }
-  };
+  };*/
 
 
   

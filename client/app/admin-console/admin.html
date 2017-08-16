@@ -7,7 +7,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <span class="hidden-xs hidden-sm"><a ui-sref="home"><img ng-src="/assets/img/logo/logo.png" class="logo"></img></a></span>
+    <span class="hidden-xs hidden-sm"><a ui-sref="home"><img ng-src="/assets/img/logo/logo.png" class="logo"/></a></span>
     <div class="visible-xs visible-sm hidden-md hidden-lg">
       <span ><a ui-sref="home"><img ng-src="/assets/img/logo/logo.png" alt="wrapsy" class="logo"></a></span>
     </div>
@@ -15,28 +15,30 @@
   <div class="collapse navbar-collapse">
     <ul class="nav navbar-nav">
      <li>
-     <a class="cursorpointer" ng-click="adminPage('dashboard')">Dashboard </a>
+       <a class="cursorpointer" ng-click="adminPage('dashboard')">Dashboard </a>
      </li>
 
      <li>
-      <a class="cursorpointer" ng-click="adminPage('products')">Products</a>
+      <a class="cursorpointer" ng-click="adminPage('pdtlist')">Products</a>
     </li>
 
     <li>
-      <a class="cursorpointer" ng-click="adminPage('catagories')">Categories</a>
-      
+      <a class="cursorpointer" ng-click="adminPage('manage-categories')">Categories</a>      
     </li>
     <li>
       <a class="cursorpointer" ng-click="adminPage('orders')">Orders</a>
     </li>
-    <li>
+    <!-- <li>
       <a class="cursorpointer" ng-click="adminPage('filter')">Filters</a>
+    </li> -->
+    <li>
+    <a class="cursorpointer" ng-click="adminPage('featureslist')">Features</a>
     </li>
     <li>
-      <a class="cursorpointer" ng-click="adminPage('featured')">Featured Products</a>
+      <a class="cursorpointer" ng-click="adminPage('featuredProducts')">Featured Products</a>
     </li>
     <li>
-      <a href="/gift-card" >Gift Cards</a>
+      <a class="cursorpointer" ng-click="adminPage('orders')">Sales reports</a>
     </li>
   </ul>
 </div><!--/.nav-collapse -->

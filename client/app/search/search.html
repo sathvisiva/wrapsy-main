@@ -1,16 +1,16 @@
 <navbar></navbar>
 <!--Breadcrumbs Start-->
 <div class="breadcrumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 col-md-offset-3">
-                <ul class="breadcrumb">
-                    <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-                    <li class="active">search-result</li>
-                </ul>
-            </div>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-md-offset-3">
+        <ul class="breadcrumb">
+          <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+          <li class="active">search-result</li>
+        </ul>
+      </div>
     </div>
+  </div>
 </div>
 <div class="uimax-block-section-26 pdt-80 pdb-80">
   <div class="container">
@@ -18,21 +18,6 @@
       <div class="col-md-4">
         <div class="uimax-sidebar">
           <div class="product-filter">
-            <div class="categories-list block">
-              <div class="title">Categories</div>
-              <div class="form-search">
-                <input type="text" class="form-control" placeholder="search" />
-                <button class="btn btn-search"><i class="ion-ios-search-strong"></i></button>
-              </div>
-              <ul class="list">
-                <li><a href="javascript:void(0)">Shirts</a></li>
-                <li><a href="javascript:void(0)">Dresses</a></li>
-                <li><a href="javascript:void(0)">Jackets</a></li>
-                <li><a href="javascript:void(0)">Trousers</a></li>
-                <li><a href="javascript:void(0)">Jeans</a></li>
-                <li><a href="javascript:void(0)">Jewellery</a></li>
-              </ul>
-            </div>
             <div class="block size-filter">
               <div class="title">size</div>
               <div class="select-group">
@@ -46,7 +31,18 @@
                 </select>
               </div>
             </div>
-            <div class="block brands">
+            <div class="block price-filter">
+              <div class="title">Price</div>
+              <rzslider
+              rz-slider-floor="priceSlider.floor"
+              rz-slider-ceil="priceSlider.ceil"
+              rz-slider-model="priceSlider.min"
+              rz-slider-high="priceSlider.max"
+              rz-slider-on-end="test()"></rzslider>
+
+              <strong>{{priceSlider.min}}</strong> &nbsp;-&nbsp; $<strong>{{priceSlider.max}}</strong>
+            </div>
+      <!--       <div class="block brands">
               <div class="title">Brands</div>
               <div class="list-brands">
                 <div class="checkbox checkbox-primary">
@@ -70,7 +66,7 @@
                   <label for="checkbox5">George at Asda</label>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="block color-filter">
               <div class="title">Color</div>
               <div class="color-list">
@@ -88,265 +84,36 @@
                 <a href="javascript:void(0)" class="color" style="background-color:#FF7043"></a>
               </div>
             </div>
-            <div class="block price-range">
+            <!-- <div class="block price-range">
               <div class="title">Price</div>
-              <input type="text" id="price-range" name="price" value="" />
-            </div>
+              <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="minRangeSlider.options"></rzslider>
+              
+            </div> -->
           </div>
         </div>
       </div>
       <div class="col-md-8">
-        <div class="product-list">
-          <div class="item">
+        <div class="product-list" >
+          <div class="col-md-4 col-sm-12 col-xs-12 item" ng-repeat="product in products">
             <div class="product-item">
               <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477590599/product/fashion-1636868_1280.jpg" alt="" class="pic" />
+                <a ui-sref="product({id: product.slug})" class="inner">
+                  <img ng-src="{{product.imageUrl}}" alt="" class="pic" />
+                </a>
+                <a  ng-if = "product.affiliate" ui-sref="product({id: product.slug})" class="inner">
+                  <img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="pic" alt="{{product.name}}" data-err-src="images/product.jpg" />
                 </a>
               </div>
               <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
+                <h2 class="name"><a ui-sref="product({id: product.slug})" >{{product.title}}</a></h2>
+                <div class="price">₹{{product.price}}</div>
               </div>
               <span class="sale">sale</span>
             </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770452/watch-1592164_1280_chinyq.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <span class="sale">sale</span>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770452/necktie-1209416_1280_k8hmwv.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770453/woman-1703768_1280_wz1emp.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770452/jaffa-1608610_1280_vw55df.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <span class="sale">sale</span>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770452/necktie-987784_1280_erteht.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <span class="sale">sale</span>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770452/hat-1674950_1280_pgzbpf.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477592507/product/girl-1262800_1280.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477592507/product/model-984246_1280.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770451/hats-995632_1280_pw53i1.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477770451/accessories-933231_1280_kmbk2t.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="product-item">
-              <div class="pic-wrapper">
-                <a href="javascript:void(0)" class="inner">
-                  <img src="https://res.cloudinary.com/vuvit03/image/upload/v1477593286/product/beauty-725094_1280.jpg" alt="" class="pic" />
-                </a>
-                <div class="pic-color">
-                  <a href="javascript:void(0)" class="pick active" style="background-color:#2196F3"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#FFFFFF;"></a>
-                  <a href="javascript:void(0)" class="pick" style="background-color:#323A45"></a>
-                </div>
-              </div>
-              <div class="product-desc">
-                <h2 class="name"><a href="javascript:void(0)">Slouchy Pullover Sweatshirt</a></h2>
-                <div class="price">$40.05</div>
-                <div class="old-price">$45.06</div>
-              </div>
-              <a href="javascript:void(0)" class="btn btn-add-cart">addcart</a>
-              <a href="javascript:void(0)" class="btn btn-wishlist">Wishlist</a>
-            </div>
-          </div>
+          </div>          
         </div>
+        <md-button class="md-raised md-accent pull-left" ng-show="page>0" ng-click="previousPage()">< Previous</md-button>
+        <md-button class="md-raised md-accent pull-right" ng-click="nextPage()">Next ></md-button>
       </div>
       
       <div class="clearfix"></div>

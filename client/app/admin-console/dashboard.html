@@ -1,14 +1,90 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-18 col-sm-6 col-md-3">
-			<div class="thumbnail">
-				<div class="title">Orders</div>
-				<div class="caption">
-					<h4>Thumbnail label</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-					<a href="#" class="btn btn-default btn-xs pull-right" role="button"><i class="glyphicon glyphicon-edit"></i></a> <a href="#" class="btn btn-info btn-xs" role="button">Button</a> <a href="#" class="btn btn-default btn-xs" role="button">Button</a>
-				</div>
+
+<div class="find-registry">
+	<div class="container">
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>Dashboard</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Products</span>
+							<span class="md-subhead ">{{productCount}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Categories</span>
+							<span class="md-subhead ">{{catalogCount}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Features</span>
+							<span class="md-subhead ">{{features.length}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Users</span>
+							<span class="md-subhead ">{{userCount}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
 			</div>
 		</div>
+		<br>
+		<br>
+
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>Recent Orders</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+		<br>
+		<div ng-cloak>
+			<md-content>
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="Processed">
+						<md-content class="md-padding">
+							
+
+						</md-content>
+					</md-tab>
+					<md-tab label="Delivered">
+						<md-content class="md-padding">      
+						</md-content>
+					</md-tab>
+					<md-tab label="cancelled">
+						<md-content class="md-padding">
+						        
+						</md-content>
+					</md-tab>
+				</md-tabs>
+			</md-content>
+		</div>
+		
 	</div>
 </div>

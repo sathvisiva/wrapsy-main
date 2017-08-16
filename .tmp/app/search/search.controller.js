@@ -8,6 +8,7 @@ angular.module('bhcmartApp').controller('SearchCtrl', ['$scope', '$stateParams',
   };
 
   $scope.products = products;
+  console.log($scope.products);
   console.log($stateParams.category, $stateParams.term);
 }]);
 //# sourceMappingURL=search.controller.js.map

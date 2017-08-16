@@ -1,7 +1,7 @@
 <div class="rsvpform">
 	<div class="row">
-	 <toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
-		<form class="form" name="form" ng-submit="saveaccomodation(form)" novalidate>
+		<toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
+		<form class="form" name="form" ng-submit="saveaccomodation(form)" novalidate ng-if="editable">
 			
 			<div class = "row">
 				<div class = "col-md-6">
@@ -79,6 +79,24 @@
 	</div>
 
 </form>
+</div>
+
+
+
+<div class="review" ng-repeat="acc in accomodations">
+	<div class="row">
+
+		<div class="col-md-12 text-center">
+
+			<div> <b>{{acc.name}}</b> </div>
+			<div>Email :{{acc.email}} &nbsp;&nbsp; Phone : {{acc.phone}}  </div>
+			<div>{{acc.address}}</div>
+			<div>Website: {{acc.website}}</div>
+
+			
+		</div>
+	</div>
+	<md-divider ng-if="!$last"></md-divider>
 </div>
 
 

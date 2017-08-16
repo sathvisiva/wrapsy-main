@@ -6,7 +6,7 @@
         <ul class="header-left-top header-menu">
           <li><a ng-click="createRegistry($event)">Create Registry</a>
             |&nbsp;&nbsp;
-            <a href="#">Find a Registry</a><span ng-if="isLoggedIn()">|&nbsp;&nbsp;
+            <a ui-sref="findregistry">Find a Registry</a><span ng-if="isLoggedIn()">|&nbsp;&nbsp;
             <a ui-sref="manageregistryList">My Registries</a></span>
           </li>
         </ul>
@@ -23,7 +23,7 @@
               </div>
             </form>
           </div> -->
-          <div class="header-contact-info"><a ui-sref="cart"><span class="fa fa-search"></span></a></div>
+          <div class="header-contact-info"><a class="cursorpointer" ng-click="toggleSearch()"><span class="fa fa-search"></span></a></div>
 
           <div class="header-contact-info">
 
@@ -38,8 +38,10 @@
                    <span ng-show="isLoggedIn()"><i class="fa fa-user"></i></span>
                  </a>
                  <ul class="header-dropdown">                                    <li ng-show="isLoggedIn() && !isAdmin()" ui-sref="orders"><a><span class="glyphicon glyphicon-tasks"></span> My Orders</a></li>
+                   <li ng-show="isLoggedIn() && !isAdmin()" ui-sref="myvouchers"><a><span class="glyphicon glyphicon-tasks"></span> My Vouchers</a></li>
+                   <li ng-show="isLoggedIn() && isAdmin()" ui-sref="adminconsole.dashboard"><a><span class="glyphicon glyphicon-tasks"></span> Admin Console</a></li>
 
-                   <li ng-show="isLoggedIn() && isAdmin()" ui-sref-active="active"><a ui-sref="admin-console"><span class="glyphicon glyphicon-tasks"></span>Admin Console</a></li>
+                   <!-- <li ng-show="isLoggedIn() && isAdmin()" ui-sref-active="active"><a ui-sref="adminconsole"><span class="glyphicon glyphicon-tasks"></span>Admin Console</a></li> -->
 
                    <li ng-show="isLoggedIn()"><a ui-sref="logout"><span class="glyphicon glyphicon-off"></span> Logout</a></li>
                  </ul>
@@ -52,9 +54,29 @@
      </div>
    </div>
  </div>
- <style type="text/css">
+
+ <!--Header Top Area Start-->
+ <div class="header-top" ng-show = "showSearch">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 search" >
+       <form id="search-form" action="search">
+        <div class="input-group">
+          <input type="search" name="term" required class="form-control" placeholder="Search Products" aria-label="Search for...">
+          <span class="input-group-btn">
+          <button type="submit" class="btn btn-default" type="button"></button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<style type="text/css">
   .top-area {
     padding: 0px 0px !important;
+  }
+  .search{
+    padding-bottom: 5px;: 
   }
 </style>
 <!--End of Header Top Area-->

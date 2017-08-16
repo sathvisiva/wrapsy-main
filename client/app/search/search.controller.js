@@ -9,5 +9,6 @@ angular.module('bhcmartApp')
       }
 
     $scope.products = products;
+    console.log($scope.products)
     console.log($stateParams.category, $stateParams.term);
   }]);
