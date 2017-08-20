@@ -1,36 +1,101 @@
 .registryPage{
 background-color : #ffffff;
-background-image: url(https://static.xoedge.com/xo-guest-services/assets/guest/themes/gold_rush-kraft/background_image-ca6c6adf0b297202be739882f47f020e.jpg);
 background-repeat: no-repeat;
 background-size: cover;
 background-position: center top;
 }
 
-.registry-container{
-background-color : #ffffff;
-
+.theme1background{
+background-image: url('https://static.xoedge.com/xo-guest-services/assets/guest/themes/spring/background_image-602f962ae9059b5afc24b1fbc59c146b.png');
 }
+
+.theme1color {
+font-family: "Libre Baskerville";
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+color: rgb(77, 77, 77);
+}
+
+.theme1tilte {
+color: #4D4D4D !important;
+font-family: Alex Brush !important;
+font-size: 60px !important;
+font-style: normal !important;
+}
+
+.theme1font{
+color: #4D4D4D;
+font-family: Libre Baskerville;
+font-size: 16px;
+font-style: normal;
+}
+
+.theme2background{
+background-image: url(https://static.xoedge.com/xo-guest-services/assets/guest/themes/gold_glitter-coral/background_image-05f805b2ccac5db3f553831879a5b060.jpg);
+background-color: rgb(251, 156, 143);
+}
+
+.theme2color {
+color: #212426 !important;
+}
+
+.theme3background{
+background-image: url(https://static.xoedge.com/xo-guest-services/assets/guest/themes/spring/background_image-602f962ae9059b5afc24b1fbc59c146b.png);
+background-color: rgb(234, 248, 226);
+}
+
+.theme3color {
+color: rgb(77, 77, 77) !important;
+}
+
+
+.theme4background{
+background-image: url(https://static.xoedge.com/xo-guest-services/assets/guest/themes/floral_trellis/background_image-3f06174401d6cdb91c075c7a043e54ed.jpg);
+background-color:rgb(34, 60, 121);
+}
+
+.theme4color {
+color: black !important;
+}
+
+
+.theme5background{
+background-image: url(https://static.xoedge.com/xo-guest-services/assets/guest/themes/tree_tale-ivy/background_image-da35160baa3cde7471fdc2bff4ef3548.png);
+background-color:rgb(255, 252, 222);
+}
+
+.theme5color {
+color: #54771D !important;
+}
+
+
 
 .registry-page-container{
 margin-bottom : 40px;
+}
+
+.guestbook{
+	min-height : 450px;
 }
 
 
 .registry-menu{
 margin-top: 40px;
 margin-bottom : 40px;
-background-color: white;
-opacity: 0.7;
+
 }
 
 .registry-details{
-padding-bottom : 40px;    
+padding-bottom : 40px;  
+background-color : #ffffff;  
 }
 
 .registry-top{
 border: 15px solid white;
-
 }
+
+
 
 .registry-settings{
 margin-top: 30px;
@@ -65,7 +130,7 @@ height: 430px;
 }
 
 .registry-top .registry-hero {
-margin: 20px 0 45px 0;
+margin: 0px 0 0px 0;
 }
 
 @media (min-width: 1280px){
@@ -365,15 +430,15 @@ height:350px;
 
 
 .rsvpform{
-    padding : 40px;
+padding : 40px;
 }
 
 .delete{
-	float : right;
+float : right;
 }
 
 .chipin{
-	float : left;
-	color : #F50057;
-	margin-right: 3px;
+float : left;
+color : #F50057;
+margin-right: 3px;
 }

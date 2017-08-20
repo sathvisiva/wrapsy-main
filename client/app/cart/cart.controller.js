@@ -4,6 +4,8 @@ angular.module('bhcmartApp')
 .controller('CartCtrl', function($scope, Modal, ngCart, $state,$mdDialog,Voucher,$uibModal) {
 
 
+console.log(ngCart.getVouchers());
+
 
  $scope.clearCart = function(ev) {
   var confirm = $mdDialog.confirm()
@@ -39,6 +41,7 @@ $scope.addVoucher = function(){
 })
  .result.then(function(result) {
   console.log(result)
+  ngCart.addVoucher(result);
 }, function() {
   // Cancel
 });

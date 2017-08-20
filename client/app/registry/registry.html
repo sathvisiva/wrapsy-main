@@ -1,20 +1,24 @@
 <navbar></navbar>
-<div class="registryPage">
+<div class="registryPage" ng-class="theme1.background">
 	<div class="container">
-
+		<a  class="btn btn-md btn-tertiary pull-left" ng-if="editable" ui-sref="manageregistry({id:registry._id})">
+			Edit Theme
+		</a> 
 		<div class="page">
+
+
 			<div class="row registry-menu">
-				<ul class="menu">
-					<li><a class="cursorpointer" ng-click="registryPage('home')">Home</a></li>
-					<li><a class="cursorpointer" ng-click="registryPage('registrypdts')">Wishlist</a></li>
-					<li><a class="cursorpointer" ng-click="registryPage('guestbook')">Guest Book</a></li>
-					<li><a class="cursorpointer" ng-click="registryPage('rsvp')">RSVP</a></li>
-					<li><a class="cursorpointer" ng-click="registryPage('accomodation')">Accomodation</a></li>
-					<li><a class="cursorpointer" ng-click="inviteFriends()">Invite</a></li>
+				<ul class="menu" >
+					<li><a class="cursorpointer" ng-click="registryPage('home')" ng-class="theme1.color">Home</a></li>
+					<li><a class="cursorpointer" ng-click="registryPage('registrypdts')" ng-class="theme1.color">Wishlist</a></li>
+					<li><a class="cursorpointer" ng-click="registryPage('guestbook')" ng-class="theme1.color">Guest Book</a></li>
+					<li><a class="cursorpointer" ng-click="registryPage('rsvp')" ng-class="theme1.color">RSVP</a></li>
+					<li><a class="cursorpointer" ng-click="registryPage('accomodation')" ng-class="theme1.color">Accomodation</a></li>
+					<li><a class="cursorpointer" ng-click="inviteFriends()" ng-class="theme1.color">Invite</a></li>
 				</ul>
 			</div>
 			<div class="registry-container">
-				<div id="form-views" ui-view></div> 
+				<div ui-view></div> 
 			</div>
 		</div>
 	</div>

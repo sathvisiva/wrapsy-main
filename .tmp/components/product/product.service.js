@@ -104,22 +104,6 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
       }
     },
 
-    'filters': {
-      method: 'POST',
-      params: {
-        controller: 'filters',
-        limit: null
-      }
-    },
-
-    'indexFilters': {
-      method: 'post',
-      isArray: true,
-      params: {
-        controller: 'indexFilters',
-        limit: null
-      }
-    },
     'addfeaturedPdt': {
       method: 'post',
       isArray: true,
@@ -141,12 +125,6 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
       method: 'post',
       params: {
         controller: 'destroyFeature'
-      }
-    },
-    'destroyFilter': {
-      method: 'post',
-      params: {
-        controller: 'destroyFilter'
       }
     },
 

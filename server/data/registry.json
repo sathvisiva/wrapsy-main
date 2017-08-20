@@ -73,4 +73,51 @@
 	],
 	"visible" : true
 	
-}]
+},
+{
+	"_id" : "5999996d9c22ce209c881d0f",
+	"type" : "wedding",
+	"title" : "Lalee weds Ursu",
+	"youfirstName" : "Lalee",
+	"yousecondName" : "Agar",
+	"firstName" : "ursu",
+	"secondName" : "pandy",
+	"location" : "Chennai",
+	"username" : "test@test.com",
+	"backgroundImageUrl" : "assets/img/cover.jpg",
+	"profileImageUrl" : "assets/img/noimage.jpg",
+	"products" : [
+		{
+			"_id" : "56f24ce1f0b14ee730de525c",
+			"name" : "SparkFun Badgers Intel",
+			"slug" : "sparkfun-badgers-intel",
+			"price" : 1156.87,
+			"imageUrl" : "assets/uploads/tab-p-1.jpg",
+			"color" : "Blue",
+			"size" : "L",
+			"paid" : 0,
+			"multiple" : false,
+			"custom" : false,
+			"affiliate" : false,
+			"required" : 0,
+			"desired" : 1
+		},
+		{
+			"_id" : "56f24ce1f0b74ee730dd5260",
+			"name" : "Coffee Mug",
+			"slug" : "coffee-mug",
+			"price" : 8,
+			"imageUrl" : "assets/uploads/general/3.jpg",
+			"color" : "Blue",
+			"size" : "L",
+			"paid" : 0,
+			"multiple" : false,
+			"custom" : false,
+			"affiliate" : false,
+			"required" : 0,
+			"desired" : 1
+		}
+	],
+	"visible" : false
+}
+]

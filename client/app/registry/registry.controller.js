@@ -5,7 +5,6 @@
   class CreateRegistryController {
 
     constructor($http, $scope, $timeout, Registry,$uibModal,$state, Auth,$stateParams,RegistryService, Address) {
-      $state.go('createregistry.registryType');
 
       $scope.disableevent = true;
       $scope.disablelocation = true ; 
@@ -72,7 +71,7 @@
           }, function(err) {
             console.log(err)
           })
-          $state.go('registry', {id: resp._id});
+          $state.go('registry.home', {id: resp._id});
         }, function(err) {
           console.log(err)
         })
@@ -128,10 +127,16 @@ angular.module('bhcmartApp')
 
     $scope.queryRegistry();
 
-    $state.go('registry.home');
 
-    /*$scope.registry._id = $stateParams.id*/
-    
+    $scope.theme1 = {
+      "background": "theme1background",
+      "color" : "theme1color",
+      "title" : "theme1tilte",
+      "font" : "theme1font"
+    }
+
+
+
     $scope.registryPage = function(state){
       $scope.state = 'registry.'+state;
       if(state == 'guestbook'){
@@ -234,9 +239,9 @@ angular.module('bhcmartApp')
     $scope.accomodation.registryId = $scope.registry._id
     Registry.accomodation({ id: $scope.registry._id }, $scope.accomodation, function(resp) {
       toaster.pop('success', "Thank you for sharing accomodation details");
-        form.$setPristine();
-        form.$setUntouched();
-        $scope.accomodation = {};
+      form.$setPristine();
+      form.$setUntouched();
+      $scope.accomodation = {};
       $scope.getAccomodations()
     }, function(err) {
 
@@ -466,6 +471,8 @@ angular.module('bhcmartApp')
 
     console.log(registryprod);
 
+    $scope.qty = 1;
+
     var q= {};
     q.where = {};
     var f =[];
@@ -474,16 +481,24 @@ angular.module('bhcmartApp')
     q.where = { $and : f};
 
 
-   /* $scope.BuyProduct = function(qty){
-
-     ngCart.addItem($scope.product._id, $scope.product.title, $scope.product.price, qty ,$scope.product,$scope.registryid)
+    $scope.BuyProduct = function(product,qty){
+      console.log($scope.qty)
+      console.log(product);
+      var gst = parseInt(product.sgst) + parseInt(product.cgst);
+      var gstamount = (parseInt(gst)*parseInt(qty)*parseInt(product.price))/100
+      ngCart.addItem(product._id, product.title, product.price, qty, product,$scope.registryprod.color,$scope.registryprod.size,gstamount,$scope.registryid);
       $uibModalInstance.close();  
-    }*/
+    }
 
     $scope.buyNow = function(qyt){
       $uibModalInstance.close("test");  
-      Registry.updatePdtcnt({ id: $scope.registryid  }, $scope.product, function(resp) {
-
+      if(!$scope.registryprod.custom){
+        var buyproduct = $scope.product;
+      }else{
+        var buyproduct = $scope.registryprod;
+      }
+      Registry.updatePdtcnt({ id: $scope.registryid  }, buyproduct, function(resp) {
+        console.log(resp);
       }, function(err) {
         console.log(err)
         $scope.message = "An error occured!"

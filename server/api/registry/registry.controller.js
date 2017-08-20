@@ -329,11 +329,16 @@ exports.updatePdtcnt =  function(req, res) {
       'products.$.required': 1
     }
   };
+
+  console.log(req.params.id);
+  console.log(req.body._id);
   var query = {
     '_id': req.params.id,
     'products._id': req.body._id
 
   };
+
+  console.log("query" + query);
 
   Registry.update(query, increment, function(err,registry){
     return res.status(201).json(registry);

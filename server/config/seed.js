@@ -16,7 +16,7 @@ import mongoose from 'mongoose';
 
 
 
-var users = require('../data/users.json');
+//var users = require('../data/users.json');
 var catalogs = require('../data/catalogs.json');
 var images = require('../data/images.json');
 var reviews = require('../data/reviews.json');
@@ -41,7 +41,7 @@ for (var i = 10; i >= 0; i--) {
 console.log(e)
 console.log(d)*/
 
-User.find({}).removeAsync()
+/*User.find({}).removeAsync()
   .then(() => {
     _.each(users, function(user) {
       User.create(user);
@@ -49,7 +49,7 @@ User.find({}).removeAsync()
   })
   .then(() => {
     console.log('finished populating users');
-  });
+  });*/
 
 Catalog.find({}).removeAsync()
   .then(() => {

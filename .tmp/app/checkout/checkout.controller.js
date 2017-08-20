@@ -142,7 +142,7 @@ angular.module('bhcmartApp').controller('CheckoutCtrl', ['$scope', 'Auth', '$sta
         Order.save(cart, function (resp) {
           $scope.amount = resp.totalCost;
           $scope.productInfo = resp._id;
-          /*$scope.presubmit();*/
+          $scope.presubmit();
           ngCart.empty();
         }, function (err) {
           toaster.pop('error', "Please Try again later");

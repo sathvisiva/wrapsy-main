@@ -6,8 +6,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var CreateRegistryController = function CreateRegistryController($http, $scope, $timeout, Registry, $uibModal, $state, Auth, $stateParams, RegistryService, Address) {
     _classCallCheck(this, CreateRegistryController);
 
-    $state.go('createregistry.registryType');
-
     $scope.disableevent = true;
     $scope.disablelocation = true;
     $scope.disablemessage = true;
@@ -68,7 +66,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           Address.save($scope.address, function (resp) {}, function (err) {
             console.log(err);
           });
-          $state.go('registry', { id: resp._id });
+          $state.go('registry.home', { id: resp._id });
         }, function (err) {
           console.log(err);
         });
@@ -115,9 +113,12 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
 
   $scope.queryRegistry();
 
-  $state.go('registry.home');
-
-  /*$scope.registry._id = $stateParams.id*/
+  $scope.theme1 = {
+    "background": "theme1background",
+    "color": "theme1color",
+    "title": "theme1tilte",
+    "font": "theme1font"
+  };
 
   $scope.registryPage = function (state) {
     $scope.state = 'registry.' + state;
@@ -404,6 +405,8 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
 
   console.log(registryprod);
 
+  $scope.qty = 1;
+
   var q = {};
   q.where = {};
   var f = [];
@@ -411,14 +414,25 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
   f.push({ 'products._id': $scope.registryprod._id });
   q.where = { $and: f };
 
-  /* $scope.BuyProduct = function(qty){
-     ngCart.addItem($scope.product._id, $scope.product.title, $scope.product.price, qty ,$scope.product,$scope.registryid)
-     $uibModalInstance.close();  
-   }*/
+  $scope.BuyProduct = function (product, qty) {
+    console.log($scope.qty);
+    console.log(product);
+    var gst = parseInt(product.sgst) + parseInt(product.cgst);
+    var gstamount = parseInt(gst) * parseInt(qty) * parseInt(product.price) / 100;
+    ngCart.addItem(product._id, product.title, product.price, qty, product, $scope.registryprod.color, $scope.registryprod.size, gstamount, $scope.registryid);
+    $uibModalInstance.close();
+  };
 
   $scope.buyNow = function (qyt) {
     $uibModalInstance.close("test");
-    Registry.updatePdtcnt({ id: $scope.registryid }, $scope.product, function (resp) {}, function (err) {
+    if (!$scope.registryprod.custom) {
+      var buyproduct = $scope.product;
+    } else {
+      var buyproduct = $scope.registryprod;
+    }
+    Registry.updatePdtcnt({ id: $scope.registryid }, buyproduct, function (resp) {
+      console.log(resp);
+    }, function (err) {
       console.log(err);
       $scope.message = "An error occured!";
     });

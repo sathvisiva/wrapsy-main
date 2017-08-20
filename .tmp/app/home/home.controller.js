@@ -52,9 +52,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     $scope.createRegistry = function (ev) {
       if ($scope.isLoggedIn()) {
-        $state.go('createregistry');
+        $state.go('createregistry.registryType');
       } else {
-        $scope.data = { 'state': 'createregistry', 'event': 'login' };
+        $scope.data = { 'state': 'createregistry.registryType', 'event': 'login' };
         $scope.login(ev, $scope.data);
       }
     };

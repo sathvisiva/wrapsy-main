@@ -119,6 +119,7 @@ angular.module('bhcmartApp')
   }
 
   $scope.addtocart = function(product, qty){
+    console.log(product);
     var gst = parseInt(product.sgst) + parseInt(product.cgst);
     var gstamount = (parseInt(gst)*parseInt(qty)*parseInt(product.price))/100
     ngCart.addItem(product._id, product.title, product.price, qty, product,product.color,product.size,gstamount);

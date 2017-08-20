@@ -15,7 +15,7 @@
 		</div>
 		<div class="col-md-6">
 			<a ui-sref="main">
-				<img class="img-responsive" src="/assets/img/Add-gifts.png">
+				<img class="img-responsive" src="/assets/img/gift-banner.jpg">
 			</a>
 		</div>
 	</div>
@@ -31,7 +31,8 @@
 		<div class="col-md-4 col-sm-12 col-xs-12 item" ng-repeat="item in registry.products">
 			<div class="product-item">
 				<span class="delete" ng-if="editable" ng-click="removeProduct($event,item._id)"><i class="fa fa-remove"></i></span>
-				<span class="chipin" ng-if="item.multiple"><i class="fa fa-gift"></i>&nbsp;chipin</span>
+				<span class="chipin" ng-if="item.multiple"><i class="fa fa-gift"></i>&nbsp;CHIPIN</span>
+				<span class="chipin" ng-if="!item.multiple">&nbsp;</span>
 
 				<div class="pic-wrapper">
 					<a ng-click="showproductDetail(item, item.multiple)" ng-if = "!item.affiliate" class="inner">

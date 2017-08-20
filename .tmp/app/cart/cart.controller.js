@@ -2,6 +2,8 @@
 
 angular.module('bhcmartApp').controller('CartCtrl', function ($scope, Modal, ngCart, $state, $mdDialog, Voucher, $uibModal) {
 
+  console.log(ngCart.getVouchers());
+
   $scope.clearCart = function (ev) {
     var confirm = $mdDialog.confirm().title('Confirm').textContent('Would you like to remove all the items from your cart').ariaLabel('remove product').targetEvent(ev).ok('Please do it!').cancel('cancel');
 
@@ -26,6 +28,7 @@ angular.module('bhcmartApp').controller('CartCtrl', function ($scope, Modal, ngC
       }
     }).result.then(function (result) {
       console.log(result);
+      ngCart.addVoucher(result);
     }, function () {
       // Cancel
     });

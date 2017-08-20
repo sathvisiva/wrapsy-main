@@ -356,6 +356,31 @@
     "XXL"
   ],
   "__v" : 0
+},
+{
+  "_id" : "599998fc9c22ce209c881d0d",
+  "title" : "Bracelet",
+  "description" : "Rose gold bracelet",
+  "price" : 600,
+  "cgst" : 2,
+  "categories" : "56f24ce1f0b74ee730de545b",
+  "imageUrl" : "assets/uploads/C---ARNWbRt9-U9Xb6i8edPd.jpg",
+  "slug" : "bracelet",
+  "sgst" : 2,
+  "affiliate" : false,
+  "reviews" : [ ],
+  "features" : [ ],
+  "images" : [ ],
+  "new" : true,
+  "hot" : true,
+  "featured" : false,
+  "stock" : 1,
+  "color" : [
+    "Rose"
+  ],
+  "size" : [
+    "One Size"
+  ],
+  "__v" : 0
 }
-
 ]

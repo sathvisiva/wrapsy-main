@@ -39,7 +39,7 @@
    </div>
    <br>
    <div class="Quantity" ng-if = "max > 0">
-     <span>Quantity : </span> <input type="number" name="input" ng-model=qty ng-init="qty = 1"
+     <span>Quantity : </span> <input type="number" name="input" ng-model= "qty"
      min="1" max={{max}} style="width: 50px;" required>
    </div>
 
@@ -50,10 +50,12 @@
 <div class="row">
 <div class="col-md-12 text-center">
 
-      <button class="btn btn-primary" ng-click="addtocart(qty)" ng-if="!product.affiliate" ng-show = "max > 0"></i>Buy Now</button>
+      <button class="btn btn-primary" ng-click="BuyProduct(product,qty)" ng-if="!product.affiliate && !registryprod.custom" ng-show = "max > 0"></i>Buy Now</button>
+
+      <button class="btn btn-primary" ng-click="buyNow(qty)" ng-if="registryprod.custom" ng-show = "max > 0"></i>Notify and Buy Now</button>
 
       <a class="btn btn-primary" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
-            ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate"></i>Buy Now</a>
+            ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate"></i>Notify and Buy Now</a>
 
 </div>
 </div>

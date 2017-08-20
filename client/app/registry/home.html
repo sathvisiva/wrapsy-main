@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="row text-center registry-container registry-details" >
-				<h1 id="wedding-title">{{registry.title}}</h1>
-				<h2 id="wedding-date-location"><span class="date-spacing" style="display: none;">   </span><span id="wedding-date">{{registry.date  | date : "longDate"}}</span><span class="date-spacing" style="display: none;">   </span><span id="separator"> • </span><span id="wedding-location">{{registry.location}}</span></h2>
-				<h2 id="wedding-countdown">{{registry.greeting}}</h2>
+				<h1 id="wedding-title" ng-class="theme1.title">{{registry.title}}</h1>
+				<h2 id="wedding-date-location"><span class="date-spacing" style="display: none;">   </span><span id="wedding-date" ng-class="theme1.font">{{registry.date  | date : "longDate"}}</span><span class="date-spacing" style="display: none;">   </span><span id="separator"> • </span><span id="wedding-location" ng-class="theme1.font">{{registry.location}}</span></h2>
+				<h2  ng-class="theme1.font">{{registry.greeting}}</h2>
 			</div>
