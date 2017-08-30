@@ -57,6 +57,9 @@ var ContributionsSchema = new Schema({
    registryId : {
     type: String
   },
+  paymentid : {
+    type: String
+  },
   vouchers: [{
     type: Schema.Types.ObjectId,
     ref: 'Voucher'
@@ -123,7 +126,7 @@ var RegistrySchema = new Schema({
   secondName : {
     type: String
   },
-  backgroundImageUrl :{
+  theme :{
     type: String
   },
   profileImageUrl : {

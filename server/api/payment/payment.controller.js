@@ -128,7 +128,8 @@ export function pdtPaymentStatus(req, res) {
 }
 
 export function contributionStatus(req, res) {
-  console.log('payment success')
+  console.log('payment success');
+  console.log(req.body);
   console.log(JSON.stringify(req.body.productinfo));
   var str = JSON.stringify(req.body.productinfo);
   var productInfo = str.split(" ");

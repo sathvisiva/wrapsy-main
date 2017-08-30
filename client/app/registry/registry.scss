@@ -5,23 +5,25 @@ background-size: cover;
 background-position: center top;
 }
 
-.theme1background{
+
+.registryPage.theme1{
 background-image: url('https://static.xoedge.com/xo-guest-services/assets/guest/themes/spring/background_image-602f962ae9059b5afc24b1fbc59c146b.png');
 }
 
-.theme1color {
+.menutitle{
 font-family: "Libre Baskerville";
 font-size: 16px;
 font-style: normal;
 font-weight: 700;
+}
+
+.menutitle.theme1{
 color: rgb(77, 77, 77);
 }
 
-.theme1tilte {
-color: #4D4D4D !important;
-font-family: Alex Brush !important;
-font-size: 60px !important;
-font-style: normal !important;
+
+.wedding-title.theme1{
+	color : #98FB98;
 }
 
 .theme1font{
@@ -38,6 +40,12 @@ background-color: rgb(251, 156, 143);
 
 .theme2color {
 color: #212426 !important;
+font-family: "Libre Baskerville";
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+color: #f47a6f;
+
 }
 
 .theme3background{
@@ -76,7 +84,7 @@ margin-bottom : 40px;
 }
 
 .guestbook{
-	min-height : 450px;
+min-height : 450px;
 }
 
 
@@ -325,21 +333,9 @@ background-color: white;
 }
 
 #wedding-title {
-color: #000000;
-font-family: Italiana;
-font-size: 60px;
-font-style: normal;
-}
-
-#wedding-title {
-font-family: "Italiana";
-font-size: 60px;
-font-style: normal;
-font-weight: normal;
-color: #000000;
-}
-
-#wedding-title {
+font-family: Alex Brush !important;
+font-size: 60px !important;
+font-style: normal !important;
 margin: 6px 0 8px 0;
 line-height: 1;
 }

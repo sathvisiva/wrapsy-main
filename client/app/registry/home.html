@@ -1,7 +1,7 @@
 <div class="row ">
 					
 					<section class="registry-top">
-						<div class="registry-hero" ng-style="{'background-image': 'url(' + registry.backgroundImageUrl + ')'}">
+						<div class="registry-hero" ng-style="{'background-image': 'url(' + registry.profileImageUrl + ')'}">
 							<div class="registry-hero-gradient"></div>
 							<div class="hero-buttons">
 								<button class="btn btn-md btn-tertiary pull-left" ng-click="selectBackgroundImage()" ng-if="editable">
@@ -26,7 +26,7 @@
 			</div>
 
 			<div class="row text-center registry-container registry-details" >
-				<h1 id="wedding-title" ng-class="theme1.title">{{registry.title}}</h1>
-				<h2 id="wedding-date-location"><span class="date-spacing" style="display: none;">   </span><span id="wedding-date" ng-class="theme1.font">{{registry.date  | date : "longDate"}}</span><span class="date-spacing" style="display: none;">   </span><span id="separator"> • </span><span id="wedding-location" ng-class="theme1.font">{{registry.location}}</span></h2>
-				<h2  ng-class="theme1.font">{{registry.greeting}}</h2>
+				<h1 id="wedding-title" class="wedding-title" ng-class="registry.theme">{{registry.title}}</h1>
+				<h2 id="wedding-date-location"><span class="date-spacing" style="display: none;">   </span><span id="wedding-date" ng-class="theme.font">{{registry.date  | date : "longDate"}}</span><span class="date-spacing" style="display: none;">   </span><span id="separator"> • </span><span id="wedding-location" ng-class="theme.font">{{registry.location}}</span></h2>
+				<h2  ng-class="theme.font">{{registry.greeting}}</h2>
 			</div>

@@ -92,9 +92,11 @@
 							<label>Location</label>
 							<div class="row grid-container grid-spacing-half">
 								<div class="col-xs-8 col-sm-8 col-md-8 grid-item top-row bottom-row">
-									<input type="text"  class="form-control" placeholder="Chennai" id="name" name="location"
+									<input type="text"  class="form-control" placeholder="Chennai" id="location" name="location"
 									ng-model="registry.location" required>
-									<p ng-show="(form1.location.$invalid && !form1.location.$pristine) || (form1.location.$invalid && form1.location.$touched) || (form1.location.$invalid && eventformsubmitted) " class="help-block">Location is required.</p>                                
+									<!-- <p ng-show="(form1.location.$invalid && !form1.location.$pristine) || (form1.location.$invalid && form1.location.$touched) || (form1.location.$invalid && eventformsubmitted) " class="help-block">Location is required.</p> -->
+
+									<p ng-show="(form.location.$invalid && !form.location.$pristine) || (form.location.$invalid && form.location.$touched) || (form.location.$invalid && eventformsubmitted) " class="help-block">Location is required.</p>                                
 								</div>
 
 							</div>

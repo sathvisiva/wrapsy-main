@@ -59,7 +59,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (form.$valid) {
         console.log($scope.getCurrentUser());
         $scope.registry.username = $scope.getCurrentUser().email;
-        $scope.registry.backgroundImageUrl = 'assets/img/cover.jpg';
+        $scope.registry.theme = 'theme1';
+        //$scope.registry.backgroundImageUrl = 'assets/img/cover.jpg'
         $scope.registry.profileImageUrl = 'assets/img/noimage.jpg';
         Registry.save($scope.registry, function (resp) {
           $scope.address.registryId = resp._id;
@@ -102,20 +103,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$stateParams', '$state', 'Registry', '$uibModal', 'Upload', 'RegistryService', 'Auth', 'toaster', '$timeout', '$mdDialog', function ($scope, $stateParams, $state, Registry, $uibModal, Upload, RegistryService, Auth, toaster, $timeout, $mdDialog) {
 
   $scope.form = {};
+
+  $scope.setTheme = function (selectedthem) {
+    $scope.theme = $scope.selectedthem;
+    console.log($scope.theme);
+  };
+
   $scope.queryRegistry = function () {
 
     $scope.registry = Registry.get({ id: $stateParams.id }, function (resp) {
+      console.log(resp);
       if (Auth.getCurrentUser().email == resp.username) {
         $scope.editable = true;
       }
+      $scope.setTheme($scope.registry.theme);
+      console.log($scope.theme);
     });
   };
 
   $scope.queryRegistry();
 
-  $scope.theme1 = {
+  $scope.registry.theme1 = {
     "background": "theme1background",
     "color": "theme1color",
+    "title": "theme1tilte",
+    "font": "theme1font"
+  };
+
+  $scope.registry.theme2 = {
+    "background": "theme2background",
+    "color": "theme2color",
     "title": "theme1tilte",
     "font": "theme1font"
   };
@@ -256,12 +273,39 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
       controller: 'backgroundImageCtrl',
       size: 'lg'
     }).result.then(function (result) {
-      $scope.registry.backgroundImageUrl = result;
-      Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
-        console.log("success");
-      });
+      var blob = dataURItoBlob(result);
+      var file = new File([blob], 'fileName.jpeg', { type: "'image/jpeg" });
+      $scope.upload(file);
     });
   };
+
+  $scope.selectTheme = function () {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'app/registry/registry-themes.html',
+      controller: 'themeCtrl',
+      size: 'lg'
+    }).result.then(function (result) {
+      console.log(result);
+    });
+  };
+
+  function dataURItoBlob(dataURI) {
+
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0) byteString = atob(dataURI.split(',')[1]);else byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], { type: mimeString });
+  }
 
   $scope.showproductDetail = function (product, chipin) {
     console.log(product);
@@ -344,17 +388,18 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
   };
 
   $scope.upload = function (file) {
-    console.log(file);
     if (file) {
       Upload.upload({
         url: '/api/uploads',
         data: { file: file }
       }).then(function (resp) {
+        console.log(resp);
         if ($scope.registry) {
 
           $scope.registry.profileImageUrl = resp.data.url;
 
           Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
+            console.log(res);
             console.log("success");
           });
         } else {
@@ -395,6 +440,17 @@ angular.module('bhcmartApp').controller('backgroundImageCtrl', ['$scope', '$stat
 
   $scope.crop = function () {
     $uibModalInstance.close($scope.myCroppedImage);
+  };
+}]);
+
+angular.module('bhcmartApp').controller('themeCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', function ($scope, $stateParams, $state, Registry, $uibModalInstance) {
+
+  $scope.ok = function (theme) {
+    $uibModalInstance.close(theme);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
   };
 }]);
 
