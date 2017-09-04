@@ -18,7 +18,7 @@ router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
-router.get('/:slug/catalog/:limit/:page', controller.catalog);
+router.get('/:slug/catalog/', controller.catalogindex);
 router.get('/:slug/search/:term', controller.search);
 router.post('/productCount', controller.count);
 router.post('/:id/addfeaturedPdt', controller.addtofeaturedproducts);

@@ -141,7 +141,7 @@ angular.module('bhcmartApp')
 
 
 
-    $scope.registry.theme1 = {
+/*    $scope.registry.theme1 = {
       "background": "theme1background",
       "color" : "theme1color",
       "title" : "theme1tilte",
@@ -153,7 +153,7 @@ angular.module('bhcmartApp')
       "color" : "theme2color",
       "title" : "theme1tilte",
       "font" : "theme1font"
-    }
+    }*/
 
     
 
@@ -336,6 +336,7 @@ angular.module('bhcmartApp')
           size :'lg'
         })
         .result.then(function(result) {
+          $scope.registry.theme = result;
          console.log(result);
        });
 

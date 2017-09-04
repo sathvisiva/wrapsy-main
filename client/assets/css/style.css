@@ -807,8 +807,7 @@ footer a {
 .header-contact-info i {
     color: #ffffff;
     display: inline-block;
-    font-size: 14px;
-    height: 18px;
+    font-size: 16px;
     text-align: center;
     width: 18px;
 }
@@ -841,6 +840,7 @@ footer a {
 }
 .header-contact-info span {
     color: #ffffff;
+    font-size: 16px;
 }
 .header-s-icons:after {
     background: #b6b6ba none repeat scroll 0 0;
@@ -1057,10 +1057,10 @@ footer a {
         padding-top: 25px;
     }
     
-#list .single-product .wishlist, #list .single-product .signal {
-    transform: scale(1);
-}
-/*--------------------------------------------*/
+    #list .single-product .wishlist, #list .single-product .signal {
+        transform: scale(1);
+    }
+    /*--------------------------------------------*/
 /*  19. Product Details Page Start
 /*--------------------------------------------*/
 
@@ -2453,9 +2453,10 @@ body {
 .navbar-custom {
     background-image: none;
     background-color: #00BCD4;
-    
-    box-shadow: 0 1px 15px rgba(0,0,0,.2);
+    border : 0px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.2);
     z-index: 8888;
+    border-radius: 0px;
 }
 
 .navbar-custom .navbar-brand:hover,
@@ -2511,7 +2512,7 @@ body {
     background-color: #ffffff;
 }
 .navbar-custom .navbar-toggle .icon-bar {
-    background-color: #CCC;
+    background-color: #ffffff;
 }
 @media (max-width: 767px) {
     .navbar-custom .navbar-nav .open .dropdown-menu > li > a {
@@ -3581,3 +3582,56 @@ input[type="radio"] .styled:checked + label::after {
     background-color: #ffffff;
 }
 
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    background-color: #FF4081;
+    color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #ffffff;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.sidenav-categories{
+    margin-left: 10px;
+}
+
+.collapsebtn{
+    border: 0px;
+    float: left;
+}
+
+.mobile-header{
+    float : right;
+    margin-top: 15px;
+}

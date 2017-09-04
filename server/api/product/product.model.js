@@ -35,11 +35,6 @@ var FilterSchema = new Schema({
   value: [{
     type: String
   }],
-  categories: {
-    type: Schema.Types.ObjectId,
-    ref: 'Catalog',
-    index: true
-  }
 });
 
 var ReviewSchema = new Schema({

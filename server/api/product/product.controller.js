@@ -41,10 +41,10 @@ function isJson(str) {
 
 function responseWithResult(res, statusCode) {
 
+
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
-      console.log(entity.length);
       res.status(statusCode).json(entity);
     }
   };
@@ -147,9 +147,11 @@ function productsInSearchCategory(term) {
 exports.index = function(req, res) {
   if(req.query){
     var q = isJson(req.query.where);
-    console.log("inside index");
-    console.log(q)
-    Product.find(q).populate({ path: "categories", select: "name" }).execAsync()
+    var limit = parseInt(req.query.list);
+    var skip = parseInt(req.query.skip)
+
+    console.log(limit);
+    Product.find(q).limit(limit).skip(skip).populate({ path: "categories", select: "name" }).execAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 
@@ -159,6 +161,18 @@ exports.index = function(req, res) {
     .catch(handleError(res));
   }
 };
+
+
+exports.catalogindex = function(req, res){
+ if(req.query){
+  console.log(req.query)
+  var q = isJson(req.query.where);
+  Product.find(q).limit(req.query.limit).skip(req.query.skip).populate({ path: "categories", select: "name" }).execAsync()
+  .then(responseWithResult(res))
+  .catch(handleError(res));
+
+}
+}
 
 exports.addtofeaturedproducts = function(req,res){
  Product.update({ _id: req.params.id }, { $set: { featured: true }}, function (err, product) {
@@ -212,9 +226,15 @@ exports.indexFilters = function(req, res) {
 
 exports.count = function(req, res) {
 
-  if(req.query){
-    var q = isJson(req.query.where);
+  console.log(req.body);
+
+  if(req.body){
+    
+    var q = isJson(req.body.where);
+    console.log("q"+q)
+    
     Product.find(q).count().exec(function (err, count) {
+      console.log("count" + count);
       if(err) { 
         console.log(err)
         return handleError(res, err); }

@@ -34,7 +34,27 @@ angular.module('bhcmartApp')
       }
 
       $scope.registry = {}
-      $scope.registry.registryId = ""
+      $scope.registry.registryId = "";
+
+      $scope.login = function(ev,data) {
+        $mdDialog.show({
+          controller: 'LoginController'
+          , templateUrl: 'app/account/login/login.html'
+          , parent: angular.element(document.body)
+          , targetEvent: ev
+          
+          , clickOutsideToClose: true
+          , locals: {
+            dataToPass: data
+          }
+        });
+
+        $scope.$watch(function () {
+          return $mdMedia('xs') || $mdMedia('sm');
+        }, function (wantsFullScreen) {
+          $scope.customFullscreen = (wantsFullScreen === true);
+        });
+      }
 
       $scope.addtoRegistry = function(ev,product, qty,registryId){
 
@@ -43,7 +63,12 @@ angular.module('bhcmartApp')
 
         if(!Auth.isLoggedIn()){
           $scope.message = "Please login to add Registry";
-        }else if($scope.registryOptions && $scope.registryOptions.length <1){
+        }else{
+          $scope.data = {'event' : 'login'};
+          $scope.login(ev, $scope.data);
+        } 
+
+        if($scope.registryOptions && $scope.registryOptions.length <1){
           $scope.message = "No Registry found. Please create Registry";
         }else if(!registryId){
           $scope.message = "Please choose a Registry";

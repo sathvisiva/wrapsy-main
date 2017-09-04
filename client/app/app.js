@@ -18,15 +18,19 @@ angular.module('bhcmartApp', [
   'ngMaterial',
   'ngMessages',
   'rzModule',
-  'uiCropper'
+  'uiCropper',
+  'infinite-scroll'
   ])
-.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider) {
+.config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider,$uiViewScrollProvider) {
   $urlRouterProvider
   .otherwise('/');
   $locationProvider.html5Mode(true);
+  $uiViewScrollProvider.useAnchorScroll();
+
   $mdThemingProvider.theme('default')
   .primaryPalette('cyan')
   .accentPalette('pink');
+
   
 
 })
@@ -45,9 +49,12 @@ angular.module('bhcmartApp', [
   $rootScope.$state = $state;
   $rootScope._ = _;
   $rootScope.location = $location;
-  $rootScope.$on('$stateChangeSuccess',function(){
-    $("html, body").animate({ scrollTop: 0 }, 200);
-  });
+  $rootScope.$on('$stateChangeSuccess',function(event, toState){
+     if($stateParams.scrollTo){
+      $location.hash($stateParams.scrollTo);
+      $anchorScroll();
+    }
+ });
 })
 .directive('myTab', function($timeout) {
   return {
@@ -62,10 +69,10 @@ angular.module('bhcmartApp', [
   }
 })
 .directive("randomBackgroundcolor", function () {
-    return {
-        restrict: 'EA',
-        replace: false,
-        link: function (scope, element, attr) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function (scope, element, attr) {
 
             //generate random color
             var color = '#' + (Math.random() * 0xFFFFFF << 0).toString(16); 
@@ -73,9 +80,9 @@ angular.module('bhcmartApp', [
             //Add random background class to selected element
             element.css('background-color', color);
 
+          }
         }
-    }
-})
+      })
 .directive('slideit', function() {
   return {
     link: function(scope, element, attrs) {

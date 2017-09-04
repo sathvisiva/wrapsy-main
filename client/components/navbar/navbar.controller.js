@@ -23,6 +23,108 @@ class NavbarController {
       }
     }
 
+    $scope.getcategories = function(parentid){
+      var q = {where:{parent:parentid}};
+      return Catalog.query(q);
+    }
+
+    $scope.buildnavbar = function(){
+      $scope.tree = [];
+      Catalog.query(function(categories) {
+        $scope.categories = categories;
+        $scope.parentCategories = _.filter(categories, function(category) {
+          return category.ancestors.length == 1;
+        })
+
+        angular.forEach($scope.parentCategories, function(value, key){
+
+          var parentcateogry = {
+            "name" : value.name,
+            "slug" : value.slug,
+            "id" : value._id
+          }
+          if(value.children.length > 0){
+            parentcateogry.subtree = [];
+            angular.forEach(value.children, function(id, key){
+              $scope.subCategories = _.filter($scope.categories, function(category) {
+                return category._id == id;
+              })
+
+              if($scope.subCategories.length>0){
+                var subcategory = {
+                  "name" : $scope.subCategories[0].name,
+                  "slug" : $scope.subCategories[0].slug,
+                  "id" : $scope.subCategories[0]._id
+
+                }
+                if($scope.subCategories[0].children && $scope.subCategories[0].children.length > 0){
+                  subcategory.subtree = [];
+                  angular.forEach($scope.subCategories[0].children, function(id, key){
+                    $scope.subsubCategories = _.filter($scope.categories, function(category) {
+                      return category._id == id;
+                    })
+
+                    if($scope.subsubCategories.length>0){
+                      var subsubcategory = {
+                        "name" : $scope.subsubCategories[0].name,
+                        "slug" : $scope.subsubCategories[0].slug,
+                        "id" : $scope.subsubCategories[0]._id
+
+                      }
+                      subcategory.subtree.push(subsubcategory)
+                    }
+
+
+
+
+                  })
+
+                }
+
+              }
+
+              parentcateogry.subtree.push(subcategory)
+            })
+
+          }
+          $scope.tree.push(parentcateogry);
+        });
+      });
+    }
+
+    $scope.buildnavbar();
+
+    $scope.showsubtree = false;
+
+    $scope.showsusubtree = false;
+
+    $scope.expandsubtree = function(){
+      $scope.showsubtree = ! $scope.showsubtree;
+    }
+
+
+    $scope.expandsusubtree = function(){
+      $scope.showsusubtree = ! $scope.showsusubtree;
+    }
+
+    $scope.openNav = function(){
+      console.log("inside openNav");
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    $scope.closeNav = function(){
+      console.log("inside closenav");
+      document.getElementById("mySidenav").style.width = "0";
+    }
+
+    /*function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }*/
+/*
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }*/
+
 
     $scope.createRegistry = function(ev){
       if($scope.isLoggedIn()){

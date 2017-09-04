@@ -15,7 +15,7 @@
 <div class="container">
   <div class="category-title-header">
     <div class="title-center">
-      <div class="title"><h1>{{categoryTitle}}</h1></div>
+      <div class="title"><h1>{{category.name}}</h1></div>
       <div class="separator-title"><div class="divider-line"></div></div>
     </div>
     <div class="clearer"></div>
@@ -27,45 +27,40 @@
       <div class="col-md-4">
         <div class="uimax-sidebar">
           <div class="product-filter">
-            <div class="categories-list block">
+            <div class="categories-list block" ng-if="childcategories.length > 0">
               <div class="title">Categories</div>
               
-              <ul class="list" ng-repeat="parentCategory in parentCategories">
+              <ul class="list" ng-repeat="parentCategory in childcategories">
                 <li><a ui-sref="products({slug: parentCategory.slug, category : parentCategory.name })">{{parentCategory.name}}</a></li>
                 
               </ul>
             </div>
-           <!--  <div class="block size-filter">
+            <div class="block size-filter">
               <div class="title">size</div>
               <div class="select-group" ng-repeat = "size in sizes">
-               <md-checkbox>
+               <md-checkbox  ng-model="selected.sizes[size]" name="group" id="{{size}}" ng-change="sizechanged()">
                  {{ size }}
                </md-checkbox>
              </div>
-           </div> -->
-         <!--   <div class="block price-filter">
+           </div>
+           <div class="block price-filter">
             <div class="title">Price</div>
-            <rzslider
-            rz-slider-floor="priceSlider.floor"
-            rz-slider-ceil="priceSlider.ceil"
-            rz-slider-model="priceSlider.min"
-            rz-slider-high="priceSlider.max"
-            rz-slider-on-end="test()"></rzslider>
+            <rzslider rz-slider-model="slider.minValue"
+            rz-slider-high="slider.maxValue"
+            rz-slider-options="slider.options"></rzslider>
+          </div> 
 
-            <strong>{{priceSlider.min}}</strong> &nbsp;-&nbsp; $<strong>{{priceSlider.max}}</strong>
-          </div> -->
-
-         <!--  <div class="block color-filter">
+          <div class="block color-filter">
             <div class="title">Color</div>
             <div class="select-group" ng-repeat = "color in colors">
-             <md-checkbox>
+             <md-checkbox ng-model="selected.colors[color]" name="group" id="{{color}}" ng-change="colorchanged()">
                {{ color }}
              </md-checkbox>
            </div>
-         </div> -->
+         </div>
 
          
-            <!-- <div class="block price-range">
+           <!--  <div class="block price-range">
               <div class="title">Price</div>
               <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="minRangeSlider.options"></rzslider>
               
@@ -93,8 +88,13 @@
             </div>
           </div>          
         </div>
-        <md-button class="md-raised md-accent pull-left" ng-show="page>0" ng-click="previousPage()">< Previous</md-button>
-        <md-button class="md-raised md-accent pull-right" ng-click="nextPage()">Next ></md-button>
+        <div class="pull-right" ng-if="totalPages > 1">
+          <span class="cursorpointer" ng-show="page>1" ng-click="previousPage()">&lsaquo;&lsaquo;</span>
+          <span ng-click="nextPage()">{{page}}</span>
+          <span class="cursorpointer" ng-hide="disablednext" ng-click="nextPage()">&rsaquo;&rsaquo;</span>
+        </div>
+        <!-- <md-button class="md-raised md-accent pull-right" ng-show="page>0" ng-click="previousPage()">< Previous</md-button>
+        <md-button class="md-raised md-accent pull-right" ng-click="nextPage()">Next ></md-button> -->
       </div>
       
       <div class="clearfix"></div>

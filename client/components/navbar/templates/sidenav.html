@@ -1,0 +1,18 @@
+	<div id="mySidenav" class="visible-xs visible-sm hidden-md hidden-lg sidenav">
+
+		<a  class="closebtn" ng-click="closeNav()">&times;</a>
+
+		<a class="text-center"><h4>Categories</h4></a>
+		<hr>
+		<ul class = "sidenav-categories" ng-repeat="category in tree | orderBy:'name'" >
+			<li>
+				<span class="created" ng-click="expandsubtree()">{{category.name }}</span>
+			</li>
+		</ul>
+		<hr>
+		<a class="text-center"><h4>My Orders</h4></a>
+		<hr>
+		<a class="text-center"><h4>My vouchers</h4></a>
+		<hr>
+		<a class="text-center"><h4>Logout</h4></a>
+	</div>

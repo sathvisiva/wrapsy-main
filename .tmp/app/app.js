@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider) {
+angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper', 'infinite-scroll']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, $uiViewScrollProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
+  $uiViewScrollProvider.useAnchorScroll();
+
   $mdThemingProvider.theme('default').primaryPalette('cyan').accentPalette('pink');
 }).run(function ($rootScope, $state, ngCart, $location) {
   $.scrollUp({
@@ -18,8 +20,11 @@ angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp
   $rootScope.$state = $state;
   $rootScope._ = _;
   $rootScope.location = $location;
-  $rootScope.$on('$stateChangeSuccess', function () {
-    $("html, body").animate({ scrollTop: 0 }, 200);
+  $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+    if ($stateParams.scrollTo) {
+      $location.hash($stateParams.scrollTo);
+      $anchorScroll();
+    }
   });
 }).directive('myTab', function ($timeout) {
   return {

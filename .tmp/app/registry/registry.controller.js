@@ -123,19 +123,19 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
 
   $scope.queryRegistry();
 
-  $scope.registry.theme1 = {
-    "background": "theme1background",
-    "color": "theme1color",
-    "title": "theme1tilte",
-    "font": "theme1font"
-  };
-
-  $scope.registry.theme2 = {
-    "background": "theme2background",
-    "color": "theme2color",
-    "title": "theme1tilte",
-    "font": "theme1font"
-  };
+  /*    $scope.registry.theme1 = {
+        "background": "theme1background",
+        "color" : "theme1color",
+        "title" : "theme1tilte",
+        "font" : "theme1font"
+      }
+  
+      $scope.registry.theme2 = {
+        "background": "theme2background",
+        "color" : "theme2color",
+        "title" : "theme1tilte",
+        "font" : "theme1font"
+      }*/
 
   $scope.registryPage = function (state) {
     $scope.state = 'registry.' + state;
@@ -285,6 +285,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
       controller: 'themeCtrl',
       size: 'lg'
     }).result.then(function (result) {
+      $scope.registry.theme = result;
       console.log(result);
     });
   };
