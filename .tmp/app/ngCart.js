@@ -41,14 +41,27 @@ angular.module('ngCart', ['ngCart.directives']).config([function () {}]).provide
     };
 
     this.addVoucher = function (id) {
-        console.log("add Voucher" + id);
         this.$cart.vouchers.push(id);
+        return this.getVouchers();
+
         $rootScope.$broadcast('ngCart:change', {});
     };
 
     this.getVouchers = function () {
         var vouchers = this.getCart().vouchers;
         return vouchers;
+    };
+
+    this.getVoucherAmount = function () {
+        var voucheramount = 0;
+        angular.forEach(this.getVouchers(), function (item) {
+            voucheramount += parseFloat(item.amount);
+        });
+        return +parseFloat(voucheramount).toFixed(2);
+    };
+
+    this.getPayable = function () {
+        return +parseFloat(this.totalCost() - this.getVoucherAmount()).toFixed(2);
     };
 
     this.getItemById = function (itemId) {
@@ -111,7 +124,7 @@ angular.module('ngCart', ['ngCart.directives']).config([function () {}]).provide
     this.getSubTotal = function () {
         var total = 0;
         angular.forEach(this.getCart().items, function (item) {
-            total += item.getTotal();
+            total += item.getTotal() - item.getGst();
         });
         return +parseFloat(total).toFixed(2);
     };
@@ -125,7 +138,7 @@ angular.module('ngCart', ['ngCart.directives']).config([function () {}]).provide
     };
 
     this.totalCost = function () {
-        return +parseFloat(this.getSubTotal() + this.getShipping()).toFixed(2);
+        return +parseFloat(this.getSubTotal() + this.getShipping() + this.getTotalTax()).toFixed(2);
     };
 
     this.removeItem = function (index) {
@@ -195,6 +208,9 @@ angular.module('ngCart', ['ngCart.directives']).config([function () {}]).provide
 
         angular.forEach(storedCart.items, function (item) {
             _self.$cart.items.push(new ngCartItem(item._id, item._name, item._price, item._quantity, item._data, item._color, item._size, item._gst));
+        });
+        angular.forEach(storedCart.vouchers, function (voucher) {
+            _self.$cart.vouchers.push(voucher);
         });
         this.$save();
     };

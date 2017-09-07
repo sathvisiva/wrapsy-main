@@ -32,9 +32,12 @@ class NavbarController {
       $scope.tree = [];
       Catalog.query(function(categories) {
         $scope.categories = categories;
+  
         $scope.parentCategories = _.filter(categories, function(category) {
           return category.ancestors.length == 1;
-        })
+        });
+
+        console.log($scope.parentCategories);
 
         angular.forEach($scope.parentCategories, function(value, key){
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bhcmartApp')
-.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster','Voucher','Address','Payment', function($scope, Auth, $state, Order, ngCart, toaster,Voucher,Address,Payment) {
+.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster','Voucher','Address','Payment','$uibModal', function($scope, Auth, $state, Order, ngCart, toaster,Voucher,Address,Payment, $uibModal) {
   $state.go('checkout.shipping')
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.country = "In"
@@ -15,14 +15,85 @@ angular.module('bhcmartApp')
   $scope.address = {};
 
   var q = {where:{email:Auth.getCurrentUser().email}};
+
+  $scope.myTabIndex = 0;
+  console.log("tabindex");
+
+  console.log($scope.myTabIndex);
  /* $scope.vouchers =  Voucher.query(q);
   console.log($scope.vouchers)
+
+
   */
+
+  $scope.moveprev = function(){
+   $scope.myTabIndex = 0; 
+   
+ }
+
+
+ $scope.addVoucher = function(ev){
+  if($scope.isLoggedIn()){
+   var modalInstance = $uibModal.open({
+    templateUrl : 'app/voucher/redeem-voucher.html',
+    controller: 'VoucherRedeemCtrl',
+    size :'md',
+    resolve: {
+      amount: function () {
+       return ngCart.totalCost();
+     }
+   }
+ })
+   .result.then(function(result) {
+    console.log(result);
+    console.log($scope.productInfo);
+    /*ngCart.addVoucher(result);*/
+    /*console.log(ngCart.getVoucherAmount());
+    console.log(ngCart.getPayable());
+    console.log(ngCart.getVouchers());*/
+
+    Order.updateVoucher({id:$scope.productInfo},result).$promise.then(function(res) {
+     console.log(res);
+    });
+
+
+  /*  Order.countorders(q, function (orders) {
+      $scope.orderscount = orders[0].count;
+      console.log($scope.orderscount);
+    });*/
+  }, function() {
+  // Cancel
+});
+ }else{
+  $scope.data = {'event' : 'login'};
+  $scope.login(ev, $scope.data);
+
+}
+}
+
+$scope.moveNext = function(){
+ $scope.myTabIndex = $scope.myTabIndex + 1; 
+ $scope.showshipping = true;
+}
+
+$scope.gotoshipping = function(){
+  console.log("inside shipping")
+  $scope.myTabIndex = 0;
+}
+
+$scope.showshipping = false;
+
+$scope.states = ['Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar',
+'Chandigarh', 'cHattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa',
+'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka',
+'Kerala', 'Lakshadweep ', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
+'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
+'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
 
 
 /*
-  $scope.savelocation = function(form){
-    $scope.locationformsubmitted = false;
+  $scope.savelocationmyTabIndex = function(form){
+    $scope.locationformsubmmyTabIndexitted = false;
     if (!form.$valid) {
       $scope.locationformsubmitted = true
     }else{
@@ -145,13 +216,14 @@ angular.module('bhcmartApp')
           customerName: user.name,
           customerEmail: $scope.user.email,
           customerAddress: user.address
-          });
-          console.log(cart)
-          Order.save(cart,function(resp) {
+        });
+        console.log(cart)
+        Order.save(cart,function(resp) {
           $scope.amount = resp.totalCost;
           $scope.productInfo = resp._id;
-          $scope.presubmit();
-          ngCart.empty();
+          //$scope.presubmit();
+          $scope.myTabIndex = $scope.myTabIndex + 1; 
+          //ngCart.empty();
 
         },
         function(err) {

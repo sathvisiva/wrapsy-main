@@ -1,156 +1,162 @@
 <navbar></navbar>
 <section class="event-details">
   <div class="container">
-    <div ng-cloak>
-      <md-content class="checkout">
-        <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always" md-selected="myTabIndex">
-          <md-tab label="1.Shipping Details">
-            <md-content class="md-padding checkout">
-              <section class="event-details">
-                <div class="container">
-                  <div class="row">
-                    <div class="category-title-header">
-                      <div class="title-center">
-                        <div class="title"><h1>Shipping Address</h1></div>
-                        <div class="separator-title"><div class="divider-line"></div></div>
-                      </div>
-                      <div class="clearer"></div>
-                    </div>
-                  </div>
-                  <div class = "register-section">
-                    <form class="form" name="form1" ng-submit="savelocation(form1)" novalidate>
-                      <!-- our nested state views will be injected here -->
+    <div class="row">
+      <div class="col-md-9">
+        <div ng-cloak>
+          <md-content class="checkout">
+            <md-tabs md-dynamic-height md-border-bottom md-center-tabs= true md-swipe-content=true md-selected="myTabIndex">
+              <md-tab label="1.Shipping Details">
+                <md-content class="md-padding checkout">
+                  <section class="event-details">
+                    <div class="test">
                       <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group form-group-lg">
-                            <label>Name</label>
-                            <div class="row grid-container grid-spacing-half">
-                              <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                <input type="text"  class="form-control" placeholder="Name" id="name" name="name"
-                                ng-model="address.name" required>
-                                <p ng-show="(form1.name.$invalid && !form1.name.$pristine) || (form1.name.$invalid && form1.name.$touched) || (form1.name.$invalid && locationformsubmitted)" class="help-block">Name is required.</p>                                
-                              </div>
-
-                            </div>
+                        <div class="category-title-header">
+                          <div class="title-center">
+                            <div class="title"><h1>Shipping Address</h1></div>
+                            <div class="separator-title"><div class="divider-line"></div></div>
                           </div>
+                          <div class="clearer"></div>
                         </div>
-                        <div class="col-md-6">
-                          <div class="form-group form-group-lg">
-                            <label>Mobile Number</label>
-                            <div class="row grid-container grid-spacing-half">
-                              <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                <input type="text" name="phoneNumber" placeholder="9999999999" class="form-control" ng-model="address.phoneNumber" ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" required/>
-                                <span class="help-block" ng-show="(form1.phoneNumber.$invalid && !form1.phoneNumber.$pristine) || (form1.phoneNumber.$invalid && form1.phoneNumber.$touched) || (form1.phoneNumber.$invalid && locationformsubmitted) ">The phone number field should be 
-                                  of 10 digits</span>              
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group form-group-lg">
-                              <label>Address 1</label>
-                              <div class="row grid-container grid-spacing-half">
-                                <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                  <input type="text"  class="form-control" placeholder="Address 1" id="name" name="address1"
-                                  ng-model="address.address1" required>
-                                  <p ng-show="(form1.address1.$invalid && !form1.address1.$pristine) || (form1.address1.$invalid && form1.address1.$touched) || (form1.address1.$invalid && locationformsubmitted) " class="help-block">Address 1 is required.</p>                                
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group form-group-lg">
-                              <label>Address 2</label>
-                              <div class="row grid-container grid-spacing-half">
-                                <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                  <input type="text"  class="form-control" placeholder="Address 2" id="name" name="address2"
-                                  ng-model="address.address2" required>
-                                  <p ng-show="(form1.address2.$invalid && !form1.address2.$pristine) || (form1.address2.$invalid && form1.address2.$touched) || (form1.address2.$invalid && locationformsubmitted) " class="help-block">Address 2 is required.</p>                                
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-
-
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group form-group-lg">
-                              <label>Landmark</label>
-                              <div class="row grid-container grid-spacing-half">
-                                <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                  <input type="text"  class="form-control" placeholder="landmark" id="landmark" name="landmark"
-                                  ng-model="address.landmark">
-
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group form-group-lg">
-                              <label>City</label>
-                              <div class="row grid-container grid-spacing-half">
-                                <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                  <input type="text"  class="form-control" placeholder="city" id="city" name="city"
-                                  ng-model="address.city" required>
-                                  <p ng-show="(form1.city.$invalid && !form1.city.$pristine) || (form1.city.$invalid && form1.city.$touched) || (form1.city.$invalid && locationformsubmitted) " class="help-block">City is required.</p>                                
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-md-6">
-                            <div class="form-group form-group-lg">
-                              <label>State</label>
-                              <div class="row grid-container grid-spacing-half">
-                                <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                  <input type="text"  class="form-control" placeholder="State" id="state" name="state"
-                                  ng-model="address.state" required>
-                                  <p ng-show="(form1.state.$invalid && !form1.state.$pristine) || (form1.state.$invalid && form1.state.$touched)  || (form1.state.$invalid && locationformsubmitted)" class="help-block">State is required.</p>                                
-                                </div>
-
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="form-group form-group-lg">
-                              <label>Pincode</label>
-                              <div class="row grid-container grid-spacing-half">
-                                <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-                                  <input type="text" name="pincode" placeholder="600001" class="form-control" ng-model="address.pincode" ng-maxlength="6" ng-minlength="6" ng-pattern="/^\d{6}$/" required/>
-                                  <span class="help-block" ng-show="(form1.pincode.$invalid && !form1.pincode.$pristine) || (form1.pincode.$invalid && form1.pincode.$touched) || (form1.pincode.$invalid && locationformsubmitted) ">The pincode field should be 
-                                    of 6 digits</span>              
+                      </div>
+                      <div class = "register-section">
+                        <form class="form" name="form1" ng-submit="savelocation(form1)" novalidate>
+                          <!-- our nested state views will be injected here -->
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group form-group-lg">
+                                <label>Name</label>
+                                <div class="row grid-container grid-spacing-half">
+                                  <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                    <input type="text"  class="form-control" placeholder="Name" id="name" name="name"
+                                    ng-model="address.name" required>
+                                    <p ng-show="(form1.name.$invalid && !form1.name.$pristine) || (form1.name.$invalid && form1.name.$touched) || (form1.name.$invalid && locationformsubmitted)" class="help-block">Name is required.</p>                                
                                   </div>
 
                                 </div>
                               </div>
                             </div>
-                          </div>
+                            <div class="col-md-6">
+                              <div class="form-group form-group-lg">
+                                <label>Mobile Number</label>
+                                <div class="row grid-container grid-spacing-half">
+                                  <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                    <input type="text" name="phoneNumber" placeholder="9999999999" class="form-control" ng-model="address.phoneNumber" ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" required/>
+                                    <span class="help-block" ng-show="(form1.phoneNumber.$invalid && !form1.phoneNumber.$pristine) || (form1.phoneNumber.$invalid && form1.phoneNumber.$touched) || (form1.phoneNumber.$invalid && locationformsubmitted) ">The phone number field should be 
+                                      of 10 digits</span>              
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
 
 
-                          <div class="row">
-                            <div class="col-xs-12 col-sm-4 col-md-2 pull-right">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group form-group-lg">
+                                  <label>Address 1</label>
+                                  <div class="row grid-container grid-spacing-half">
+                                    <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                      <input type="text"  class="form-control" placeholder="Address 1" id="name" name="address1"
+                                      ng-model="address.address1" required>
+                                      <p ng-show="(form1.address1.$invalid && !form1.address1.$pristine) || (form1.address1.$invalid && form1.address1.$touched) || (form1.address1.$invalid && locationformsubmitted) " class="help-block">Address 1 is required.</p>                                
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group form-group-lg">
+                                  <label>Address 2</label>
+                                  <div class="row grid-container grid-spacing-half">
+                                    <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                      <input type="text"  class="form-control" placeholder="Address 2" id="name" name="address2"
+                                      ng-model="address.address2" required>
+                                      <p ng-show="(form1.address2.$invalid && !form1.address2.$pristine) || (form1.address2.$invalid && form1.address2.$touched) || (form1.address2.$invalid && locationformsubmitted) " class="help-block">Address 2 is required.</p>                                
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group form-group-lg">
+                                  <label>Landmark</label>
+                                  <div class="row grid-container grid-spacing-half">
+                                    <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                      <input type="text"  class="form-control" placeholder="landmark" id="landmark" name="landmark"
+                                      ng-model="address.landmark">
+
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group form-group-lg">
+                                  <label>City</label>
+                                  <div class="row grid-container grid-spacing-half">
+                                    <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                      <input type="text"  class="form-control" placeholder="city" id="city" name="city"
+                                      ng-model="address.city" required>
+                                      <p ng-show="(form1.city.$invalid && !form1.city.$pristine) || (form1.city.$invalid && form1.city.$touched) || (form1.city.$invalid && locationformsubmitted) " class="help-block">City is required.</p>                                
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group form-group-lg">
+                                  <label>State</label>
+                                  <div class="row grid-container grid-spacing-half">
+                                    <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                      <!-- <input type="text"  class="form-control" placeholder="State" id="state" name="state"
+                                      ng-model="address.state" required> -->
+                                      <select class="form-control" name="state" ng-model="address.state" data-live-search="true" required>
+                                       <option ng-repeat="state in states" value="{{state}}" >{{state}}</option>
+                                     </select>
+                                     <p ng-show="(form1.state.$invalid && !form1.state.$pristine) || (form1.state.$invalid && form1.state.$touched)  || (form1.state.$invalid && locationformsubmitted)" class="help-block">State is required.</p>                                
+                                   </div>
+
+                                 </div>
+                               </div>
+                             </div>
+                             <div class="col-md-6">
+                              <div class="form-group form-group-lg">
+                                <label>Pincode</label>
+                                <div class="row grid-container grid-spacing-half">
+                                  <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                                    <input type="text" name="pincode" placeholder="600001" class="form-control" ng-model="address.pincode" ng-maxlength="6" ng-minlength="6" ng-pattern="/^\d{6}$/" required/>
+                                    <span class="help-block" ng-show="(form1.pincode.$invalid && !form1.pincode.$pristine) || (form1.pincode.$invalid && form1.pincode.$touched) || (form1.pincode.$invalid && locationformsubmitted) ">The pincode field should be 
+                                      of 6 digits</span>              
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div class="row">
+                              <div class="pull-right">
                               <!-- <input type="submit" class="btn btn-primary btn-lg " value="Continue">
                             -->
-                            <md-button class="md-raised md-accent" ng-disabled="form1.$invalid" ng-click="myTabIndex = myTabIndex+1">Save & Next</md-button>
+                            <md-button class="md-raised md-accent" ng-disabled="form1.$invalid" ng-click="moveNext()">Save & Next</md-button>
                           </div>
 
 
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
+                    
                   </div>
                 </section>
 
@@ -176,11 +182,11 @@
                               <tr ng-repeat="item in ngCart.getCart().items track by $index">
                                 <td class="p-image">
                                   <a ui-sref="product({id: item.getData().slug})"><img alt="" width="100" src="{{item.getData().imageUrl}}"></a>
-                                  <div>
+                                <!--   <div>
 
                                     <span class="fa fa-minus-circle" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
                                     <span class="fa fa-plus-circle" ng-click="item.setQuantity(1, true)"></span>
-                                  </div>
+                                  </div> -->
                                 </td>
                                 <td class="p-name"><a ui-sref="product({id: item.getData().slug})">{{ item.getName() }}</a></td>
                                <!--  <td class="p-amount"><span class="amount">₹{{ item.getPrice() | number:2}}</span></td>
@@ -193,8 +199,8 @@
                               </tbody>
                             </table>
                             <div class="row">
-                              <div class="col-xs-12 col-sm-4 col-md-2 pull-right">
-                                <md-button class="md-raised md-accent" ng-click="myTabIndex = myTabIndex+1">Save & Next</md-button>
+                              <div class="pull-right">
+                                <md-button class="md-raised md-accent" ng-click="checkoutorder(ngCart.toObject(), user)">Confirm and Proceed to Payment</md-button>
                               </div>
 
 
@@ -204,7 +210,7 @@
                         <md-tab label="3.Payment Options">
                           <md-content class="md-padding checkout">
                             <div class="row">
-                              <div class="col-md-8">
+                              <div class="col-md-12">
                                <div class="category-title-header">
 
                                 <div class="title-center">
@@ -215,62 +221,84 @@
                               </div>
                               <div>
                                 <md-list ng-model="user.payment">
-                                <md-list-item  >
-                                    <p> <a ng-click="checkoutorder(ngCart.toObject(), user)"> Net Banking / Credit card / Debit Card </a></p>
-                                    
-                                  </md-list-item>
+                                  <md-list-item>
+                                   <div>Have gift card/Voucher ? <md-button class="md-raised md-accent" ng-click="addVoucher()">Add Voucher</md-button> </div>
+                                 </md-list-item>
+                                 <md-list-item  >
 
-                                  <md-divider></md-divider>
-                                  <md-list-item >
-                                    <p> Cash On Delivery </p>
-                                    
-                                  </md-list-item>
-                                  <md-divider></md-divider>
-                                  <md-list-item >
-                                    <p> Gift Voucher </p>
-                                    
-                                  </md-list-item>
-                                </md-list>  
+                                  <p> <a ng-click="checkoutorder(ngCart.toObject(), user)"> Net Banking / Credit card / Debit Card </a></p>
 
-                                <form id="paymentForm" action='https://test.payu.in/_payment' method='post'>
-                                  <input type="hidden" name="key" value="{{mkey}}" />
-                                  <input type="hidden" name="txnid" value="{{txnid}}" />
-                                  <input type="hidden" name="amount" value="{{amount}}" />
-                                  <input type="hidden" name="productinfo" value="{{productInfo}}" />
-                                  <input type="hidden" name="firstname" value="{{firstName}}" />
-                                  <input type="hidden" name="udf1" value={{id}} />      
-                                  <input type="hidden" name="email" value="{{email}}" />
-                                  <input type="hidden" name="phone" value="{{phone}}" />
-                                  <input type="hidden" name="lastname" value="{{lastName}}" />
-                                  <input type="hidden" name="surl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
-                                  <input type="hidden" name="furl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
-                                  <input type="hidden" name="hash" id="hash" value="{{hash}}">
-                                </form>                            
+                                </md-list-item>
 
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-
-                              <div class="amount-totals">
-                                <p class="title text-center">Price Details</span></p>
                                 <md-divider></md-divider>
-                                <p class="total">Subtotal: <span>₹{{ ngCart.getSubTotal() | number:2}}</span></p>
-                                <p class="total">Delivery Charges: <span>₹{{ 100 | number:2}}</span></p>
-                                <md-divider></md-divider>
-                                <p class="total">Grandtotal: <span>₹{{ ngCart.totalCost() | number:2}}</span></p>
-                                <button ng-click="checkout($event)"  class="btn btn-primary btn-md pull-right">PROCEED TO CHECKOUT</button> 
+                                <md-list-item >
+                                  <p> Cash On Delivery </p>
 
-                              </div>
+                                </md-list-item>
+                                <md-divider></md-divider>
+                                <md-list-item >
+                                  <p> Gift Voucher </p>
+
+                                </md-list-item>
+                              </md-list>  
+
+                              <form id="paymentForm" action='https://test.payu.in/_payment' method='post'>
+                                <input type="hidden" name="key" value="{{mkey}}" />
+                                <input type="hidden" name="txnid" value="{{txnid}}" />
+                                <input type="hidden" name="amount" value="{{amount}}" />
+                                <input type="hidden" name="productinfo" value="{{productInfo}}" />
+                                <input type="hidden" name="firstname" value="{{firstName}}" />
+                                <input type="hidden" name="udf1" value={{id}} />      
+                                <input type="hidden" name="email" value="{{email}}" />
+                                <input type="hidden" name="phone" value="{{phone}}" />
+                                <input type="hidden" name="lastname" value="{{lastName}}" />
+                                <input type="hidden" name="surl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
+                                <input type="hidden" name="furl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
+                                <input type="hidden" name="hash" id="hash" value="{{hash}}">
+                              </form>                            
+
                             </div>
                           </div>
-                        </md-content>
-                      </md-tab>
-                    </md-tabs>
-                  </md-content>
-                </div>
 
+                        </div>
+                      </md-content>
+                    </md-tab>
+                  </md-tabs>
+                </md-content>
 
 
               </div>
+            </div>
+            <div class="col-md-3">
+              <div class="amount-totals">
+                <div class="Shipping-address text-center" ng-show="showshipping">
+                  <div class="text-center"><span>Shipping Address</span> <span ng-click="moveprev()" ><i class="fa fa-pencil "></i></span></div>
+                  <div>{{address.name}}</div>
+                  <div>{{address.phoneNumber}}</div>
+                  <div>{{address.address1}}</div>
+                  <div>{{address.address2}}</div>
+                  <div>{{address.city}}</div>
+                  <div>{{address.state}} - {{address.pincode}}</div>
+                  <md-divider></md-divider>
+                </div>
+                <br>
+                <div class="text-center"><span># of Products : </span> <span >{{ngCart.getCart().items.length}}</span></div>
+                <br>
+                <md-divider></md-divider>
+                <br>
+                <!-- <md-divider></md-divider> -->
 
-            </section>
+
+                <p class="title text-center"><span>Price Details</span></p>
+                <md-divider></md-divider>
+                <p class="total">Subtotal: <span>₹{{ ngCart.getSubTotal() | number:2}}</span></p>
+                <p class="total">Total Tax: <span>₹{{ ngCart.getTotalTax() | number:2}}</span></p>
+                <p class="total">Delivery Charges: <span>₹{{ ngCart.getShipping() | number:2}}</span></p>
+                <md-divider></md-divider>
+                <p class="total">Grandtotal: <span>₹{{ ngCart.totalCost() | number:2}}</span></p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>

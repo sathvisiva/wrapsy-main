@@ -3,6 +3,9 @@
 angular.module('bhcmartApp')
 .controller('VoucherCtrl', function ($scope,$mdDialog,$mdMedia,Auth,Voucher,$http,Payment) {
 
+	this.getCurrentUser = Auth.getCurrentUser;
+
+	console.log(this.getCurrentUser());
 
 
 	function makeid() {
@@ -15,17 +18,24 @@ angular.module('bhcmartApp')
 		return text;
 	}
 
+
+	function uuidv4() {
+		return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+			return v.toString(16);
+		});
+	}
+
 	$scope.message = 'Everyone come and see how good I look!';
 	$scope.mkey = 'gtKFFx';
-	$scope.productInfo = 'Verification order';
+	$scope.productInfo = 'AddVoucher';
 	$scope.txnid = makeid();
-	$scope.amount = 234.99;
-	$scope.id = '2222222';
+	$scope.id = uuidv4();
 	$scope.type = '2';
 	$scope.email = 'sathvisiva@gmail.com';
 	$scope.phone = 9176464641;
-	$scope.lastName = 'test';
-	$scope.firstName = 'fname';
+	$scope.lastName = this.getCurrentUser().name;
+	$scope.firstName = '';
 	$scope.surl = "http://localhost:9000/PaymentStatus";
 	$scope.hash = '';
 
@@ -102,7 +112,10 @@ angular.module('bhcmartApp')
 angular.module('bhcmartApp')
 .controller('VoucherListCtrl', function ($scope,$mdDialog,$mdMedia,Auth,Voucher,$http,Payment) {
 
-	var q = {where:{email:Auth.getCurrentUser().email}};
+	this.getCurrentUser = Auth.getCurrentUser;
+	console.log(this.getCurrentUser());
+
+	var q = {where:{email:Auth.getCurrentUser().email, paid : true }};
 	$scope.vouchers =  Voucher.query(q);
 	console.log($scope.vouchers)
 
@@ -116,17 +129,27 @@ angular.module('bhcmartApp')
 		$uibModalInstance.dismiss('Close');
 	};
 	$scope.ok = function () {
+		$scope.errormessage = '';
 		$scope.voucher = {};
 		$scope.voucher.code = $scope.voucherCode;
 		$scope.voucher.amount = amount;
 		Voucher.redeem($scope.voucher, function(resp){
-			console.log(resp);
-			console.log(resp.errorcode);
-			if(resp.errorcode == 0 || resp.errorcode == 1 || resp.errorcode == 2){
-				console.log("inside if")
-				$uibModalInstance.close(resp.errorcode);
-			}else{
-				$uibModalInstance.close($scope.voucher);	
+			if(resp.errorcode == 0 ){
+				$scope.errormessage = "Sorry, Voucher already redeemed";
+			}else if(resp.errorcode == 1){
+				$scope.errormessage = "Sorry, Voucher validity expired";
+			}else if(resp.errorcode == 2){
+				$scope.errormessage = "Sorry, Voucher amount is greater than cart amount";
+			}else if(resp.errorcode == 3){
+				$scope.errormessage = "Sorry, Invalid voucher code";
+			}
+			else{
+				/*console.log(resp);
+				$scope.voucher.code = resp.code;
+				$scope.voucher.amount = resp.amount;
+				$scope.voucher.id _ resp._id*/
+
+				$uibModalInstance.close(resp);	
 			}
 		});
 		

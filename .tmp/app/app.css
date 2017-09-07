@@ -8258,6 +8258,7 @@ a {
   height: 46px;
   -moz-appearance: none;
   -webkit-appearance: none;
+  background-color: white;
   padding-right: 35px;
   padding-left: 16px;
   margin-left: 10px; }

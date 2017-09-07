@@ -4,47 +4,59 @@ angular.module('bhcmartApp')
 .controller('CartCtrl', function($scope, Modal, ngCart, $state,$mdDialog,Voucher,$uibModal) {
 
 
-console.log(ngCart.getVouchers());
+  console.log(ngCart.getVouchers());
+  console.log(ngCart.getVoucherAmount());
+  console.log(ngCart.getShipping());
+  
 
 
- $scope.clearCart = function(ev) {
-  var confirm = $mdDialog.confirm()
-  .title('Confirm')
-  .textContent('Would you like to remove all the items from your cart' )
-  .ariaLabel('remove product')
-  .targetEvent(ev)
-  .ok('Please do it!')
-  .cancel('cancel');
+  $scope.clearCart = function(ev) {
+    var confirm = $mdDialog.confirm()
+    .title('Confirm')
+    .textContent('Would you like to remove all the items from your cart' )
+    .ariaLabel('remove product')
+    .targetEvent(ev)
+    .ok('Please do it!')
+    .cancel('cancel');
 
-  $mdDialog.show(confirm).then(function() {
-   ngCart.empty()
- }, function() {
+    $mdDialog.show(confirm).then(function() {
+     ngCart.empty()
+   }, function() {
 
- });
+   });
 
-}
+  }
 
-$scope.calculateGST = function(gst,qty,amt){
- return (parseInt(gst)*parseInt(qty)*parseInt(amt))/100;
-};
+  $scope.calculateGST = function(gst,qty,amt){
+   return (parseInt(gst)*parseInt(qty)*parseInt(amt))/100;
+ };
 
-$scope.addVoucher = function(){
- var modalInstance = $uibModal.open({
-  templateUrl : 'app/voucher/redeem-voucher.html',
-  controller: 'VoucherRedeemCtrl',
-  size :'md',
-  resolve: {
-    amount: function () {
-     return ngCart.totalCost();
+ $scope.addVoucher = function(ev){
+  if($scope.isLoggedIn()){
+   var modalInstance = $uibModal.open({
+    templateUrl : 'app/voucher/redeem-voucher.html',
+    controller: 'VoucherRedeemCtrl',
+    size :'md',
+    resolve: {
+      amount: function () {
+       return ngCart.totalCost();
+     }
    }
- }
-})
- .result.then(function(result) {
-  console.log(result)
-  ngCart.addVoucher(result);
-}, function() {
+ })
+   .result.then(function(result) {
+    console.log(result)
+    ngCart.addVoucher(result);
+    console.log(ngCart.getVouchers());
+    console.log(ngCart.getVoucherAmount());
+    console.log(ngCart.getPayable());
+  }, function() {
   // Cancel
 });
+ }else{
+  $scope.data = {'event' : 'login'};
+  $scope.login(ev, $scope.data);
+
+}
 }
 
 $scope.removeProduct = function(ev,productName , product) {

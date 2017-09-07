@@ -10,10 +10,11 @@
  'use strict';
 
  import _ from 'lodash';
- var Voucher = require('./payment.model');
+ var Payment = require('./payment.model');
  var sha512 = require('js-sha512');
  var cc = require('coupon-code');
  var Voucher = require('../voucher/voucher.model');
+
  var Order = require('../order/order.model');
  var mail = require('../mail/sendmail');
  var Registry = require('../registry/registry.model').registry;
@@ -46,6 +47,16 @@ function handleEntityNotFound(res) {
   };
 }
 
+
+function updateVoucher(res,productinfo){
+
+  console.log(res);
+  console.log(productinfo);
+
+
+
+}
+
 function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
@@ -75,11 +86,56 @@ export function createHash(req, res) {
   res.send({success : true, hash: hash});
 }
 
-export function giftPaymentStatus(req, res) {
+export function giftSuccessPaymentStatus(req, res) {
 
-  console.log(res);
+
+  Payment.create(req.body, function(err, payment){
+    if(err){
+      handleError(payment)
+    }
+
+    Voucher.update({ _id: req.body.productinfo }, { $set: { paid: true,  paymentId: payment._id }}, function (err, voucher) {
+      if (err) {
+        handleError(err)
+      }
+
+      Voucher.findById(req.body.productinfo, function (err, voucher) {
+
+        if(err) { return handleError(err); }
+        let voucherdetails = [
+        {
+          'email': voucher.email,
+          'amount': voucher.amount,
+          'vouchercode': voucher.code,
+        }
+        ];
+
+        console.log(voucherdetails);
+        mail.sendmail('voucher',voucherdetails);
+
+      });
+
+
+
+      res.redirect('/myvouchers');
+    });
+  });
+
+
   
-  Voucher.update({ _id: req.body.productinfo }, { $set: { paid: true }}, function (err, voucher) {
+  
+
+
+  
+}
+
+export function giftFilurePaymentStatus(req, res){
+
+
+  console.log(req);
+  console.log(req.body);
+
+  Voucher.update({ _id: req.body.productinfo }, { $set: { paid: false }}, function (err, voucher) {
     if (err) {
       responseObject.err = err;
       responseObject.data = null;
@@ -88,28 +144,9 @@ export function giftPaymentStatus(req, res) {
       return res.json(responseObject);
     }
 
-    Voucher.findById(req.body.productinfo, function (err, voucher) {
-
-      if(err) { return handleError(res, err); }
-      let voucherdetails = [
-      {
-        'email': voucher.email,
-        'amount': voucher.amount,
-        'vouchercode': voucher.code,
-      }
-      ];
-
-      console.log(voucherdetails);
-      mail.sendmail('voucher',voucherdetails);
-      
-    });
-
-    
-
-    res.redirect('/myvouchers');
+    res.redirect('/cart');
   });
 
-  
 }
 
 
@@ -162,49 +199,49 @@ export function contributionStatus(req, res) {
     console.log(registry);
   });}
 
-// Gets a list of Vouchers
-export function index(req, res) {
-  Voucher.findAsync()
-  .then(responseWithResult(res))
-  .catch(handleError(res));
-}
-
-// Gets a single Voucher from the DB
-export function show(req, res) {
-  Voucher.findByIdAsync(req.params.id)
-  .then(handleEntityNotFound(res))
-  .then(responseWithResult(res))
-  .catch(handleError(res));
-}
-
-// Creates a new Voucher in the DB
-export function create(req, res) {
-
-
-  req.body.code = cc.generate();;
-  console.log(req.body);
-
-  Voucher.createAsync(req.body)
-  .then(responseWithResult(res, 201))
-  .catch(handleError(res));
-}
-
-// Updates an existing Voucher in the DB
-export function update(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
+  // Gets a list of Vouchers
+  export function index(req, res) {
+    Voucher.findAsync()
+    .then(responseWithResult(res))
+    .catch(handleError(res));
   }
-  Voucher.findByIdAsync(req.params.id)
-  .then(handleEntityNotFound(res))
-  .then(saveUpdates(req.body))
-  .then(responseWithResult(res))
-  .catch(handleError(res));
-}
 
-// Deletes a Voucher from the DB
-export function destroy(req, res) {
-  Voucher.findByIdAsync(req.params.id)
-  .then(handleEntityNotFound(res))
-  .then(removeEntity(res))
-  .catch(handleError(res));
-}
+  // Gets a single Voucher from the DB
+  export function show(req, res) {
+    Voucher.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+  }
+
+  // Creates a new Voucher in the DB
+  export function create(req, res) {
+
+
+    req.body.code = cc.generate();;
+    console.log(req.body);
+
+    Voucher.createAsync(req.body)
+    .then(responseWithResult(res, 201))
+    .catch(handleError(res));
+  }
+
+  // Updates an existing Voucher in the DB
+  export function update(req, res) {
+    if (req.body._id) {
+      delete req.body._id;
+    }
+    Voucher.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(saveUpdates(req.body))
+    .then(responseWithResult(res))
+    .catch(handleError(res));
+  }
+
+  // Deletes a Voucher from the DB
+  export function destroy(req, res) {
+    Voucher.findByIdAsync(req.params.id)
+    .then(handleEntityNotFound(res))
+    .then(removeEntity(res))
+    .catch(handleError(res));
+  }

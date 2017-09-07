@@ -57,7 +57,7 @@ angular.module('bhcmartApp')
       if (form.$valid) {
         Catalog.update({ id: $scope.category._id }, $scope.category, function(resp) {
           console.log('updated', resp);
-          $state.go('manage-categories');
+          $state.go('adminconsole.manage-categories');
         }, function(err) {
           console.log(err);
         });
@@ -101,7 +101,7 @@ angular.module('bhcmartApp')
         console.log($scope.category)
         Catalog.save($scope.category, function(resp) {
           console.log('created', resp);
-          $state.go('manage-categories');
+          $state.go('adminconsole.manage-categories');
         }, function(err) {
           console.log(err);
           $scope.message == err;
@@ -144,7 +144,7 @@ angular.module('bhcmartApp')
       if (form.$valid) {
         Features.update({ id: $scope.feature._id }, $scope.feature, function(resp) {
           console.log('updated', resp);
-          $state.go('manage-features');
+          $state.go('adminconsole.manage-features');
         }, function(err) {
           console.log(err);
         });
@@ -165,7 +165,7 @@ angular.module('bhcmartApp')
         console.log($scope.features)
         Features.save($scope.features, function(resp) {
           console.log('created', resp);
-          $state.go('manage-features');
+          $state.go('adminconsole.manage-features');
         }, function(err) {
           console.log(err);
           $scope.message == err;

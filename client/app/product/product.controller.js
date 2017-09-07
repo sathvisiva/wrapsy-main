@@ -21,12 +21,21 @@ angular.module('bhcmartApp')
         console.log(p)
         $scope.qty = 1;
         $scope.product.averageRating = getAverageRating(p);
-        Product.catalog({ id: p.categories.slug, limit: 10, page : 0  }, function(relatedProducts) {
+        var q = {};
+        var f = [];
+        f.push({'categories' : { $in: $scope.selectedcategories  } }); 
+        q = {f}
+        $scope.products = Product.query(q, function(relatedProducts){
+         $scope.relatedProducts = _.filter(
+          _.map(relatedProducts, relatedProduct =>
+            _.extend(relatedProduct, { averageRating: getAverageRating(relatedProduct) })), rp => rp._id != p._id);
+       });
+      /*  Product.catalog({ id: p.categories.slug, limit: 10, page : 0  }, function(relatedProducts) {
           $scope.relatedProducts = _.filter(
             _.map(relatedProducts, relatedProduct =>
               _.extend(relatedProduct, { averageRating: getAverageRating(relatedProduct) })), rp => rp._id != p._id);
-        });
-      });
+            });*/
+          });
 
       if(Auth.isLoggedIn()){
         var q = {where:{username:Auth.getCurrentUser().email}};

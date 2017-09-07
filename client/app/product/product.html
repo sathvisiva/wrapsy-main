@@ -138,7 +138,7 @@
 
     <div class="clearfix product-variants-item">
         <span class="control-label">Quantity</span>
-        <input type="number" ng-model= "qty" class="form-control-select qty"/>
+        <input type="number" min="1" max={{product.stock}} ng-model= "qty" class="form-control-select qty"/>
     </div>
 
 

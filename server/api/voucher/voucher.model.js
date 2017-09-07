@@ -21,7 +21,8 @@ var VoucherSchema = new mongoose.Schema({
 	paid : {
 		type: Boolean,
 		default: false
-	}
+	},
+	paymentId : String
 });
 
 export default mongoose.model('Voucher', VoucherSchema);

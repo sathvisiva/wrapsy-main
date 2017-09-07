@@ -114,32 +114,34 @@ export function redeem(req, res) {
   var code = req.body.code;
 
   Voucher.findOne({'code' : code},function(err,voucher){
-    console.log(voucher);
-    var todayDate = new Date();
-    var validDatae = new Date(voucher.validuntil)
-    
-    console.log(todayDate);
-    console.log(validDatae);
-    if(voucher.redeemed){
-      return res.json({'errorcode' : 0});
-    }else if((new Date().getTime() > new Date(voucher.validuntil).getTime())){
-      return res.json({'errorcode' : 1});
-    }else if(parseInt(voucher.amount) > parseInt(req.body.amount)){
-      return res.json({'errorcode' :2});
+
+    if(voucher){
+      var todayDate = new Date();
+      var validDatae = new Date(voucher.validuntil)
+      console.log(voucher.amount);
+      if(voucher.redeemed){
+        return res.json({'errorcode' : 0});
+      }else if((new Date().getTime() > new Date(voucher.validuntil).getTime())){
+        return res.json({'errorcode' : 1});
+      }else if(parseInt(voucher.amount) > parseInt(req.body.amount)){
+        return res.json({'errorcode' :2});
+      }else{
+        Voucher.update({ 'code' : code }, { $set: { redeemed: true }}, function (err, resp) {
+          if (err) {
+            resp.err = err;
+            resp.data = null;
+            resp.code = 422;
+
+            return res.json(responseObject);
+          }
+          console.log(voucher);
+          return res.json(voucher);
+        });
+      }
     }else{
-      Voucher.update({ 'code' : code }, { $set: { redeemed: true }}, function (err, voucher) {
-        if (err) {
-          responseObject.err = err;
-          responseObject.data = null;
-          responseObject.code = 422;
-
-          return res.json(responseObject);
-        }
-
-        return res.json(voucher);
-      });
+      return res.json({'errorcode' :3});
     }
-  })
+  });
   /**/
 }
 

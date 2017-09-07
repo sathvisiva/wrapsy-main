@@ -116,16 +116,16 @@ exports.countorders = function(req, res) {
   .then(responseWithResult(res))
   .catch(handleError(res));*/
   
-    
+
   if(req.body){
-    
-    
+
+
     var q = isJson(req.query.where);
     Order.find(q).exec(function (err, count) {
       if(err) { 
         console.log(err)
         return handleError(res, err); }
-          console.log(count);
+        console.log(count);
         return res.status(200).json([{count:count}]);
       });
   }else{
@@ -159,6 +159,38 @@ export function create(req, res) {
     }
   })
   .catch(handleError(res));
+}
+
+
+export function updateVoucher(req, res){
+  var orderId = req.params.id;
+
+  Order.findOne({'_id': orderId}, function(err, order){
+    //var incrementamount = parseInt(order.paidbyVoucher, 10) + parseInt(req.body.amount, 10)
+
+    var increment = {
+      $push: {
+        vouchers: req.body._id
+      },
+      $inc: {
+        'paidbyVoucher': parseInt(req.body.amount, 10)
+      }
+    };
+    var query = {
+      '_id':orderId
+
+    };
+
+
+    Order.update(query, increment, function(err,ordr){
+      console.log(ordr)
+      return res.status(200).json(ordr);
+    });
+  });
+
+
+
+
 }
 
 // Updates an existing Order in the DB

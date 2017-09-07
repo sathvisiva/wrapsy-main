@@ -30,6 +30,13 @@ angular.module('bhcmartApp').factory('Order', function ($resource) {
       params: {
         controller: 'countorder'
       }
+    },
+    //updateVoucher
+    'updateVoucher': {
+      method: 'POST',
+      params: {
+        controller: 'updateVoucher'
+      }
     }
 
   });

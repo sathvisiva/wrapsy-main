@@ -36,7 +36,10 @@ var OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Address'
   },
-  vouchers: [],  
+  vouchers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Voucher'
+  }],  
   status: {
     type: String
   },
@@ -51,8 +54,11 @@ var OrderSchema = new Schema({
   paid : {
     type: Boolean,
     default: false
-  }
-});
+  },
+  paidbyVoucher : { type: Number,
+    min: 0,
+    default : 0}
+  });
 
 OrderSchema.plugin(autoIncrement.plugin, {
   model: 'Order',
