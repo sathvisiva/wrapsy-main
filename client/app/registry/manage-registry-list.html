@@ -1,44 +1,46 @@
 <navbar></navbar>
 <div class="find-registry">
-<div class="container">
-  <div class="category-title-header">
-    <div class="title-center">
-      <div class="title"><h1>My Registries</h1></div>
-      <div class="separator-title"><div class="divider-line"></div></div>
-    </div>
-    <div class="clearer"></div>
-  </div>
-</div>
+	<div class="container">
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>My Registries</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+	</div>
 	<div class="container">
 <!-- 
 	<div class="row">
 	<div class="col-md-12 ">
 		<h1 class="text-center find-title">MY REGISTRIES</h1>
 	</div>
-	</div> -->
+</div> -->
 <br>
 
-		
-		<br>
 
-		<div class="row">
-			<div class="center-block">
-			<div class="col-md-8 col-md-offset-2 text-center" ng-if="registries.length < 1" >
+<br>
+
+<div class="row">
+	<div class="center-block">
+		<div class="col-md-8 col-md-offset-2 text-center" ng-if="registries.length < 1" >
 			Sorry No Registries Found, Please create Registry
-			</div>
+			<br>
+			<a ui-sref="createregistry.registryType"  class="btn btn-primary mainbtn cursorpointer">Create Registry</a>
+		</div>
 
-			<div class="col-md-8 col-md-offset-2" ng-repeat="registry in registries">
+		<div class="col-md-8 col-md-offset-2" ng-repeat="registry in registries">
 			<hr >
 			<div class="col-md-2" >
 				<img class="couple-img-circle-find img-responsive" ng-src="{{registry.profileImageUrl}}" >
 			</div>
 			<div class="col-md-7" >
-				<div><a ui-sref="manageregistry({id:registry._id})" >{{registry.title}}</a></div>
+				<div><a ui-sref="manageregistry({id:registry.slug})" >{{registry.title}}</a></div>
 				<div>Date :{{registry.date  | date : "longDate"}}</div>
 			</div>
 			<div class="col-md-3">
-			<a class="btn btn-primary" ui-sref="manageregistry({id:registry._id})">Edit</a>
-			<a class="btn btn-primary" ui-sref="registry.home({id:registry._id})">View</a>
+				<a class="btn btn-primary" ui-sref="manageregistry({id:registry.slug})">Edit</a>
+				<a class="btn btn-primary" ui-sref="registry.home({id:registry.slug})">View</a>
 			</div>
 		</div>
 	</div>

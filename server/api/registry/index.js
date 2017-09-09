@@ -10,6 +10,8 @@ router.get('/', controller.index);
 router.get('/count', controller.count);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
+//
+router.post('/makevisible', controller.makevisible);
 router.post('/:id/registryProduct', controller.createregistryProduct);
 router.post('/:id/getregistryProduct', controller.getRegistryProduct);
 router.post('/:id/rsvpRegistry', controller.creatersvpRegistry);

@@ -70,32 +70,29 @@ angular.module('bhcmartApp').controller('ProductCtrl', ['$scope', '$stateParams'
     $scope.message = '';
 
     if (!Auth.isLoggedIn()) {
-      $scope.message = "Please login to add Registry";
-    } else {
       $scope.data = { 'event': 'login' };
       $scope.login(ev, $scope.data);
-    }
+    } else {
+      if ($scope.registryOptions && $scope.registryOptions.length < 1 || !$scope.registryOptions) {
+        /*$scope.message = "No Registry found. Please create Registry";*/
+        $state.go('createregistry.registryType');
+      } else if (!registryId) {
+        $scope.message = "Please choose a Registry";
+      } else if ($scope.registry.registryId) {
+        $scope.multiple = false;
+        if (product.price > 5000 && !product.affiliate) {
+          var confirm = $mdDialog.confirm().textContent('Would you like to wishlist this item as a solo item or put it under a chip-in category so that multiple guests can chip- in towards it?').ariaLabel('solo or multichipin').targetEvent(ev).ok('Chip In').cancel('Solo');
 
-    if ($scope.registryOptions && $scope.registryOptions.length < 1) {
-      $scope.message = "No Registry found. Please create Registry";
-    } else if (!registryId) {
-      $scope.message = "Please choose a Registry";
-    } else if ($scope.registry.registryId) {
-
-      $scope.multiple = false;
-
-      if (product.price > 5000 && !product.affiliate) {
-        var confirm = $mdDialog.confirm().textContent('Would you like to wishlist this item as a solo item or put it under a chip-in category so that multiple guests can chip- in towards it?').ariaLabel('solo or multichipin').targetEvent(ev).ok('Chip In').cancel('Solo');
-
-        $mdDialog.show(confirm).then(function () {
-          $scope.multiple = true;
+          $mdDialog.show(confirm).then(function () {
+            $scope.multiple = true;
+            $scope.addregistrytoDB(product, qty, registryId, $scope.multiple);
+          }, function () {
+            $scope.multiple = false;
+            $scope.addregistrytoDB(product, qty, registryId, $scope.multiple);
+          });
+        } else {
           $scope.addregistrytoDB(product, qty, registryId, $scope.multiple);
-        }, function () {
-          $scope.multiple = false;
-          $scope.addregistrytoDB(product, qty, registryId, $scope.multiple);
-        });
-      } else {
-        $scope.addregistrytoDB(product, qty, registryId, $scope.multiple);
+        }
       }
     }
   };

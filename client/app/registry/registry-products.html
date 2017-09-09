@@ -20,7 +20,7 @@
 		</div>
 	</div>
 
-		<div class="product-list" >
+	<div class="product-list" >
 		<div class="col-md-12 col-sm-12 col-xs-12  text-center" ng-show="registry.products.length < 1" >
 			No Products Added to Registry
 		</div>          
@@ -45,14 +45,15 @@
 				</div>
 				<div class="product-desc">
 					<h2 class="name cursorpointer"><a ng-click="showproductDetail(item, item.multiple)" >{{item.name}}</a></h2>
-					<div class="name" ng-hide="item.multiple">Needs : {{item.desired}} Has : {{item.required}}</div>
-					<div class="name" ng-if="item.multiple">₹{{item.price | number}}</div>
-					
+					<div class="name" ng-hide="item.multiple">Needs : <!-- {{item.desired}} -->  <input type="number" name="input" ng-model= "item.desired"
+						min="1" max={{max}} style="width: 50px;" required> Has : {{item.required}}</div>
+						<div class="name" ng-if="item.multiple">₹{{item.price | number}}</div>
 
+						<button ng-hide="item.multiple" class="btn btn-accent" ng-click=updatedesired(item.desired)>Update desired</button>
+					</div>
+
+					<span ng-if="item.desired == item.required" class="fulfilled">fulfilled</span>
 				</div>
-
-				<span ng-if="item.desired == item.required" class="fulfilled">fulfilled</span>
-			</div>
-		</div>          
+			</div>          
+		</div>
 	</div>
-</div>

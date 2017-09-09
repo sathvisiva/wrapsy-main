@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bhcmartApp')
-.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster','Voucher','Address','Payment','$uibModal', function($scope, Auth, $state, Order, ngCart, toaster,Voucher,Address,Payment, $uibModal) {
+.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster','Voucher','Address','Payment','$uibModal', 'stateService',function($scope, Auth, $state, Order, ngCart, toaster,Voucher,Address,Payment, $uibModal, stateService) {
   $state.go('checkout.shipping')
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.country = "In"
@@ -47,14 +47,11 @@ angular.module('bhcmartApp')
    .result.then(function(result) {
     console.log(result);
     console.log($scope.productInfo);
-    /*ngCart.addVoucher(result);*/
-    /*console.log(ngCart.getVoucherAmount());
-    console.log(ngCart.getPayable());
-    console.log(ngCart.getVouchers());*/
+
 
     Order.updateVoucher({id:$scope.productInfo},result).$promise.then(function(res) {
-     console.log(res);
-    });
+     console.log(res.ok);
+   });
 
 
   /*  Order.countorders(q, function (orders) {
@@ -83,12 +80,8 @@ $scope.gotoshipping = function(){
 
 $scope.showshipping = false;
 
-$scope.states = ['Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar',
-'Chandigarh', 'cHattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa',
-'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka',
-'Kerala', 'Lakshadweep ', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
-'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana',
-'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
+
+$scope.states = stateService.getstates();
 
 
 /*

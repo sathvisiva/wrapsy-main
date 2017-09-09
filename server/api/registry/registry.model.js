@@ -1,7 +1,7 @@
 'use strict';
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
-
+var slugs = require('mongoose-url-slugs');
 var Product = require('../product/product.model').product;
 
 var RsvpSchema = new Schema({
@@ -192,6 +192,7 @@ var RegistrySchema = new Schema({
   'title': 'text'
 });
 
+RegistrySchema.plugin(slugs('title'));
 
 module.exports = {
   registry: mongoose.model('Registry', RegistrySchema),

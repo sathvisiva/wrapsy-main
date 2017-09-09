@@ -170,6 +170,13 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
         limit: null
       }
     },
+    'makevisible': {
+      method: 'POST',
+      params: {
+        controller: 'makevisible',
+        limit: null
+      }
+    },
     'getregistryProduct': {
       method: 'POST',
       params: {
@@ -228,31 +235,22 @@ angular.module('bhcmartApp').factory('Catalog', function ($resource) {
       }
     }
   });
-}).service('RegistryService', function () {
+}).service('stateService', function () {
+
+  var states = ['Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'cHattisgarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Lakshadweep ', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
   var registry = {};
   var registrymethod = "";
+  /*
+    var addregistry = function(newObj) {
+      registry = newObj;
+    }*/
 
-  var addregistry = function addregistry(newObj) {
-    registry = newObj;
-  };
-
-  var getregistry = function getregistry() {
-    return registry;
-  };
-
-  var addregistryMethod = function addregistryMethod(newObj) {
-    registrymethod = newObj;
-  };
-
-  var getregistryMethod = function getregistryMethod() {
-    return registrymethod;
+  var getstates = function getstates() {
+    return states;
   };
 
   return {
-    addregistry: addregistry,
-    getregistry: getregistry,
-    addregistryMethod: addregistryMethod,
-    getregistryMethod: getregistryMethod
+    getstates: getstates
   };
 });
 //# sourceMappingURL=product.service.js.map

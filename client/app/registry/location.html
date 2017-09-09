@@ -108,8 +108,11 @@
 								<label>State</label>
 								<div class="row grid-container grid-spacing-half">
 									<div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
-										<input type="text"  class="form-control" placeholder="State" id="state" name="state"
-										ng-model="address.state" required>
+										<!-- <input type="text"  class="form-control" placeholder="State" id="state" name="state"
+										ng-model="address.state" required> -->
+										<select class="form-control" name="state" ng-model="address.state" data-live-search="true" required>
+											<option ng-repeat="state in states" value="{{state}}" >{{state}}</option>
+										</select>
 										<p ng-show="(form1.state.$invalid && !form1.state.$pristine) || (form1.state.$invalid && form1.state.$touched)  || (form1.state.$invalid && locationformsubmitted)" class="help-block">State is required.</p>                                
 									</div>
 
@@ -141,8 +144,8 @@
 							</div>
 
 						</div>
-						</form>
-					</div>
+					</form>
+				</div>
 				
 			</div>
 		</section>

@@ -3,7 +3,7 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function () {
-  var CreateRegistryController = function CreateRegistryController($http, $scope, $timeout, Registry, $uibModal, $state, Auth, $stateParams, RegistryService, Address) {
+  var CreateRegistryController = function CreateRegistryController($http, $scope, $timeout, Registry, $uibModal, $state, Auth, $stateParams, stateService, Address) {
     _classCallCheck(this, CreateRegistryController);
 
     $scope.disableevent = true;
@@ -18,6 +18,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     $scope.registry = {};
     $scope.address = {};
 
+    $scope.states = stateService.getstates();
     $scope.eventType = function (type) {
       $scope.registry.type = type;
       if ($scope.registry.type == 'wedding') {
@@ -67,7 +68,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           Address.save($scope.address, function (resp) {}, function (err) {
             console.log(err);
           });
-          $state.go('registry.home', { id: resp._id });
+          $state.go('registry.home', { id: resp.slug });
         }, function (err) {
           console.log(err);
         });
@@ -100,7 +101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   angular.module('bhcmartApp').controller('CreateRegistryController', CreateRegistryController);
 })();
 
-angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$stateParams', '$state', 'Registry', '$uibModal', 'Upload', 'RegistryService', 'Auth', 'toaster', '$timeout', '$mdDialog', function ($scope, $stateParams, $state, Registry, $uibModal, Upload, RegistryService, Auth, toaster, $timeout, $mdDialog) {
+angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$stateParams', '$state', 'Registry', '$uibModal', 'Upload', 'Auth', 'toaster', '$timeout', '$mdDialog', function ($scope, $stateParams, $state, Registry, $uibModal, Upload, Auth, toaster, $timeout, $mdDialog) {
 
   $scope.form = {};
 
@@ -111,7 +112,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
 
   $scope.queryRegistry = function () {
 
-    $scope.registry = Registry.get({ id: $stateParams.id }, function (resp) {
+    $scope.registry = Registry.get({ slug: $stateParams.id }, function (resp) {
       console.log(resp);
       if (Auth.getCurrentUser().email == resp.username) {
         $scope.editable = true;
@@ -176,7 +177,11 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
 
   $scope.rsvp = {};
 
-  $scope.updatedesired = function () {
+  $scope.updatedesired = function (count) {
+    if (count < $scope.registry.required) {
+      toaster.pop('error', "Sorry, Desired product count must be less than required product count");
+    }
+
     Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
       $scope.registry = res;
       toaster.pop('success', "Product desired count updated");
@@ -381,12 +386,24 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     */
   };
 
-  $scope.setVisible = function () {
-    $scope.registry.visible = true;
-    Registry.update({ id: $scope.registry._id }, $scope.registry).$promise.then(function (res) {
-      console.log("success");
+  $scope.setVisible = function (visible) {
+    $scope.registry.visible = visible;
+
+    $scope.visibility = {};
+    $scope.visibility.id = $scope.registry._id;
+    $scope.visibility.visible = visible;
+    Registry.makevisible($scope.visibility, function (resp) {
+      console.log(resp);
+    }, function (err) {
+      console.log(err);
     });
   };
+  /*
+  
+        $scope.updateDesiredCount = function(count){
+          console.log("inside updatedesired");
+          console.log(count);
+        }*/
 
   $scope.upload = function (file) {
     if (file) {
@@ -722,7 +739,7 @@ angular.module('bhcmartApp').controller('ManageRegistryController', ['$scope', '
           console.log(err);
         });
 
-        $state.go('registry', { id: resp._id });
+        $state.go('registry.home', { id: resp.slug });
       }, function (err) {
         console.log(err);
       });
@@ -749,12 +766,11 @@ angular.module('bhcmartApp').controller('ManageRegistryController', ['$scope', '
     $scope.registry.date = new Date(year, month, day);
   };
 
-  var q = { where: { registryId: $stateParams.id } };
-  $scope.address = Address.get(q, function (resp) {
-    console.log(resp);
-  });
-
-  $scope.registry = Registry.get({ id: $stateParams.id }, function (resp) {
+  $scope.registry = Registry.get({ slug: $stateParams.id }, function (resp) {
+    var q = { where: { registryId: resp._id } };
+    $scope.address = Address.get(q, function (resp) {
+      console.log(resp);
+    });
 
     console.log(resp.date);
     var date = new Date(resp.date);

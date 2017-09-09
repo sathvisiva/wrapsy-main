@@ -57,40 +57,53 @@ exports.count = function(req, res) {
 
 // Get list of products
 exports.index = function(req, res) {
-	if(req.query){
 
-		if(req.query.count){
-			
-			var q = isJson(req.query.count);
+  if(req.query){
 
-			Registry.find(q).select('_id occasion').exec(function (err, registries) {
-				if(err) { 
-					console.log(err)
-					return handleError(res, err); }
-					
-					return res.status(200).json(registries);
-				});
-		}
-		else{
-			
-			var q = isJson(req.query.where);
-			
-			Registry.find(q).exec(function (err, registry) {
-				if(err) { console.log(err);
-					return handleError(res, err); }
-					console.log(registry)
-					return res.status(200).json(registry);
-				});
-		}
+    if(req.query.slug){
+      console.log("inside index");
+      console.log(req.query);
+      console.log(req.query.slug);
+      Registry.findOne(req.query, function (err, registry) {
+
+        if(err) { return handleError(res, err); }
+        if(!registry) { return res.status(404).send('Not Found'); }
+        return res.json(registry);
+      });
+    }
+
+    else if(req.query.count){
+
+     var q = isJson(req.query.count);
+
+     Registry.find(q).select('_id occasion').exec(function (err, registries) {
+      if(err) { 
+       console.log(err)
+       return handleError(res, err); }
+
+       return res.status(200).json(registries);
+     });
+   }
+   else{
+
+     var q = isJson(req.query.where);
+     console.log(q);
+     Registry.find(q).exec(function (err, registry) {
+      if(err) { console.log(err);
+       return handleError(res, err); }
+       console.log(registry)
+       return res.status(200).json(registry);
+     });
+   }
 
 
 
-	}else{
-		Registry.find(function (err, registry) {
-			if(err) { return handleError(res, err); }
-			return res.status(200).json(registry);
-		});
-	}
+ }else{
+  Registry.find(function (err, registry) {
+   if(err) { return handleError(res, err); }
+   return res.status(200).json(registry);
+ });
+}
 };
 
 
@@ -103,6 +116,49 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!registry) { return res.status(404).send('Not Found'); }
     return res.json(registry);
+  });
+
+
+};
+
+/*exports.makevisible = function(req, res) {
+
+  Registry.update({ _id: req.params.id }, { $set: { visible: true }}, function (err, registry) {
+    if (err) {
+      handleError(err)
+    }
+    Registry.findById(req.params.id, function (err, registry) {
+
+      if(err) { return handleError(res, err); }
+      if(!registry) { return res.status(404).send('Not Found'); }
+      return res.json(registry);
+    });
+
+  });
+};*/
+
+
+exports.makevisible = function(req, res) {
+
+  /*var visiblity = */
+  console.log("inside make visible");
+
+  console.log(req.body);
+  console.log(req.query);
+
+  Registry.update({ _id: req.body.id }, { $set: { visible: req.body.visible }}, function (err, registry) {
+    if (err) {
+      handleError(err)
+    }
+   /* Registry.findById(req.params.id, function (err, registry) {
+
+      if(err) { return handleError(res, err); }
+      if(!registry) { return res.status(404).send('Not Found'); }
+      return res.json(registry);
+    });*/
+
+    return res.json(registry);
+
   });
 };
 
@@ -204,7 +260,7 @@ exports.indexrsvpRegistry = function(req, res) {
 };
 
 exports.createGuestBookRegistry = function(req, res) {
-  
+
   GuestBook.create(req.body, function(err, registry) {
     if(err) { return handleError(res, err); }
     

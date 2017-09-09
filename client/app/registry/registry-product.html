@@ -29,7 +29,7 @@
   <div class="col-md-8">
 
 
-   <div class="availability">
+   <div class="availability" ng-if="!registryprod.custom">
      <span>In Stock : </span> {{product.stock}}
    </div>
    <br>
@@ -44,20 +44,20 @@
    </div>
 
    <br>
-   <span>Description : </span><span><strong>{{product.description}}</strong></span>
-  
-</div>
-<div class="row">
-<div class="col-md-12 text-center">
+   <span>Description : </span><span ng-if="!registryprod.custom"><strong>{{product.description}}</strong></span><span ng-if="registryprod.custom"><strong>{{registryprod.description}}</strong></span>
 
-      <button class="btn btn-primary" ng-click="BuyProduct(product,qty)" ng-if="!product.affiliate && !registryprod.custom" ng-show = "max > 0"></i>Buy Now</button>
+ </div>
+ <div class="row">
+  <div class="col-md-12 text-center">
 
-      <button class="btn btn-primary" ng-click="buyNow(qty)" ng-if="registryprod.custom" ng-show = "max > 0"></i>Notify and Buy Now</button>
+    <button class="btn btn-primary" ng-click="BuyProduct(product,qty)" ng-if="!product.affiliate && !registryprod.custom" ng-show = "max > 0"></i>Add to Cart</button>
 
-      <a class="btn btn-primary" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
-            ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate"></i>Notify and Buy Now</a>
+    <button class="btn btn-primary" ng-click="buyNow(qty)" ng-if="registryprod.custom" ng-show = "max > 0"></i>Notify and Buy Now</button>
 
-</div>
+    <a class="btn btn-primary" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
+    ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate"></i>Notify and Buy Now</a>
+
+  </div>
 </div>
 
 

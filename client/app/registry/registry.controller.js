@@ -4,7 +4,7 @@
 
   class CreateRegistryController {
 
-    constructor($http, $scope, $timeout, Registry,$uibModal,$state, Auth,$stateParams,RegistryService, Address) {
+    constructor($http, $scope, $timeout, Registry,$uibModal,$state, Auth,$stateParams,stateService, Address) {
 
       $scope.disableevent = true;
       $scope.disablelocation = true ; 
@@ -18,6 +18,7 @@
       $scope.registry = {}
       $scope.address = {}
 
+      $scope.states = stateService.getstates();
       $scope.eventType = function(type){
         $scope.registry.type = type;
         if($scope.registry.type == 'wedding'){
@@ -72,7 +73,7 @@
           }, function(err) {
             console.log(err)
           })
-          $state.go('registry.home', {id: resp._id});
+          $state.go('registry.home', {id: resp.slug});
         }, function(err) {
           console.log(err)
         })
@@ -111,8 +112,8 @@ angular.module('bhcmartApp')
 
 
 angular.module('bhcmartApp')
-.controller('RegistryController', ['$scope', '$stateParams', '$state', 'Registry','$uibModal','Upload','RegistryService','Auth','toaster','$timeout','$mdDialog',
-  function($scope, $stateParams, $state,  Registry,$uibModal, Upload, RegistryService , Auth, toaster,$timeout,$mdDialog) {
+.controller('RegistryController', ['$scope', '$stateParams', '$state', 'Registry','$uibModal','Upload','Auth','toaster','$timeout','$mdDialog',
+  function($scope, $stateParams, $state,  Registry,$uibModal, Upload, Auth, toaster,$timeout,$mdDialog) {
 
 
 
@@ -125,7 +126,7 @@ angular.module('bhcmartApp')
 
     $scope.queryRegistry = function(){
 
-      $scope.registry = Registry.get({ id: $stateParams.id }, function(resp) {
+      $scope.registry = Registry.get({ slug: $stateParams.id }, function(resp) {
         console.log(resp);
         if(Auth.getCurrentUser().email == resp.username){
           $scope.editable = true
@@ -211,7 +212,11 @@ angular.module('bhcmartApp')
 
   $scope.rsvp = {};
 
-  $scope.updatedesired = function(){
+  $scope.updatedesired = function(count){
+    if(count < $scope.registry.required){
+      toaster.pop('error', "Sorry, Desired product count must be less than required product count");
+    }
+    
     Registry.update({id:$scope.registry._id},$scope.registry).$promise.then(function(res) {
       $scope.registry = res;
       toaster.pop('success', "Product desired count updated");
@@ -337,8 +342,8 @@ angular.module('bhcmartApp')
         })
         .result.then(function(result) {
           $scope.registry.theme = result;
-         console.log(result);
-       });
+          console.log(result);
+        });
 
       }
 
@@ -442,13 +447,28 @@ angular.module('bhcmartApp')
          */
        }
 
-       $scope.setVisible = function(){
-        $scope.registry.visible = true;
-        Registry.update({id:$scope.registry._id},$scope.registry).$promise.then(function(res) {
-          console.log("success")
-        });
+       $scope.setVisible = function(visible){
+        $scope.registry.visible = visible;
+
+
+        $scope.visibility = {}
+        $scope.visibility.id = $scope.registry._id
+        $scope.visibility.visible = visible
+        Registry.makevisible($scope.visibility,  function(resp) {
+         console.log(resp);
+       },function(err) {
+        console.log(err)
+      });
 
       }
+/*
+
+      $scope.updateDesiredCount = function(count){
+        console.log("inside updatedesired");
+        console.log(count);
+      }*/
+
+
 
       $scope.upload = function(file) {
         if (file) {
@@ -850,7 +870,7 @@ angular.module('bhcmartApp')
             console.log(err);
           })
 
-          $state.go('registry', {id: resp._id});
+          $state.go('registry.home', {id: resp.slug});
         }, function(err) {
           console.log(err)
         })
@@ -875,15 +895,15 @@ angular.module('bhcmartApp')
       $scope.registry.date = new Date(year, month, day);
     };
 
-    var q = {where:{registryId:$stateParams.id}};
-    $scope.address = Address.get(q,function(resp){
-      console.log(resp);
-    });
+    
 
 
 
-    $scope.registry = Registry.get({ id: $stateParams.id }, function(resp) {
-
+    $scope.registry = Registry.get({ slug: $stateParams.id }, function(resp) {
+      var q = {where:{registryId:resp._id}};
+      $scope.address = Address.get(q,function(resp){
+        console.log(resp);
+      });
 
       console.log(resp.date)
       var date = new Date(resp.date);

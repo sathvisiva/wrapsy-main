@@ -41,7 +41,7 @@
 				<img class="couple-img-circle-find img-responsive" ng-src="{{registry.profileImageUrl}}" >
 			</div>
 			<div class="col-md-6" ng-if="registry.visible">
-				<div><a ui-sref="registry({id:registry._id})" >{{registry.title}}</a></div>
+				<div><a ui-sref="registry({id:registry.slug})" >{{registry.title}}</a></div>
 				<div>Date :{{registry.date  | date : "longDate"}}</div>
 			</div>
 		</div>

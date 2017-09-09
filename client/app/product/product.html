@@ -83,13 +83,13 @@
 
                             <div id="product-description-short-12">
                               <p>{{product.description}}</p>
-                            </div>
+                          </div>
 
 
-                            <div class="product-prices">
+                          <div class="product-prices">
 
                               <div class="product-price h5 has-discount">
-                                 <div class="current-price">
+                               <div class="current-price">
                                   <span itemprop="price" content="32">₹{{product.price | number}}</span>
                               </div>
 
@@ -192,20 +192,20 @@
     <ul>
 
         <li class="facebook"><a  class="md-fab md-mini" href="http://www.facebook.com/sharer.php?u={{location.absUrl()}}"
-         title="Share" target="_blank">f</a></li>
-         <li class="twitter"><a href="https://twitter.com/intent/tweet?text=Google Nexus 9 Tablet {{location.absUrl()}}"
-          class="text-hide" title="Tweet" target="_blank">Tweet</a></li>
-          <li class="googleplus"><a href="https://plus.google.com/share?url={{location.absUrl()}}" class="text-hide"
-              title="Google+" target="_blank">Google+</a></li>
+           title="Share" target="_blank">f</a></li>
+           <li class="twitter"><a href="https://twitter.com/intent/tweet?text=Google Nexus 9 Tablet {{location.absUrl()}}"
+              class="text-hide" title="Tweet" target="_blank">Tweet</a></li>
+              <li class="googleplus"><a href="https://plus.google.com/share?url={{location.absUrl()}}" class="text-hide"
+                  title="Google+" target="_blank">Google+</a></li>
 
-          </ul>
+              </ul>
+          </div>
+
+
       </div>
 
 
   </div>
-
-
-</div>
                             <!-- <div class="product-right-details">
                                 <div class="product-info">
                                     <h4>{{product.title}}</h4>
@@ -288,11 +288,11 @@
                                   </md-tab>
                                   <md-tab label="Shipping">
                                     <md-content class="md-padding">
-                                       <p>Shipped by the seller.</p>
+                                     <p>Shipped by the seller.</p>
 
-                                   </md-content>
-                               </md-tab>
-                               <md-tab label="Ratings & Reviews">
+                                 </md-content>
+                             </md-tab>
+                             <md-tab label="Ratings & Reviews">
                                 <md-content class="md-padding">
 
                                   <h4 class="md-display-6 text-center"><span>Have you used this Product? <md-button class="md-raised md-accent" ng-click="addrating = true">Review</md-button></span></h4>
@@ -364,7 +364,7 @@
                                           </div>
                                           <div class="col-md-9">
                                             <div class="review-left">
-                                             <div class="rating">
+                                               <div class="rating">
                                                 <i class="fa fa-star" ng-class="{'grey': review.rating < 1}"></i>
                                                 <i class="fa fa-star" ng-class="{'grey': review.rating < 2}"></i>
                                                 <i class="fa fa-star" ng-class="{'grey': review.rating < 3}"></i>
@@ -384,48 +384,54 @@
                             </div>
                         </md-content>
                     </md-tab>
-                </md-tabs>
-            </md-content>
-        </div>
+                    <md-tab label="Features">
+                        <md-content class="md-padding">
+                         <p>Shipped by the seller.</p>
+
+                     </md-content>
+                 </md-tab>
+             </md-tabs>
+         </md-content>
+     </div>
+ </div>
+
+ <div class="category-title-header" style="margin-top: 50px;">
+
+    <div class="title-center">
+        <div class="title"><h1 class="ng-binding">Products You May Like</h1></div>
+        <div class="separator-title"><div class="divider-line"></div></div>
     </div>
+    <div class="clearer"></div>
+</div>
 
-    <div class="category-title-header" style="margin-top: 50px;">
+<div class="col-md-3 col-sm-6 col-xs-6 first registry-item" ng-repeat="product in relatedProducts| limitTo:4">
+    <div class="product-outer">
+      <div class="registry-product-image single-product">
+          <a ui-sref="product({id: product.slug})" class="registry-product-link" >
+              <img class="img-responsive item-image lazy primary-img" ng-src="{{product.imageUrl}}" width="480" height="480"  style="display: block;">
+              <img class="img-responsive item-image lazy secondary-img" ng-src="{{product.imageUrl}}" width="480" height="480"  style="display: block;">
+              <i class="fa fa-expand"></i>
+          </a>
 
-        <div class="title-center">
-            <div class="title"><h1 class="ng-binding">Products You May Like</h1></div>
-            <div class="separator-title"><div class="divider-line"></div></div>
-        </div>
-        <div class="clearer"></div>
+      </div>                      
+
+      <div class="registry-product-name">
+        <h2 class="product-name brand-name">
+            <a ui-sref="product({id: product.slug})" class="registry-product-link">{{product.brand}}                                </a>
+        </h2>
+        <h2 class="product-name">
+            <a ui-sref="product({id: product.slug})" >{{product.title}}      </a>
+        </h2>
     </div>
-
-    <div class="col-md-3 col-sm-6 col-xs-6 first registry-item" ng-repeat="product in relatedProducts| limitTo:4">
-        <div class="product-outer">
-          <div class="registry-product-image single-product">
-              <a ui-sref="product({id: product.slug})" class="registry-product-link" >
-                  <img class="img-responsive item-image lazy primary-img" ng-src="{{product.imageUrl}}" width="480" height="480"  style="display: block;">
-                  <img class="img-responsive item-image lazy secondary-img" ng-src="{{product.imageUrl}}" width="480" height="480"  style="display: block;">
-                  <i class="fa fa-expand"></i>
-              </a>
-
-          </div>                      
-
-          <div class="registry-product-name">
-            <h2 class="product-name brand-name">
-                <a ui-sref="product({id: product.slug})" class="registry-product-link">{{product.brand}}                                </a>
-            </h2>
-            <h2 class="product-name">
-                <a ui-sref="product({id: product.slug})" >{{product.title}}      </a>
-            </h2>
-        </div>
-        <div class="price-box" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
-            <span class="regular-price" itemprop="price" id="product-price-3259">
-                <span class="price">₹&nbsp;{{product.price}}  </span> </span>
-
-            </div>
-
+    <div class="price-box" itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+        <span class="regular-price" itemprop="price" id="product-price-3259">
+            <span class="price">₹&nbsp;{{product.price}}  </span> </span>
 
         </div>
+
+
     </div>
+</div>
 
 
 
