@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../server/api/mail/config.js"],"names":[],"mappings":";;AAAA,IAAI,MAAM,GAAG;AACX,SAAO,EAAE,mBAAmB;AAC5B,QAAM,EAAE,SAAS;CAClB,CAAC;;AAEF,MAAM,CAAC,OAAO,GAAG,MAAM,CAAC","file":"config.js","sourcesContent":["var config = {\n  \"email\": \"batman@batman.com\",\n  \"pass\": \"FuY0k3r\"\n};\n\nmodule.exports = config;"]}

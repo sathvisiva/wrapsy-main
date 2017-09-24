@@ -14,7 +14,7 @@
         infinite: false,
         speed: 300,
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 1,
         responsive: [
         {
           breakpoint: 1024,
@@ -138,20 +138,4 @@
   .controller('HomeController', HomeController);
 
 })();
-
-
-angular.module('bhcmartApp').controller('RegistryTypeCtrl', function($scope, $uibModalInstance, $state) {
-
-  $scope.ok = function(registrytype){
-    $uibModalInstance.dismiss('cancel');
-    $state.go('createregistry', {type: registrytype});
-
-  }
-
-  $scope.cancel = function() {
-    $uibModalInstance.dismiss('cancel');
-  };
-})
-
-
 

@@ -1,5 +1,5 @@
 <navbar></navbar>
-<div class="home">
+<div class="home" ng-cloak>
 	<div class="share_main_block hidden-sm hidden-xs">
 		<span style="font-size: 12px; font-family: 'Montserrat', sans-serif; font-weight: bold; color: #6c3003;">Share</span>
 		<div class="clearfix"></div>
@@ -92,57 +92,22 @@
 						<a href="/category/fashion"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-03_1.jpg" alt="Birthday Gifts"></a>            </div>
 					</div>
 				</section>
+				<div class="clearfix"></div>
 
-			<!-- <div class="row ">
-				<div class="col-md-12 ">
-					<div class="banner1-holder cyan-hover ">     
-						<a href="https://www.giftalove.com/birthday-gifts-5.html"><img class="img-responsive " src="assets/img/gifts-everyone.jpg" alt="Birthday Gifts"></a>   
-
-					</div>
-				</div>
-			</div> -->
-			<div class="clearfix"></div>
-			
-			<div class="registry-container">
-				<div class="container">
-					<div class="category-title-header">
-						<div class="title-center">
-							<div class="title"><h1>View A Sample Registry</h1></div>
-							<div class="separator-title"><div class="divider-line"></div></div>
-						</div>
-						<div class="clearer"></div>
-					</div>
-
-					<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" >
-						<div ng-repeat="slide in registryslides">
-							<a  ui-sref="registry({id:slide.registry})">
-								<img ng-src="{{slide.image}}" class="img-responsive" >
-							</a>
-							<div class="sampleregistryText">{{slide.text}}
-							</div>
-						</div>
-
-					</slick>
-				</div>
-			</div>
-
-
-		<!-- 	<div class="registry-container">
-				<div class="container">
-					<div class="category-title-header">
-						<div class="title-center">
-							<div class="title"><h1>Featured Products</h1></div>
-							<div class="separator-title"><div class="divider-line"></div></div>
-						</div>
-						<div class="clearer"></div>
-					</div>
-				</div>
-				<div class="products-background">
+				<div class="registry-container">
 					<div class="container">
-						<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" >
-							<div ng-repeat="product in products">
-								<a  ui-sref="product({id: product.slug})">
-									<img ng-src="{{product.imageUrl}}" class="img-responsive" width="217px" height="217px">
+						<div class="category-title-header">
+							<div class="title-center">
+								<div class="title"><h1>View A Sample Registry</h1></div>
+								<div class="separator-title"><div class="divider-line"></div></div>
+							</div>
+							<div class="clearer"></div>
+						</div>
+
+						<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" init-onload=true data="registryslides" >
+							<div ng-repeat="slide in registryslides">
+								<a  ui-sref="registry({id:slide.registry})">
+									<img ng-src="{{slide.image}}" class="img-responsive" >
 								</a>
 								<div class="sampleregistryText">{{slide.text}}
 								</div>
@@ -150,10 +115,8 @@
 
 						</slick>
 					</div>
-				</div>
-
-			</div> -->
-		</div>
+				</div>	
+			</div>
 
 
 			<div class="home-categories">
@@ -167,16 +130,18 @@
 				<div class="figure">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-12 ">
-								<slick class="slider cyan-hover" settings="slickConfig3" ng-if="slickConfig3Loaded" >
-									<div ng-repeat="product in products">
+
+							<slick class="slider cyan-hover" settings="slickConfig3" ng-if="slickConfig3Loaded" >
+								<div ng-repeat="product in products" class="col-md-3 ">
+									<div >
 										<a  ui-sref="product({id: product.slug})">
-											<img ng-src="{{product.imageUrl}}" class="img-responsive " width="200px" height="200px">
+											<img ng-src="{{product.imageUrl}}" class="img-responsive">
 										</a>
 									</div>
+								</div>
 
-								</slick>
-							</div>
+							</slick>
+
 						</div>
 					</div>
 				</div>

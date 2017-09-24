@@ -42,6 +42,53 @@ angular.module('bhcmartApp')
     }
   });
 })
+.factory('Home', function($resource) {
+  return $resource('/api/home/:id/:controller', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    },
+    'createhompageImg': {
+      method: 'POST',
+      params: {
+        controller: 'hompageImg'
+      }        
+    },
+    'GethompageImg': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'hompageImg'
+      }        
+    },
+    'DelhompageImg': {
+      method: 'DELETE',
+      params: {
+        controller: 'hompageImg'
+      }        
+    },
+    'createpopularCat': {
+      method: 'POST',
+      params: {
+        controller: 'popularCat'
+      }        
+    },
+    'GetpopularCat': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'popularCat'
+      }        
+    },
+    'DelpopularCat': {
+      method: 'DELETE',
+      params: {
+        controller: 'popularCat'
+      }        
+    },
+  });
+})
 .factory('Payment', function($resource) {
   return $resource('/api/payment/:id/:controller', {
     id: '@_id'

@@ -7,7 +7,7 @@ class NavbarController {
   isCollapsed = true;
   //end-non-standard
 
-  constructor(Auth, Catalog, $scope, $mdDialog, $state, $stateParams, $mdMedia) {
+  constructor(Auth, Catalog, $scope, $mdDialog, $state, $stateParams, $mdMedia,NavbarService) {
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -27,7 +27,7 @@ class NavbarController {
       var q = {where:{parent:parentid}};
       return Catalog.query(q);
     }
-
+/*
     $scope.buildnavbar = function(){
       $scope.tree = [];
       Catalog.query(function(categories) {
@@ -93,9 +93,11 @@ class NavbarController {
           $scope.tree.push(parentcateogry);
         });
       });
-    }
+    }*/
 
-    $scope.buildnavbar();
+    /*$scope.buildnavbar();*/
+
+    $scope.tree = NavbarService.createnav();
 
     $scope.showsubtree = false;
 

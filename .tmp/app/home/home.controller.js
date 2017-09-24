@@ -14,7 +14,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       infinite: false,
       speed: 300,
       slidesToShow: 4,
-      slidesToScroll: 4,
+      slidesToScroll: 1,
       responsive: [{
         breakpoint: 1024,
         settings: {
@@ -119,16 +119,4 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   angular.module('bhcmartApp').controller('HomeController', HomeController);
 })();
-
-angular.module('bhcmartApp').controller('RegistryTypeCtrl', function ($scope, $uibModalInstance, $state) {
-
-  $scope.ok = function (registrytype) {
-    $uibModalInstance.dismiss('cancel');
-    $state.go('createregistry', { type: registrytype });
-  };
-
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-});
 //# sourceMappingURL=home.controller.js.map

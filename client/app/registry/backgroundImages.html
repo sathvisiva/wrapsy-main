@@ -1,21 +1,43 @@
-<table>
-  <td>
-  <div class="text-center">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+  <h3 class="list-title text-center">Select your Cover Picture</h3>
+  
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="text-center">
       <a ngf-select="upload($file, $invalidFiles)" ng-model="imagimageUrleUrl" class="btn btn-primary cursorpointer" name="imageUrl" accept="image/*" ngf-max-size="1MB"  ngf-model-invalid="errorFile">Select image</a>
-    </div>
-    <div class="cropArea">
-      <ui-cropper image="myImage" area-type="rectangle" result-image-quality = '0.8' result-image-size='{w: 680,h: 400}' result-image="myCroppedImage" live-view="blockingObject"></ui-cropper>
-    </div>
-  </td>
-  <td>
-  <div class="row">
-    <div class="col-md-6 text-center">
-    <button class="btn btn-md btn-primary" ng-click="crop()">Crop</button>
-    </div>
-    <div class="col-md-6 text-center">
-    <button class="btn btn-md btn-primary" ng-click="Withoutcrop()">Upload without Crop</button>
+      <button class="btn btn-md btn-primary" ng-click="crop()">Crop</button>
+      <button class="btn btn-md btn-primary" ng-click="Withoutcrop()">Upload without Crop</button>
     </div>
   </div>
-    <div><img ng-src="{{myCroppedImage}}" /></div>
-  </td>
-</table>
+
+  <div class="col-md-6">
+   <div class="cropArea">
+   <ui-cropper image="myImage" area-type="rectangle" result-image-quality = '0.8' result-image="myCroppedImage" live-view="blockingObject"></ui-cropper>
+  </div>
+</div>
+<div class="col-md-6 text-center">
+  <img ng-src="{{myCroppedImage}}" />
+</div>
+</div>
+<!--   <table>
+    <td>
+
+      <div class="cropArea">
+        <ui-cropper image="myImage" area-type="rectangle" result-image-quality = '0.8' result-image-size='{w: 680,h: 400}' result-image="myCroppedImage" live-view="blockingObject"></ui-cropper>
+      </div>
+    </td>
+    <td>
+      <div class="row">
+        <div class="col-md-6 text-center">
+         
+        </div>
+        <div class="col-md-6 text-center">
+         
+        </div>
+      </div>
+      <div></div>
+    </td>
+  </table> -->

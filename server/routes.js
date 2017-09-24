@@ -13,17 +13,14 @@
   app.use('/api/requests', require('./api/request'));
   app.use('/api/uploads', require('./api/upload'));
   app.use('/api/orders', require('./api/order'));
-  // app.use('/api/variants', require('./api/variant'));
-  // app.use('/api/reviews', require('./api/review'));
-  // app.use('/api/images', require('./api/image'));
   app.use('/api/catalogs', require('./api/catalog'));
   app.use('/api/products', require('./api/product'));
   app.use('/api/registry', require('./api/registry'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/address', require('./api/address'));
   app.use('/api/voucher', require('./api/voucher'));
+  app.use('/api/home', require('./api/home'));
   app.use('/api/payment', require('./api/payment'));
-
   app.use('/auth', require('./auth'));
 
   

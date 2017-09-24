@@ -1,0 +1,75 @@
+<div class="home-image">
+	<div class="container">
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>Home page Images</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+		<div class="row">
+			<div  class="col-md-6 pull-right">
+				<a ui-sref="adminconsole.add-home-image" class="btn btn-xs btn-success pull-right"><span class="fa fa-plus fa-2x"></span></a>
+			</div>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>Text</td>                                
+					<td>Image</td>
+					<td class="text-center" colspan="3">Actions</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="imgs in homeImages" class="order-col">
+					<td>{{imgs.text}}</td>
+					<td>
+						<img ng-src="{{imgs.imageUrl}}"/>
+					</td>
+
+					<td >
+						<a ng-click="deleteImage(imgs._id)" class="trash"><span class="fa fa-trash fa-2x">                                </span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div class="popular-cateogries">
+	<div class="container">
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>Popular Categories</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+		<div class="row">
+			<div  class="col-md-6 pull-right">
+				<a ui-sref="adminconsole.add-popularCategory-image" class="btn btn-xs btn-success pull-right"><span class="fa fa-plus fa-2x"></span></a>
+			</div>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td>Category</td>                                
+					<td>Image</td>
+					<td class="text-center" colspan="3">Actions</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="imgs in popularcat" class="order-col">
+					<td>{{imgs.categories}}</td>
+					<td>
+						<img ng-src="{{imgs.imageUrl}}"/>
+					</td>
+
+					<td >
+						<a ng-click="deletepopCat(imgs._id)" class="trash"><span class="fa fa-trash fa-2x">                                </span></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

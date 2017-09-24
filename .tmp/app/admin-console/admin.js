@@ -5,6 +5,7 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
 		url: '/admin-console',
 		templateUrl: 'app/admin-console/admin.html',
 		controller: 'AdminCtrl',
+		authenticate: 'admin',
 		authenticate: 'admin'
 	}).state('adminconsole.dashboard', {
 		url: '/dashboard',
@@ -53,6 +54,18 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
 		url: '/add-category',
 		templateUrl: 'app/manage-categories/manage-categories-add.html',
 		controller: 'ManageCategoriesAddCtrl'
+	}).state('adminconsole.manage-home-image', {
+		url: '/manage-home-image',
+		templateUrl: 'app/manage-home/manage-home-image.html',
+		controller: 'ManageHomePageCtrl'
+	}).state('adminconsole.add-home-image', {
+		url: '/add-home-image',
+		templateUrl: 'app/manage-home/add-home-image.html',
+		controller: 'ManageHomePageImgAddCtrl'
+	}).state('adminconsole.add-popularCategory-image', {
+		url: '/add-popcategory',
+		templateUrl: 'app/manage-home/add-popcategory.html',
+		controller: 'ManagePopularCategoriesAddCtrl'
 	});
 });
 //# sourceMappingURL=admin.js.map
