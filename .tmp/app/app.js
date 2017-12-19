@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, $uiViewScrollProvider) {
+angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper', 'long2know']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, $uiViewScrollProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
   $uiViewScrollProvider.useAnchorScroll();

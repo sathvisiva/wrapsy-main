@@ -3664,24 +3664,142 @@ input[type="radio"] .styled:checked + label::after {
 @-moz-keyframes spin {
   from {
     transform: rotate(0deg);
-  }
-  to {
+}
+to {
     transform: rotate(360deg);
-  }
+}
 }
 @-webkit-keyframes spin {
   from {
     transform: rotate(0deg);
-  }
-  to {
+}
+to {
     transform: rotate(360deg);
-  }
+}
 }
 @keyframes spin {
   from {
     transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
+to {
+    transform: rotate(360deg);
+}
+}
+
+multiselect {
+    display: block;
+}
+
+multiselect > .btn-group {
+    min-width: 180px;
+}
+
+multiselect .btn {
+    width: 100%;
+    background-color: #FFF;
+}
+
+multiselect .btn.has-error {
+    border: 1px solid #a94442 !important;
+    color: #db524b;
+}
+
+multiselect .dropdown-menu {
+    max-height: 300px;
+    min-width: 200px;
+    overflow-y: auto;
+}
+
+multiselect .dropdown-menu .filter > input {
+    width: 99%;
+}
+
+multiselect .dropdown-menu .filter .glyphicon {
+    cursor: pointer;
+    pointer-events: all;
+}
+
+multiselect .dropdown-menu {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2px;
+}
+
+multiselect > .btn-group > button {
+    padding-right: 20px;
+}
+
+multiselect > .btn-group > button > .caret {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid black;
+    right: 5px;
+    top: 45%;
+    position: absolute;
+}
+
+multiselect .dropdown-menu > li > a {
+    padding: 3px 10px;
+    cursor: pointer;
+}
+
+multiselect .dropdown-menu > li > a i {
+    margin-right: 4px;
+}
+
+.glyphicon-none:before {
+    content: "\e013";
+    color: transparent !important;
+}
+
+.adminpage{
+    min-height: 100vh
+}
+
+.card {
+  min-height: 200px;
+  
+}
+
+.whiteframedemoBasicClassUsage {
+  /* For breakpoint `-xs` */
+  /* For breakpoint `-sm` */
+  /* For breakpoint `-md` */
+/* For breakpoint `-gt-md` */ }
+.whiteframedemoBasicClassUsage md-whiteframe {
+    color: #fff;
+    margin: 10px;
+    height: 100px; }
+    @media (max-width: 599px) {
+        .whiteframedemoBasicClassUsage md-whiteframe {
+          margin: 5px;
+          height: 50px;
+          color: #fff; }
+          .whiteframedemoBasicClassUsage md-whiteframe > span {
+              font-size: 0.4em; } }
+              @media (min-width: 600px) and (max-width: 959px) {
+                .whiteframedemoBasicClassUsage md-whiteframe {
+                  margin: 10px;
+                  height: 75px; }
+                  .whiteframedemoBasicClassUsage md-whiteframe > span {
+                      font-size: 0.6em; } }
+                      @media (min-width: 960px) and (max-width: 1279px) {
+                        .whiteframedemoBasicClassUsage md-whiteframe {
+                          margin: 10px;
+                          height: 90px;
+                          color: #fff; }
+                          .whiteframedemoBasicClassUsage md-whiteframe > span {
+                              font-size: 0.9em; } }
+                              @media (min-width: 1280px) {
+                                .whiteframedemoBasicClassUsage md-whiteframe {
+                                  margin: 10px;
+                                  height: 100px;
+                                  color: #fff; }
+                                  .whiteframedemoBasicClassUsage md-whiteframe > span {
+                                      font-size: 1.0em; } }
+
+
+/*
+Copyright 2016 Google Inc. All Rights Reserved. 
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+*/

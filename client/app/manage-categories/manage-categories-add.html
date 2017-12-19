@@ -40,3 +40,9 @@
 </div>
 </section>
 
+<div class="form-group">
+<multiselect class="input-xlarge multiselect" ng-model="option1" options="p.key as p.value for p in options1" select-limit="5"
+    header="Select Stuff1" selected-header="options selected" multiple="true" required
+    enable-filter="true" filter-placeholder="Filter stuff..">
+</multiselect>
+</div>

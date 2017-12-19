@@ -214,7 +214,7 @@ $scope.states = stateService.getstates();
         Order.save(cart,function(resp) {
           $scope.amount = resp.totalCost;
           $scope.productInfo = resp._id;
-          //$scope.presubmit();
+          $scope.presubmit();
           $scope.myTabIndex = $scope.myTabIndex + 1; 
           //ngCart.empty();
 

@@ -3,6 +3,12 @@
 angular.module('bhcmartApp')
 .controller('ManageCategoriesCtrl', ['$scope', 'Catalog', 'Modal',
   function($scope, Catalog, Modal) {
+
+
+
+
+
+
     Catalog.query(function(categories) {
       $scope.categories = categories;
         // pagination controls
@@ -72,7 +78,13 @@ angular.module('bhcmartApp')
     Catalog.query(function(categories) {
       $scope.categories = categories;
     });
+    $scope.options1 = []
+    
+    for (var i = 0; i < 10; i++) {
+      $scope.options1.push({ key: i + 1, value: 'Prop' + (i + 1).toString() });
+    }
 
+    $scope.option1 = [3,5,7];
     $scope.upload = function(file) {
       if (file) {
         Upload.upload({

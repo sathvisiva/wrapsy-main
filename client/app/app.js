@@ -18,7 +18,8 @@ angular.module('bhcmartApp', [
   'ngMaterial',
   'ngMessages',
   'rzModule',
-  'uiCropper'
+  'uiCropper',
+  'long2know'
   ])
 .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider,$uiViewScrollProvider) {
   $urlRouterProvider
