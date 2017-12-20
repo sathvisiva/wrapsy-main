@@ -1,58 +1,54 @@
-.cart-details{
-	background-color : #ffffff;
-	margin-top : 10px;
-	margin-bottom : 10px;
+md-sidenav.md-locked-open {
+width: 250px;
+min-width: 250px;
+max-width: 250px;
 }
 
-.cart-pdt-name{
-	font-size: 16px;
-    color: #212121;
-    line-height: 1;
-    display: inline;
+md-whiteframe {
+background: #fff;
 }
 
-md-content.md-default-theme {
-  background-color: #eee;
+.font-size-5, .font-size-6, .font-size-7 {
+font-size: 3rem!important;
+min-width: 1em;
+line-height: 1;
 }
 
-md-sidenav > md-toolbar {
-  padding: 15px;
-}
-md-sidenav md-list-item.md-2-line .md-list-item-text {
-  padding-top: 14px;
-  padding-bottom: 12px;
-}
-md-sidenav md-divider {
-  margin-top: 4px;
-  margin-bottom: 4px;
+.margin-left-10 {
+margin-left: 10px!important;
+margin-top: 10px;
 }
 
-md-sidenav md-icon {
-  fill: #737373;
-  position: relative;
-}
-md-sidenav .md-avatar {
-  height: 64px;
-  width: 64px;
+.margin-bottom-0 {
+margin-bottom: 0!important;
 }
 
-/* More closely matches https://www.google.com/design/spec/components/lists.html#lists-specs */
-md-list-item.md-3-line md-divider[md-inset] {
-  left: 70px;
+.margin-top-0 {
+margin-top: 0!important;
 }
 
-.md-avatar > svg {
-  border-radius: 50%;
+.table th {
+text-transform: uppercase;
 }
 
-/* fade animation */
-.animate-show {
-  transition: 0.75s ease-out opacity;
-  opacity: 1;
+.form-control {
+display: inline-block;
+width: 100%;
+height: auto;
+padding: 8px 12px;
+font-size: 13px;
+color: #555;
+background-color: #FFF!important;
+border: 1px solid #D3D3D3;
+border-radius: 2px;
+-moz-transition: all .2s linear 0s,box-shadow .2s linear 0;
+-o-transition: all .2s linear 0s,box-shadow .2s linear 0;
+transition: all .2s linear 0s,box-shadow .2s linear 0;
+-webkit-box-shadow: none;
+box-shadow: none;
 }
-.animate-show.ng-hide {
-  height: 0;
-  min-height: 0;
-  opacity: 0;
-  overflow: hidden;
+
+.nav.nav-tabs > li > a {
+    background-color: #CFDAE0;
+    color: #121212;
 }

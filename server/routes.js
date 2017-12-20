@@ -10,7 +10,7 @@
 
  export default function(app) {
   // Insert routes below
-  app.use('/api/requests', require('./api/request'));
+  app.use('/api/vendor', require('./api/vendor'));
   app.use('/api/uploads', require('./api/upload'));
   app.use('/api/orders', require('./api/order'));
   app.use('/api/catalogs', require('./api/catalog'));

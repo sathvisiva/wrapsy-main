@@ -10,7 +10,7 @@
 'use strict';
 
 import _ from 'lodash';
-var Request = require('./request.model');
+var Vendor = require('./vendor.model');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -61,21 +61,21 @@ function removeEntity(res) {
 
 // Gets a list of Requests
 export function index(req, res) {
-  Request.findAsync()
+  Vendor.findAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a list of user requests
 export function myRequests(req, res) {
-  Request.findAsync({ customerId: req.params.id })
+  Vendor.findAsync({ customerId: req.params.id })
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single Request from the DB
 export function show(req, res) {
-  Request.findByIdAsync(req.params.id)
+  Vendor.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));
@@ -83,7 +83,7 @@ export function show(req, res) {
 
 // Creates a new Request in the DB
 export function create(req, res) {
-  Request.createAsync(req.body)
+  Vendor.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -93,7 +93,7 @@ export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Request.findByIdAsync(req.params.id)
+  Vendor.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
@@ -102,7 +102,7 @@ export function update(req, res) {
 
 // Deletes a Request from the DB
 export function destroy(req, res) {
-  Request.findByIdAsync(req.params.id)
+  Vendor.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

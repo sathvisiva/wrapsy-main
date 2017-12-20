@@ -1,163 +1,95 @@
+<div ng-cloak>
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="General">
+        <md-content class="md-padding">
+          <div class="row">
+            <div class="col-md-12">
+              <form id="form1" class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Product Name <span class="asterisk">*</span>
+                  </label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" value="Product 1">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Product Reference <span class="asterisk">*</span>
+                  </label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" value="Product 1">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Vendor</label>
+                  <div class="col-sm-7">
+                    <select class="form-control" id="sel1">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Categories <span class="asterisk">*</span></label>
+                  <div class="col-sm-7">
+                    <multiselect class="input-xlarge multiselect" ng-model="option1" options="p.key as p.value for p in options1" select-limit="5"
+                    header="Select Categories" selected-header="options selected" multiple="true" required
+                    enable-filter="true" filter-placeholder="Filter stuff..">
+                  </multiselect>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Price <span class="asterisk">*</span>
+                </label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" value="$25.95">
+                </div>
+              </div>
 
-<section class="product-grid" style="min-height: 200px">
-	<div class="container">
-		<div class="row">
-			
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<form class="form" name="form" ng-submit="save(form)" novalidate>
-					<div class="form-group">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" ng-model="product.affiliate"> Affiliate
-							</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label>Title</label>
-						<input type="text" name="name" class="form-control" ng-model="product.title" required/>
-						<p class="help-block" ng-show="form.name.$error.required">
-							Title is required
-						</p>
-					</div>
-					<div class="form-group" ng-if="product.affiliate">
-						<label>Link Id</label>
-						<input type="text" name="linkId" class="form-control" ng-model="product.linkId" required/>
-						<p class="help-block" ng-show="form.linkId.$error.required">
-							Link Id is required
-						</p>
-					</div>
-					<div class="form-group" ng-if="product.affiliate">
-						<label>Product Code</label>
-						<input type="text" name="prodcode" class="form-control" ng-model="product.prodcode" required/>
-						<p class="help-block" ng-show="form.prodcode.$error.required">
-							Product code is required
-						</p>
-					</div>
-					<div class="form-group" >
-						<label>Description</label>
-						<textarea name="description" class="form-control" ng-model="product.description" required></textarea>
-						<p class="help-block" ng-show="form.description.$error.required">
-							Description is required
-						</p>
-					</div>
-					<div class="row" >
-						<div class="form-group col-md-4">
-							<label>Price(₹)</label>
-							<input type="number" name="price" class="form-control" ng-model="product.price" required/>
-							<p class="help-block" ng-show="form.price.$error.required">
-								Price is required
-							</p>
-						</div>
-						<div class="form-group col-md-4">
-							<label>Selling Price(₹)</label>
-							<input type="number" name="sellingprice" class="form-control" ng-model="product.sellingPrice"/>
-							
-						</div>
-						<div class="form-group col-md-4" ng-if="!product.affiliate">
-							<label>Stock</label>
-							<input type="number" name="stock" class="form-control" ng-model="product.stock" required/>
-							<p class="help-block" ng-show="form.stock.$error.required">
-								Stock is required
-							</p>
-						</div>
-					</div>
-					<div class="row" >
-						<div class="form-group col-md-4">
-							<label>CGST(%)</label>
-							<input type="number" name="cgst" class="form-control" ng-model="product.cgst" required/>
-							<p class="help-block" ng-show="form.cgst.$error.required">
-								Price is required
-							</p>
-						</div>
-						<div class="form-group col-md-4">
-							<label>sgst(%)</label>
-							<input type="number" name="sgst" class="form-control" ng-model="product.sgst"/>
-							
-						</div>
-						
-					</div>
+            </form>
+          </div>
+        </div>
+      </md-content>
+    </md-tab>
+    <md-tab label="Description">
+      <md-content class="md-padding"><div class="row">
+        <div class="col-md-12">
+          <form id="form1" class="form-horizontal">
+           <div class="form-group">
+            <label class="col-sm-2 control-label">Long Description <span class="asterisk">*</span>
+            </label>
+            <div class="col-sm-7">
+              <textarea rows="6" class="form-control" placeholder="Description goes here..."></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Short description</label>
+            <div class="col-sm-7">
+              <textarea rows="4" class="form-control" placeholder="Maximum 220 characters"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
-					<div class="row" >
-						<div class="form-group col-md-6">
-							<label>Size</label>
-							<input type="text" name="size" class="form-control" ng-model="product.size"/>
-							
-						</div>
-						
-						<div class="form-group col-md-6" ng-if="!product.affiliate">
-							<label>Color</label>
-							<input type="text" name="color" class="form-control" ng-model="product.color" required/>
-							
-						</div>
-					</div>
-					
-					<div class="form-group" >
-						<label>Categories</label>
-						<select class="form-control" name="categories" ng-model="product.categories" data-live-search="true">
-							<option ng-repeat="cat in categories" value="{{cat._id}}" ng-selected="{{_.size(_.findWhere(product.categories, {_id: cat._id})) > 0}}">{{cat.name}}</option>
-						</select>
-					</div>
-
-					<div class="row" >
-						<div class="form-group col-md-6">
-							<label>Features</label>					
-							<select class="form-control" name="categories" ng-model="productfeatures" >
-								<option ng-repeat="feature in features" value="{{feature._id}}">{{feature.key}} - {{feature.value}}</option>
-							</select>
-							
-						</div>
-						
-						<div class="form-group col-md-6" style="margin-top: 20px;">
-							<a class="btn btn-primary" ng-click="addFeatures(productfeatures)">Add feature to product</a>
-						</div>
-					</div>
-
-					<div class="row" ng-repeat="feature in product.features">
-					<div class="col-md-6">
-						{{(features | filter: {_id:feature})[0].key}} &nbsp; {{(features | filter: {_id:feature})[0].value}}
-					</div>
-					<div class="col-md-6">
-						<a class="btn btn-primary btn-sm" ng-click='del(feature._id)'>Remove</a>
-					</div>
-					</div>
-					
-					<!-- <div class="form-group" col-md-6>	
-
-						
-					</div> -->
-
-					<div class="form-group">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" ng-model="product.hot"> Hot
-							</label>
-						</div>
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" ng-model="product.new"> New
-							</label>
-						</div>
-					</div>
-					<div class="form-group" ng-if="!product.affiliate" ng-class="{ 'has-success': form.imageUrl.$valid && submitted,
-					'has-error': form.imageUrl.$invalid && submitted }">
-					<label class="form-label" for="imageUrl">Featured Image</label>
-					<span class="desc"></span>
-					<div class="controls">
-						<input type="file" ng-hide="imageUrl" ngf-select="upload($file, $invalidFiles)" ng-model="imageUrl" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-resize="{width: 606, height: 780, quality: .8, type: 'image/jpeg', centerCrop: true, restoreExif: false}" ngf-model-invalid="errorFile" />
-						<i ng-show="form.imageUrl.$error.required">*required</i>
-						<i ng-show="form.imageUrl.$error.maxSize">File too large  {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
-						<img ng-show="form.imageUrl.$valid" ngf-thumbnail="imageUrl" class="thumb">
-						<span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-						<div ng-show="imageUrl" class="remove-btn">
-							<button class="btn btn-danger btn-xs" ng-click="imageUrl = null"> <span class="glyphicon glyphicon-trash"></span> Remove</button>
-						</div>
-					</div>
-				</div>
-				<p class="help-block"> {{ message }} </p>
-				<button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-			</form>
-		</div>
-	</div>
+  </md-content>
+</md-tab>
+<md-tab label="Features">
+  <md-content class="md-padding">
+    <h1 class="md-display-2">Tab Two</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
+    <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
+    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+  </md-content>
+</md-tab>
+<md-tab label="Affiliate">
+  <md-content class="md-padding">
+    <h1 class="md-display-2">Tab Three</h1>
+    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+  </md-content>
+</md-tab>
+</md-tabs>
+</md-content>
 </div>
-</section>
-

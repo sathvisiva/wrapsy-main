@@ -1,4 +1,4 @@
-<section class="product-grid" style="min-height: 200px">
+<!-- <section class="product-grid" style="min-height: 200px">
     <div class="container">
         <div class="row">
 
@@ -39,9 +39,7 @@
                                 <td>
                                     <a ui-sref="product({id: p.slug})" class="btn btn-sm btn-primary"> <span class="glyphicon glyphicon-eye-open"></span></a>
                                 </td>
-                               <!--  <td ng-show="isAdmin">
-                                    <a ui-sref="add-product" class="btn btn-xs btn-success"><span class="fa fa-plus fa-2x"></span></a>
-                                </td> -->
+                         
                                 <td >
                                     <a ui-sref=" adminconsole.edit-product({id: p.slug})" class=""><span class="fa fa-edit fa-2x"></span></a>
                                 </td>
@@ -58,3 +56,408 @@
     </div>
 </section>
 <footer></footer>
+-->
+<div class="m-b-20 clearfix">
+    <div class="page-title pull-left">
+        <h3 class="pull-left"><strong>Manage Products</strong></h3>
+    </div>
+    <div class="pull-right">
+        <a ui-sref="adminconsole.addproduct" class="btn btn-success m-t-10"><i class="fa fa-plus p-r-10"></i> Add a product</a>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 table-responsive">
+                        <div id="products-table_wrapper" class="dataTables_wrapper form-inline no-footer"><div class="row m-t-10"><div class="col-md-6 col-md-offset-1"><div id="products-table_filter" class="dataTables_filter"><label><input type="search" class="form-control" aria-controls="products-table" placeholder="Search a product..."></label></div></div></div><table id="products-table respon" class="table table-tools table-hover dataTable no-footer table-responsive" role="grid">
+                        <thead>
+                            <tr role="row"><th style="min-width: 70px; width: 54px;" class="sorting_asc" tabindex="0" aria-controls="products-table" rowspan="1" colspan="1" aria-label="ID
+                                : activate to sort column ascending" aria-sort="ascending"><strong>ID</strong>
+                            </th><th class="sorting" tabindex="0" aria-controls="products-table" rowspan="1" colspan="1" aria-label="Product
+                            : activate to sort column ascending" style="width: 119px;"><strong>Product</strong>
+                        </th><th class="sorting" tabindex="0" aria-controls="products-table" rowspan="1" colspan="1" aria-label="Reference
+                        : activate to sort column ascending" style="width: 90px;"><strong>Reference</strong>
+                    </th><th class="sorting" tabindex="0" aria-controls="products-table" rowspan="1" colspan="1" aria-label="Category
+                    : activate to sort column ascending" style="width: 114px;"><strong>Category</strong>
+                </th><th class="sorting" tabindex="0" aria-controls="products-table" rowspan="1" colspan="1" aria-label="Price
+                : activate to sort column ascending" style="width: 44px;"><strong>Price</strong>
+            </th><th class="sorting" tabindex="0" aria-controls="products-table" rowspan="1" colspan="1" aria-label="Date added
+            : activate to sort column ascending" style="width: 75px;"><strong>Date added</strong>
+        </th><th style="width: 85px; text-align: center;" class="sorting_disabled" rowspan="1" colspan="1" aria-label="Stock
+        "><strong>Stock</strong>
+    </th><th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Sales
+    " style="width: 96px;"><strong>Sales</strong>
+</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Status
+" style="width: 52px;"><strong>Status</strong>
+</th><th class="text-center sorting_disabled" rowspan="1" colspan="1" aria-label="Actions
+" style="width: 123px;"><strong>Actions</strong>
+</th></tr>
+</thead>
+<tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <tr role="row" class="odd">
+        <td class="sorting_1">1</td>
+        <td>Product 1</td>
+        <td>SV 456 878 647</td>
+        <td>Women / Underwear</td>
+        <td><strong>$25.20</strong></td>
+        <td>02/03/2013</td>
+        <td class="color-success">
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="75" aria-valuenow="75" style="width: 75%;">2654</div>
+            </div>
+        </td>
+        <td class="text-center">
+            <div class="sparkline" data-sparkline-color="#7BB2B4" data-sparkline-value="[13,14,16,15,4,14,20,14,12,16,11,17,19,16]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+        </td>
+        <td class="text-center">
+            <span class="label label-success w-300">Online</span>
+        </td>
+        <td class="text-center "> 
+        <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> </a>
+            <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> </a>
+        </td>
+    </tr><tr role="row" class="even">
+    <td class="sorting_1">2</td>
+    <td>Product 2 <span class="label bg-red">Low Stock</span>
+    </td>
+    <td>BG 588 735 457</td>
+    <td>Menu / Shoes</td>
+    <td><strong>$22.55</strong></td>
+    <td>02/11/2013</td>
+    <td class="color-success">
+        <div class="progress">
+            <div class="progress-bar progress-bar-danger" data-aria-valuetransitiongoal="21" aria-valuenow="21" style="width: 21%;">458</div>
+        </div>
+    </td>
+    <td class="text-center">
+        <div class="sparkline" data-sparkline-color="#c3a8db" data-sparkline-value="[14,17,16,12,15,16,22,15,14,17,11,18,11,12]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+    </td>
+    <td class="text-center">
+        <span class="label label-danger w-300">Deleted</span>
+    </td>
+    <td class="text-center ">
+        <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+        <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+    </td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">3</td>
+<td>Product 3</td>
+<td>YT 124 856 565</td>
+<td>Women / Underwear</td>
+<td><strong>$21.00</strong></td>
+<td>04/09/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="58" aria-valuenow="58" style="width: 58%;">2547</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#8dae24" data-sparkline-value="[18,14,15,14,13,12,21,16,18,14,12,15,17,19]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-dark w-300">Offline</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">4</td>
+<td>Product 4</td>
+<td>SV 456 878 647</td>
+<td>Women / Underwear</td>
+<td><strong>$34.25</strong></td>
+<td>02/03/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="75" aria-valuenow="75" style="width: 75%;">1645</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#7BB2B4" data-sparkline-value="[18,10,11,14,4,14,20,14,18,11,10,15,19,16]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-success w-300">Online</span>
+</td>
+<td class="text-center "> 
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">5</td>
+<td>Product 5</td>
+<td>BG 588 735 457</td>
+<td>Menu / Shoes</td>
+<td><strong>$42.78</strong></td>
+<td>03/07/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger" data-aria-valuetransitiongoal="21" aria-valuenow="21" style="width: 21%;">567</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#c3a8db" data-sparkline-value="[8,12,16,12,11,16,22,15,14,17,10,13,11,16]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-danger w-300">Deleted</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">6</td>
+<td>Product 6</td>
+<td>YT 124 856 565</td>
+<td>Women / Underwear</td>
+<td><strong>$21.00</strong></td>
+<td>04/09/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="58" aria-valuenow="58" style="width: 58%;">2245</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#8dae24" data-sparkline-value="[18,14,15,14,13,12,21,16,18,14,12,15,17,19]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-dark w-300">Offline</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">7</td>
+<td>Product 7</td>
+<td>FR 587 657 658</td>
+<td>Children / Shirts</td>
+<td><strong>$25.20</strong></td>
+<td>02/03/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="75" aria-valuenow="75" style="width: 75%;">1244</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#7BB2B4" data-sparkline-value="[13,14,16,15,4,14,20,14,12,16,11,17,19,16]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-success w-300">Online</span>
+</td>
+<td class="text-center "> 
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">8</td>
+<td>Product 8 <span class="label bg-red">Low Stock</span>
+</td>
+<td>RE 547 254 698</td>
+<td>Children / Shirts</td>
+<td><strong>$22.55</strong></td>
+<td>02/11/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger" data-aria-valuetransitiongoal="21" aria-valuenow="21" style="width: 21%;">364</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#c3a8db" data-sparkline-value="[14,17,16,12,15,16,22,15,14,17,11,18,11,12]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-danger w-300">Deleted</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">9</td>
+<td>Product 9</td>
+<td>MP 365 456 656</td>
+<td>Women / Underwear</td>
+<td><strong>$21.80</strong></td>
+<td>04/09/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="58" aria-valuenow="58" style="width: 58%;">657</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#8dae24" data-sparkline-value="[18,14,15,14,13,12,21,16,18,14,12,15,17,19]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-dark w-300">Offline</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">10</td>
+<td>Product 10</td>
+<td>AZ 987 581 554</td>
+<td>Women / Underwear</td>
+<td><strong>$19.25</strong></td>
+<td>02/03/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="19" aria-valuenow="19" style="width: 19%;">557</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#7BB2B4" data-sparkline-value="[13,14,16,15,4,14,20,14,12,16,11,17,19,16]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-success w-300">Online</span>
+</td>
+<td class="text-center "> 
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">11</td>
+<td>Product 11 <span class="label bg-red">Low Stock</span>
+</td>
+<td>HB 587 658 544</td>
+<td>Children / Shirts</td>
+<td><strong>$26.45</strong></td>
+<td>02/11/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-danger" data-aria-valuetransitiongoal="12" aria-valuenow="12" style="width: 12%;">788</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#c3a8db" data-sparkline-value="[7,17,5,12,17,10,22,15,14,17,19,18,11,5]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-danger w-300">Deleted</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">12</td>
+<td>Product 12</td>
+<td>VC 257 545 668</td>
+<td>Women / Underwear</td>
+<td><strong>$25.36</strong></td>
+<td>04/09/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="64" aria-valuenow="64" style="width: 64%;">1354</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#8dae24" data-sparkline-value="[18,14,16,14,12,12,25,16,18,16,12,15,17,15]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-dark w-300">Offline</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">13</td>
+<td>Product 13</td>
+<td>SQ 658 552 331</td>
+<td>Children / Shirts</td>
+<td><strong>$21.00</strong></td>
+<td>04/09/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="66" aria-valuenow="66" style="width: 66%;">3657</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#c3a8db" data-sparkline-value="[18,14,15,14,13,12,21,16,18,14,12,15,17,19]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-success w-300">Online</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="even">
+<td class="sorting_1">14</td>
+<td>Product 14</td>
+<td>UY 552 222 545</td>
+<td>Women / Underwear</td>
+<td><strong>$21.00</strong></td>
+<td>14/08/2013</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="35" aria-valuenow="35" style="width: 35%;">545</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#7BB2B4" data-sparkline-value="[18,14,15,14,13,12,21,16,18,14,12,15,17,19]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-danger w-300">Deleted</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr><tr role="row" class="odd">
+<td class="sorting_1">15</td>
+<td>Product 15</td>
+<td>NB 112 547 698</td>
+<td>Women / Underwear</td>
+<td><strong>$21.00</strong></td>
+<td>24/03/2012</td>
+<td class="color-success">
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" data-aria-valuetransitiongoal="62" aria-valuenow="62" style="width: 62%;">2547</div>
+    </div>
+</td>
+<td class="text-center">
+    <div class="sparkline" data-sparkline-color="#8dae24" data-sparkline-value="[18,14,15,14,13,12,21,16,18,14,12,15,17,19]"><canvas width="96" height="20" style="display: inline-block; width: 96px; height: 20px; vertical-align: top;"></canvas></div>
+</td>
+<td class="text-center">
+    <span class="label label-success w-300">Online</span>
+</td>
+<td class="text-center ">
+    <a href="ecommerce_product_view.html" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+    <a href="#" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+</td>
+</tr></tbody>
+</table><div class="row"><div class="col-md-6"></div><div class="col-md-6 align-right"><div class="dataTables_paginate paging_simple_numbers" id="products-table_paginate"><ul class="pagination"><li class="paginate_button previous disabled" aria-controls="products-table" tabindex="0" id="products-table_previous"><a href="#">Previous</a></li><li class="paginate_button active" aria-controls="products-table" tabindex="0"><a href="#">1</a></li><li class="paginate_button " aria-controls="products-table" tabindex="0"><a href="#">2</a></li><li class="paginate_button next" aria-controls="products-table" tabindex="0" id="products-table_next"><a href="#">Next</a></li></ul></div></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

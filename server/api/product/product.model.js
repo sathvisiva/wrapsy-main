@@ -73,12 +73,6 @@ var ProductSchema = new Schema({
   vendor: {
     type: String
   },
-  size: [{
-    type: String
-  }],
-  color: [{
-    type: String
-  }],
   price: {
     type: Number,
     required: true,
@@ -92,25 +86,19 @@ var ProductSchema = new Schema({
     type: Boolean,
     default: false
   },
-  hot: {
-    type: Boolean,
-    default: false
-  },
-  new: {
-    type: Boolean,
-    default: false
-  },
   imageUrl: {
     type: String
   },
-  imageBin: {
-    data: Buffer,
-    contentType: String
-  },
   description: String,
+  shortdescription : String,
   images: [{
     type: Schema.Types.ObjectId,
     ref: 'Image',
+    index: true
+  }],
+  features: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Feature',
     index: true
   }],
   features: [{
@@ -123,11 +111,11 @@ var ProductSchema = new Schema({
     ref: 'Review',
     index: true
   }],
-  categories: {
+  categories: [{
     type: Schema.Types.ObjectId,
     ref: 'Catalog',
     index: true
-  },
+  }],
   prodcode: {
     type: String
   },

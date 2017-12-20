@@ -86,6 +86,12 @@ angular.module('bhcmartApp')
 
     $scope.product.features = [];
 
+    $scope.options1 = []
+    
+    for (var i = 0; i < 10; i++) {
+      $scope.options1.push({ key: i + 1, value: 'Prop' + (i + 1).toString() });
+    }
+
     $scope.features = Product.indexFeatures();
       // upload on file select or drop
       $scope.upload = function(file) {
