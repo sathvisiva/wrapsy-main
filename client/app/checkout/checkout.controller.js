@@ -78,7 +78,8 @@ angular.module('bhcmartApp')
     $scope.voucher.user = Auth.getCurrentUser()._id;
     console.log($scope.voucher)
     Voucher.redeem($scope.voucher, function(resp){
-
+      console.log(resp)
+      $scope.displaycarItems()
       if(resp.errorcode == 0 ){
         $scope.errormessage = "Sorry, Voucher already redeemed";
       }else if(resp.errorcode == 1){
@@ -291,6 +292,10 @@ $scope.checkoutorder = function(cart, user){
 
   $scope.cart = {};
   $scope.cart.items = cart;
+  if($scope.carts.vouchers){
+    $scope.cart.vouchers = $scope.carts.vouchers._id
+    $scope.cart.paidbyVoucher = $scope.carts.vouchers.amount;
+  }
   Address.save($scope.address, function(resp) {
     console.log(resp)
     $scope.cart.customerId = user._id ? user._id : '',

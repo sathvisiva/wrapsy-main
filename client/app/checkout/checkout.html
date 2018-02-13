@@ -225,7 +225,8 @@
                                       <div class="col-xs-8 col-sm-8 col-md-8 grid-item top-row bottom-row">
                                         <input type="text"  class="form-control" placeholder="Voucher code" id="name" name="voucherCode"
                                         ng-model="voucherCode" required>
-                                        <p ng-show="(form.voucherCode.$invalid && !form.voucherCode.$pristine) || (form.address2.$invalid && form.voucherCode.$touched)" class="help-block">Please enter Voucher Code</p>                                
+                                        <p ng-show="(form.voucherCode.$invalid && !form.voucherCode.$pristine) || (form.address2.$invalid && form.voucherCode.$touched)" class="help-block">Please enter Voucher Code</p> 
+                                        <p ng-show="errormessage" class="help-block">{{errormessage}}</p>                                
                                       </div>
                                       <div class="col-md-3">
                                         <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="redeemvoucher(voucherCode)">Redeem</button>

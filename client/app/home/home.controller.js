@@ -86,6 +86,7 @@
 
       var q = {where:{username:'admin@wrapsytest.com'}};
       $scope.sampleregistries =  Registry.query(q);
+      console.log("sample registries");
       console.log($scope.sampleregistries)
 
       var q = {where:{featured:true}};

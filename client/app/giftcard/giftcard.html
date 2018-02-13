@@ -1,0 +1,120 @@
+
+<navbar></navbar>
+<div class="container">
+  <div class="row">
+    <div class="category-title-header">
+      <div class="title-center">
+        <div class="title"><h1>Gift Cards</h1></div>
+        <div class="separator-title"><div class="divider-line"></div></div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </div>
+  <div layout="row" layout-xs="column" layout-sm="column">
+    <div flex>
+      <md-card >
+        <md-whiteframe class="md-whiteframe-2dp" style="background-color: #FF4081; padding: 20px;" layout layout-align="center center">
+          <md-button class="md-icon-button logo-btn" aria-label="giftcard 500">
+            <img class="logo-image img-circle" src="assets/img/logo/giftcard.jpg">
+          </md-button>
+        </md-whiteframe>
+
+        <md-card-actions layout="row" layout-align="start center">
+          <div layout="column" flex="60">
+            <div flex class="giftcard-label">Gift Card</div>
+            <div flex><span class="fa fa-inr"><span ng-model="gift.amount">500</span></div>
+          </div>
+          <div layout="row" flex="40">
+            <md-button class="md-raised md-primary" ng-click="save(500)">Buy Now</md-button>
+          </div>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex>
+      <md-card >
+        <md-whiteframe class="md-whiteframe-2dp" style="background-color: #FF4081; padding: 20px;" layout layout-align="center center">
+          <md-button class="md-icon-button logo-btn" aria-label="giftcard 1000">
+            <img class="logo-image img-circle" src="assets/img/logo/giftcard.jpg">
+          </md-button>
+        </md-whiteframe>
+
+        <md-card-actions layout="row" layout-align="start center">
+          <div layout="column" flex="60">
+            <div flex class="giftcard-label">Gift Card</div>
+            <div flex><span class="fa fa-inr"><span ng-model="gift.amount">1000</span></div>
+          </div>
+          <div layout="row" flex="40">
+            <md-button class="md-raised md-primary" ng-click="save(1000)">Buy Now</md-button>
+          </div>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex>
+      <md-card >
+        <md-whiteframe class="md-whiteframe-2dp" style="background-color: #FF4081; padding: 20px;" layout layout-align="center center">
+          <md-button class="md-icon-button logo-btn" aria-label="giftcard 2500">
+            <img class="logo-image img-circle" src="assets/img/logo/giftcard.jpg">
+          </md-button>
+        </md-whiteframe>
+
+        <md-card-actions layout="row" layout-align="start center">
+          <div layout="column" flex="60">
+            <div flex class="giftcard-label">Gift Card</div>
+            <div flex><span class="fa fa-inr"><span ng-model="gift.amount">2500</span></div>
+          </div>
+          <div layout="row" flex="40">
+            <md-button class="md-raised md-primary" ng-click="save(2500)">Buy Now</md-button>
+          </div>
+        </md-card-actions>
+      </md-card>
+    </div>
+    <div flex>
+      <md-card >
+        <md-whiteframe class="md-whiteframe-2dp" style="background-color: #FF4081; padding: 20px;" layout layout-align="center center">
+          <md-button class="md-icon-button logo-btn" aria-label="giftcard 5000">
+            <img class="logo-image img-circle" src="assets/img/logo/giftcard.jpg">
+          </md-button>
+        </md-whiteframe>
+
+        <md-card-actions layout="row" layout-align="start center">
+          <div layout="column" flex="60">
+            <div flex class="giftcard-label">Gift Card</div>
+            <div flex><span class="fa fa-inr"><span ng-model="gift.amount">5000</span></div>
+          </div>
+          <div layout="row" flex="40">
+            <md-button class="md-raised md-primary" ng-click="save(5000)"> Buy Now</md-button>
+          </div>
+        </md-card-actions>
+      </md-card>
+    </div>
+
+  </div>
+
+  <div layout="row" layout-align="center center">
+    <div flex="25">
+     <md-card >
+      <md-whiteframe class="md-whiteframe-2dp" style="background-color: #FF4081; padding: 20px;" layout layout-align="center center">
+        <md-button class="md-icon-button logo-btn" aria-label="giftcard 5000">
+          <img class="logo-image img-circle" src="assets/img/logo/giftcard.jpg">
+        </md-button>
+      </md-whiteframe>
+
+      <md-card-actions layout="row" layout-align="start center">
+        <div layout="column" flex="60">
+          <div flex class="giftcard-label">Gift Card</div>
+          <div flex><span class="fa fa-inr"></span><span ><md-input-container>
+            <label>Enter amount</label>
+            <input ng-model="gift">
+          </md-input-container></span></div>
+        </div>
+        <div layout="row" flex="40">
+          <md-button class="md-raised md-primary" ng-click="save(gift)">Buy Now</md-button>
+        </div>
+      </md-card-actions>
+    </md-card>
+  </div>
+</div>
+</div>
+<ng-include src=" 'app/paymentform.html' "></ng-include>
+
+<footer></footer>

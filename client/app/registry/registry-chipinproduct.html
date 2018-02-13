@@ -1,4 +1,4 @@
-<div class = "modal-body">
+<!-- <div class = "modal-body">
  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
  <div class="row">
   <toaster-container toaster-options="{'time-out': 1000, 'position-class': 'toast-top-center'}"></toaster-container>
@@ -25,15 +25,14 @@
      <span>Payment Received : </span>₹{{registryprod.paid}} &nbsp;&nbsp;&nbsp;
      <span>Remaining : </span>{{(registryprod.price-0) - (registryprod.paid-0)}}
    </div>
-
-  <!--  <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="{{paidpercent}}"
-    aria-valuemin="0" aria-valuemax="{{registryprod.price | number}}" style="width:70%">
-    <span class="sr-only">{{paidpercent}}% Complete</span>
+   <div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{registryprod.paid}}"
+    aria-valuemin="0" aria-valuemax="{{registryprod.price}}" style="width:40%">
+    {{registryprod.paid}}
   </div>
-  <uib-progressbar max="maxprice" value="dynamic" value="paidPercent"><span style="color:white; white-space:nowrap;">{{paidPercent}}</span></uib-progressbar>
-</div> -->
+</div>
 
+ 
 <br>
 <form name="form1" ng-submit="save(form1)">
   <div class="form-group form-group-lg">
@@ -56,3 +55,85 @@
 </div>
 </form>
 </div>
+<ng-include src=" 'app/paymentform.html' "></ng-include> -->
+
+
+<div class="modal-content mc-quick quickview2">
+  <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <div class="row">         
+    <div class="col-sm-6 left-quickview">           
+      <img ng-src="{{registryprod.imageUrl}}" class="img-responsive" ng-if= "!product.affiliate">  
+      
+      <span class="butss"></span>     
+    </div>
+    <div class="col-sm-6 right-quickview">
+      <div class="product-des product-des-detail">
+        <h1 class="title-product"><a href="#">{{registryprod.name}}</a></h1>
+        <div class="short-info" ng-repeat="f in registryprod.feature">
+          <div><span>{{f.feature}} : {{f.value}}</span></div>
+        </div>
+        <span ng-if = "!registryprod.custom" class="mc-price m-t-20"><ins>₹{{registryprod.price | number}}</ins></span>
+
+
+        <br>
+        <div class="desired short-info">
+         <span>Payment Received : </span>₹{{registryprod.paid}} &nbsp;&nbsp;&nbsp;
+         <span>Remaining : </span>{{(registryprod.price-0) - (registryprod.paid-0)}}
+       </div>
+       <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{registryprod.paid}}"
+        aria-valuemin="0" aria-valuemax="{{registryprod.price}}" style="width:40%">
+        {{registryprod.paid}}
+      </div>
+    </div>
+    <div class="product-shortdes" ng-if="registryprod.custom">{{registryprod.description}}</div>                
+     <!--    <div class="product-btn m-t-20">
+          <div class="quantity">
+            <div class="Quantity" ng-if = "max > 0">
+              <span class="regprod-tit">Quantity : </span> <input type="number" name="input" ng-model= "qty"
+              min="1" max={{max}}  required>
+            </div>
+          </div>
+        </div> -->
+        <br>
+        <form name="form1" ng-submit="save(form1)" ng-if="remaining > 0">
+          <div class="form-group form-group-lg">
+            <label>Price</label>
+            <div class="row grid-container grid-spacing-half">
+              <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
+                <input type="number"  class="form-control" placeholder="1000" id="price" name="price"
+                ng-model="amount" max={{remaining}} min="100" required>
+                <div data-ng-if="form1.price.$error.max" class="help-block">Contribution amount cannot be more than required amount</div>  
+                <div data-ng-if="form1.price.$error.min" class="help-block">Minimum Contribution amount is 100</div>                               
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="row" ng-if="remaining > 0">
+          <div class="col-md-12 text-center">    
+           <button  class="btn btn-primary" ng-click="ok()">Contribute</button> 
+         </div>
+       </div>
+       <div class="row" ng-if="remaining == 0">
+        <div class="col-md-12 text-center">    
+          <button  class="btn btn-primary" ng-click="buyNow()">Buy Now</button> 
+        </div>
+      </div>
+    </form>
+   <!--      <div class="add-to-cart">
+
+
+
+
+          <button class="btn btn-primary" ng-click="ok()">Contribute</button>
+
+
+        </div> -->
+
+      </div>                 
+    </div>  
+  </div>
+</div>
+
+<ng-include src=" 'app/paymentform.html' "></ng-include>

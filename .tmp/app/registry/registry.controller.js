@@ -116,6 +116,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
       console.log(resp);
       if (Auth.getCurrentUser().email == resp.username) {
         $scope.editable = true;
+        console.log("editable" + $scope.editable);
       }
       $scope.setTheme($scope.registry.theme);
       console.log($scope.theme);
@@ -197,7 +198,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
       Registry.rsvpRegistry({ id: $scope.registry._id }, $scope.rsvp, function (resp) {
         toaster.pop('success', "Thank you for your Response");
         $timeout(function () {
-          $scope.showWishlist();
+          $state.go('registry.registrypdts'); //$scope.showWishlist()
         }, 1000);
       }, function (err) {
 
@@ -331,7 +332,7 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     var modalInstance = $uibModal.open({
       templateUrl: 'app/registry/registry-product.html',
       controller: 'RegistryProductDetailCtrl',
-      size: 'md',
+      size: 'lg',
       resolve: {
         registry: function registry() {
           return $scope.registry._id;
@@ -351,12 +352,14 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     var modalInstance = $uibModal.open({
       templateUrl: 'app/registry/registry-chipinproduct.html',
       controller: 'RegistryChipinProductDetailCtrl',
-      size: 'md',
+      size: 'lg',
       resolve: {
         registry: function registry() {
           return $scope.registry._id;
         }, registryprod: function registryprod() {
           return product;
+        }, registryslug: function registryslug() {
+          return $scope.registry.slug;
         }
       }
     }).result.then(function (result) {
@@ -477,7 +480,7 @@ angular.module('bhcmartApp').controller('themeCtrl', ['$scope', '$stateParams', 
   };
 }]);
 
-angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', 'registry', 'registryprod', 'Product', 'ngCart', function ($scope, $stateParams, $state, Registry, $uibModalInstance, registry, registryprod, Product, ngCart) {
+angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', 'registry', 'registryprod', 'Product', 'ngCart', 'Cart', 'Auth', '$uibModal', function ($scope, $stateParams, $state, Registry, $uibModalInstance, registry, registryprod, Product, ngCart, Cart, Auth, $uibModal) {
 
   $scope.registryid = registry;
   $scope.registryprod = registryprod;
@@ -493,17 +496,43 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
   f.push({ 'products._id': $scope.registryprod._id });
   q.where = { $and: f };
 
+  /*    $scope.BuyProduct = function(product,qty){
+        console.log($scope.qty)
+        console.log(product);
+        var gst = parseInt(product.sgst) + parseInt(product.cgst);
+        var gstamount = (parseInt(gst)*parseInt(qty)*parseInt(product.price))/100
+        ngCart.addItem(product._id, product.title, product.price, qty, product,$scope.registryprod.color,$scope.registryprod.size,gstamount,$scope.registryid);
+        
+      }*/
+
+  var items = {};
   $scope.BuyProduct = function (product, qty) {
-    console.log($scope.qty);
-    console.log(product);
-    var gst = parseInt(product.sgst) + parseInt(product.cgst);
-    var gstamount = parseInt(gst) * parseInt(qty) * parseInt(product.price) / 100;
-    ngCart.addItem(product._id, product.title, product.price, qty, product, $scope.registryprod.color, $scope.registryprod.size, gstamount, $scope.registryid);
-    $uibModalInstance.close();
+    items.quantity = qty;
+    items.features = $scope.registryprod.feature;
+    items.products = product._id;
+    items.registry = $scope.registryid;
+    var gst = parseInt(product.gst) * 0.01 * parseInt(product.price) + parseInt(product.price);
+    items.subtotal = parseInt(qty) * gst;
+    console.log(items.products);
+
+    Cart.addTocart({ id: Auth.getCurrentUser()._id }, items, function (res) {
+      $uibModalInstance.close();
+      var modalInstance = $uibModal.open({
+        templateUrl: 'app/cart/cart.html',
+        controller: 'CartCtrl',
+        size: 'lg'
+      });
+    }, function (err) {
+      console.log(err);
+    });
+
+    /*  Cart.alterpdtQuantity({id : Auth.getCurrentUser()._id},items,function(res){
+        console.log(res)
+      })*/
   };
 
   $scope.buyNow = function (qyt) {
-    $uibModalInstance.close("test");
+
     if (!$scope.registryprod.custom) {
       var buyproduct = $scope.product;
     } else {
@@ -515,6 +544,7 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
       console.log(err);
       $scope.message = "An error occured!";
     });
+    $uibModalInstance.close("test");
   };
   if (!$scope.registryprod.custom) {
     $scope.product = Product.get({ id: registryprod.slug });
@@ -531,22 +561,102 @@ angular.module('bhcmartApp').controller('RegistryProductDetailCtrl', ['$scope', 
   };
 }]);
 
-angular.module('bhcmartApp').controller('RegistryChipinProductDetailCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', 'registry', 'registryprod', 'Product', 'ngCart', function ($scope, $stateParams, $state, Registry, $uibModalInstance, registry, registryprod, Product, ngCart) {
+angular.module('bhcmartApp').controller('RegistryChipinProductDetailCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', 'registry', 'registryprod', 'Product', 'Auth', 'Payment', 'registryslug', function ($scope, $stateParams, $state, Registry, $uibModalInstance, registry, registryprod, Product, Auth, Payment, registryslug) {
 
   $scope.registryid = registry;
   $scope.registryprod = registryprod;
+  console.log($scope.registryid);
   console.log($scope.registryprod);
-  $scope.contribution = 100;
+  $scope.contribution = parseInt(100);
   $scope.maxprice = parseInt(registryprod.price);
+  $scope.isLoggedIn = Auth.isLoggedIn;
+
+  console.log();
 
   $scope.paidPercent = parseInt(registryprod.price) / parseInt(registryprod.paid) * 100;
   $scope.total = parseInt(registryprod.price) * parseInt(registryprod.desired);
   $scope.remaining = parseInt(registryprod.price) - parseInt(registryprod.paid);
 
+  this.getCurrentUser = Auth.getCurrentUser;
+  function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+
+  function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0,
+          v = c == 'x' ? r : r & 0x3 | 0x8;
+      return v.toString(16);
+    });
+  }
+
+  console.log(window.location.origin + "api/payment/contributionStatus");
+
+  $scope.message = 'Get ready to buy gift';
+  $scope.mkey = 'gtKFFx';
+  $scope.productInfo = 'Contribution';
+  $scope.txnid = makeid();
+  $scope.id = uuidv4();
+  $scope.type = '2';
+  $scope.email = Auth.getCurrentUser().email;
+  $scope.phone = 9176464641;
+  $scope.lastName = Auth.getCurrentUser().name;
+  $scope.firstName = '';
+  $scope.surl = window.location.origin + "/api/payment/contributionStatus";
+  $scope.furl = window.location.origin + "/api/payment/contributionStatus";
+  $scope.hash = '';
+
+  $scope.presubmit = function () {
+    var data = { preHashString: $scope.mkey + '|' + $scope.txnid + '|' + $scope.amount + '|' + $scope.productInfo + '|' + $scope.firstName + '|' + $scope.email + '|' + $scope.id + '||||||||||' };
+    Payment.createHash(data, function (resp) {
+      document.getElementById('hash').value = resp.hash;
+      document.getElementById('paymentForm').submit();
+    }, function (err) {
+      console.log(err);
+    });
+  };
+
+  $scope.buyNow = function () {
+    $uibModalInstance.close("test");
+  };
+
   $scope.ok = function () {
-    $state.go('contributioncart', { registryId: $scope.registryid, product: $scope.registryprod, contribution: $scope.contribution });
+    if ($scope.isLoggedIn()) {
+      $scope.name = Auth.getCurrentUser().name || {};
+      console.log($scope.amount);
+      var prodinfo = [];
+      console.log($scope.registryprod._id);
+      console.log($scope.amount);
+      console.log($scope.registryid);
+      console.log($scope.name);
+      prodinfo.push($scope.registryprod._id);
+      prodinfo.push($scope.amount);
+      prodinfo.push($scope.registryid);
+      prodinfo.push($scope.name);
+      prodinfo.push(registryslug);
+      $scope.productInfo = prodinfo.toString();
+
+      console.log($scope.productInfo);
+      $scope.presubmit();
+      Registry.contribution($scope.productInfo, function (resp) {
+        $scope.amount = resp.amount;
+        $scope.productInfo = resp._id;
+        $scope.presubmit();
+      }, function (err) {
+        console.log(err);
+      });
+    }
     $uibModalInstance.close();
   };
+
+  /*  $scope.ok = function() {
+      $uibModalInstance.close();  
+   };*/
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');

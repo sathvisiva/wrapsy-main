@@ -452,3 +452,64 @@ float : left;
 color : #F50057;
 margin-right: 3px;
 }
+
+.quickview2 .mc-quick{
+padding: 0px;
+position: relative;
+}
+.left-quickview{
+position: relative;
+}
+.butss{
+position: absolute;
+width: 0; 
+height: 0; 
+border-top: 20px solid transparent;
+border-bottom: 16px solid transparent; 
+border-right: 16px solid #fff; 
+top: calc(50% - 8px);
+right: 15px;
+}
+button.close{	
+position: absolute;
+z-index: 99;
+right: 20px;
+top: 20px;
+}    
+.right-quickview{
+padding: 40px 35px 20px 20px;
+}
+.regprod-tit{
+color :#000;
+}
+.short-info{
+width: 100%;
+float: left;
+margin: 5px 0px;
+font-size: 15px;
+}
+.short-info div{
+width: 100%;
+float: left;
+
+padding: 6px 0px;
+}
+.short-info div span,.short-info div small{
+width: 50%;
+float: left;
+}
+.short-info div span{
+color: #000;
+}
+.quickview2 .title-product a {
+color: #00BCD4;
+}
+.quickview2 .product-des .mc-price ins {
+color: #ff5722;
+font-weight: 600;
+font-size: 20px;
+}
+.quickview2 .available-instock span {
+color: #8BC34A;
+}
+

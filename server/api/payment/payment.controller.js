@@ -322,7 +322,8 @@ export function contributionStatus(req, res) {
   contribution.contribution = productInfo[1];
   contribution.registryId = productInfo[2];
   contribution.name = productInfo[3];
-  slug = productInfo[4];
+  console.log(productInfo.length)
+  slug = productInfo[productInfo.length - 1];
   slug = slug.substring(0, slug.length - 1);
   Contribution.create(contribution, function(err, registry) {
     if(err) { return handleError(res, err); }

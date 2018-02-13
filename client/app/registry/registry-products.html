@@ -6,20 +6,6 @@
 			</a>
 		</div>
 	</div>
-
-	<div class="row" ng-if="editable">
-		<div class="col-md-6">
-			<a ng-click="addCustomProduct()" class="cursorpointer">
-				<img class="img-responsive" src="/assets/img/manual_gifts.jpg">
-			</a>
-		</div>
-		<div class="col-md-6">
-			<a ui-sref="main">
-				<img class="img-responsive" src="/assets/img/gift-banner.jpg">
-			</a>
-		</div>
-	</div>
-
 	<div class="product-list" >
 		<div class="col-md-12 col-sm-12 col-xs-12  text-center" ng-show="registry.products.length < 1" >
 			No Products Added to Registry
@@ -30,7 +16,7 @@
 	<div class="product-list" >
 		<div class="col-md-4 col-sm-12 col-xs-12 item" ng-repeat="item in registry.products">
 			<div class="product-item">
-				<span class="delete" ng-if="editable" ng-click="removeProduct($event,item._id)"><i class="fa fa-remove"></i></span>
+				<!-- <span class="delete" ng-if="editable" ng-click="removeProduct($event,item._id)"><i class="fa fa-remove"></i></span> -->
 				<span class="chipin" ng-if="item.multiple"><i class="fa fa-gift"></i>&nbsp;CHIPIN</span>
 				<span class="chipin" ng-if="!item.multiple">&nbsp;</span>
 
@@ -39,17 +25,17 @@
 						<img ng-src="{{item.imageUrl}}" alt="" class="pic" />
 					</a>
 					<a ng-click="showproductDetail(item, item.multiple)" ng-if = "item.affiliate" class="inner">
-						<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="pic" alt="{{item.name}}" data-err-src="images/product.jpg" />
+						<img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{item.asin}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160__&tag=sathviprasi-21" class="pic" alt="{{item.title}}" data-err-src="images/product.jpg" />
 					</a>
 
 				</div>
 				<div class="product-desc">
 					<h2 class="name cursorpointer"><a ng-click="showproductDetail(item, item.multiple)" >{{item.name}}</a></h2>
-					<div class="name" ng-hide="item.multiple">Needs : <!-- {{item.desired}} -->  <input type="number" name="input" ng-model= "item.desired"
-						min="1" max={{max}} style="width: 50px;" required> Has : {{item.required}}</div>
+					<div class="name" ng-hide="item.multiple">Needs :  <span ng-if="!editable">{{item.desired}} </span>  <input type="number" name="input" ng-model= "item.desired"
+						min="1" max={{max}} style="width: 50px;" required ng-if="editable">  Has : {{item.required}}</div>
 						<div class="name" ng-if="item.multiple">₹{{item.price | number}}</div>
 
-						<button ng-hide="item.multiple" class="btn btn-accent" ng-click=updatedesired(item.desired)>Update desired</button>
+						<button ng-hide="item.multiple" ng-if="editable" class="btn btn-accent" ng-click=updatedesired(item.desired)>Update desired</button> 
 					</div>
 
 					<span ng-if="item.desired == item.required" class="fulfilled">fulfilled</span>

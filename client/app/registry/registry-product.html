@@ -1,7 +1,54 @@
 
-<div class = "modal-body">
- <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
- <div class="row">
+<div class="modal-content mc-quick quickview2">
+  <button type="button" class="close" data-dismiss="modal" ng-click="cancel()" aria-label="Close"><span aria-hidden="true">×</span></button>
+  <div class="row">         
+    <div class="col-sm-6 left-quickview">           
+      <img ng-src="{{registryprod.imageUrl}}" class="img-responsive" ng-if= "!product.affiliate">  
+      <img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="registry-image" style="margin-top:35px;" alt="{{product.name}}" data-err-src="images/product.jpg"  ng-if= "product.affiliate"/>
+      <span class="butss"></span>     
+    </div>
+    <div class="col-sm-6 right-quickview">
+      <div class="product-des product-des-detail">
+        <h1 class="title-product"><a href="#">{{registryprod.name}}</a></h1>
+        <div class="short-info" ng-repeat="f in registryprod.feature">
+          <div><span>{{f.feature}} : {{f.value}}</span></div>
+        </div>
+        <span ng-if = "!registryprod.custom" class="mc-price m-t-20"><ins>₹{{product.price | number}}</ins><!-- <del>$25.00</del> --></span>
+        <div class="available-instock regprod-tit" ng-if="!registryprod.custom" >AVAILABLE: <span>{{product.stock}}</span>
+
+        </div>
+        <div class="desired">
+         <span class="regprod-tit">Desired : </span>{{registryprod.desired}} &nbsp;&nbsp;&nbsp;
+         <span class="regprod-tit">Still Needs : </span>{{(registryprod.desired-0) - (registryprod.required-0)}}
+       </div>
+       <br>
+       <div class="product-shortdes" ng-if="!registryprod.custom">{{product.description}}</div>
+       <div class="product-shortdes" ng-if="registryprod.custom">{{registryprod.description}}</div>                
+       <div class="product-btn m-t-20">
+        <div class="quantity">
+          <div class="Quantity" ng-if = "max > 0">
+            <span class="regprod-tit">Quantity : </span> <input type="number" name="input" ng-model= "qty"
+            min="1" max={{max}}  required>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="add-to-cart">
+
+
+        <button class="btn btn-primary btn-lg" ng-click="BuyProduct(product,qty)" ng-if="!product.affiliate && !registryprod.custom" ng-show = "max > 0">Add to Cart</button>
+
+        <button class="btn btn-primary" ng-click="buyNow(qty)" ng-if="registryprod.custom" ng-show = "max > 0">Notify and Buy Now</button>
+
+        <a class="btn btn-primary" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
+        ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate">Notify and Buy Now</a>
+      </div>
+
+    </div>                 
+  </div>  
+</div>
+</div>
+<!--  <div class="row">
 
 
   <div class="col-md-12 text-center">
@@ -50,15 +97,14 @@
  <div class="row">
   <div class="col-md-12 text-center">
 
-    <button class="btn btn-primary" ng-click="BuyProduct(product,qty)" ng-if="!product.affiliate && !registryprod.custom" ng-show = "max > 0"></i>Add to Cart</button>
+    <button class="btn btn-primary" ng-click="BuyProduct(product,qty)" ng-if="!product.affiliate && !registryprod.custom" ng-show = "max > 0">Add to Cart</button>
 
-    <button class="btn btn-primary" ng-click="buyNow(qty)" ng-if="registryprod.custom" ng-show = "max > 0"></i>Notify and Buy Now</button>
+    <button class="btn btn-primary" ng-click="buyNow(qty)" ng-if="registryprod.custom" ng-show = "max > 0">Notify and Buy Now</button>
 
     <a class="btn btn-primary" target="_blank" ng-href = "https://www.amazon.in/gp/product/{{product.prodcode}}/
-    ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate"></i>Notify and Buy Now</a>
+    ref=as_li_tl?ie=UTF8&camp=3638&creative=24630&creativeASIN={{product.prodcode}}&linkCode=as2&tag=sathviprasi-21&linkId={{product.linkId}}linkId" ng-click="buyNow(qty)" ng-if="product.affiliate">Notify and Buy Now</a>
 
   </div>
-</div>
+</div> -->
 
 
-</div>

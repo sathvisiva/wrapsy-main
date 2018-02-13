@@ -121,6 +121,12 @@ var RegistrySchema = new Schema({
   type: {
     type: String
   },
+  greeting: {
+    type: String
+  },
+  thankyou: {
+    type: String
+  },
   
   youfirstName: {
     type: String

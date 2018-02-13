@@ -100,16 +100,20 @@
 					<div class="clearer"></div>
 				</div>
 
-				<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" init-onload=true data="registryslides" >
-					<div ng-repeat="slide in registryslides">
-						<a  ui-sref="registry({id:slide.registry})">
-							<img ng-src="{{slide.image}}" class="img-responsive" >
-						</a>
-						<div class="sampleregistryText">{{slide.text}}
+				<div class="container">
+					<div class="row">
+						<div ng-repeat="slide in sampleregistries">
+							<div class="col-md-3">
+								<a  ui-sref="registry.home({id:slide.slug})">
+									<img ng-src="{{slide.profileImageUrl}}" class="img-responsive primary-img" style="min-height: 200px; max-height:200px; min-width: 200px; max-width: 200px;" >
+								</a>
+								<div class="sampleregistryText">{{slide.text}}
+								</div>
+							</div>
 						</div>
-					</div>
 
-				</slick>
+					</div>
+				</div>
 			</div>
 		</div>	
 	</div>
