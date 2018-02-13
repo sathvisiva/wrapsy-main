@@ -115,6 +115,15 @@ angular.module('bhcmartApp')
         }]
       },
       {
+        name: 'Request',
+        expandable : true,
+        expand: false,
+        actions: [{
+          name: 'Manage Requests',
+          state: 'admin.manageRequest'
+        }]
+      }
+  /*    {
         name: 'Wedding Services',
         expandable : true,
         expand: false,
@@ -131,7 +140,7 @@ angular.module('bhcmartApp')
           name : 'Service Vendors',
           state : 'admin.serviceVendors'
         }]
-      }]
+      }*/]
     }
   }
 }]);

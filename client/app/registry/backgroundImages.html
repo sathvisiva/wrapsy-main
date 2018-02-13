@@ -1,19 +1,33 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
-  <h3 class="list-title text-center">Select your Cover Picture</h3>
+  <h3 class="list-title text-center">Select your Profile Image</h3>
   
 </div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center">
+          <form name="form" id="form">
+            <a ngf-select="upload($file, $invalidFiles)" ng-model="imageUrl" class="btn btn-primary cursorpointer" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-min-height = "300"  ngf-min-width = "800"  >Select image</a>
+            <br>
+            <i ng-show="form.imageUrl.$error.minHeight"> Min Height has to be 300px.</i><br>
 
+            <i ng-show="form.imageUrl.$error.minWidth"> Min width has to be 900px.</i><br>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="text-center">
-      <form name="form" id="form">
-        <a ngf-select="upload($file, $invalidFiles)" ng-model="imageUrl" class="btn btn-primary cursorpointer" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-min-height = "300"  ngf-min-width = "800"  >Select image</a>
-        <br>
-        <i ng-show="form.imageUrl.$error.minHeight"> Min Height has to be 300px.</i><br>
-
-        <i ng-show="form.imageUrl.$error.minWidth"> Min width has to be 900px.</i><br>
+ <!--          <div class="msg-block" ng-if="form.imageUrl.$touched && form.imageUrl.$error" ng-messages="form.imageUrl.$error" style="color:maroon; ">
+            <div ng-messages="minWidth"> Min width has to be 900px.</div> 
+            <div ng-messages="minHeight">
+            
+           </div>
+           <div ng-messages="maxWidth">
+            Max Width has to be 1200px.
+          </div>
+          <div ng-messages="maxHeight">
+            Max Width has to be 500px.
+          </div>    
+        </div> -->
+        <!--   -->
       </form>
       <button class="btn btn-md btn-primary" ng-click="crop()">Crop</button>
       <button class="btn btn-md btn-primary" ng-click="Withoutcrop()">Upload without Crop</button>
@@ -31,47 +45,12 @@
 
 
 
-<div class="row">
+<!-- <div class="row">
  <div class="col-md-12 text-center">
   <img ng-src="{{croppedImage}}" />
 </div>
 
-</div>
-
-<!-- <div class="row">
-  <div class="col-md-12">
-    <div class="text-center">
-      <a ngf-select="upload($file, $invalidFiles)" ng-model="imagimageUrleUrl" class="btn btn-primary cursorpointer" name="imageUrl" accept="image/*" ngf-max-size="1MB"  ngf-model-invalid="errorFile">Select image</a>
-      <button class="btn btn-md btn-primary" ng-click="crop()">Crop</button>
-      <button class="btn btn-md btn-primary" ng-click="Withoutcrop()">Upload without Crop</button>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-   <div class="cropArea">
-   <ui-cropper image="myImage" area-type="rectangle" result-image-quality = '0.8' result-image="myCroppedImage" live-view="blockingObject"></ui-cropper>
-  </div>
-</div>
-<div class="col-md-6 text-center">
-  <img ng-src="{{myCroppedImage}}" />
-</div>
 </div> -->
-<!--   <table>
-    <td>
+</div>
 
-      <div class="cropArea">
-        <ui-cropper image="myImage" area-type="rectangle" result-image-quality = '0.8' result-image-size='{w: 680,h: 400}' result-image="myCroppedImage" live-view="blockingObject"></ui-cropper>
-      </div>
-    </td>
-    <td>
-      <div class="row">
-        <div class="col-md-6 text-center">
-         
-        </div>
-        <div class="col-md-6 text-center">
-         
-        </div>
-      </div>
-      <div></div>
-    </td>
-  </table> -->
+</div>

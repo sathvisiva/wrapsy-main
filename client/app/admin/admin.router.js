@@ -102,6 +102,11 @@ angular.module('bhcmartApp.admin')
     templateUrl: 'app/manage-orders/manageorders.html',
     controller : 'ManageOrdersCtrl'
   })
+  .state('admin.manageRequest', {
+    url: '/manageRequest',
+    templateUrl: 'app/manage-requests/manage-requests.html',
+    controller : 'ManageRequestsCtrl'
+  })
   .state('admin.managehome', {
     url: '/managehome',
     templateUrl: 'app/manage-home/manage-home-image.html',

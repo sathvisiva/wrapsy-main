@@ -76,7 +76,7 @@ export function deleteImage(req,res){
 }
 // Gets a list of Requests
 export function index(req, res) {
-  Request.findAsync()
+  Request.find().populate('customerId').populate('orderId')
   .then(responseWithResult(res))
   .catch(handleError(res));
 }

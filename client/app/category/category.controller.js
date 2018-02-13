@@ -7,7 +7,7 @@ angular.module('bhcmartApp')
   
   $scope.page = 1;
 
-  $scope.list = 3;
+  $scope.list = 10;
 
   $scope.priceSlider = {};
 /*

@@ -6,7 +6,7 @@ angular.module('bhcmartApp').controller('CategoryCtrl', ['$scope', '$stateParams
 
   $scope.page = 1;
 
-  $scope.list = 3;
+  $scope.list = 10;
 
   $scope.priceSlider = {};
   /*

@@ -8,6 +8,7 @@ angular.module('bhcmartApp')
 
     
       Request.query(function(requests) {
+        console.log(requests)
         $scope.requests = requests
           // pagination controls
         $scope.currentPage = 1;

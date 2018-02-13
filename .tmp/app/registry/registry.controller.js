@@ -284,9 +284,8 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
       controller: 'backgroundImageCtrl',
       size: 'lg'
     }).result.then(function (result) {
-      var blob = dataURItoBlob(result);
-      var file = new File([blob], 'fileName.jpeg', { type: "'image/jpeg" });
-      $scope.upload(file);
+
+      $scope.queryRegistry();
     });
   };
 
@@ -297,7 +296,16 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
       size: 'lg'
     }).result.then(function (result) {
       $scope.registry.theme = result;
-      console.log(result);
+      $scope.selectedtheme = {};
+      $scope.selectedtheme.id = $scope.registry._id;
+      $scope.selectedtheme.theme = result;
+      Registry.updatetheme($scope.selectedtheme, function (resp) {
+        $scope.queryRegistry();
+      }, function (err) {
+        console.log(err);
+
+        console.log(result);
+      });
     });
   };
 
@@ -442,30 +450,91 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
   };
 }]);
 
-angular.module('bhcmartApp').controller('backgroundImageCtrl', ['$scope', '$stateParams', '$state', 'Registry', '$uibModalInstance', function ($scope, $stateParams, $state, Registry, $uibModalInstance) {
+angular.module('bhcmartApp').controller('backgroundImageCtrl', ['$scope', '$stateParams', '$state', 'Registry', 'Upload', '$uibModalInstance', function ($scope, $stateParams, $state, Registry, Upload, $uibModalInstance) {
 
   $scope.myCroppedImage = '';
   $scope.myImage = '';
 
-  $scope.upload = function (file) {
-    var selectedfile = file;
-    var reader = new FileReader();
-    reader.onload = function (evt) {
-      $scope.$apply(function ($scope) {
-        $scope.myImage = evt.target.result;
+  $scope.registryslug = $stateParams.id;
+
+  $scope.upload = function (file, err) {
+    if (file) {
+      var selectedfile = file;
+      var reader = new FileReader();
+      reader.onload = function (evt) {
+        $scope.$apply(function ($scope) {
+          $scope.myImage = evt.target.result;
+          console.log($scope.myImage);
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  $scope.uploadprofileImage = function (file) {
+    if (file) {
+      Upload.upload({
+        url: '/api/uploads',
+        data: { file: file }
+      }).then(function (resp) {
+        $scope.registry = {};
+        $scope.registry.id = $scope.registryslug;
+        $scope.registry.profileImageUrl = resp.data.url;
+        Registry.updateProfilepic({ id: $scope.registryslug }, $scope.registry).$promise.then(function (res) {
+          $state.go('dashboard', { id: $scope.registryslug });
+        });
+        /*if ($scope.registry) {
+          $scope.registry.profileImageUrl = resp.data.url;
+          Registry.updateProfilepic({id:$scope.registryslug},$scope.registry).$promise.then(function(res) {
+           console.log(res);
+           console.log("success")
+         });
+        } else {
+         $scope.registry = { profileImageUrl: resp.data.imageUrl }
+        }
+        */
+      }, function (resp) {
+        $scope.errorMsg = resp.status + ': ' + resp.data;
+      }, function (evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        // console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
       });
     };
-    reader.readAsDataURL(file);
   };
+
+  function dataURItoBlob(dataURI) {
+
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0) byteString = atob(dataURI.split(',')[1]);else byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], { type: mimeString });
+  }
 
   $scope.myCroppedImage = '';
 
   $scope.Withoutcrop = function () {
-    $uibModalInstance.close($scope.myImage);
+    var blob = dataURItoBlob($scope.croppedImage);
+    var file = new File([blob], 'fileName.jpeg', { type: "'image/jpeg" });
+    $scope.uploadprofileImage(file);
+    $uibModalInstance.close('ok');
   };
 
   $scope.crop = function () {
-    $uibModalInstance.close($scope.myCroppedImage);
+    /*$uibModalInstance.close($scope.croppedImage);*/
+    var blob = dataURItoBlob($scope.croppedImage);
+    var file = new File([blob], 'fileName.jpeg', { type: "'image/jpeg" });
+    $scope.uploadprofileImage(file);
+    $uibModalInstance.close('ok');
   };
 }]);
 

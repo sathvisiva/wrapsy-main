@@ -6,6 +6,7 @@ angular.module('bhcmartApp').controller('ManageRequestsCtrl', ['$scope', 'Modal'
   $scope.requests = [];
 
   Request.query(function (requests) {
+    console.log(requests);
     $scope.requests = requests;
     // pagination controls
     $scope.currentPage = 1;

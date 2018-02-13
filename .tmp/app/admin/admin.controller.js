@@ -100,23 +100,32 @@ angular.module('bhcmartApp').controller('AdminController', ['$scope', '$statePar
           state: 'admin.manageOrders'
         }]
       }, {
-        name: 'Wedding Services',
+        name: 'Request',
         expandable: true,
         expand: false,
         actions: [{
-          name: 'Services List',
-          state: 'admin.services'
-        }, {
-          name: 'Add Services',
-          state: 'admin.newcservices'
-        }, {
-          name: 'Add Service Vendor',
-          state: 'admin.newcserviceVendor'
-        }, {
-          name: 'Service Vendors',
-          state: 'admin.serviceVendors'
+          name: 'Manage Requests',
+          state: 'admin.manageRequest'
         }]
-      }]
+      }
+      /*    {
+            name: 'Wedding Services',
+            expandable : true,
+            expand: false,
+            actions: [{
+              name: 'Services List',
+              state: 'admin.services'
+            },{
+              name: 'Add Services',
+              state: 'admin.newcservices'
+            },{
+              name : 'Add Service Vendor',
+              state : 'admin.newcserviceVendor'
+            },{
+              name : 'Service Vendors',
+              state : 'admin.serviceVendors'
+            }]
+          }*/]
     }
   };
 }]);

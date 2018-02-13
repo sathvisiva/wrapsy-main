@@ -7,11 +7,27 @@ background-position: center top;
 
 
 .registryPage.theme1{
-background-image: url('https://static.xoedge.com/xo-guest-services/assets/guest/themes/spring/background_image-602f962ae9059b5afc24b1fbc59c146b.png');
+background-image: url('/assets/img/thm1.png');
+}
+
+.registryPage.theme3{
+background-image: url('/assets/img/thm3.jpg');
+}
+
+.registryPage.theme4{
+background-image: url('/assets/img/thm4.png');
+}
+
+.full-screen {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    top: 0;
+    left: 0;
 }
 
 .registryPage.theme2{
-background-image: url(https://static.xoedge.com/xo-guest-services/assets/guest/themes/gold_glitter-coral/background_image-05f805b2ccac5db3f553831879a5b060.jpg);
+background-image: url('/assets/img/thm2.jpg');
 background-color: rgb(251, 156, 143);
 }
 
@@ -24,6 +40,12 @@ font-weight: 700;
 
 .menutitle.theme1{
 color: rgb(77, 77, 77);
+}
+.menutitle.theme3{
+color: gold;
+}
+.menutitle.theme4{
+color: black;
 }
 
 
