@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('bhcmartApp')
-.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order', 'ngCart','toaster','Voucher','Address','Payment','$uibModal', 'stateService',function($scope, Auth, $state, Order, ngCart, toaster,Voucher,Address,Payment, $uibModal, stateService) {
+.controller('CheckoutCtrl', ['$scope', 'Auth', '$state', 'Order','toaster','Voucher','Address','Payment','$uibModal', 'stateService','Cart',function($scope, Auth, $state, Order,  toaster,Voucher,Address,Payment, $uibModal, stateService, Cart) {
   $state.go('checkout.shipping')
   $scope.user = Auth.getCurrentUser() || {};
   $scope.user.country = "In"
@@ -13,10 +13,50 @@ angular.module('bhcmartApp')
   $scope.disableorder = true ; 
   $scope.disablepayment = true;
   $scope.address = {};
+  $scope.amounttobepaid = 0
+  $scope.grandtotal = 0
+  $scope.voucheramount = 0
+  
+  $scope.enableVoucher = true;
+
 
   var q = {where:{email:Auth.getCurrentUser().email}};
 
   $scope.myTabIndex = 0;
+
+  function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
+
+  $scope.displaycarItems = function(){
+    Cart.show({id : Auth.getCurrentUser()._id}, function(res){
+      $scope.carts = res;
+      $scope.appliedVoucher = res.vouchers;
+      console.log($scope.appliedVoucher)
+      if($scope.appliedVoucher || $scope.appliedVoucher !=null){
+        $scope.enableVoucher = false;
+      }
+      $scope.items = res.items;
+      $scope.subtotal = 0;
+      for(var i= 0 ;i < $scope.items.length; i++ ){
+        $scope.subtotal += $scope.items[i].subtotal;
+        if($scope.appliedVoucher || $scope.appliedVoucher !=null){
+          $scope.grandtotal = $scope.subtotal ; 
+          $scope.voucheramount = $scope.appliedVoucher.amount;
+          $scope.amounttobepaid = $scope.subtotal - $scope.appliedVoucher.amount; 
+        }else{
+          $scope.grandtotal = $scope.subtotal  ;
+          $scope.amounttobepaid = $scope.subtotal
+        }
+      }
+    }
+    );
+  }
+
+  $scope.displaycarItems()
   console.log("tabindex");
 
   console.log($scope.myTabIndex);
@@ -24,7 +64,47 @@ angular.module('bhcmartApp')
   console.log($scope.vouchers)
 
 
+
   */
+
+
+
+
+  $scope.redeemvoucher = function (voucherCode) {
+    $scope.errormessage = '';
+    $scope.voucher = {};
+    $scope.voucher.code = voucherCode;
+    $scope.voucher.amount = $scope.subtotal;
+    $scope.voucher.user = Auth.getCurrentUser()._id;
+    console.log($scope.voucher)
+    Voucher.redeem($scope.voucher, function(resp){
+
+      if(resp.errorcode == 0 ){
+        $scope.errormessage = "Sorry, Voucher already redeemed";
+      }else if(resp.errorcode == 1){
+        $scope.errormessage = "Sorry, Voucher validity expired";
+      }else if(resp.errorcode == 2){
+        $scope.errormessage = "Sorry, Voucher amount is greater than cart amount";
+      }else if(resp.errorcode == 3){
+        $scope.errormessage = "Sorry, Invalid voucher code";
+      }else if(resp.errorcode == 4){
+        $scope.errormessage = "Sorry, Voucher already applied to cart";
+      }
+      
+
+
+
+    });
+    
+  };
+
+
+
+  $scope.items = Cart.show({id : Auth.getCurrentUser()._id}, function(res){
+    console.log(res)
+    $scope.items = res.items;
+    console.log($scope.items);
+  });
 
   $scope.moveprev = function(){
    $scope.myTabIndex = 0; 
@@ -32,48 +112,14 @@ angular.module('bhcmartApp')
  }
 
 
- $scope.addVoucher = function(ev){
-  if($scope.isLoggedIn()){
-   var modalInstance = $uibModal.open({
-    templateUrl : 'app/voucher/redeem-voucher.html',
-    controller: 'VoucherRedeemCtrl',
-    size :'md',
-    resolve: {
-      amount: function () {
-       return ngCart.totalCost();
-     }
-   }
- })
-   .result.then(function(result) {
-    console.log(result);
-    console.log($scope.productInfo);
 
 
-    Order.updateVoucher({id:$scope.productInfo},result).$promise.then(function(res) {
-     console.log(res.ok);
-   });
+ $scope.moveNext = function(){
+   $scope.myTabIndex = $scope.myTabIndex + 1; 
+   $scope.showshipping = true;
+ }
 
-
-  /*  Order.countorders(q, function (orders) {
-      $scope.orderscount = orders[0].count;
-      console.log($scope.orderscount);
-    });*/
-  }, function() {
-  // Cancel
-});
- }else{
-  $scope.data = {'event' : 'login'};
-  $scope.login(ev, $scope.data);
-
-}
-}
-
-$scope.moveNext = function(){
- $scope.myTabIndex = $scope.myTabIndex + 1; 
- $scope.showshipping = true;
-}
-
-$scope.gotoshipping = function(){
+ $scope.gotoshipping = function(){
   console.log("inside shipping")
   $scope.myTabIndex = 0;
 }
@@ -95,7 +141,7 @@ $scope.states = stateService.getstates();
     }
 
   }*/
-
+/*
   $scope.redeemVoucher = function(voucher1){
     var data = {code:voucher1};
     Voucher.redeem(data, function(resp) {
@@ -104,7 +150,7 @@ $scope.states = stateService.getstates();
       console.log(err)
     })
 
-  }
+  }*/
 
 
   $scope.validate = form => {
@@ -169,67 +215,112 @@ $scope.states = stateService.getstates();
     }
   }*/
 
-  $scope.presubmit = function () {
-    var data = { preHashString: $scope.mkey + '|' + $scope.txnid + '|' + $scope.amount + '|' + $scope.productInfo + '|' + $scope.firstName + '|' + $scope.email + '|' + $scope.id + '||||||||||' };
-    Payment.createHash(data, function(resp) {
-      document.getElementById('hash').value = resp.hash;
-      document.getElementById('paymentForm').submit();
-    }, function(err) {
-      console.log(err)
-    })
+
+  $scope.completeOrder = function(cart , user){
+   $scope.cart = {};
+   $scope.cart.items = cart;
+   if($scope.carts.vouchers){
+    $scope.cart.vouchers = $scope.carts.vouchers._id
+    $scope.cart.paidbyVoucher = $scope.carts.vouchers.amount;
   }
+  $scope.cart.paid = paid;
+  $scope.cart.status = 'placed';
 
-  $scope.message = 'Everyone come and see how good I look!';
-  $scope.mkey = 'gtKFFx';
-  $scope.productInfo = 'Verification order';
-  $scope.txnid = makeid();
-  $scope.amount = 234.99;
-  $scope.id = '2222222';
-  $scope.type = '2';
-  $scope.email = 'sathvisiva@gmail.com';
-  $scope.phone = 9176464641;
-  $scope.lastName = 'test';
-  $scope.firstName = 'fname';
-  $scope.surl = "http://localhost:9000/PaymentStatus";
-  $scope.hash = '';
-
-  $scope.checkoutorder = function(cart, user){
-
-    if (user.name && user.email ) {
-      _.map(cart.items, i => {
-        i.productId = i.id;
-        delete i.data;
-        delete i.id;
-        return i;
-      })
-
-      Address.save($scope.address, function(resp) {
-        cart = _.extend(cart, {
-          customerId: user._id ? user._id : '',
-          customerName: user.name,
-          customerEmail: $scope.user.email,
-          customerAddress: user.address
-        });
-        console.log(cart)
-        Order.save(cart,function(resp) {
-          $scope.amount = resp.totalCost;
-          $scope.productInfo = resp._id;
-          $scope.presubmit();
-          $scope.myTabIndex = $scope.myTabIndex + 1; 
-          //ngCart.empty();
-
-        },
-        function(err) {
-          toaster.pop('error', "Please Try again later");
-        });
-
-      }, function(err) {
-        console.log(err)
-      });
-
-    } else {
-      $scope.message = 'Please, complete the shipping section and click on continue'
+  Address.save($scope.address, function(resp) {
+    console.log(resp)
+    $scope.cart.customerId = user._id ? user._id : '',
+    $scope.cart.customerName = user.name,
+    $scope.cart.customerEmail= $scope.user.email,
+    $scope.cart.customerAddress = resp._id
+    console.log(cart)
+    $scope.cart.totalCost = 0;
+    for(var i=0 ; i < $scope.cart.items.length ; i++){
+      $scope.cart.totalCost += parseInt($scope.cart.items[i].subtotal)
+      $scope.cart.items[i].statusChangeHistory = [];
+      $scope.cart.items[i].status = 'placed'
+      $scope.cart.items[i].statusChangeHistory.push({status : 'placed'})
     }
+    $scope.cart.status = 'placed';
+    console.log($scope.cart)
 
-  }
+    Order.save($scope.cart,function(resp) {
+      Cart.delete({id : Auth.getCurrentUser()._id})
+      $state.go('orders')
+    },
+    function(err) {
+      toaster.pop('error', "Please Try again later");
+    });
+  }, function(err) {
+    console.log(err)
+  });
+
+
+}
+
+$scope.presubmit = function () {
+  var data = { preHashString: $scope.mkey + '|' + $scope.txnid + '|' + $scope.amount + '|' + $scope.productInfo + '|' + $scope.firstName + '|' + $scope.email + '|' + $scope.id + '||||||||||' };
+  Payment.createHash(data, function(resp) {
+    document.getElementById('hash').value = resp.hash;
+    document.getElementById('paymentForm').submit();
+  }, function(err) {
+    console.log(err)
+  })
+}
+
+$scope.message = 'Get ready to buy gift card';
+$scope.mkey = 'gtKFFx';
+$scope.productInfo = 'AddVoucher';
+$scope.txnid = makeid();
+$scope.id = uuidv4();
+$scope.type = '2';
+$scope.email = Auth.getCurrentUser().email;
+$scope.phone = 9176464641;
+$scope.lastName = Auth.getCurrentUser().name;
+$scope.firstName = '';
+$scope.surl = window.location.origin + "/api/payment/pdtPaymentStatus";
+$scope.furl = window.location.origin + "/api/payment/pdtPaymentFailureStatus";
+$scope.hash = '';
+
+
+$scope.paymentpage = function(){
+  $scope.myTabIndex = $scope.myTabIndex + 1; 
+}
+
+$scope.checkoutorder = function(cart, user){
+
+
+  $scope.cart = {};
+  $scope.cart.items = cart;
+  Address.save($scope.address, function(resp) {
+    console.log(resp)
+    $scope.cart.customerId = user._id ? user._id : '',
+    $scope.cart.customerName = user.name,
+    $scope.cart.customerEmail= $scope.user.email,
+    $scope.cart.address = resp._id
+    console.log(cart)
+    $scope.cart.totalCost = 0;
+    for(var i=0 ; i < $scope.cart.items.length ; i++){
+      $scope.cart.totalCost += parseInt($scope.cart.items[i].subtotal)
+      $scope.cart.items[i].statusChangeHistory = [];
+      $scope.cart.items[i].status = 'placed'
+      $scope.cart.items[i].statusChangeHistory.push({status : 'placed'})
+    }
+    $scope.cart.status = 'placed';
+    console.log($scope.cart.totalCost)
+
+    Order.save($scope.cart,function(resp) {
+      $scope.amount = resp.totalCost;
+      $scope.productInfo = resp._id;
+      $scope.presubmit();
+      $scope.myTabIndex = $scope.myTabIndex + 1; 
+    },
+    function(err) {
+      toaster.pop('error', "Please Try again later");
+    });
+  }, function(err) {
+    console.log(err)
+  });
+
+} 
+
 }]);

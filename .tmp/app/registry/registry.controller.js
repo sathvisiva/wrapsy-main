@@ -266,7 +266,12 @@ angular.module('bhcmartApp').controller('RegistryController', ['$scope', '$state
     var modalInstance = $uibModal.open({
       templateUrl: 'app/registry/invite.html',
       controller: 'inviteRegistryCtrl',
-      size: 'md'
+      size: 'md',
+      resolve: {
+        registry: function registry() {
+          return $scope.registry.slug;
+        }
+      }
     }).result.then(function (result) {});
     /* $scope.registry.backgroundImageUrl = "assets/img/cover.jpg"
     */
@@ -713,10 +718,9 @@ angular.module('bhcmartApp').controller('ManageRegistryListController', ['$scope
   var q = { where: { username: Auth.getCurrentUser().email } };
   $scope.registries = Registry.query(q);
 }]);
-angular.module('bhcmartApp').controller('inviteRegistryCtrl', function ($scope, $rootScope, $state, $stateParams, Registry, Auth, $location, $uibModalInstance) {
+angular.module('bhcmartApp').controller('inviteRegistryCtrl', function ($scope, $rootScope, $state, $stateParams, Registry, Auth, $location, $uibModalInstance, registry) {
 
-  $scope.url = 'http://www.wrapsytest.com' + $location.path();
-  console.log($location.path());
+  $scope.url = window.location.origin + "/" + window.location.pathname.split('/')[1] + '/' + registry + '/';
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('Close');

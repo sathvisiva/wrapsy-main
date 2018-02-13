@@ -7,6 +7,7 @@ var Rsvp = require('./registry.model').rsvp;
 var GuestBook = require('./registry.model').guestBook;
 var Contribution = require('./registry.model').contribution;
 var Accomodation = require('./registry.model').accomodation;
+var RegistryType = require('./registry.model').registrytype
 var mail = require('../mail/sendmail');
 
 
@@ -121,21 +122,16 @@ exports.show = function(req, res) {
 
 };
 
-/*exports.makevisible = function(req, res) {
+exports.updatetheme = function(req, res) {
 
-  Registry.update({ _id: req.params.id }, { $set: { visible: true }}, function (err, registry) {
+  Registry.update({ _id: req.body.id }, { $set: { theme: req.body.theme }}, function (err, registry) {
     if (err) {
       handleError(err)
     }
-    Registry.findById(req.params.id, function (err, registry) {
-
-      if(err) { return handleError(res, err); }
-      if(!registry) { return res.status(404).send('Not Found'); }
-      return res.json(registry);
-    });
+    return res.json(registry);
 
   });
-};*/
+};
 
 
 exports.makevisible = function(req, res) {
@@ -150,13 +146,23 @@ exports.makevisible = function(req, res) {
     if (err) {
       handleError(err)
     }
-   /* Registry.findById(req.params.id, function (err, registry) {
+    return res.json(registry);
 
-      if(err) { return handleError(res, err); }
-      if(!registry) { return res.status(404).send('Not Found'); }
-      return res.json(registry);
-    });*/
+  });
+};
 
+exports.updateProfilepic = function(req, res) {
+
+  /*var visiblity = */
+  console.log("inside profile pic update");
+
+  console.log(req.body);
+  console.log(req.query);
+
+  Registry.update({ slug: req.body.id }, { $set: { profileImageUrl: req.body.profileImageUrl }}, function (err, registry) {
+    if (err) {
+      handleError(err)
+    }
     return res.json(registry);
 
   });
@@ -278,7 +284,7 @@ exports.indexGuestBookRegistry = function(req, res) {
 };
 
 exports.createAccomodation = function(req, res) {
-
+  console.log(req.body);
   Accomodation.create(req.body, function(err, registry) {
     if(err) { return handleError(res, err); }
     
@@ -313,6 +319,22 @@ exports.indexContribution = function(req, res) {
       return res.status(200).json(wishes);
     });
 };
+
+exports.createRegistryType = function(req,res){
+  RegistryType.create(req.body, function(err, registryType){
+    if(err){ return handleError(res,err);}
+    return res.status(201).json(registryType)
+  })
+}
+
+exports.indexRegistryType = function(req,res){
+ Registry.findByIdAsync(req.params.id).exec(function (err, registrytypes) {
+  if(err) { console.log(err);
+    return handleError(res, err); }
+    return res.status(200).json(registrytypes);
+  });
+
+}
 
 
 
@@ -364,6 +386,19 @@ exports.destroy = function(req, res) {
 		});
 	});
 };
+
+
+exports.removeaccomodation = function(req,res){
+  Accomodation.findById(req.params.id, function (err, product) {
+    if(err) { return handleError(res, err); }
+    if(!product) { return res.status(404).send('Not Found'); }
+    product.remove(function(err) {
+      if(err) { return handleError(res, err); }
+      return res.status(204).send('No Content');
+    });
+  });
+
+}
 
 exports.search = function(req, res) {
   var term = "/"+req.params.term+"/";
@@ -425,7 +460,7 @@ exports.getRegistryProduct = function(req, res) {
 
   };*/
 
-  exports.updateRegistryProduct = function(registryId, productId,quantity, email, name){
+  exports.updateRegistryProduct = function(registryId, productId,quantity){
 
 
     Registry.findOne({'products._id': productId}, {'products.$': 1}, function(err, registry){
@@ -454,11 +489,64 @@ exports.getRegistryProduct = function(req, res) {
 
 
 
+  exports.updateRegistryPdt = function(req , res){
+//registryId, productId,quantity
+var registryId  = req.params.id;
+var productId = req.body.product;
+var quantity = req.body.quantity;
+
+Registry.findOne({'_id' :registryId , 'products._id': productId}, {'products.$': 1}, function(err, registry){
+  var desiredQuantity = parseInt(req.body.quantity)
+  var increment = {
+    $set: {
+      'products.$.desired': desiredQuantity
+    }
+  };
+  var query = {
+    '_id': registryId,
+    'products._id': productId
+
+  };
 
 
-  function handleError(res, err) {
-   return res.status(500).send(err);
- }
+  Registry.update(query, increment, function(err,registry){
+    return res.status(200).json(registry);
+  });
+});
+
+}
+
+exports.revertRegistryProduct = function(registryId, productId,qty){
+
+
+  Registry.findOne({'products._id': productId}, {'products.$': 1}, function(err, registry){
+    var desiredQuantity = parseInt(registry.products[0].desired, 10) - parseInt(registry.products[0].required, 10)
+    quantity = desiredQuantity + qty
+    var increment = {
+      $inc: {
+        'products.$.required': quantity
+      }
+    };
+    var query = {
+      '_id': registryId,
+      'products._id': productId
+
+    };
+
+
+    Registry.update(query, increment, function(err,registry){
+
+    });
+  });
+
+}
+
+
+
+
+function handleError(res, err) {
+ return res.status(500).send(err);
+}
 
 
 

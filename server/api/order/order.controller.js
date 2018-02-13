@@ -12,22 +12,14 @@
  import _ from 'lodash';
  var Order = require('./order.model');
  var Product = require('../product/product.model').product;
- var Registry = require('../registry/registry.model').registry;
  var Registrycontroller = require('../registry/registry.controller');
+ var Voucher = require('../voucher/voucher.model')
+ var Cart = require('../cart/cart.model')
 
- function isJson(str) {
-  try {
-    str = JSON.parse(str);
-  } catch (e) {
-    str = str;
-  }
-  return str
-}
 
-function handleError(res, statusCode) {
+ function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    console.log(err)
     res.status(statusCode).send(err);
   };
 }
@@ -53,21 +45,7 @@ function handleEntityNotFound(res) {
 
 function saveUpdates(updates) {
   return function(entity) {
-
-    var updated = entity;
-    updated.delivered = true
-    return updated.saveAsync()
-    .spread(updated => {
-      return updated;
-    });
-  };
-}
-
-function saveCancelUpdates(updates) {
-  return function(entity) {
-
-    var updated = entity;
-    updated.cancel = true
+    var updated = _.merge(entity, updates);
     return updated.saveAsync()
     .spread(updated => {
       return updated;
@@ -86,19 +64,31 @@ function removeEntity(res) {
   };
 }
 
+exports.count = function(req, res) {
+
+ 
+
+
+  Order.count().exec(function (err, count) {
+    if(err) { 
+      console.log(err)
+      return handleError(res, err); }
+      return res.status(200).json([{count:count}]);
+    });
+  
+};
+
 // Gets a list of Orders
 export function index(req, res) {
-  Order.findAsync()
+  Order.find().populate('items.products').execAsync()
   .then(responseWithResult(res))
   .catch(handleError(res));
-
-  
 }
 
 // Gets a list of user Orders
 export function myOrders(req, res) {
-  console.log(req.params.id)
-  Order.findAsync({ customerId: req.params.id })
+  Order.find({ customerId: req.params.id }).populate('items.products').populate('address').populate('vouchers')
+  .execAsync()
   .then(responseWithResult(res))
   .catch(handleError(res));
 }
@@ -111,86 +101,59 @@ export function show(req, res) {
   .catch(handleError(res));
 }
 
-exports.countorders = function(req, res) {
-  /*Order.find().count()
-  .then(responseWithResult(res))
-  .catch(handleError(res));*/
-  
+export function updateStatus(req,res){
+  console.log(req.body.product)
+  Order.findOne({'orderNumber' :req.body.id , 'items.products' : req.body.product }).execAsync()
+  .then(function(order){
+    _.each(order.items , function(i){
 
-  if(req.body){
+     if(i.products == req.body.product){
+      i.status = req.body.status;
+      i.statusChangeHistory.push({'status' : req.body.status })    
+    }
+  })
+    order.saveAsync()
+    
+    res.status(201).json(order);
+  })
+  .catch(handleError(res));
 
 
-    var q = isJson(req.query.where);
-    Order.find(q).exec(function (err, count) {
-      if(err) { 
-        console.log(err)
-        return handleError(res, err); }
-        console.log(count);
-        return res.status(200).json([{count:count}]);
-      });
-  }else{
-    Order.find().count().exec(function (err, count) {
-      if(err) { 
-        console.log(err)
-        return handleError(res, err); }
-        return res.status(200).json([{count:count}]);
-      });
-  }
-};
+} 
+
+
+
 
 // Creates a new Order in the DB
 export function create(req, res) {
-  console.log(req.body)
-  
   Order.createAsync(req.body)
   .then(entity => {
+    console.log(entity)
     if (entity) {
+      if(entity.vouchers){
+        console.log('Vouchers' + entity.vouchers)
+        Voucher.findByIdAsync(entity.vouchers)
+        .then(function(voucher){
+          voucher.redeemed = true;
+          voucher.saveAsync();
+        })
+      }
       _.each(entity.items, function(i) {
-        Product.findByIdAsync(i.productId)
+        Product.findByIdAsync(i.products)
         .then(function(product) {
           product.stock -= i.quantity;
           product.saveAsync();
         });
+
         if(i.registry){
-          Registrycontroller.updateRegistryProduct(i.registry,i.productId,i.quantity, req.body.customerEmail, req.body.customerName)
+          Registrycontroller.updateRegistryProduct(i.registry,i.products,i.quantity)
         }
       })
+
       res.status(201).json(entity);
     }
   })
   .catch(handleError(res));
-}
-
-
-export function updateVoucher(req, res){
-  var orderId = req.params.id;
-
-  Order.findOne({'_id': orderId}, function(err, order){
-    //var incrementamount = parseInt(order.paidbyVoucher, 10) + parseInt(req.body.amount, 10)
-
-    var increment = {
-      $push: {
-        vouchers: req.body._id
-      },
-      $inc: {
-        'paidbyVoucher': parseInt(req.body.amount, 10)
-      }
-    };
-    var query = {
-      '_id':orderId
-
-    };
-
-
-    Order.update(query, increment, function(err,ordr){
-      console.log(ordr)
-      return res.status(200).json(ordr);
-    });
-  });
-
-
-
-
 }
 
 // Updates an existing Order in the DB
@@ -205,17 +168,6 @@ export function update(req, res) {
   .catch(handleError(res));
 }
 
-export function updateCancel(req, res) {
-  if (req.body._id) {
-    delete req.body._id;
-  }
-  Order.findByIdAsync(req.params.id)
-  .then(handleEntityNotFound(res))
-  .then(saveCancelUpdates(req.body))
-  .then(responseWithResult(res))
-  .catch(handleError(res));
-}
-
 // Deletes a Order from the DB
 export function destroy(req, res) {
   Order.findByIdAsync(req.params.id)
@@ -223,5 +175,3 @@ export function destroy(req, res) {
   .then(removeEntity(res))
   .catch(handleError(res));
 }
-
-

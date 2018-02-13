@@ -18,6 +18,7 @@
  var Feature = require('./product.model').feature;
  var Filter = require('./product.model').filter;
  var Catalog = require('../catalog/catalog.model');
+ var Order = require('../order/order.model');
  var path = require('path');
 
 
@@ -151,12 +152,12 @@ exports.index = function(req, res) {
     var skip = parseInt(req.query.skip)
 
     console.log(limit);
-    Product.find(q).limit(limit).skip(skip).populate({ path: "categories", select: "name" }).execAsync()
+    Product.find(q).limit(limit).skip(skip).populate({ path: "categories", select: "name" }).populate({ path: "vendor", select: "name" }).execAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 
   }else{
-    Product.find().sort({ featured: 1 }).populate({ path: "categories", select: "name" }).execAsync()
+    Product.find().sort({ featured: 1 }).populate({ path: "categories", select: "name" }).populate({ path: "vendor", select: "name" }).execAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
   }
@@ -183,10 +184,6 @@ exports.addtofeaturedproducts = function(req,res){
 
     return res.json(responseObject);
   }   
-  Product.find().sort({ featured: 1 }).populate({ path: "categories", select: "name" }).execAsync()
-  .then(responseWithResult(res))
-  .catch(handleError(res));
-
 });
 }
 
@@ -198,11 +195,7 @@ exports.removefromfeaturedproducts = function(req,res){
     responseObject.code = 422;
 
     return res.json(responseObject);
-  }   
-  Product.find().sort({ featured: 1 }).populate({ path: "categories", select: "name" }).execAsync()
-  .then(responseWithResult(res))
-  .catch(handleError(res));
-  
+  }    
 });
 }
 
@@ -229,7 +222,7 @@ exports.count = function(req, res) {
   console.log(req.body);
 
   if(req.body){
-    
+
     var q = isJson(req.body.where);
     console.log("q"+q)
     
@@ -254,9 +247,7 @@ exports.show = function(req, res) {
   Product.findOne({
     slug: req.params.slug
   })
-  .populate('images')
-  .populate({ path: 'reviews' }).populate({ path: 'categories', select: 'slug' })
-  .execAsync()
+  .populate({ path: 'reviews' })
   .then(handleEntityNotFound(res))
   .then(function(entity) {
     if (entity) {
@@ -294,11 +285,13 @@ exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Product.findByIdAsync(req.params.id)
-  .then(handleEntityNotFound(res))
-  .then(saveUpdates(req.body))
-  .then(responseWithResult(res))
-  .catch(handleError(res));
+  console.log(req.body)
+  var query = {'_id':req.params.id};
+
+  Product.findOneAndUpdate(query, req.body, {upsert:true}, function(err, doc){
+    if (err) return res.send(500, { error: err });
+    return res.send("succesfully saved");
+  });
 };
 
 exports.updateFeature = function(req, res) {
@@ -314,6 +307,11 @@ exports.updateFeature = function(req, res) {
 
 // Deletes a Product from the DB
 exports.destroy = function(req, res) {
+/*  Order.count({'items.products' : req.params.id}, function(err,count){
+    if(count > 0){
+      return handleError(res)('Product is in Order Queue');
+    }
+  })*/
   Product.findByIdAsync(req.params.id)
   .then(handleEntityNotFound(res))
   .then(removeEntity(res))
@@ -456,6 +454,23 @@ exports.updateImage = function(req, res) {
   .then(responseWithResult(res))
   .catch(handleError(res));
 };
+
+
+exports.productsInVendor = function(req ,res){
+  console.log("inside product");
+  console.log(req);
+ /* Product.find({'vendor' : req}, function(product){
+    return product;
+  });*/
+
+  Product.find({vendor:req}).exec(function (err, product) {
+    if(err) { console.log(err);
+      return handleError(res, err); }
+      res.send(product);
+    });
+  
+
+}
 
 /*Variants*/
 /*function getVariants(res) {

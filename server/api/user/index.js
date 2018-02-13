@@ -17,5 +17,6 @@ router.put('/:id/permission/:cat_id', auth.hasRole('admin'), controller.deAuthor
 router.post('/forgot', controller.forgot);
 router.post('/userCount', controller.count);
 router.get('/resetpassword', controller.getresetuser);
+router.post('/:id/addTocart', controller.addToCart);
 
 export default router;

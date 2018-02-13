@@ -1,14 +1,14 @@
 <navbar></navbar>
-<section class="event-details">
+<section class="event ">
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-8">
         <div ng-cloak>
-          <md-content class="checkout">
+          <md-content class="checkout shipping">
             <md-tabs md-dynamic-height md-border-bottom md-center-tabs= true md-swipe-content=true md-selected="myTabIndex">
               <md-tab label="1.Shipping Details">
                 <md-content class="md-padding checkout">
-                  <section class="event-details">
+                  <section class="event">
                     <div class="test">
                       <div class="row">
                         <div class="category-title-header">
@@ -24,7 +24,7 @@
                           <!-- our nested state views will be injected here -->
                           <div class="row">
                             <div class="col-md-6">
-                              <div class="form-group form-group-lg">
+                              <div class="form-group ">
                                 <label>Name</label>
                                 <div class="row grid-container grid-spacing-half">
                                   <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -37,7 +37,7 @@
                               </div>
                             </div>
                             <div class="col-md-6">
-                              <div class="form-group form-group-lg">
+                              <div class="form-group ">
                                 <label>Mobile Number</label>
                                 <div class="row grid-container grid-spacing-half">
                                   <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -54,7 +54,7 @@
 
                             <div class="row">
                               <div class="col-md-6">
-                                <div class="form-group form-group-lg">
+                                <div class="form-group ">
                                   <label>Address 1</label>
                                   <div class="row grid-container grid-spacing-half">
                                     <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -67,7 +67,7 @@
                                 </div>
                               </div>
                               <div class="col-md-6">
-                                <div class="form-group form-group-lg">
+                                <div class="form-group ">
                                   <label>Address 2</label>
                                   <div class="row grid-container grid-spacing-half">
                                     <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -85,7 +85,7 @@
 
                             <div class="row">
                               <div class="col-md-6">
-                                <div class="form-group form-group-lg">
+                                <div class="form-group ">
                                   <label>Landmark</label>
                                   <div class="row grid-container grid-spacing-half">
                                     <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -98,7 +98,7 @@
                                 </div>
                               </div>
                               <div class="col-md-6">
-                                <div class="form-group form-group-lg">
+                                <div class="form-group ">
                                   <label>City</label>
                                   <div class="row grid-container grid-spacing-half">
                                     <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -114,7 +114,7 @@
 
                             <div class="row">
                               <div class="col-md-6">
-                                <div class="form-group form-group-lg">
+                                <div class="form-group ">
                                   <label>State</label>
                                   <div class="row grid-container grid-spacing-half">
                                     <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -130,7 +130,7 @@
                                </div>
                              </div>
                              <div class="col-md-6">
-                              <div class="form-group form-group-lg">
+                              <div class="form-group ">
                                 <label>Pincode</label>
                                 <div class="row grid-container grid-spacing-half">
                                   <div class="col-xs-9 col-sm-9 col-md-9 grid-item top-row bottom-row">
@@ -146,61 +146,59 @@
 
 
                             <div class="row">
-                              <div class="pull-right">
-                              <!-- <input type="submit" class="btn btn-primary btn-lg " value="Continue">
-                            -->
-                            <md-button class="md-raised md-accent" ng-disabled="form1.$invalid" ng-click="moveNext()">Save & Next</md-button>
-                          </div>
+                              <div class="text-center">
+                                <md-button class="md-raised md-accent" ng-disabled="form1.$invalid" ng-click="moveNext()">Save & Next</md-button>
+                              </div>
 
 
+                            </div>
+                          </form>
                         </div>
-                      </form>
-                    </div>
-                    
-                  </div>
-                </section>
+
+                      </div>
+                    </section>
 
 
 
-              </md-content>
-            </md-tab>
-            <md-tab label="2.Order Review" >
-              <md-content class="md-padding checkout">
+                  </md-content>
+                </md-tab>
+                <md-tab label="2.Order Review" >
+                  <md-content class="md-padding checkout">
 
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th class="p-image">Image</th>
-                      <th class="p-name">Product Name</th>
-                      <th class="p-amount">Unit Price</th>
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th class="p-image">Image</th>
+                          <th class="p-name">Product Name</th>
+                          <th class="p-amount">Unit Price</th>
                                 <!-- <th class="p-quantity">Qty</th>
                                 <th class="p-total">SubTotal</th> -->
                                 
                               </tr>
                             </thead>
                             <tbody>
-                              <tr ng-repeat="item in ngCart.getCart().items track by $index">
+                              <tr ng-repeat="item in items track by $index">
                                 <td class="p-image">
-                                  <a ui-sref="product({id: item.getData().slug})"><img alt="" width="100" src="{{item.getData().imageUrl}}"></a>
+                                  <a ui-sref="product({id: item.getData().slug})"><img alt="" width="100" src="{{item.products.coverimage}}"></a>
                                 <!--   <div>
 
                                     <span class="fa fa-minus-circle" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
                                     <span class="fa fa-plus-circle" ng-click="item.setQuantity(1, true)"></span>
                                   </div> -->
                                 </td>
-                                <td class="p-name"><a ui-sref="product({id: item.getData().slug})">{{ item.getName() }}</a></td>
+                                <td class="p-name"><a ui-sref="product({id: item.getData().slug})">{{item.products.title}}</a></td>
                                <!--  <td class="p-amount"><span class="amount">₹{{ item.getPrice() | number:2}}</span></td>
                                 <td class="p-quantity"><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
                                     <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span>
                                   </td> -->
-                                  <td class="p-total">₹{{ item.getTotal() | number:2}}</td>
+                                  <td class="p-total">{{item.subtotal}}</td>
                                   
                                 </tr>
                               </tbody>
                             </table>
                             <div class="row">
                               <div class="pull-right">
-                                <md-button class="md-raised md-accent" ng-click="checkoutorder(ngCart.toObject(), user)">Confirm and Proceed to Payment</md-button>
+                                <md-button class="md-raised md-accent" ng-click="paymentpage()">Confirm and Proceed to Payment</md-button>
                               </div>
 
 
@@ -220,29 +218,43 @@
                                 <div class="clearer"></div>
                               </div>
                               <div>
-                                <md-list ng-model="user.payment">
-                                  <md-list-item>
-                                   <div>Have gift card/Voucher ? <md-button class="md-raised md-accent" ng-click="addVoucher()">Add Voucher</md-button> </div>
-                                 </md-list-item>
-                                 <md-list-item  >
+                                <md-list>
+                                  <md-list-item ng-if = 'enableVoucher'>
+                                   <div>Have gift card/Voucher ?   <form name="form">
+                                    <div class="row grid-container grid-spacing-half">
+                                      <div class="col-xs-8 col-sm-8 col-md-8 grid-item top-row bottom-row">
+                                        <input type="text"  class="form-control" placeholder="Voucher code" id="name" name="voucherCode"
+                                        ng-model="voucherCode" required>
+                                        <p ng-show="(form.voucherCode.$invalid && !form.voucherCode.$pristine) || (form.address2.$invalid && form.voucherCode.$touched)" class="help-block">Please enter Voucher Code</p>                                
+                                      </div>
+                                      <div class="col-md-3">
+                                        <button class="btn btn-primary" ng-disabled="form.$invalid" ng-click="redeemvoucher(voucherCode)">Redeem</button>
+                                      </div>
+                                    </div>
+                                  </form> </div>
+                                </md-list-item>
+                                <md-list-item ng-if = '!enableVoucher' >
 
-                                  <p> <a ng-click="checkoutorder(ngCart.toObject(), user)"> Net Banking / Credit card / Debit Card </a></p>
+                                  <p> Voucher Applied : {{appliedVoucher.code}}</p>
 
                                 </md-list-item>
-
-                                <md-divider></md-divider>
                                 <md-list-item >
-                                  <p> Cash On Delivery </p>
+
+                                  <p> <a class="cursorpointer" ng-click="checkoutorder(items, user)" ng-disabled="amounttobepaid == 0"> Net Banking / Credit card / Debit Card </a></p>
 
                                 </md-list-item>
-                                <md-divider></md-divider>
+
                                 <md-list-item >
-                                  <p> Gift Voucher </p>
+                                  <p class="row" ng-show="amounttobepaid == 0">
 
+                                    <button class="btn btn-primary text-center" ng-click = "completeOrder(items , user)"> Complete Order</button>
+                                  </p>
                                 </md-list-item>
+
+
                               </md-list>  
 
-                              <form id="paymentForm" action='https://test.payu.in/_payment' method='post'>
+                          <!--     <form id="paymentForm" action='https://test.payu.in/_payment' method='post'>
                                 <input type="hidden" name="key" value="{{mkey}}" />
                                 <input type="hidden" name="txnid" value="{{txnid}}" />
                                 <input type="hidden" name="amount" value="{{amount}}" />
@@ -255,7 +267,7 @@
                                 <input type="hidden" name="surl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
                                 <input type="hidden" name="furl" value="http://localhost:9000/api/payment/pdtPaymentStatus" />
                                 <input type="hidden" name="hash" id="hash" value="{{hash}}">
-                              </form>                            
+                              </form>  -->                           
 
                             </div>
                           </div>
@@ -269,7 +281,7 @@
 
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="amount-totals">
                 <div class="Shipping-address text-center" ng-show="showshipping">
                   <div class="text-center"><span>Shipping Address</span> <span ng-click="moveprev()" ><i class="fa fa-pencil "></i></span></div>
@@ -282,7 +294,7 @@
                   <md-divider></md-divider>
                 </div>
                 <br>
-                <div class="text-center"><span># of Products : </span> <span >{{ngCart.getCart().items.length}}</span></div>
+                <div class="text-center"><span># of Products : </span> <span >{{items.length}}</span></div>
                 <br>
                 <md-divider></md-divider>
                 <br>
@@ -291,14 +303,37 @@
 
                 <p class="title text-center"><span>Price Details</span></p>
                 <md-divider></md-divider>
-                <p class="total">Subtotal: <span>₹{{ ngCart.getSubTotal() | number:2}}</span></p>
-                <p class="total">Total Tax: <span>₹{{ ngCart.getTotalTax() | number:2}}</span></p>
-                <p class="total">Delivery Charges: <span>₹{{ ngCart.getShipping() | number:2}}</span></p>
+                <div class="row">
+                  <p class="col-md-6">Subtotal  </p><span class="col-md-6">: ₹{{ subtotal | number:2}}</span>
+                </div>
+                <div class="row">
+                  <p class="col-md-6">Delivery Charges  </p><span class="col-md-6">: ₹{{ 0 | number:2}}</span>
+                </div>
                 <md-divider></md-divider>
-                <p class="total">Grandtotal: <span>₹{{ ngCart.totalCost() | number:2}}</span></p>
+                <div class="row">
+                  <p class="col-md-6">Grand Total  </p><span class="col-md-6">: ₹{{ grandtotal | number:2}}</span>
+                </div>
+                <div class="row">
+                  <p class="col-md-6">Voucher Amount  </p><span class="col-md-6">: ₹{{ voucheramount | number:2}}</span>
+                </div>
+                <div class="row">
+                  <p class="col-md-6">Amount to be paid  </p><span class="col-md-6">: ₹{{ amounttobepaid | number:2}}</span>
+                </div>
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
+           <!--      <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group ">
+                      <label>Have Voucher ? </label>
+                    
+                    </div>
+                  </div>
+                   <p class="col-md-12">Apply Voucher  </p><span class="col-md-6">: ₹{{ subtotal | number:2}}</span> 
+                 </div> -->
+
+               </div>
+             </div>
+           </div>
+         </div>
+         <ng-include src=" 'app/paymentform.html' "></ng-include>
+       </section>

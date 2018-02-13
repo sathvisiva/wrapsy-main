@@ -5,7 +5,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var NavbarController =
 //end-non-standard
 
-function NavbarController(Auth, Catalog, $scope, $mdDialog, $state, $stateParams, $mdMedia, NavbarService) {
+function NavbarController(Auth, Catalog, $scope, $mdDialog, $state, $stateParams, $mdMedia, NavbarService, $uibModal) {
   _classCallCheck(this, NavbarController);
 
   this.isCollapsed = true;
@@ -28,6 +28,19 @@ function NavbarController(Auth, Catalog, $scope, $mdDialog, $state, $stateParams
   $scope.getcategories = function (parentid) {
     var q = { where: { parent: parentid } };
     return Catalog.query(q);
+  };
+
+  $scope.openCart = function (ev) {
+    if ($scope.isLoggedIn()) {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'app/cart/cart.html',
+        controller: 'CartCtrl',
+        size: 'lg'
+      });
+    } else {
+      $scope.data = { 'state': 'cart', 'event': 'login' };
+      $scope.login(ev, $scope.data);
+    }
   };
   /*
       $scope.buildnavbar = function(){

@@ -3,8 +3,8 @@ import {Strategy as FacebookStrategy} from 'passport-facebook';
 
 export function setup(User, config) {
   passport.use(new FacebookStrategy({
-    clientID: "740319199474993",
-    clientSecret: "424a718b6c70005d629f7054769f9f21",
+    clientID: config.facebook.clientID,
+    clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL,
     profileFields: [
       'displayName',

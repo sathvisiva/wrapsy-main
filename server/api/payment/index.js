@@ -10,6 +10,7 @@ router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.post('/createHash', controller.createHash);
 router.post('/pdtPaymentStatus', controller.pdtPaymentStatus);
+router.post('/pdtPaymentFailureStatus', controller.pdtPaymentFailureStatus);
 router.post('/giftSuccessPaymentStatus', controller.giftSuccessPaymentStatus);
 router.post('/giftFilurePaymentStatus', controller.giftFilurePaymentStatus);
 router.post('/contributionStatus',controller.contributionStatus)

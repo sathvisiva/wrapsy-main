@@ -1,0 +1,49 @@
+<div class="m-b-20 clearfix">
+    <div class="page-title text-center">
+        <h3 class="text-center"><strong>Manage Vendors</strong></h3>
+    </div>
+    <div class="pull-right">
+        <a ui-sref="admin.newvendor" class="btn btn-success m-t-10"><i class="fa fa-plus p-r-10"></i> Add a Vendor</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 ">
+      <div class="input-group primary col-md-4 pull-left" inputgroup>
+        <input type="text" class="form-control search-page-input" placeholder="Search Vendor" ng-model="search">
+    </div>
+</div>
+</div>
+
+<div class="table-responsive"> 
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center"><a  class="cursorpointer"><strong>Name</strong></a> </th>
+                <th class="text-center"><a class="cursorpointer"><strong>Phone</strong></a> </th>
+                <th class="text-center"><a  class="cursorpointer"><strong>Email </strong></a></th>
+                <th class="text-center"><a  class="cursorpointer"><strong>Commision</strong> </a> </th>
+                <th class="text-center"><a class="cursorpointer"><strong>Action</strong></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr ng-repeat="f in filtered = vendor | filter: search | startSearchFrom:(currentPage-1) * itemsPerPage  | limitTo:itemsPerPage | orderBy:propertyName:reverse" class="order-col"> -->
+            <tr ng-repeat="f in filtered = vendor | filter: search | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="order-col">
+                <td class="text-center">{{f.name}}</td>
+                <td class="text-center">{{f.phone}}</td>
+                <td class="text-center">{{f.mail}}</td>
+                <td class="text-center">{{f.commision}}</td>
+                <td class="text-center"> 
+                    <a ui-sref="admin.editvendor({id: f._id})" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                    <a ng-click="deleteVendor($event , f)" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+                </td>
+            <!-- <td >
+                <a ng-click="deleteFeature('Product ' + f.key, f)" class="trash"><span class="fa fa-trash fa-2x">                                </span></a>
+            </td> -->
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" class="pull-right"></ul>
+

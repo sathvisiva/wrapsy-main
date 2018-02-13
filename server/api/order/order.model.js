@@ -8,24 +8,33 @@ var Schema = mongoose.Schema
 autoIncrement.initialize(mongoose.createConnection(config.mongo.uri));
 
 var OrderItemSchema = new Schema({
-  name: String,
-  price: Number,
-  quantity: Number,
-  total: Number,
-  registry :  String,
-  size : String,
-  color : String,
-  productId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Product'
+ quantity: Number,  
+ registry :  String,
+ features : Array,
+ status : String,
+ products: {
+  type: Schema.Types.ObjectId,
+  ref: 'Product'
+},
+returnrequest : {
+  type: Schema.Types.ObjectId,
+  ref: 'RequestSchema'
+},
+subtotal : Number,
+statusChangeHistory : [{
+  status : String,
+  datemodified : {
+    type: Date,
+    default: Date.now
   }
+
+}]
+
 });
 
 var OrderSchema = new Schema({
   orderNumber: String,
   shipping: Number,
-  tax: Number,
-  subTotal: Number,
   totalCost: Number,
   items: [OrderItemSchema],
   customerId: {
@@ -36,10 +45,10 @@ var OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Address'
   },
-  vouchers: [{
+  vouchers: {
     type: Schema.Types.ObjectId,
     ref: 'Voucher'
-  }],  
+  },  
   status: {
     type: String
   },
@@ -49,12 +58,23 @@ var OrderSchema = new Schema({
   },
   delivered: {
     type: Date,
-    default: Date.now
   },
   paid : {
     type: Boolean,
     default: false
   },
+  txn : {
+    type: Schema.Types.ObjectId,
+    ref: 'PaymentSchema'
+  },
+  cancelrequest : {
+    type: Schema.Types.ObjectId,
+    ref: 'RequestSchema'
+  },
+  paidbycontribution : [{
+    type: Schema.Types.ObjectId,
+    ref: 'ContributionsSchema'
+  }],
   paidbyVoucher : { type: Number,
     min: 0,
     default : 0}

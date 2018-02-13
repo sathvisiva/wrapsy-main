@@ -4,6 +4,19 @@ var Schema = mongoose.Schema;
 var slugs = require('mongoose-url-slugs');
 var Product = require('../product/product.model').product;
 
+var RegistryTypeSchema = new Schema({
+  type: {
+    type: String,    
+    trim: true
+  },
+  thumbnail: {
+    type: String
+  },
+  themes : [{
+    background : {type : String},
+    fontColor : {type : String}
+  }]
+});
 var RsvpSchema = new Schema({
   name: {
     type: String,    
@@ -54,7 +67,7 @@ var ContributionsSchema = new Schema({
   contribution: {
     type: Number
   },
-   registryId : {
+  registryId : {
     type: String
   },
   paymentid : {
@@ -108,12 +121,7 @@ var RegistrySchema = new Schema({
   type: {
     type: String
   },
-  greeting: {
-    type: String
-  },
-  thankyou: {
-    type: String
-  },
+  
   youfirstName: {
     type: String
   },
@@ -172,21 +180,16 @@ var RegistrySchema = new Schema({
     },
     description: {
      type: String 
-    },
-    paid: {
-      type: Number,
-      default: 0
-    },
-    size : {
-      type : String
-    },
-    color : {
-      type : String
-    }
+   },
+   paid: {
+    type: Number,
+    default: 0
+  },
+  feature : Array
 
 
 
-  }]
+}]
 
 }, { versionKey: false }).index({
   'title': 'text'
@@ -199,5 +202,6 @@ module.exports = {
   rsvp: mongoose.model('Rsvp', RsvpSchema),
   guestBook : mongoose.model('GuestBook', GuestBookSchema),
   contribution: mongoose.model('Contribution', ContributionsSchema),
-  accomodation: mongoose.model('Accomodation', AccomodationSchema)
+  accomodation: mongoose.model('Accomodation', AccomodationSchema),
+  registrytype : mongoose.model('RegistryType',RegistryTypeSchema)
 }

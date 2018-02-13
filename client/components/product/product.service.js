@@ -2,28 +2,74 @@
 
 angular.module('bhcmartApp')
 .factory('Catalog', function($resource) {
-  return $resource('/api/catalogs/:id/:controller', {
+  return $resource('/api/catalogs/:id', {
     id: '@_id'
   }, {
     'update': {
       method: 'PUT'
-    }
-    ,
-    'catalogCount': {
-      method: 'post',
-      isArray: true,
-      params: {
-        controller: 'catalogCount',
-      }
     }
   });
-})
-.factory('Address', function($resource) {
-  return $resource('/api/address/:id', {
+
+}).factory('Vendor', function($resource) {
+  return $resource('/api/vendors/:id', {
     id: '@_id'
   }, {
     'update': {
       method: 'PUT'
+    }
+  });
+
+})
+.factory('Service', function ($resource) {
+  return $resource('api/services/:id/:controller', {
+    id: '@_id'
+  }, {
+    update: {
+      method: 'PUT'
+    },
+    'createvendor': {
+      method: 'POST',
+      params: {
+        controller: 'vendor',
+        limit: null
+      }
+    },
+    'updatevendor': {
+      method: 'PUT',
+      params: {
+        controller: 'vendor',
+        limit: null
+      }
+    },
+    'vendor': {
+      method: 'DELETE',
+      params: {
+        controller: 'vendor',
+        limit: null
+      }
+    },
+    'getVendors': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'vendors',
+        limit: null
+      }
+    },
+    'getServiceVendors': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'vendorsinservice',
+        limit: null
+      }
+    },
+    'getvendor': {
+      method: 'GET',
+      params: {
+        controller: 'vendor',
+        limit: null
+      }
     }
   });
 })
@@ -42,6 +88,42 @@ angular.module('bhcmartApp')
     }
   });
 })
+.factory('UploadImage', function($resource) {
+  return $resource('/api/uploads/:id/:controller', {
+    id: '@_id'
+  }, {
+    'des': {
+      method: 'POST',
+      params: {
+        controller: 'des'
+      }        
+    }
+  });
+})
+.factory('Blog', function ($resource) {
+  return $resource('api/blog/:id/:controller', {
+    id: '@_id'
+  }, {
+    update: {
+      method: 'PUT'
+    },
+    'comment': {
+      method: 'POST',
+      params: {
+        controller: 'comment',
+        limit: null
+      }
+    },
+    'comments': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'comments',
+        limit: null
+      }
+    },
+  });
+})
 .factory('Home', function($resource) {
   return $resource('/api/home/:id/:controller', {
     id: '@_id'
@@ -55,14 +137,14 @@ angular.module('bhcmartApp')
         controller: 'hompageImg'
       }        
     },
-    'GethompageImg': {
+    'gethompageImg': {
       method: 'GET',
       isArray: true,
       params: {
         controller: 'hompageImg'
       }        
     },
-    'DelhompageImg': {
+    'delhompageImg': {
       method: 'DELETE',
       params: {
         controller: 'hompageImg'
@@ -74,14 +156,14 @@ angular.module('bhcmartApp')
         controller: 'popularCat'
       }        
     },
-    'GetpopularCat': {
+    'getpopularCat': {
       method: 'GET',
       isArray: true,
       params: {
         controller: 'popularCat'
       }        
     },
-    'DelpopularCat': {
+    'delpopImg': {
       method: 'DELETE',
       params: {
         controller: 'popularCat'
@@ -110,83 +192,6 @@ angular.module('bhcmartApp')
         limit: null
       }        
     },
-  });
-}).factory('Product', function($resource) {
-  return $resource('/api/products/:id/:controller/:limit/:page', {
-    id: '@_id'
-  }, {
-    'update': { method: 'PUT' },
-    'catalog': {
-      method: 'GET',
-      isArray: true,
-      params: {
-        controller: 'catalog'
-      }
-    },
-    'search': {
-      method: 'GET',
-      isArray: true,
-      params: {
-        controller: 'search',
-      }
-    },
-    'review': {
-      method: 'POST',
-      params: {
-        controller: 'reviews',
-        limit: null
-      }
-    }
-    ,
-    'features': {
-      method: 'POST',
-      params: {
-        controller: 'features',
-        limit: null
-      }
-    }
-    ,
-    'indexFeatures': {
-      method: 'post',
-      isArray: true,
-      params: {
-        controller: 'indexFeatures',
-        limit: null
-      }
-    }
-    ,
-    'addfeaturedPdt': {
-      method: 'post',
-      isArray: true,
-      params: {
-        controller: 'addfeaturedPdt',
-        limit: null
-      }
-    }
-    ,
-    'removefeaturedPdt': {
-      method: 'post',
-      isArray: true,
-      params: {
-        controller: 'removefeaturedPdt',
-        limit: null
-      }
-    }
-    ,'destroyFeature': {
-      method: 'post',
-      params: {
-        controller: 'destroyFeature'
-      }
-    }
-    ,
-    'productCount': {
-      method: 'post',
-      isArray: true,
-      params: {
-        controller: 'productCount',
-      }
-    }
-
   });
 }).factory('Registry', function($resource) {
   return $resource('/api/registry/:id/:controller/:limit', {
@@ -225,6 +230,13 @@ angular.module('bhcmartApp')
       method: 'POST',
       params: {
         controller: 'makevisible',
+        limit: null
+      }
+    },
+    'updatetheme': {
+      method: 'POST',
+      params: {
+        controller: 'updatetheme',
         limit: null
       }
     },
@@ -278,10 +290,164 @@ angular.module('bhcmartApp')
         limit: null
       }
     },
+    'updateProfilepic'  : {
+      method : 'PUT',
+      params : {
+        controller : 'updateProfilepic',
+        limit : null
+      }
+    },
     'updatePdtcnt': {
       method: 'POST',
       params: {
         controller: 'updatePdtcnt',
+        limit: null
+      }
+    }
+  });
+})
+.factory('Feature', function($resource) {
+  return $resource('/api/features/:id/:controller', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    },
+    'group': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'group',
+        limit: null
+      }
+    }
+  });
+
+})
+.factory('Filter', function($resource) {
+  return $resource('/api/filters/:id/:controller', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    },
+
+    'group': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'group',
+        limit: null
+      }
+    }
+  });
+
+})
+.factory('Cart', function($resource) {
+  return $resource('/api/cart/:id/:controller', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    },
+    'alterpdtQuantity' : {
+      method: 'PUT',
+      params: {
+        controller: 'alterpdtQuantity'
+      }
+    },
+    'modifyCart' : {
+      method: 'PUT',
+      params: {
+        controller: 'modifyCart'
+      }
+    },
+    'clearCart' : {
+      method: 'PUT',
+      params: {
+        controller: 'clearCart'
+      }
+    },
+    'show': {
+      method: 'GET',
+      isArray: false,
+      params: {
+        controller: 'show'
+      }
+    },
+    'addTocart' : {
+      method: 'POST',
+      params: {
+        controller: 'addTocart'
+      }
+    }
+  });
+
+})
+.factory('Address', function($resource) {
+  return $resource('/api/address/:id', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    }
+  });
+})
+.factory('Product', function($resource) {
+  return $resource('/api/products/:id/:controller/:limit', {
+    id: '@_id'
+  }, {
+    'update': { method: 'PUT' },
+    'catalog': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'catalog'
+      }
+    },
+    'search': {
+      method: 'GET',
+      isArray: true,
+      params: {
+        controller: 'search',
+      }
+    } ,
+    'productCount': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'productCount',
+      }
+    }   ,
+    'addfeaturedPdt': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'addfeaturedPdt',
+        limit: null
+      }
+    }
+    ,
+    'removefeaturedPdt': {
+      method: 'post',
+      isArray: true,
+      params: {
+        controller: 'removefeaturedPdt',
+        limit: null
+      }
+    },
+    'amazonaffiliate' : {
+      method: 'post',
+      params: {
+        controller: 'amazonaffiliate',
+      }
+    }
+    ,
+
+    'review': {
+      method: 'POST',
+      params: {
+        controller: 'reviews',
         limit: null
       }
     }
@@ -310,4 +476,91 @@ angular.module('bhcmartApp')
     getstates: getstates
   };
 
+});;
+
+
+angular.module('bhcmartApp').service('NavbarService', function ($http, Catalog) {
+  var tree = [];
+
+  Catalog.query(function (categories) {
+    var categories = categories;
+
+    var parentCategories = _.filter(categories, function (category) {
+      return category.ancestors.length == 1;
+    });
+
+    angular.forEach(parentCategories, function (value, key) {
+
+      var parentcateogry = {
+        "name": value.name,
+        "slug": value.slug,
+        "id": value._id
+      };
+      if (value.children.length > 0) {
+        parentcateogry.subtree = [];
+        angular.forEach(value.children, function (id, key) {
+          var subCategories = _.filter(categories, function (category) {
+            return category._id == id;
+          });
+
+          if (subCategories.length > 0) {
+            var subcategory = {
+              "name": subCategories[0].name,
+              "slug": subCategories[0].slug,
+              "id": subCategories[0]._id
+
+            };
+            if (subCategories[0].children && subCategories[0].children.length > 0) {
+              subcategory.subtree = [];
+              angular.forEach(subCategories[0].children, function (id, key) {
+                var subsubCategories = _.filter(categories, function (category) {
+                  return category._id == id;
+                });
+
+                if (subsubCategories.length > 0) {
+                  var subsubcategory = {
+                    "name": subsubCategories[0].name,
+                    "slug": subsubCategories[0].slug,
+                    "id": subsubCategories[0]._id
+
+                  };
+                  subcategory.subtree.push(subsubcategory);
+                }
+              });
+            }
+          }
+
+          parentcateogry.subtree.push(subcategory);
+        });
+      }
+      tree.push(parentcateogry);
+    });
+  });
+
+  return {
+    createnav: function createnav() {
+      return tree;
+    }
+  };
 });
+
+angular.module('bhcmartApp').service('AlertService', function ($http, $mdDialog) {
+
+
+  return {
+    showAlert: function showAlert(title , content) {
+      $mdDialog.show(
+        $mdDialog.alert()
+        .clickOutsideToClose(true)
+        .title(title)
+        .textContent(content)
+        .ok('Ok')
+        // You can specify either sting with query selector
+        .openFrom('#left')
+        // or an element
+        .closeTo(angular.element(document.querySelector('#right')))
+        );
+    }
+  };
+});
+

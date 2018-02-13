@@ -44,6 +44,8 @@ module.exports = function(config) {
       'bower_components/angular-toastr/dist/angular-toastr.tpls.js',
       'bower_components/angularjs-slider/dist/rzslider.js',
       'bower_components/moment/moment.js',
+      'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+      'bower_components/ui-cropper/compile/minified/ui-cropper.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'node_modules/socket.io-client/socket.io.js',

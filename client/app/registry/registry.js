@@ -45,7 +45,7 @@ angular.module('bhcmartApp')
     controller: 'RegistryController'
   })
   .state('registry.home', {
-    url: '/home',
+    url: '/',
     templateUrl: 'app/registry/home.html'
   })
   .state('registry.registrypdts', {

@@ -1,47 +1,47 @@
 <navbar></navbar>
 <div class="find-registry">
-<div class="container">
-  <div class="category-title-header">
-    <div class="title-center">
-      <div class="title"><h1>FIND REGISTRY</h1></div>
-      <div class="separator-title"><div class="divider-line"></div></div>
-    </div>
-    <div class="clearer"></div>
-  </div>
-</div>
+	<div class="container">
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>FIND REGISTRY</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+	</div>
 	<div class="container">
 	<!-- <div class="row">
 	<div class="col-md-12 ">
 		<h1 class="text-center find-title">FIND REGISTRY</h1>
 	</div>
-	</div> -->
+</div> -->
 <br>
 
-		<div class="row">
-			<div class="col-md-6 col-md-offset-2">
-			<div class="form-group">
-  
-  			<input type="text" ng-model="input" class="form-control" id="usr" placeholder="Enter Registry Name">
-			</div>
-			</div>
-			<div class="col-md-3">
-                        <button class = "btn btn-primary" ng-click="searchRegistry()">Find Registry</button>
-			</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-2">
+		<div class="form-group">
+			
+			<input type="text" ng-model="input" class="form-control" id="usr" placeholder="Enter Registry Name">
 		</div>
-		<br>
+	</div>
+	<div class="col-md-3">
+		<button class = "btn btn-primary" ng-click="searchRegistry()">Find Registry</button>
+	</div>
+</div>
+<br>
 
-		<div class="row">
-			<div class="center-block">
-			<div class="col-md-8 col-md-offset-2 text-center" ng-if="registries.length < 1 || display" > 
+<div class="row">
+	<div class="center-block">
+		<div class="col-md-8 col-md-offset-2 text-center" ng-if="registries.length < 1 || display" > 
 			Sorry No Registries Found
-			</div>
-			<div class="col-md-8 col-md-offset-2" ng-repeat="registry in registries">
+		</div>
+		<div class="col-md-8 col-md-offset-2" ng-repeat="registry in registries">
 			<hr ng-if="registry.visible">
 			<div class="col-md-2" ng-if="registry.visible">
 				<img class="couple-img-circle-find img-responsive" ng-src="{{registry.profileImageUrl}}" >
 			</div>
 			<div class="col-md-6" ng-if="registry.visible">
-				<div><a ui-sref="registry({id:registry.slug})" >{{registry.title}}</a></div>
+				<div><a ui-sref="registry.home({id:registry.slug})"><span class="cursorpointer">{{registry.title}}</span></a></div>
 				<div>Date :{{registry.date  | date : "longDate"}}</div>
 			</div>
 		</div>

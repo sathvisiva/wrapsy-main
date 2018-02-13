@@ -1,0 +1,124 @@
+<!-- <navbar></navbar>
+<div class="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3">
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
+                    <li class="active">orders</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="product-grid" style="min-height: 200px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <sidebar-account></sidebar-account>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="alert alert-warning" role="alert" ng-show="filtered.length === 0">
+                    You do not have any order
+                </div>
+                <div class="table-responsive">
+                    <div class="row">
+                        <div class="input-group primary col-md-6" inputgroup>
+                            <span class="input-group-addon">
+                            <span class="arrow"></span>
+                            <i class="fa fa-search"></i>
+                            </span>
+                            <input type="text" class="form-control search-page-input" placeholder="Search order" ng-model="search">
+                        </div>
+                    </div>
+                    <table class="table table-striped" ng-hide="filtered.length === 0">
+                        <thead>
+                            <tr>
+                                <td>#</td>
+                                <td>Order Number</td>
+                                <td>Customer Name</td>
+                                <td>Telephone</td>
+                                <td>Delivery Status</td>
+                                <td>Created on</td>
+                                <td>Total</td>
+                                <td class="text-center" colspan="2">Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="o in filtered = orders | filter:search  | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="table-col">
+                                <td>{{$index + 1}}</td>
+                                <td>{{o.orderNumber}}</td>
+                                <td>{{o.customerName}}</td>
+                                <td>{{o.customerPhone}}</td>
+                                <td>
+                                    <span ng-show="o.delivered">Delivered</span>
+                                    <span ng-hide="o.delivered">Pending</span>
+                                </td>
+                                <td>{{o.created | date}}</td>
+                                <td>₦{{o.totalCost}}</td>
+                                <td>
+                                    <a ui-sref="invoice({id: o._id})" class="btn btn-primary"> <span class="glyphicon glyphicon-eye-open"></span></a>
+                                </td>
+                                <td ng-show="isAdmin"> <a ng-click=" deliverOrder('Order ' + '#' + o.orderNumber, o)" class="yellow"><span class="fa fa-truck fa-2x"></span></a></td>
+                                <td ng-show="isAdmin"> <a ng-click="deleteOrder('Order ' + '#' + o.orderNumber, o)" class="trash"><span class="fa fa-trash fa-2x"></span></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+<footer></footer>
+-->
+
+
+
+<div class="table-responsive"> 
+ <div >
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center"><a  class="cursorpointer"><strong>Product Description</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>Order</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>Status</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>Price</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>GST</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>Subtotal</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>Change Status</strong></a> </th>
+
+      </tr>
+    </thead>
+    <tbody ng-repeat = "order in orders">
+      <tr ng-repeat="item in order.items"" class="order-col">
+        <td class="text-center"> <div class="row"><div class=col-md-4>
+          <img ng-src="{{item.products.coverimage}}" class="thumb"/>
+        </div>
+        <div class=col-md-8>
+          Quantity : {{item.quantity}}
+          <br>
+          <div ng-repeat = "f in item.features">
+            {{f.feature}} :  {{f.value}}
+          </div>
+        </div>
+      </div> </td>
+      <td class="text-center">#{{order.orderNumber}}</td>
+      <td class="text-center">{{item.status}}</td>
+      <td class="text-center">₹{{item.products.price | number}}</td>
+      <td class="text-center">{{item.products.gst}}%</td>
+      <td class="text-center">₹{{item.subtotal}}</td>
+      <td class="text-center"><select class="form-control" id="sel1" ng-model="status" ng-change="updatestatus(order.orderNumber , item.products._id,status )">
+        <option>Processed</option>
+        <option>Shipped</option>
+        <option>Delivered</option>
+        <option>Cancelled</option>
+      </select></td>
+    </tr>
+  </tbody> 
+</table>
+</div>
+</div>
+
+

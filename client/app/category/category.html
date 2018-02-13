@@ -1,17 +1,4 @@
 <navbar></navbar>
-<!--Breadcrumbs Start-->
-<div class="breadcrumb">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-7 col-md-offset-3">
-        <ul class="breadcrumb">
-          <li><a href="/"><i class="fa fa-home"></i>Home</a></li>
-          <li class="active">search-result</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container">
   <div class="category-title-header">
     <div class="title-center">
@@ -27,44 +14,22 @@
       <div class="col-md-4">
         <div class="uimax-sidebar">
           <div class="product-filter">
-            <div class="categories-list block" ng-if="childcategories.length > 0">
-              <div class="title">Categories</div>
-              
-              <ul class="list" ng-repeat="parentCategory in childcategories">
-                <li><a ui-sref="products({slug: parentCategory.slug, category : parentCategory.name })">{{parentCategory.name}}</a></li>
-                
-              </ul>
-            </div>
-            <div class="block size-filter">
-              <div class="title">size</div>
-              <div class="select-group" ng-repeat = "size in sizes">
-               <md-checkbox  ng-model="selected.sizes[size]" name="group" id="{{size}}" ng-change="sizechanged()">
-                 {{ size }}
-               </md-checkbox>
-             </div>
-           </div>
-           <div class="block price-filter">
-            <div class="title">Price</div>
-            <rzslider rz-slider-model="slider.minValue"
-            rz-slider-high="slider.maxValue"
-            rz-slider-options="slider.options"></rzslider>
-          </div> 
-
-          <div class="block color-filter">
-            <div class="title">Color</div>
-            <div class="select-group" ng-repeat = "color in colors">
-             <md-checkbox ng-model="selected.colors[color]" name="group" id="{{color}}" ng-change="colorchanged()">
-               {{ color }}
-             </md-checkbox>
-           </div>
-         </div>
-
-         
-           <!--  <div class="block price-range">
+            <div class="block price-filter">
               <div class="title">Price</div>
-              <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="minRangeSlider.options"></rzslider>
-              
-            </div> -->
+              <rzslider rz-slider-model="slider.minValue"
+              rz-slider-high="slider.maxValue"
+              rz-slider-options="slider.options"></rzslider>
+            </div> 
+
+            <div class="block size-filter" ng-repeat="k in category.filters">
+              <div class="title">{{k.feature}}</div>
+              <div class="checkbox" ng-repeat="f in k.value">
+                <label>
+                  <input type="checkbox" value="{{f}}" checklist-model="fl.features[k.feature]" checklist-value="f" ng-click="filter();" />
+                  {{f}}<span>&nbsp;</span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -74,10 +39,10 @@
             <div class="product-item">
               <div class="pic-wrapper">
                 <a ui-sref="product({id: product.slug})" class="inner">
-                  <img ng-src="{{product.imageUrl}}" alt="" class="pic" />
+                  <img ng-src="{{product.coverimage}}" alt="" class="pic" />
                 </a>
                 <a  ng-if = "product.affiliate" ui-sref="product({id: product.slug})" class="inner">
-                  <img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.prodcode}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="pic" alt="{{product.name}}" data-err-src="images/product.jpg" />
+                  <img ng-src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&MarketPlace=IN&ASIN={{product.asin}}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL160_&tag=sathviprasi-21" class="pic" alt="{{product.name}}" data-err-src="images/product.jpg" />
                 </a>
               </div>
               <div class="product-desc">

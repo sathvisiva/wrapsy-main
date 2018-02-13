@@ -1,0 +1,56 @@
+<div class="m-b-20 clearfix">
+  <div class="page-title text-center">
+    <h3 class="text-center"><strong>Manage Filters</strong></h3>
+  </div>
+
+</div>
+
+<form class="form-inline" name="form1" ng-submit = "save(form1)">
+  <div class="form-group">
+    <label for="val">Name:</label>
+    <input type="text" class="form-control" id="val" ng-model="filter.name" placeholder="Enter Value" name="val">
+  </div>
+  <div class="form-group">
+    <label for="email">Feature:</label>
+    <select ng-model="filter.feature" class="form-control" ng-change = "SelectedRow(filter.feature)" >
+      <option ng-repeat="x in filterfeatures" value="{{x.key}}">{{x.key}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="val">Value:</label>
+
+
+    <multiselect class="input-xlarge multiselect" ng-model="filter.value" options="x for x in options" select-limit="5"
+    header="Select Values" selected-header="options selected" multiple="true" required
+    enable-filter="true" filter-placeholder="Filter stuff..">
+  </multiselect>
+</div>
+
+<button type="submit" class="btn btn-primary" style="margin-top: 25px;">Add Filter</button>
+</form>
+
+<div class="table-responsive"> 
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-center"><a  class="cursorpointer"><strong>Name</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>Feature</strong></a> </th>
+        <th class="text-center"><a  class="cursorpointer"><strong>Value</strong></a> </th>
+        <th class="text-center"><a class="cursorpointer"><strong>Action</strong></a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="f in filtered = filters | filter: search | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="order-col">
+        <td class="text-center">{{f.name}}</td>
+        <td class="text-center">{{f.feature}}</td>
+        <td class="text-center">{{f.value.join(", ")}}</td> 
+        <td class="text-center"> 
+          <a ng-click="deletefilter($event, f)" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+        </td>
+      </tr>
+    </tbody> 
+  </table>
+</div>
+
+<ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" class="pull-right"></ul>
+

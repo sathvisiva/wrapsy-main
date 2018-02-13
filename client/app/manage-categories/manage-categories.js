@@ -17,5 +17,5 @@ angular.module('bhcmartApp')
         url: '/add-category',
         templateUrl: 'app/manage-categories/manage-categories-add.html',
         controller: 'ManageCategoriesAddCtrl'
-      })
+      });
   });

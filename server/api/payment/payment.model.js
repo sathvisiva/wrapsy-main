@@ -45,9 +45,7 @@ var PaymentSchema = new mongoose.Schema({
 	name_on_card : String,
 	cardnum : String,
 	issuing_bank : String,
-	card_type : String,
-	
-	
+	card_type : String,	
 	createdAt: {
 		type: Date,
 		default: Date.now

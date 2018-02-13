@@ -6,24 +6,29 @@
 
  import errors from './components/errors';
  import path from 'path';
- var sha512 = require('js-sha512');
 
  export default function(app) {
   // Insert routes below
-  app.use('/api/vendor', require('./api/vendor'));
+  app.use('/api/requests', require('./api/request'));
   app.use('/api/uploads', require('./api/upload'));
   app.use('/api/orders', require('./api/order'));
+  app.use('/api/features', require('./api/feature'));
+  app.use('/api/filters', require('./api/filter'));
+  app.use('/api/cart', require('./api/cart'));
   app.use('/api/catalogs', require('./api/catalog'));
   app.use('/api/products', require('./api/product'));
-  app.use('/api/registry', require('./api/registry'));
+  app.use('/api/services', require('./api/service'));
   app.use('/api/users', require('./api/user'));
-  app.use('/api/address', require('./api/address'));
-  app.use('/api/voucher', require('./api/voucher'));
-  app.use('/api/home', require('./api/home'));
+  app.use('/api/vendors', require('./api/vendor'));
   app.use('/api/payment', require('./api/payment'));
-  app.use('/auth', require('./auth'));
+  app.use('/api/voucher', require('./api/voucher'));
+  app.use('/api/registry', require('./api/registry'));
+  app.use('/api/home', require('./api/home'));
+  app.use('/api/address', require('./api/address'));
+  app.use('/api/blog', require('./api/blog'));
 
-  
+
+  app.use('/auth', require('./auth'));
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

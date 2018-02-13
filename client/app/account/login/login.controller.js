@@ -5,7 +5,7 @@
   class LoginController {
 
 
-    constructor($http, $scope, $timeout, Auth, $state,User, $mdDialog, $window, dataToPass) {
+    constructor($http, $scope, $timeout, Auth, $state,User, $mdDialog, $window, dataToPass, Cart, $uibModal) {
       $scope.dataToPass = dataToPass
       if(dataToPass){ 
         if(dataToPass.event == 'login'){
@@ -40,7 +40,6 @@
       $scope.signup = false;
     }
 
-
     $scope.register = function(form) {
       $scope.submitted = true;
       console.log(form.$valid)
@@ -53,7 +52,22 @@
         })
         .then(() => {
           if($scope.dataToPass){
-            $state.go($scope.dataToPass.state);
+            if($scope.dataToPass.state == 'cart'){
+              Cart.addTocart({id : Auth.getCurrentUser()._id},$scope.dataToPass.items,function(res){
+                console.log(res)
+                var modalInstance = $uibModal.open({
+                  templateUrl : 'app/cart/cart.html',
+                  controller: 'CartCtrl',
+                  size :'lg'
+                })
+              }, function(err) {
+                var title = "Sorry product cannot be added to Cart" 
+                AlertService.showAlert(err.data)
+              }); 
+
+            }else{
+              $state.go($scope.dataToPass.state);
+            }
           }
           $scope.cancel();
 
@@ -76,7 +90,30 @@
         })
         .then(() => {
           if($scope.dataToPass){
-            $state.go($scope.dataToPass.state);
+            if($scope.dataToPass.state == 'cart'){
+              if($scope.dataToPass.items){
+                Cart.addTocart({id : Auth.getCurrentUser()._id},$scope.dataToPass.items,function(res){
+                  var modalInstance = $uibModal.open({
+                    templateUrl : 'app/cart/cart.html',
+                    controller: 'CartCtrl',
+                    size :'lg'
+                  })
+                }, function(err) {
+                  var title = "Sorry product cannot be added to Cart" 
+                  AlertService.showAlert(err.data)
+                }); 
+              }else{
+                var modalInstance = $uibModal.open({
+                  templateUrl : 'app/cart/cart.html',
+                  controller: 'CartCtrl',
+                  size :'lg'
+                })
+              }
+
+
+            }else{
+              $state.go($scope.dataToPass.state);
+            }
           }
           $scope.cancel();
 
@@ -92,6 +129,8 @@
         });
       }
     }
+
+
 
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;

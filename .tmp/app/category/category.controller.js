@@ -4,13 +4,9 @@ angular.module('bhcmartApp').controller('CategoryCtrl', ['$scope', '$stateParams
 
   $scope.categoryTitle = $stateParams.slug;
 
-  $scope.sizes = ["S", "M", "L", "XL", "XXL"];
-  $scope.colors = ["Blue", "Brown", "Green", "Red"];
-  $scope.pricerange = ["0 -500", "500-5000", "5000 +"];
-
   $scope.page = 1;
 
-  $scope.list = 5;
+  $scope.list = 3;
 
   $scope.priceSlider = {};
   /*
@@ -24,10 +20,10 @@ angular.module('bhcmartApp').controller('CategoryCtrl', ['$scope', '$stateParams
 
   $scope.slider = {
     minValue: 0,
-    maxValue: 10000,
+    maxValue: 100000,
     options: {
       floor: 0,
-      ceil: 10000,
+      ceil: 100000,
       step: 1,
       onEnd: function onEnd() {
         $scope.filter();
@@ -61,14 +57,6 @@ angular.module('bhcmartApp').controller('CategoryCtrl', ['$scope', '$stateParams
         $scope.disablednext = false;
       }
     });
-  };
-
-  $scope.sizechanged = function () {
-    $scope.filter(false, $scope.page);
-  };
-
-  $scope.colorchanged = function () {
-    $scope.filter(false, $scope.page);
   };
 
   $scope.category = Catalog.get({ id: $stateParams.slug }, function (category) {
@@ -122,41 +110,26 @@ angular.module('bhcmartApp').controller('CategoryCtrl', ['$scope', '$stateParams
      $stateParams.slug == 'all' ? Product.query(process($scope)) : Product.catalog({ id: $stateParams.slug, limit: 4, page : $scope.page  },q);*/
   };
 
+  $scope.fl = {};
+
+  $scope.filter = function () {
+    $scope.filter(false, $scope.page);
+  };
+
   $scope.filter = function (flush, page) {
 
     var q = {};
     var f = [];
     f.push({ 'categories': { $in: $scope.selectedcategories } });
+    if ($scope.fl.features) {
+      angular.forEach($scope.fl.features, function (val, key) {
+        if (val.length > 0) {
+          f.push({ 'features.key': key, 'features.val': { $in: val } });
+        }
+      });
+    }
     f.push({ 'price': { $gt: $scope.slider.minValue, $lt: $scope.slider.maxValue } });
-
-    var sizes = [];
-    /*console.log("sizes"+Object.keys($scope.selected.sizes));*/
-    console.log("selectedsizes" + $scope.selected.sizes.toString());
-    console.log($scope.selected.sizes);
-    angular.forEach(Object.keys($scope.selected.sizes), function (size) {
-      if ($scope.selected.sizes[size]) {
-        sizes.push(size);
-      }
-    });
-
-    if (sizes.length > 0) {
-      console.log("inside sizes");
-      f.push({ 'size': { $in: sizes } });
-    }
-
-    var colors = [];
-    /*console.log("sizes"+Object.keys($scope.selected.sizes));*/
-    angular.forEach(Object.keys($scope.selected.colors), function (color) {
-      if ($scope.selected.colors[color]) {
-        colors.push(color);
-      }
-    });
-
-    if (colors.length > 0) {
-      console.log("inside colors");
-      console.log(colors);
-      f.push({ 'color': { $in: colors } });
-    }
+    console.log(f);
     q.where = { $and: f };
     q.sort = 'asc';
     q.skip = ($scope.page - 1) * $scope.list;

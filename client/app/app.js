@@ -14,12 +14,13 @@ angular.module('bhcmartApp', [
   'ngFileUpload',
   'toaster',
   'socialLinks',
-  'slickCarousel',
+  'slick',
   'ngMaterial',
   'ngMessages',
   'rzModule',
   'uiCropper',
-  'long2know'
+  'long2know',
+  'checklist-model'
   ])
 .config(function($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider,$uiViewScrollProvider) {
   $urlRouterProvider
@@ -33,7 +34,7 @@ angular.module('bhcmartApp', [
 
 })
 
-.run(function($rootScope, $state, ngCart,$location) {
+.run(function($rootScope, $state, ngCart,$location, $transitions) {
   $.scrollUp({
     scrollName: 'scrollUp',
     scrollText: '<i class="fa fa-angle-up"></i>',
@@ -47,12 +48,14 @@ angular.module('bhcmartApp', [
   $rootScope.$state = $state;
   $rootScope._ = _;
   $rootScope.location = $location;
+  $transitions.onSuccess({}, function() {
+
+    console.log("statechange success");
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  });
   $rootScope.$on('$stateChangeSuccess',function(event, toState){
-   if($stateParams.scrollTo){
-    $location.hash($stateParams.scrollTo);
-    $anchorScroll();
-  }
-});
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  });
 })
 .directive("randomBackgroundcolor", function () {
   return {

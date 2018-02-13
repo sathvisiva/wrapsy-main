@@ -12,20 +12,12 @@
  var _ = require('lodash');
  var Catalog = require('./catalog.model');
 
+
  function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
     res.status(statusCode).send(err);
   };
-}
-
-function isJson(str) {
-  try {
-    str = JSON.parse(str);
-  } catch (e) {
-    str = str;
-  }
-  return str
 }
 
 function responseWithResult(res, statusCode) {
@@ -49,7 +41,9 @@ function handleEntityNotFound(res) {
 
 function saveUpdates(updates) {
   return function(entity) {
+    delete entity.filters
     var updated = _.merge(entity, updates);
+    console.log(updated)
     return updated.saveAsync()
     .spread(function(updated) {
       return updated;
@@ -68,41 +62,11 @@ function removeEntity(res) {
   };
 }
 
-exports.count = function(req, res) {
-
-  if(req.query){
-    var q = isJson(req.query.where);
-    Catalog.find(q).count().exec(function (err, count) {
-      if(err) { 
-        console.log(err)
-        return handleError(res, err); }
-        return res.status(200).json([{count:count}]);
-      });
-  }else{
-    Catalog.count().exec(function (err, count) {
-      if(err) { 
-        console.log(err)
-        return handleError(res, err); }
-        return res.status(200).json([{count:count}]);
-      });
-  }
-};
-
-
 // Gets a list of Catalogs
 exports.index = function(req, res) {
-
-  if(req.query){
-    var q = isJson(req.query.where);
-    console.log(q);
-    Catalog.find(q).sort({ parent: 1 }).execAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
-  }else{
-    Catalog.find().sort({ parent: 1 }).populate('parent').execAsync()
-    .then(responseWithResult(res))
-    .catch(handleError(res));
-  }
+  Catalog.find().sort({ parent: 1 }).populate('parent').populate('filters').execAsync()
+  .then(responseWithResult(res))
+  .catch(handleError(res));
 };
 
 // Gets a single Catalog from the DB
@@ -111,6 +75,8 @@ exports.show = function(req, res) {
   .findOne({
     slug: req.params.slug
   })
+  .populate('children')
+  .populate('filters')
   .execAsync()
   .then(handleEntityNotFound(res))
   .then(responseWithResult(res))

@@ -44,12 +44,13 @@ form .progress {
 
 // Component styles are injected through grunt
 // injector
-@import 'admin-console/admin.scss';
 @import 'admin/admin.scss';
 @import 'cart/cart.scss';
 @import 'category/category.scss';
 @import 'checkout/checkout.scss';
 @import 'contact/contact.scss';
+@import 'features/features.scss';
+@import 'filters/filters.scss';
 @import 'home/home.scss';
 @import 'invoice/invoice.scss';
 @import 'main/main.scss';
@@ -62,6 +63,8 @@ form .progress {
 @import 'product/product.scss';
 @import 'registry/registry.scss';
 @import 'search/search.scss';
+@import 'status/status.scss';
+@import 'vendors/vendors.scss';
 @import '../components/footer/footer.scss';
 @import '../components/modal/modal.scss';
 @import '../components/oauth-buttons/oauth-buttons.scss';

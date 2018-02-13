@@ -13,20 +13,20 @@
 		<div class="col-md-12">
 			<div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
 				<div uib-slide ng-repeat="slide in slides " index="$index">
-					<img ng-src="{{slide.image}}" >
+					<img ng-src="{{slide.imageUrl}}" >
 					<div class="carousel-caption">
 						<ul><li><h2 
 							class="wow bounceInLeft layer-1 slide-text hidden-xs" data-wow-duration="3s" data-wow-delay=".5s">{{slide.text}}</h2></li><li class="home-buttons hidden-xs">
-							<a ui-sref="manageregistryList" ng-show="isLoggedIn()" class="btn btn-primary mainbtn">Manage Registry</a>
+							<a ui-sref="manageregistryList" ng-show="isLoggedIn()" class="btn btn-primary mainbtn cursorpointer ">Manage Registry</a>
 							<a ng-click="createRegistry($event)"  class="btn btn-primary mainbtn cursorpointer">Create Registry</a>
-							<a ui-sref="findregistry" class="btn btn-primary mainbtn">Find Registry</a>
-							<a ui-sref="main"  class="btn btn-primary mainbtn">Shop Now</a>
+							<a ui-sref="findregistry" class="btn btn-primary mainbtn cursorpointer">Find Registry</a>
+							<a ui-sref="main"  class="btn btn-primary mainbtn cursorpointer">Shop Now</a>
 						</li>
 						<li class="home-buttons visible-xs">
-							<a ui-sref="manageregistryList"  ng-show="isLoggedIn()" class="btn btn-primary mainbtnxs">Manage Registry</a>
+							<a ui-sref="manageregistryList"  ng-show="isLoggedIn()" class="btn btn-primary mainbtnxs cursorpointer">Manage Registry</a>
 							<a  ng-click="createRegistry($event)"   class="btn btn-primary mainbtnxs cursorpointer">Create Registry</a>
-							<a ui-sref="findregistry" class="btn btn-primary mainbtnxs">Find Registry</a>
-							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs">Shop Now</a>
+							<a ui-sref="findregistry" class="btn btn-primary mainbtnxs cursorpointer">Find Registry</a>
+							<a ui-sref="manageregistryList"  class="btn btn-primary mainbtnxs cursorpointer">Shop Now</a>
 						</li>
 					</ul>
 				</div>
@@ -84,71 +84,65 @@
 			<div class="clearer"></div>
 		</div>
 		<div class="row">
-			<div class="col-md-4 banner-holder cyan-hover" >
-				<a href="/category/fashion"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-01.jpg" alt="Birthday Gifts"></a>      </div>
-				<div class="col-md-4 banner-holder cyan-hover">
-					<a href="/category/fashion"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-02.jpg" alt="Birthday Gifts"></a>            </div>
-					<div class="col-md-4 banner-holder cyan-hover">
-						<a href="/category/fashion"><img class="img-responsive" src="https://ld-magento.template-help.com/magento_64134/pub/media/catalog/category/category-03_1.jpg" alt="Birthday Gifts"></a>            </div>
-					</div>
-				</section>
-				<div class="clearfix"></div>
-
-				<div class="registry-container">
-					<div class="container">
-						<div class="category-title-header">
-							<div class="title-center">
-								<div class="title"><h1>View A Sample Registry</h1></div>
-								<div class="separator-title"><div class="divider-line"></div></div>
-							</div>
-							<div class="clearer"></div>
-						</div>
-
-						<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" init-onload=true data="registryslides" >
-							<div ng-repeat="slide in registryslides">
-								<a  ui-sref="registry({id:slide.registry})">
-									<img ng-src="{{slide.image}}" class="img-responsive" >
-								</a>
-								<div class="sampleregistryText">{{slide.text}}
-								</div>
-							</div>
-
-						</slick>
-					</div>
-				</div>	
+			<div class="col-md-4 banner-holder cyan-hover" ng-repeat = "popcat in popularcat" >
+				<a ui-sref="products({slug: popcat.categories.slug, category : popcat.categories.parentCategory.name })"><img class="img-responsive" ng-src="{{popcat.imageUrl}}" alt="Birthday Gifts"></a>      </div>
 			</div>
+		</section>
+		<div class="clearfix"></div>
 
-
-			<div class="home-categories">
+		<div class="registry-container">
+			<div class="container">
 				<div class="category-title-header">
 					<div class="title-center">
-						<div class="title"><h1>Featured Products</h1></div>
+						<div class="title"><h1>View A Sample Registry</h1></div>
 						<div class="separator-title"><div class="divider-line"></div></div>
 					</div>
 					<div class="clearer"></div>
 				</div>
-				<div class="figure">
-					<div class="container">
-						<div class="row">
 
-							<slick class="slider cyan-hover" settings="slickConfig3" ng-if="slickConfig3Loaded" >
-								<div ng-repeat="product in products" class="col-md-3 ">
-									<div >
-										<a  ui-sref="product({id: product.slug})">
-											<img ng-src="{{product.imageUrl}}" class="img-responsive">
-										</a>
-									</div>
-								</div>
+				<slick class="slider cyan-hover" settings="slickConfig3" dots=false ng-if="slickConfig3Loaded" init-onload=true data="registryslides" >
+					<div ng-repeat="slide in registryslides">
+						<a  ui-sref="registry({id:slide.registry})">
+							<img ng-src="{{slide.image}}" class="img-responsive" >
+						</a>
+						<div class="sampleregistryText">{{slide.text}}
+						</div>
+					</div>
 
-							</slick>
+				</slick>
+			</div>
+		</div>	
+	</div>
+
+
+	<div class="home-categories">
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>Featured Products</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+		<div class="figure">
+			<div class="container">
+				<slick dots="false"  init-onload='true' infinite="true" data="products" ng-if="products.length" speed="300" slides-to-show="4" touch-move="true" slides-to-scroll="1">
+					<div  ng-repeat="product in products">
+						<div class="single-product">
+							<a class="col-md-12" ui-sref="product({id: product.slug})">
+								<img class="primary-img" src="{{product.coverimage}}" alt="">
+							</a>
 
 						</div>
 					</div>
-				</div>
+				</slick>
+
+
 			</div>
-
-
 		</div>
 	</div>
 
-	<footer></footer> 
+
+</div>
+</div>
+
+<footer></footer> 

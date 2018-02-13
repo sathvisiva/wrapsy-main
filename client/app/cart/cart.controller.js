@@ -1,97 +1,77 @@
 'use strict';
 
 angular.module('bhcmartApp')
-.controller('CartCtrl', function($scope, Modal, ngCart, $state,$mdDialog,Voucher,$uibModal) {
+.controller('CartCtrl', ['$scope', 'Cart', 'Auth', 'Modal','$rootScope','$state','$uibModalInstance', function($scope, Cart, Auth, Modal, $rootScope,$state , $uibModalInstance) {
+	$rootScope.ip
+
+	
+
+	$scope.displaycarItems = function(){
+		$scope.items = Cart.show({id : Auth.getCurrentUser()._id}, function(res){
+			$scope.items = res.items;
+			$scope.subtotal = 0;
+			for(var i= 0 ;i < $scope.items.length; i++ ){
+				$scope.subtotal += $scope.items[i].subtotal;
+			}
+		});
+	}
 
 
-  console.log(ngCart.getVouchers());
-  console.log(ngCart.getVoucherAmount());
-  console.log(ngCart.getShipping());
-  
+	$scope.cancel = function(){
+		$uibModalInstance.close(); 	
+	}
+
+	$scope.displaycarItems()
+
+	$scope.changeQuantity = function(quantity , product , price, gst){
+		
+		$scope.incitems = {}
+        var gst = (parseInt(gst) * 0.01 * parseInt(price)) + parseInt(price);
+        $scope.incitems.subtotal = parseInt(quantity) * gst;
+		$scope.incitems.product  = product;
+		$scope.incitems.quantity = quantity;
+		console.log($scope.incitems)
+		Cart.alterpdtQuantity({id : Auth.getCurrentUser()._id},$scope.incitems,function(res){
+			console.log(res);
+			$scope.displaycarItems()
+		})
+	}
+
+	$scope.checkout = function(){
+		console.log('inside checkout')
+		$state.go('checkout');
+		$uibModalInstance.close(); 
+
+	}
 
 
-  $scope.clearCart = function(ev) {
-    var confirm = $mdDialog.confirm()
-    .title('Confirm')
-    .textContent('Would you like to remove all the items from your cart' )
-    .ariaLabel('remove product')
-    .targetEvent(ev)
-    .ok('Please do it!')
-    .cancel('cancel');
+	$scope.continueShop = function(){
+		console.log("inside continue shop")
+		$state.go('main');
+		$uibModalInstance.close(); 
+	}
 
-    $mdDialog.show(confirm).then(function() {
-     ngCart.empty()
-   }, function() {
+	
 
-   });
-
-  }
-
-  $scope.calculateGST = function(gst,qty,amt){
-   return (parseInt(gst)*parseInt(qty)*parseInt(amt))/100;
- };
-
- $scope.addVoucher = function(ev){
-  if($scope.isLoggedIn()){
-   var modalInstance = $uibModal.open({
-    templateUrl : 'app/voucher/redeem-voucher.html',
-    controller: 'VoucherRedeemCtrl',
-    size :'md',
-    resolve: {
-      amount: function () {
-       return ngCart.totalCost();
-     }
-   }
- })
-   .result.then(function(result) {
-    console.log(result)
-    ngCart.addVoucher(result);
-    console.log(ngCart.getVouchers());
-    console.log(ngCart.getVoucherAmount());
-    console.log(ngCart.getPayable());
-  }, function() {
-  // Cancel
-});
- }else{
-  $scope.data = {'event' : 'login'};
-  $scope.login(ev, $scope.data);
-
-}
-}
-
-$scope.removeProduct = function(ev,productName , product) {
-  var confirm = $mdDialog.confirm()
-  .title('Confirm')
-  .textContent('Would you like to remove' + productName + 'from your cart' )
-  .ariaLabel('remove product')
-  .targetEvent(ev)
-  .ok('Please do it!')
-  .cancel('cancel');
-
-  $mdDialog.show(confirm).then(function() {
-   ngCart.removeItemById(product.getId());
- }, function() {
-
- });
-
-}
+	$scope.removeItem = function(product, qty){
+		$scope.incitems = {};
+		$scope.incitems.product  = product;
+		$scope.incitems.qty = qty;
+		Cart.modifyCart({id : Auth.getCurrentUser()._id},$scope.incitems,function(res){
+			console.log(res);
+			$scope.displaycarItems()
+		})
+	}
 
 
+	$scope.clearCart = function(){
+		$scope.incitems = {}
+		$scope.incitems.product  = 'test'
+		Cart.clearCart({id : Auth.getCurrentUser()._id},$scope.incitems,function(res){
+			console.log(res);
+			$scope.displaycarItems()
+		})
 
-/*ui-sref="checkout"*/
+	}
 
-$scope.checkout = function(ev){
-  if($scope.isLoggedIn()){
-    console.log(ngCart.getVouchers());
-    /*if(ngCart.getVouchers().length == 0 ){
-      ngCart.addVoucher('null');
-    }*/
-
-    $state.go('checkout');
-  }else{
-   $scope.data = {'state' : 'checkout' , 'event' : 'login'};
-   $scope.login(ev, $scope.data);
- }
-}
-
-});
+}]);

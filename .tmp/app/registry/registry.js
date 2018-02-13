@@ -36,7 +36,7 @@ angular.module('bhcmartApp').config(function ($stateProvider) {
     templateUrl: 'app/registry/registry.html',
     controller: 'RegistryController'
   }).state('registry.home', {
-    url: '/home',
+    url: '/',
     templateUrl: 'app/registry/home.html'
   }).state('registry.registrypdts', {
     url: '/registry',

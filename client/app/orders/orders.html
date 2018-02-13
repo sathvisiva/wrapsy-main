@@ -1,187 +1,105 @@
 <navbar></navbar>
-<nav class="navbar navbar-default" ng-show="isAdmin">
-  <div class="container-fluid">
-
-      <ul class="nav navbar-nav">
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-categories">Manage categories</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-products">Manage products</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-products">Features</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-products">Filters</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-requests">Requests</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isLoggedIn">
-            <a ui-sref="orders">Orders</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="sales">Sales Reports</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="admin">Users</a>
-        </li> 
-    </ul>
-</div>
-</nav>
-<div class="breadcrumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 col-md-offset-3">
-                <ul class="breadcrumb">
-                    <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-                    <li class="active">orders</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<section class="product-grid" style="min-height: 200px">
-    <div class="container">
-        <div class="row">
-      <!--       <div class="col-lg-3 col-md-3">
-                <div class="uimax-sidebar">
-                  <div class="product-filter">
-                    <div class="categories-list block">
-                        <div class="title">Options</div>
-
-                        <ul class="list" >
-                         <li  ui-sref-active="active" ng-hide="isAdmin">
-                            <a href="#">My account</a>
-                        </li>
-                        <li ui-sref-active="active" ng-show="isAdmin">
-                            <a ui-sref="manage-categories">Manage categories</a>
-                        </li>
-                        <li ui-sref-active="active" ng-show="isAdmin">
-                            <a ui-sref="manage-products">Manage products</a>
-                        </li>
-                        <li ui-sref-active="active" ng-show="isAdmin">
-                            <a ui-sref="manage-requests">Requests</a>
-                        </li>
-                        <li ui-sref-active="active" ng-show="isLoggedIn">
-                            <a ui-sref="orders">Orders</a>
-                        </li>
-
-                        <li ui-sref-active="active" ng-show="isAdmin">
-                            <a ui-sref="admin">Users</a>
-                        </li> 
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--  <sidebar-account></sidebar-account> 
-    </div> -->
-    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-        <div class="alert alert-warning" role="alert" ng-show="filtered.length === 0">
-            You do not have any order
-        </div>
-        <div class="table-responsive">
-
-            <table class="table table-striped" ng-hide="filtered.length === 0">
-                <thead>
-                    <tr>
-                        <td>#</td>
-                        <td>Order Number</td>
-                        <td>Customer Name</td>
-                        <td>Telephone</td>
-                        <td>Status</td>
-                        <td>Date</td>
-                        <td>Total</td>
-
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="o in filtered = orders | filter:search  | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="table-col">
-                        <td>{{$index + 1}}</td>
-                        <td>{{o.orderNumber}}</td>
-                        <td>{{o.customerName}}</td>
-                        <td>{{o.customerPhone}}</td>
-                        <td>
-                         <select ng-model="status">
-                            <option ng-repeat="x in orderstatus" value="{{x.id}}">{{x.status}}</option>
-                        </select>
-                    </td>
-                    <td>{{o.created | date}}</td>
-                    <td>₹{{o.totalCost}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
-</div>
-
-<div class="col-lg-3 col-md-3">
-    <div class="uimax-sidebar">
-      <div class="product-filter">
-        <div class="categories-list block">
-            <div class="title">Search</div>
-            <ul class="list" >
-              <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Search By</label>
-                        <div class="row grid-container grid-spacing-half">
-                            <div class="col-xs-12 col-sm-12 col-md-12 grid-item top-row bottom-row">
-                                <select ng-model="searchoption" class="form-control search-page-input">
-                                    <option ng-repeat="x in searchOptions" value="{{x.id}}">{{x.option}}</option>
-                                </select>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label>Search By</label>
-                        <div class="row grid-container grid-spacing-half">
-                            <div class="col-xs-12 col-sm-12 col-md-12 grid-item top-row bottom-row">
-                                <input type="text" class="form-control search-page-input" placeholder="Search order" ng-model="search">
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        
-                       <button type="button" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
-            </div>
-        </li>
-        <!-- <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-categories">Manage categories</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-products">Manage products</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="manage-requests">Requests</a>
-        </li>
-        <li ui-sref-active="active" ng-show="isLoggedIn">
-            <a ui-sref="orders">Orders</a>
-        </li>
-
-        <li ui-sref-active="active" ng-show="isAdmin">
-            <a ui-sref="admin">Users</a>
-        </li>  -->
-    </ul>
-</div>
-</div>
-</div>
-
-</div> 
-</div>
-</div>
-</section>
 <br>
+<div class="container">
+  <div class="m-b-20 clearfix">
+    <div class="page-title text-center">
+      <h3 class="text-center"><strong>My Orders</strong></h3>
+    </div>
+  </div>
+  <br>
+
+
+  <div class="row">
+
+    <ul ng-repeat = "order in orders">
+      <br>
+      <div class="row">
+        <div class="col-md-4">
+          <strong>Order : #{{order.orderNumber}}</strong>
+        </div>
+        <div class="col-md-4">
+          <strong>Status : {{order.status}}</strong>
+        </div>
+        <div class="col-md-4 pull-right">
+        <button class="btn btn-info pull-right" ng-click="cancelorder($event , order._id , order.orderNumber)" ng-disabled = "order.cancelrequest">Cancel Order</button>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="borderless">
+        <br>
+        <li ng-repeat="item in order.items" >
+         <div class="row">
+           <div class="col-md-12">
+             <div class=col-md-2>
+               <img ui-sref="product({id: item.products.slug})" ng-src="{{item.products.coverimage}}" class="thumb"/>
+             </div>
+             <div class=col-md-2>
+              <a class="entity-name cursorpointer" ui-sref="product({id: item.products.slug})" >{{item.products.title}}</a>
+              <br>
+              Quantity : {{item.quantity}}
+              <br>
+              <div ng-repeat = "f in item.features">
+                {{f.feature}} :  {{f.value}}
+              </div>
+            </div>        
+            <div class="col-md-2">Status : {{item.status}}</div>
+            <div class="col-md-2">Item Price : ₹{{item.products.price | number}}</div>
+            <div class="col-md-2">GST : {{item.products.gst}}%</div>
+            <div class="col-md-2">Item SubTotal : ₹{{item.subtotal}}
+              <br>
+              <button class="btn btn-primary" ng-click="returnProduct($event , order._id , item.products._id , item.products.title )" ng-disabled = "order.cancelrequest">Return Product</button>
+            </div>
+          </div>
+        </div> 
+      </li>
+    </div>
+  </ul>
+
+  <br>
+  <br>
+
+
+</div>
+</div>
+
+
+
+<!-- <md-content class="md-whiteframe-z1" layout-padding>
+    <div ng-repeat = "order in orders">
+      <div>Order No : {{order.orderNumber}}</div>
+      <br>
+      <table>
+          <thead>
+            <tr>
+              <th>Product Description</th>
+              <th>Status</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+          </tr>
+      </thead>
+      <tr ng-repeat="item in order.items">
+        <td><div layout="row">
+          <div flex>
+              <img ng-src="{{item.products.coverimage}}" class="thumb"/>
+          </div>
+          <div flex>
+            Quantity : {{item.quantity}}
+            <br>
+            <div ng-repeat = "f in item.features">
+              {{f.feature}} :  {{f.value}}
+          </div>
+      </div>
+  </div></td>
+  <td>Placed</td>
+  <td>{{item.products.price}}</td>
+  <td>{{item.subtotal}}</td>
+</tr>
+</table>
+</div>
+<br>
+</md-content> -->
 <footer></footer>

@@ -309,7 +309,12 @@ angular.module('bhcmartApp')
         var modalInstance = $uibModal.open({
           templateUrl : 'app/registry/invite.html',
           controller: 'inviteRegistryCtrl',
-          size :'md'
+          size :'md',
+          resolve: {
+            registry: function () {
+              return $scope.registry.slug;
+            }
+          }
         })
         .result.then(function(result) {
 
@@ -839,10 +844,11 @@ angular.module('bhcmartApp')
   }
   ]);
 angular.module('bhcmartApp')
-.controller('inviteRegistryCtrl',function ($scope,$rootScope,$state, $stateParams,Registry,Auth,$location, $uibModalInstance) {
+.controller('inviteRegistryCtrl',function ($scope,$rootScope,$state, $stateParams,Registry,Auth,$location, $uibModalInstance , registry) {
 
- $scope.url = 'http://www.wrapsytest.com'+$location.path();
- console.log($location.path());
+  
+
+ $scope.url = window.location.origin + "/"+ window.location.pathname.split('/')[1] +'/'+ registry + '/'
 
  $scope.cancel = function () {
   $uibModalInstance.dismiss('Close');

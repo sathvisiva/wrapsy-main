@@ -14,6 +14,6 @@ router.get('/:id', controller.show);
 router.post('/', multiparty(uploadOptions), controller.create);
 router.put('/:id', multiparty(uploadOptions), controller.update);
 router.patch('/:id', controller.update);
-router.delete('/:id', controller.destroy);
+
 
 module.exports = router;

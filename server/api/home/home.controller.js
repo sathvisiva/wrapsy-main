@@ -80,7 +80,7 @@ export function indexHomePageImg(req, res) {
 
 export function indexpopularCategory(req, res) {
 
-  PopularCategory.findAsync()
+  PopularCategory.find().populate('categories').exec()
   .then(responseWithResult(res))
   .catch(handleError(res));
   

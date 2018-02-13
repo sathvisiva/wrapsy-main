@@ -1,43 +1,59 @@
+<!-- <navbar></navbar>
+<div class="breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 col-md-offset-3">
+                <ul class="breadcrumb">
+                    <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
+                    <li class="active">manage-categories</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <section class="product-grid" style="min-height: 200px">
     <div class="container">
         <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="alert alert-warning" role="alert" ng-show="categories.length === 0">
-            You do not have any category
-        </div>
-        <div class="table-responsive" ng-hide="categories.length === 0">
-            <div class="row">
-                <div  class="col-md-6 pull-right">
-                    <a ui-sref="adminconsole.add-category" class="btn btn-xs btn-success pull-right"><span class="fa fa-plus fa-2x"></span></a>
-                </div>
-                <div class="input-group primary col-md-6" inputgroup>
-                    <span class="input-group-addon">
-                        <span class="arrow"></span>
-                        <i class="fa fa-search"></i>
-                    </span>
-                    <input type="text" class="form-control search-page-input" placeholder="Search category" ng-model="search">
-                </div>
+            <div class="col-lg-3 col-md-3">
+                <sidebar-account></sidebar-account>
             </div>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>Name</td>                                
-                        <td class="text-center" colspan="3">Actions</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="c in filtered = categories | filter: search | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="order-col">
-                        <td>{{c.name}}</td>
-                        <td>
-                            <a ui-sref="products({slug: c.slug})" class="btn btn-sm btn-primary"> <span class="glyphicon glyphicon-eye-open"></span></a>
-                        </td>
-                               <!--  <td ng-show="isAdmin">
-                                    <a ui-sref=" add-category" class="btn btn-xs btn-success"><span class="fa fa-plus fa-2x"></span></a>
-                                </td> -->
-                                <td >
-                                    <a ui-sref=" adminconsole.edit-category({id: c.slug})" class=""><span class="fa fa-edit fa-2x"></span></a>
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="alert alert-warning" role="alert" ng-show="categories.length === 0">
+                    You do not have any category
+                </div>
+                <div class="table-responsive" ng-hide="categories.length === 0">
+                    <div class="row">
+                        <div ng-show="isAdmin" class="col-md-6 pull-right">
+                            <a ui-sref=" add-category" class="btn btn-xs btn-success pull-right"><span class="fa fa-plus fa-2x"></span></a>
+                        </div>
+                        <div class="input-group primary col-md-6" inputgroup>
+                            <span class="input-group-addon">
+                            <span class="arrow"></span>
+                            <i class="fa fa-search"></i>
+                            </span>
+                            <input type="text" class="form-control search-page-input" placeholder="Search category" ng-model="search">
+                        </div>
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Parent</td>
+                                <td class="text-center" colspan="3">Actions</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="c in filtered = categories | filter: search | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="order-col">
+                                <td>{{c.name}}</td>
+                                <td>{{c.parent.name ? c.parent.name : "none" }}</td>
+                                <td>
+                                    <a ui-sref="products({slug: c.slug})" class="btn btn-sm btn-primary"> <span class="glyphicon glyphicon-eye-open"></span></a>
                                 </td>
-                                <td >
+                          
+                                <td ng-show="isAdmin">
+                                    <a ui-sref=" edit-category({id: c.slug})" class=""><span class="fa fa-edit fa-2x"></span></a>
+                                </td>
+                                <td ng-show="isAdmin">
                                     <a ng-click="deleteCatalog('Category ' + c.name, c)" class="trash"><span class="fa fa-trash fa-2x">                                </span></a>
                                 </td>
                             </tr>
@@ -50,3 +66,39 @@
     </div>
 </section>
 <footer></footer>
+-->
+
+<div class="m-b-20 clearfix">
+    <div class="page-title text-center">
+        <h3 class="text-center"><strong>Manage Categories</strong></h3>
+    </div>
+    <div class="pull-right">
+        <a ui-sref="admin.newcategory" class="btn btn-success m-t-10"><i class="fa fa-plus p-r-10"></i> Add a Category</a>
+    </div>
+</div>
+
+<div class="table-responsive"> 
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center"><a ng-click="sortBy('name')" class="cursorpointer"><strong>Name</strong></a> <span class="sortorder" ng-show="propertyName === 'name'" ng-class="{reverse: reverse}"></span></th>
+                <th class="text-center"><a ng-click="sortBy('phone')" class="cursorpointer"><strong>Parent</strong></a> <span class="sortorder" ng-show="propertyName === 'phone'" ng-class="{reverse: reverse}"></span></th>
+                <th class="text-center"><a class="cursorpointer"><strong>Action</strong></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <tr ng-repeat="f in filtered = vendor | filter: search | startSearchFrom:(currentPage-1) * itemsPerPage  | limitTo:itemsPerPage | orderBy:propertyName:reverse" class="order-col"> -->
+            <tr ng-repeat="c in filtered = categories | filter: search | startSearchFrom:(currentPage-1) * itemsPerPage | limitTo:itemsPerPage" class="order-col">
+                <td class="text-center">{{c.name}}</td>
+                <td class="text-center">{{c.parent.name ? c.parent.name : "none" }}</td>
+                <td class="text-center"> 
+                    <a ui-sref="admin.editcategory({id: c.slug})" class="edit btn btn-sm btn-default"><i class="fa fa-pencil"></i> Edit</a>
+                    <a ng-click="deleteCatalog('Category ' + c.name, c)" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ul uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" class="pull-right"></ul>
+

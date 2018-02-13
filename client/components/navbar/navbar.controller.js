@@ -7,7 +7,7 @@ class NavbarController {
   isCollapsed = true;
   //end-non-standard
 
-  constructor(Auth, Catalog, $scope, $mdDialog, $state, $stateParams, $mdMedia,NavbarService) {
+  constructor(Auth, Catalog, $scope, $mdDialog, $state, $stateParams, $mdMedia,NavbarService,$uibModal) {
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -26,6 +26,20 @@ class NavbarController {
     $scope.getcategories = function(parentid){
       var q = {where:{parent:parentid}};
       return Catalog.query(q);
+    }
+
+
+    $scope.openCart = function(ev){
+      if($scope.isLoggedIn()){
+        var modalInstance = $uibModal.open({
+          templateUrl : 'app/cart/cart.html',
+          controller: 'CartCtrl',
+          size :'lg'
+        })
+      }else{
+        $scope.data = {'state' : 'cart' , 'event' : 'login'};
+        $scope.login(ev, $scope.data);
+      }
     }
 /*
     $scope.buildnavbar = function(){

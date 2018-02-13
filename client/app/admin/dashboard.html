@@ -1,0 +1,134 @@
+<!-- 
+<div class="find-registry">
+	<div class="container">
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>Dashboard</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Products</span>
+							<span class="md-subhead ">{{productCount}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Categories</span>
+							<span class="md-subhead ">{{catalogCount}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Features</span>
+							<span class="md-subhead ">{{features.length}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+			<div class="col-md-3">
+				<md-card>
+					<md-card-title>
+						<md-card-title-text>
+							<span class="md-headline text-center">Users</span>
+							<span class="md-subhead ">{{userCount}}</span>
+						</md-card-title-text>
+					</md-card-title>
+				</md-card>
+			</div>
+		</div>
+		<br>
+		<br>
+
+		<div class="category-title-header">
+			<div class="title-center">
+				<div class="title"><h1>Recent Orders</h1></div>
+				<div class="separator-title"><div class="divider-line"></div></div>
+			</div>
+			<div class="clearer"></div>
+		</div>
+		<br>
+		<div ng-cloak>
+			<md-content>
+				<md-tabs md-dynamic-height md-border-bottom>
+					<md-tab label="Processed">
+						<md-content class="md-padding">
+							
+
+						</md-content>
+					</md-tab>
+					<md-tab label="Delivered">
+						<md-content class="md-padding">      
+						</md-content>
+					</md-tab>
+					<md-tab label="cancelled">
+						<md-content class="md-padding">
+						        
+						</md-content>
+					</md-tab>
+				</md-tabs>
+			</md-content>
+		</div>
+		
+	</div>
+</div>
+-->
+
+
+<div layout="row" layout-xs="column" layout-wrap="" class="layout-wrap layout-xs-column layout-row">
+	<md-card class="tri-counter-widget _md md-cyan-theme flex" flex=""  style="background: rgb(239, 83, 80); color: rgb(255, 255, 255);">
+		<md-card-content layout="row" layout-align="space-between center" class="layout-align-space-between-center layout-row">
+			<md-icon class="font-size-5 margin-left-10 inherit-color md-cyan-theme md-font material-icons fa fa-book" md-font-icon="fa fa-book" aria-hidden="true"></md-icon>
+			<div layout="column" class="layout-column">
+				<p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis ng-isolate-scope" countupto="vm.count" decimals="0">45</p>
+				<p class="md-body-2 margin-top-0 margin-bottom-0 ng-scope ng-binding" translate="">Categories</p>
+			</div>
+		</md-card-content>
+	</md-card>
+
+	<md-card class="tri-counter-widget _md md-cyan-theme flex" flex=""  style="background: rgb(130, 177, 255); color: rgb(255, 255, 255);">
+		<md-card-content layout="row" layout-align="space-between center" class="layout-align-space-between-center layout-row">
+			<md-icon class="font-size-5 margin-left-10 inherit-color md-cyan-theme md-font material-icons fa fa-comments" md-font-icon="fa fa-desktop" aria-hidden="true"></md-icon>
+			<div layout="column" class="layout-column">
+				<p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis ng-isolate-scope" countupto="vm.count" decimals="0">{{prodcutCount[0].count}}</p>
+				<p class="md-body-2 margin-top-0 margin-bottom-0 ng-scope ng-binding" translate="">PRODUCTS</p>
+			</div>
+		</md-card-content>
+	</md-card>
+
+	<md-card class="tri-counter-widget _md md-cyan-theme flex" flex=""  style="background: rgb(13, 71, 161); color: rgb(255, 255, 255);">
+		<md-card-content layout="row" layout-align="space-between center" class="layout-align-space-between-center layout-row">
+			<md-icon class="font-size-5 margin-left-10 inherit-color md-cyan-theme md-font material-icons fa fa-comments" md-font-icon="fa fa-money" aria-hidden="true"></md-icon>
+			<div layout="column" class="layout-column">
+				<p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis ng-isolate-scope" countupto="vm.count" decimals="0">3</p>
+				<p class="md-body-2 margin-top-0 margin-bottom-0 ng-scope ng-binding" translate="">USERS</p>
+			</div>
+		</md-card-content>
+	</md-card>
+
+	<md-card class="tri-counter-widget _md md-cyan-theme flex" flex="" style="background: rgb(76, 175, 80); color: rgb(255, 255, 255);">
+		<md-card-content layout="row" layout-align="space-between center" class="layout-align-space-between-center layout-row">
+			<md-icon class="font-size-5 margin-left-10 inherit-color md-cyan-theme md-font material-icons fa fa-bar-chart" md-font-icon="fa  fa-bar-chart" aria-hidden="true"></md-icon>
+			<div layout="column" class="layout-column">
+				<p class="md-display-3 font-weight-100 margin-top-0 margin-bottom-0 text-ellipsis ng-isolate-scope" countupto="vm.count" decimals="0">{{orderCount[0].count}}</p>
+				<p class="md-body-2 margin-top-0 margin-bottom-0 ng-scope ng-binding" translate="">ORDERS</p>
+			</div>
+		</md-card-content>
+	</md-card> 
+</div>

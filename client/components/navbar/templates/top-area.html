@@ -39,7 +39,7 @@
                  </a>
                  <ul class="header-dropdown">                                    <li ng-show="isLoggedIn() && !isAdmin()" ui-sref="orders"><a><span class="glyphicon glyphicon-tasks"></span> My Orders</a></li>
                    <li ng-show="isLoggedIn() && !isAdmin()" ui-sref="myvouchers"><a><span class="glyphicon glyphicon-tasks"></span> My Vouchers</a></li>
-                   <li ng-show="isLoggedIn() && isAdmin()" ui-sref="adminconsole.dashboard"><a><span class="glyphicon glyphicon-tasks"></span> Admin Console</a></li>
+                   <li ng-show="isLoggedIn() && isAdmin()" ui-sref="admin.dashboard"><a><span class="glyphicon glyphicon-tasks"></span> Admin Console</a></li>
 
                    <!-- <li ng-show="isLoggedIn() && isAdmin()" ui-sref-active="active"><a ui-sref="adminconsole"><span class="glyphicon glyphicon-tasks"></span>Admin Console</a></li> -->
 
@@ -48,7 +48,7 @@
                </li>
              </ul>
            </div> 
-           <a ui-sref="cart-details"><div class="header-contact-info"><span class="fa fa-shopping-cart"></span></div></a>
+           <a class="cursorpointer" ng-click="openCart($event)"><div class="header-contact-info"><span class="fa fa-shopping-cart"></span></div></a>
          </div>
        </div>
      </div>
@@ -56,7 +56,7 @@
  </div>
 
  <!--Header Top Area Start-->
- <div class="header-top" ng-show = "showSearch">
+<!--  <div class="header-top" ng-show = "showSearch">
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 search" >
@@ -71,7 +71,7 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
 <style type="text/css">
   .top-area {
     padding: 0px 0px !important;

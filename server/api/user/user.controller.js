@@ -213,7 +213,7 @@ export function getresetuser(req, res, next) {
 }
 
 exports.count = function(req, res) {
-  
+
   if(req.query){
     var q = isJson(req.query.where);
     User.find(q).count().exec(function (err, count) {
@@ -223,7 +223,7 @@ exports.count = function(req, res) {
         return res.status(200).json([{count:count}]);
       });
   }else{
-      User.count().exec(function (err, count) {
+    User.count().exec(function (err, count) {
       if(err) { 
         console.log(err)
         return handleError(res, err); }
@@ -231,6 +231,23 @@ exports.count = function(req, res) {
       });
   }
 };
+
+
+exports.addToCart = function(req,res){
+
+  console.log(req.body);
+
+  User.findByIdAsync(req.params._id)
+  .then(user => {
+    User.items.push(req.body);
+    return user.saveAsync()
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(validationError(res));
+  });
+
+}
 
 
 export function forgot(req, res, next) {

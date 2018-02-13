@@ -1,95 +1,252 @@
-<div ng-cloak>
-  <md-content>
-    <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="General">
-        <md-content class="md-padding">
-          <div class="row">
-            <div class="col-md-12">
-              <form id="form1" class="form-horizontal">
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Product Name <span class="asterisk">*</span>
-                  </label>
-                  <div class="col-sm-7">
-                    <input type="text" class="form-control" value="Product 1">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Product Reference <span class="asterisk">*</span>
-                  </label>
-                  <div class="col-sm-7">
-                    <input type="text" class="form-control" value="Product 1">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Vendor</label>
-                  <div class="col-sm-7">
-                    <select class="form-control" id="sel1">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Categories <span class="asterisk">*</span></label>
-                  <div class="col-sm-7">
-                    <multiselect class="input-xlarge multiselect" ng-model="option1" options="p.key as p.value for p in options1" select-limit="5"
-                    header="Select Categories" selected-header="options selected" multiple="true" required
-                    enable-filter="true" filter-placeholder="Filter stuff..">
-                  </multiselect>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-2 control-label">Price <span class="asterisk">*</span>
-                </label>
-                <div class="col-sm-7">
-                  <input type="text" class="form-control" value="$25.95">
-                </div>
-              </div>
-
-            </form>
+<md-tabs md-dynamic-height="" md-border-bottom="" md-selected="myTabIndex">
+  <md-tab label="General">
+    <md-content class="md-padding">
+      <form id="form1" name="form1" class="form-horizontal" novalidate>
+        <div class="form-group">
+          <div class="col-sm-4 pull-left">
+            <md-switch ng-model="product.affiliate" aria-label="affiliate">
+              <md-tooltip md-direction="right">slide the switch to add affiliate prodcuts</md-tooltip>
+              Affiliate
+            </md-switch>
           </div>
         </div>
-      </md-content>
-    </md-tab>
-    <md-tab label="Description">
-      <md-content class="md-padding"><div class="row">
-        <div class="col-md-12">
-          <form id="form1" class="form-horizontal">
-           <div class="form-group">
-            <label class="col-sm-2 control-label">Long Description <span class="asterisk">*</span>
-            </label>
-            <div class="col-sm-7">
-              <textarea rows="6" class="form-control" placeholder="Description goes here..."></textarea>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Title <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model = "product.title" required name="title">
+            
+            <div class="msg-block" ng-if="form1.title.$touched" ng-messages="form1.title.$error" style="color:maroon; ">
+              <div ng-message="required">The Title field is required</div>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Short description</label>
-            <div class="col-sm-7">
-              <textarea rows="4" class="form-control" placeholder="Maximum 220 characters"></textarea>
-            </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Short Description <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-8">
+           <input type="text" class="form-control" ng-model = "product.shortdescription" required name="shortdescription">
+           <div class="msg-block" ng-if="form1.shortdescription.$touched && form1.shortdescription.$error" ng-messages="form1.shortdescription.$error" style="color:maroon; ">
+            <div ng-message="required">The short description field is required</div>                  
           </div>
-        </form>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Description <span class="asterisk">*</span>
+        </label>
+        <div class="col-sm-8">
+          <textarea rows="6" class="form-control" name="description"   ng-model="product.description" required></textarea>
+          <div class="msg-block" ng-if="form1.description.$touched && form1.description.$error" ng-messages="form1.description.$error" style="color:maroon; ">
+            <div ng-message="required">The description field is required</div>                  
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div ng-if="!product.affiliate">
+          <label class="col-sm-2 control-label">Vendor 
+          </label>
+          <div class="col-sm-3">
+            <select class="form-control" name="categories" ng-model="product.vendor">
+              <option ng-repeat="vendor in vendors" value="{{vendor._id}}">{{vendor.name}}</option>
+            </select>
+          </div>
+        </div>
+        <label class="col-sm-2 control-label">Category <span class="asterisk">*</span>
+        </label>
+        <div class="col-sm-3">
+          <select class="form-control" name="categories" ng-model="product.categories">
+            <option ng-repeat="cat in categories" value="{{cat._id}}">{{cat.name}}</option>
+          </select>
+          <div class="msg-block" ng-if="form1.categories.$touched && form1.categories.$error" ng-messages="form1.categories.$error" style="color:maroon; ">
+            <div ng-message="required">The Category field is required</div>                  
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Price <span class="asterisk">*</span>
+        </label>
+        <div class="col-sm-3">
+          <input type="number" class="form-control" ng-model = "product.price" required name="price">
+          <div class="msg-block" ng-if="form1.price.$touched && form1.price.$error" ng-messages="form1.price.$error" style="color:maroon; ">
+            <div ng-message="required">The price field is required</div>                  
+          </div>
+        </div>
+        <label class="col-sm-2 control-label">Discount 
+        </label>
+        <div class="col-sm-3">
+          <input type="number" class="form-control" ng-model = "product.discount" name="discount">
+
+        </div>
+      </div>
+
+      <div class="form-group" ng-if="!product.affiliate">
+       <label class="col-sm-2 control-label">Stock <span class="asterisk">*</span>
+       </label>
+       <div class="col-sm-3">
+        <input type="number" class="form-control" ng-model = "product.stock" required name="stock">
+        <div class="msg-block" ng-if="form1.stock.$touched && form1.stock.$error" ng-messages="form1.stock.$error" style="color:maroon; ">
+          <div ng-message="required">The Stock field is required</div>                  
+        </div>
+      </div>
+      <label class="col-sm-2 control-label">GST 
+      </label>
+      <div class="col-sm-3">
+        <input type="number" class="form-control" ng-model = "product.gst" name="gst">
+  
       </div>
     </div>
 
-  </md-content>
+    <div class="form-group" ng-if="product.affiliate">
+      <label class="col-sm-2 control-label">Asin <span class="asterisk">*</span>
+      </label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" ng-model = "product.asin" required name="asin">
+        <div class="msg-block" ng-if="form1.asin.$touched && form1.asin.$error" ng-messages="form1.asin.$error" style="color:maroon; ">
+          <div ng-message="required">The Asin field is required</div>                  
+        </div>
+      </div>
+      <label class="col-sm-2 control-label">Code <span class="asterisk">*</span>
+      </label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" ng-model = "product.code" required name="code">
+        <div class="msg-block" ng-if="form1.code.$touched && form1.code.$error" ng-messages="form1.code.$error" style="color:maroon; ">
+          <div ng-message="required">The Code field is required</div>                  
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="text-center">
+        <button class="btn btn-primary" ng-click="myTabIndex = myTabIndex+1"> Save & Next</button>
+      </div>
+    </div>
+  </form>
+</md-content>
 </md-tab>
 <md-tab label="Features">
   <md-content class="md-padding">
-    <h1 class="md-display-2">Tab Two</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida. Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus ornare dui nec orci posuere, nec luctus mauris semper.</p>
-    <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo. Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-  </md-content>
+    <div>
+      <form class="form-inline form-horizontal" name="form1" >
+        <div class="form-group">
+          <label class="col-sm-1 control-label">Feature </label>
+          <div class="col-sm-2">
+           <select ng-model="feature.key" class="form-control" ng-change = "SelectedRow(feature.key)" >
+            <option ng-repeat="x in filterfeatures" value="{{x.key}}">{{x.key}}</option>
+          </select>
+
+        </div>
+        <label class="col-sm-1 control-label">Value </label>
+        <div class="col-sm-3">
+          <multiselect class="input-xlarge multiselect" ng-model="feature.val" options="x for x in options" select-limit="5"
+          header="Select Values" selected-header="options selected" multiple="true" required
+          enable-filter="true" filter-placeholder="Filter stuff..">
+        </multiselect>
+
+      </div>
+      <label class="col-sm-2 control-label">Selectable </label>
+      <div class="col-sm-2">
+        <md-checkbox ng-model="feature.selectable" aria-label="Selectable" style = "margin-top: 5px;">
+
+        </md-checkbox>
+      </div>
+      <div class="col-sm-1">
+        <a class="btn btn-primary" ng-click="addfeature(feature)"> Add Feature </a>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="text-center"><a  class="cursorpointer"><strong>Feature</strong></a> </th>
+      <th class="text-center"><a  class="cursorpointer"><strong>Value</strong></a> </th>
+      <th class="text-center"><a  class="cursorpointer"><strong>Selectable</strong></a> </th>
+      <th class="text-center"><a class="cursorpointer"><strong>Action</strong></a></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="x in product.features" class="order-col">
+      <td class="text-center">{{x.key}}</td>
+      <td class="text-center">{{x.val.join(", ")}}</td>
+      <td class="text-center">{{x.selectable}}</td> 
+      <td class="text-center"> 
+        <a ng-click="deleteFeature($index)" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+      </td>
+    </tr>
+  </tbody> 
+</table>
+<div class="col-sm-12">
+  <div class="text-center">
+    <button class="btn btn-primary" ng-click="myTabIndex = myTabIndex+1"> Save & Next</button>
+  </div>
+</div>
+</md-content>
 </md-tab>
-<md-tab label="Affiliate">
+<md-tab label="Images">
   <md-content class="md-padding">
-    <h1 class="md-display-2">Tab Three</h1>
-    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
-  </md-content>
+    <div class="row">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Image <span class="asterisk">*</span>
+        </label>
+        <div class="col-sm-10">
+          <div class="controls">
+            <input type="file"  ngf-select="upload($file, $invalidFiles)" ng-model="imageUrl1" name="imageUrl1" accept="image/*" ngf-max-size="1MB" ngf-resize="{width: 444, height: 444, quality: 1, type: 'image/jpeg', centerCrop: true, restoreExif: false}" ngf-model-invalid="errorFile" />
+            <i ng-show="form.imageUrl1.$error.required">*required</i>
+            <i ng-show="form.imageUrl1.$error.maxSize">File too large  {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+
+            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+          </div>
+        </div> 
+
+      </div>
+      <div class="col-sm-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-center"><a  class="cursorpointer"><strong>Image</strong></a> </th>
+              <th class="text-center"><a  class="cursorpointer"><strong>Cover</strong></a> </th>
+              <th class="text-center"><a class="cursorpointer"><strong>Action</strong></a></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="x in product.images" class="order-col">
+              <td class="text-center"><img ng-src="{{x.url}}" class="thumb"></td>
+              <td class="text-center">
+                <md-switch ng-model="x.cover"  aria-label="affiliate">
+                  <md-tooltip md-direction="right">slide the switch to add Image as cover Image</md-tooltip>
+                </md-switch>
+              </td>
+              <td class="text-center"> 
+                <a ng-click="deleteImage($index, x.url)" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+              </td>
+            </tr>
+          </tbody> 
+        </table>
+    <!--    <table>
+        <tr ng-repeat="img in product.images" class="order-col">
+          <td><img  ng-src="{{img.url}}" class="thumb"></td>
+          <td class="text-center">{{img.cover}}</td>
+          <td class="text-center"> 
+            <a ng-click="deleteFeature($index)" class="delete btn btn-sm btn-default"><i class="fa fa-times-circle"></i> Remove</a>
+          </td>
+        </tr>
+      </table>   -->
+    </div>
+  </div>
+
+
+
+  <div class="col-sm-12">
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary" ng-click="save(form1)"> Save Product</button>
+    </div>
+  </div>
+</md-content>
 </md-tab>
 </md-tabs>
-</md-content>
-</div>
+

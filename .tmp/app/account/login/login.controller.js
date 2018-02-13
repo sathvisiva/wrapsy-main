@@ -3,7 +3,7 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function () {
-  var LoginController = function LoginController($http, $scope, $timeout, Auth, $state, User, $mdDialog, $window, dataToPass) {
+  var LoginController = function LoginController($http, $scope, $timeout, Auth, $state, User, $mdDialog, $window, dataToPass, Cart, $uibModal) {
     _classCallCheck(this, LoginController);
 
     $scope.dataToPass = dataToPass;
@@ -50,7 +50,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           password: $scope.user.password
         }).then(function () {
           if ($scope.dataToPass) {
-            $state.go($scope.dataToPass.state);
+            if ($scope.dataToPass.state == 'cart') {
+              Cart.addTocart({ id: Auth.getCurrentUser()._id }, $scope.dataToPass.items, function (res) {
+                console.log(res);
+                var modalInstance = $uibModal.open({
+                  templateUrl: 'app/cart/cart.html',
+                  controller: 'CartCtrl',
+                  size: 'lg'
+                });
+              }, function (err) {
+                var title = "Sorry product cannot be added to Cart";
+                AlertService.showAlert(err.data);
+              });
+            } else {
+              $state.go($scope.dataToPass.state);
+            }
           }
           $scope.cancel();
         })['catch'](function (err) {
@@ -69,7 +83,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           password: $scope.user.password
         }).then(function () {
           if ($scope.dataToPass) {
-            $state.go($scope.dataToPass.state);
+            if ($scope.dataToPass.state == 'cart') {
+              if ($scope.dataToPass.items) {
+                Cart.addTocart({ id: Auth.getCurrentUser()._id }, $scope.dataToPass.items, function (res) {
+                  var modalInstance = $uibModal.open({
+                    templateUrl: 'app/cart/cart.html',
+                    controller: 'CartCtrl',
+                    size: 'lg'
+                  });
+                }, function (err) {
+                  var title = "Sorry product cannot be added to Cart";
+                  AlertService.showAlert(err.data);
+                });
+              } else {
+                var modalInstance = $uibModal.open({
+                  templateUrl: 'app/cart/cart.html',
+                  controller: 'CartCtrl',
+                  size: 'lg'
+                });
+              }
+            } else {
+              $state.go($scope.dataToPass.state);
+            }
           }
           $scope.cancel();
         })['catch'](function (err) {

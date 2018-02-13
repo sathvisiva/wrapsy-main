@@ -12,6 +12,7 @@ router.get('/:id', controller.show);
 router.post('/', controller.create);
 //
 router.post('/makevisible', controller.makevisible);
+router.post('/updatetheme' , controller.updatetheme);
 router.post('/:id/registryProduct', controller.createregistryProduct);
 router.post('/:id/getregistryProduct', controller.getRegistryProduct);
 router.post('/:id/rsvpRegistry', controller.creatersvpRegistry);
@@ -20,12 +21,16 @@ router.post('/:id/guestBookRegistry', controller.createGuestBookRegistry);
 router.get('/:id/registryGuestBook', controller.indexGuestBookRegistry);
 router.post('/:id/accomodation', controller.createAccomodation );
 router.get('/:id/accomodation', controller.indexAccomodation );
+router.delete('/:id/removeaccomodation', controller.removeaccomodation );
 router.post('/:id/contribution', controller.createContribution  );
 router.get('/:id/contribution', controller.indexContribution  );
 router.put('/:id', controller.update);
+router.put('/:slug/updateProfilepic', controller.updateProfilepic);
 router.patch('/:id', controller.update);
 router.delete('/:id',  controller.destroy);
 router.get('/search/:term', controller.search);
 router.post('/:id/updatePdtcnt', controller.updatePdtcnt);
+router.post('/:id/updateRegistryPdt', controller.updateRegistryPdt);
+//updateRegistryPdt
 
 module.exports = router;

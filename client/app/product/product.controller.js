@@ -1,24 +1,21 @@
 'use strict';
 
 angular.module('bhcmartApp')
-.controller('ProductCtrl', ['$scope', '$stateParams', '$state', 'Product', 'Registry','$rootScope','ngCart','Auth','toaster','$mdDialog','$timeout',
-  function($scope, $stateParams, $state, Product, Registry, $rootScope, ngCart,Auth, toaster,$mdDialog, $timeout) {
+.controller('ProductCtrl', ['$scope', '$stateParams', '$state', 'Product', 'Registry','$rootScope','Auth','AlertService','$mdDialog','$timeout','Cart', '$uibModal','toaster',
+  function($scope, $stateParams, $state, Product, Registry, $rootScope,Auth, AlertService,$mdDialog, $timeout,Cart, $uibModal,toaster) {
 
       //Get product and fetch related products based on category
+      var feature = []
       $scope.product = Product.get({ id: $stateParams.id }, function(p) {
-        if(p.color){
-          $scope.colors = p.color;
-          $scope.product.color = $scope.colors[0];
-        }else{
-          $scope.product.color = '';
-        }
-        if(p.size){
-          $scope.sizes = p.size;
-          $scope.product.size =  $scope.sizes[0];
-        }else{
-          $scope.product.size = '';
-        }
         console.log(p)
+        for(var i =0 ; i < p.features.length; i++){
+          console.log(p.features[i])
+          console.log(p.features[i].selectable)
+          if(p.features[i].selectable){
+            feature.push({'feature' : p.features[i].key, 'value' : p.features[i].val[0]})
+          }
+        }
+
         $scope.qty = 1;
         $scope.product.averageRating = getAverageRating(p);
         var q = {};
@@ -37,9 +34,15 @@ angular.module('bhcmartApp')
             });*/
           });
 
+      console.log(Auth.getCurrentUser());
+
       if(Auth.isLoggedIn()){
         var q = {where:{username:Auth.getCurrentUser().email}};
         $scope.registryOptions =  Registry.query(q);
+      }
+      
+      $scope.selectedfeature =function(key, value){
+        feature.push({'feature' : key, 'value' : value})
       }
 
       $scope.registry = {}
@@ -51,7 +54,7 @@ angular.module('bhcmartApp')
           , templateUrl: 'app/account/login/login.html'
           , parent: angular.element(document.body)
           , targetEvent: ev
-          
+
           , clickOutsideToClose: true
           , locals: {
             dataToPass: data
@@ -68,11 +71,14 @@ angular.module('bhcmartApp')
       $scope.addtoRegistry = function(ev,product, qty,registryId){
 
         $scope.message = '';
-
+        product.imageUrl = product.coverimage;
+        console.log(product.imageUrl);
 
         if(!Auth.isLoggedIn()){
          $scope.data = {'event' : 'login'};
          $scope.login(ev, $scope.data);
+         var q = {where:{username:Auth.getCurrentUser().email}};
+         $scope.registryOptions =  Registry.query(q);
        }else{
         if($scope.registryOptions && $scope.registryOptions.length <1 || !$scope.registryOptions){
           /*$scope.message = "No Registry found. Please create Registry";*/
@@ -120,8 +126,7 @@ angular.module('bhcmartApp')
    $scope.products.linkId = product.linkId;
    $scope.products.affiliate = product.affiliate;
    $scope.products.multiple = multiple;
-   $scope.products.color = product.color;
-   $scope.products.size = product.size;
+   $scope.products.feature = feature;
    if(multiple){
     $scope.products.price = $scope.products.price * qty;
   }
@@ -135,9 +140,6 @@ angular.module('bhcmartApp')
     if(data.length==0){
       Registry.registryProduct({ id: registryId }, $scope.products, function(resp) {
         toaster.pop('success', "Product has been added successfully");
-        $timeout(function() {
-          window.history.back();
-        }, 1000);
       },function(err) {
         console.log(err)
       });
@@ -149,13 +151,31 @@ angular.module('bhcmartApp')
 
 }
 
-$scope.addtocart = function(product, qty){
-  console.log(product);
-  var gst = parseInt(product.sgst) + parseInt(product.cgst);
-  var gstamount = (parseInt(gst)*parseInt(qty)*parseInt(product.price))/100
-  ngCart.addItem(product._id, product.title, product.price, qty, product,product.color,product.size,gstamount);
-  $state.go('cart');
+var items = {};
+$scope.addtocart = function(ev,product,qty){
+ items.quantity = qty;
+ items.features = feature;
+ items.products = product._id;
+ var gst = (parseInt(product.gst) * 0.01 * parseInt(product.price)) + parseInt(product.price);
+ items.subtotal = parseInt(qty) * gst;
 
+ if($scope.isLoggedIn()){
+  Cart.addTocart({id : Auth.getCurrentUser()._id},items,function(res){
+    console.log(res.status)
+    var modalInstance = $uibModal.open({
+      templateUrl : 'app/cart/cart.html',
+      controller: 'CartCtrl',
+      size :'lg'
+    })
+  }, function(err) {
+    console.log(err)
+    var title = "Sorry product cannot be added to Cart" 
+    AlertService.showAlert(err.data)
+  });
+}else{
+  $scope.data = {'state' : 'cart' , 'event' : 'login' , 'items' : items };
+  $scope.login(ev, $scope.data);
+}
 }
 
 

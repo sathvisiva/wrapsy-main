@@ -3,16 +3,7 @@
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
 var Schema = mongoose.Schema;
 var slugs = require('mongoose-url-slugs');
-
-
-var FiltersSchema = new Schema({
-  label: {
-    type: String
-  },
-  value: [{
-    type: String
-  }],
-});
+var Filter = require('../filter/filter.model');
 
 var CatalogSchema = new Schema({
   name: {
@@ -20,7 +11,8 @@ var CatalogSchema = new Schema({
     required: true
   },
   parent: {
-    type: String
+    type: Schema.Types.ObjectId,
+    ref: 'Catalog'
   },
   ancestors: [{
     type: Schema.Types.ObjectId,
@@ -35,9 +27,8 @@ var CatalogSchema = new Schema({
   },
   filters: [{
     type: Schema.Types.ObjectId,
-    ref: 'Filters'
+    ref: 'Filter'
   }],
-
 });
 
 CatalogSchema.methods = {
@@ -53,7 +44,5 @@ CatalogSchema.methods = {
 }
 
 CatalogSchema.plugin(slugs('name'));
-
-mongoose.model('Filters', FiltersSchema)
 
 module.exports = mongoose.model('Catalog', CatalogSchema);

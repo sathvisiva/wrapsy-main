@@ -2466,8 +2466,9 @@ body {
 
 .navbar-custom .navbar-nav > li > a {
     color: #ffffff;
-    font-weight: 300;
+    font-weight: 500;
     cursor: pointer !important;
+    font-size: 12px;
 }
 
 .navbar-custom .navbar-nav > li > a:hover,
@@ -3699,10 +3700,6 @@ multiselect .btn {
     background-color: #FFF;
 }
 
-multiselect .btn.has-error {
-    border: 1px solid #a94442 !important;
-    color: #db524b;
-}
 
 multiselect .dropdown-menu {
     max-height: 300px;

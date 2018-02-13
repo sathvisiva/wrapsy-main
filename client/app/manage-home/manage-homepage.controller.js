@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 angular.module('bhcmartApp')
 .controller('ManageHomePageCtrl', ['$scope', 'Home', 'Modal','Catalog',
@@ -132,3 +132,4 @@ angular.module('bhcmartApp')
     }
   }
   ]);
+*/

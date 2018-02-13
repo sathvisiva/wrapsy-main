@@ -1,0 +1,83 @@
+  <div class="m-b-20 clearfix">
+  	<div class="page-title text-center">
+  		<h3 class="text-center"><strong>Add Vendor</strong></h3>
+  	</div>
+  </div>
+
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<form id="form1" name="form1" class="form-horizontal" ng-submit="save(form1)" novalidate>
+  			<div class="form-group">
+  				<label class="col-sm-2 control-label">Vendor Name <span class="asterisk">*</span>
+  				</label>
+  				<div class="col-sm-7">
+  					<input type="text" class="form-control" ng-model = "vendor.name" required name="name">
+
+  					<div class="msg-block" ng-if="form1.name.$touched" ng-messages="form1.name.$error" style="color:maroon; ">
+  						<div ng-message="required">The Name field is required</div>
+  					</div>
+  				</div>
+  			</div>
+  			<div class="form-group">
+  				<label class="col-sm-2 control-label">Vendor Email <span class="asterisk">*</span>
+  				</label>
+  				<div class="col-sm-7">
+  					<input type="email" class="form-control" name="mail" ng-model="vendor.mail" required>
+
+  					<div class="msg-block" ng-if="form1.mail.$touched" ng-messages="form1.mail.$error" style="color:maroon; ">
+  						<div ng-message="required">The Email field is required</div>
+  						<div ng-message="email">Not a valid email</div>
+  					</div>
+  				</div>
+  			</div>
+  			<div class="form-group">
+  				<label class="col-sm-2 control-label">Phone <span class="asterisk">*</span>
+  				</label>
+  				<div class="col-sm-7">
+  					<input type="text" class="form-control" name="phone" placeholder="9999999999" class="form-control" ng-model="vendor.phone" ng-maxlength="10" ng-minlength="10" ng-pattern="/^\d{10}$/" required>
+  					<div class="msg-block" ng-if="form1.phone.$touched" ng-messages="form1.phone.$error" style="color:maroon; ">
+  						<div ng-message="required">The Phone number field is required</div>
+  						<div ng-message="minlength">Phone number must be 10 digits</div>
+  						<div ng-message="maxlength">Phone number must be 10 digits</div>
+  						<div ng-message="pattern">Phone number is not valid</div>
+  					</div> 
+  				</div>
+  			</div>
+  			<div class="form-group">
+  				<label class="col-sm-2 control-label">GSTIN <span class="asterisk">*</span>
+  				</label>
+  				<div class="col-sm-7">
+  					<input type="text" class="form-control" ng-model = "vendor.gstin"  name="gstin">
+  				</div>
+  			</div>
+  			<div class="form-group">
+  				<label class="col-sm-2 control-label">Commision <span class="asterisk">*</span>
+  				</label>
+  				<div class="col-sm-7">
+  					<input type="number" class="form-control" name="commision"   ng-model="vendor.commision" required>
+
+  					<div class="msg-block" ng-if="form1.commision.$touched && form1.address.$error" ng-messages="form1.commision.$error" style="color:maroon; ">
+  						<div ng-message="required">The commision field is required</div>                  
+  					</div>
+  				</div>
+  			</div>
+  			<div class="form-group">
+  				<label class="col-sm-2 control-label">Address <span class="asterisk">*</span>
+  				</label>
+  				<div class="col-sm-7">
+  					<textarea rows="6" class="form-control" name="address"   ng-model="vendor.address" required></textarea>
+  					<div class="msg-block" ng-if="form1.address.$touched && form1.address.$error" ng-messages="form1.address.$error" style="color:maroon; ">
+  						<div ng-message="required">The Address field is required</div>                  
+  					</div>
+  				</div>
+  			</div>
+
+  			<div class="col-sm-12">
+  				<div class="text-center">
+  					<button class="btn btn-primary" ng-disabled="form1.$invalid" type="submit"> Save Vendor</button>
+  				</div>
+  			</div>
+  		</form>
+  	</div>
+  </div>

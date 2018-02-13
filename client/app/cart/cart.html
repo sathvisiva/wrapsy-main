@@ -1,103 +1,100 @@
-<navbar></navbar>
+  <!-- Modal Content: begins -->
+  <div class="modal-content">
 
-
-<section class="cart-main-area">
-    <div class="container">
-        <div class="category-title-header">
-            <div class="title-center">
-                <div class="title"><h1>Shopping Cart</h1></div>
-                <div class="separator-title"><div class="divider-line"></div></div>
-            </div>
-            <div class="clearer"></div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 cart-details">
-               <!--  <div class="s-title">
-                    <h1>My Cart({{ ngCart.getCart().items.length }})</h1>
-                </div> -->
-                <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
-                    Your cart is empty
-                </div>
-
-                
-                <div class="cart-table table-responsive" ng-show="ngCart.getTotalItems() > 0">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="p-image">Image</th>
-                                <th class="p-name">Product Name</th>
-                                <th class="p-amount">Unit Price</th>
-                                <th class="p-amount">GST</th>
-                                <th class="p-amount">subtotal</th>
-                                <th class="p-times">Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="item in ngCart.getCart().items track by $index">
-                                <td class="p-image">
-                                    <a ui-sref="product({id: item.getData().slug})"><img alt="" width="100" src="{{item.getData().imageUrl}}"></a>
-                                    <div>
-
-                                        <span class="fa fa-minus-circle" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
-                                        <span class="fa fa-plus-circle" ng-click="item.setQuantity(1, true)"></span>
-                                    </div>
-                                </td>
-                                <td class="p-name"><a ui-sref="product({id: item.getData().slug})">{{ item.getName() }}</a></td>
-                               <!--  <td class="p-amount"><span class="amount">₹{{ item.getPrice() | number:2}}</span></td>
-                                <td class="p-quantity"><span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}" ng-click="item.setQuantity(-1, true)"></span>&nbsp;&nbsp; {{ item.getQuantity() | number }}&nbsp;&nbsp;
-                                    <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span>
-                                </td> -->
-                                <td class="p-amount"><span class="amount">₹{{ item.getPrice() | number:2}}</span></td>
-                                
-                                <!--  <td class="p-total">₹{{ ((item.getData().cgst - 0)* (item.getQuantity() -0) *(item.getTotal() -0 ))/100}}</td> -->
-                                <td class="p-total">₹{{item.getGst()}}</td>
-                                <td class="p-total">₹{{ item.getTotal() | number:2}}</td>
-
-                                <td class="p-action"><a href="#" ng-click="removeProduct($event,item.getName(), item)"><i class="fa fa-trash"></i></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="all-cart-buttons">
-                        <a href="#" ng-click="addVoucher($event)">Clear Cart </a> 
-                        <div class="float-right">
-                         <a ui-sref="main">Continue Shopping</a>
-                     </div>
-                 </div> 
-             </div>
-         </div>
-
-
-         <div class="col-md-4" ng-show="ngCart.getTotalItems() > 0">
-            <div class="amount-totals">
-                <p class="title text-center"><span>Price Details</span></p>
-                <md-divider></md-divider>
-                <p class="total">Subtotal: <span>₹{{ ngCart.getSubTotal() | number:2}}</span></p>
-                <p class="total">Total Tax: <span>₹{{ ngCart.getTotalTax() | number:2}}</span></p>
-                <p class="total">Delivery Charges: <span>₹{{ ngCart.getShipping() | number:2}}</span></p>
-                <md-divider></md-divider>
-                <p class="total">Grandtotal: <span>₹{{ ngCart.totalCost() | number:2}}</span></p>
-                <button ng-click="checkout($event)"  class="btn btn-primary btn-md pull-right">PROCEED TO CHECKOUT</button> 
-
-            </div>
-        </div>
-
-
-
-       <!--  <div class="col-md-4 col-md-offset-8">
-
-            <div class="amount-totals">
-                <p class="title text-center"><span>Price Details</span></p>
-                <md-divider></md-divider>
-                <p class="total">Subtotal: <span>₹{{ ngCart.getSubTotal() | number:2}}</span></p>
-                <p class="total">Delivery Charges: <span>₹{{ ngCart.getShipping() | number:2}}</span></p>
-                <md-divider></md-divider>
-                <p class="total">Grandtotal: <span>₹{{ ngCart.totalCost() | number:2}}</span></p>
-                <button ng-click="checkout($event)"  class="btn btn-primary btn-md pull-right">PROCEED TO CHECKOUT</button> 
-
-            </div>
-        </div> -->
+    <!-- Modal Header -->
+    <div class="modal-header no-borders">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" ng-click="cancel()">&times;</span></button>
+      <h4 class="modal-title" id="gridSystemModalLabel"></h4>
     </div>
-</div>
-</section>
-<!--End of Cart Main Area-->
-<footer></footer>
+
+    <!-- Modal Body -->
+    <div class="modal-body">
+
+      <div class="cart-header clearfix" >
+        <h3 class="pull-left">Your Cart</h3>
+        <button class="btn btn-primary pull-right" ng-click="continueShop()">Continue Shopping</button>
+      </div>
+
+
+      <div class="row cart-items-header text-center" ng-if = "items.length == 0">
+        <h3 class="text-center">Your Bag is Empty</h3>
+        <button class="btn btn-primary text-center" ng-click="continueShop()">Continue Shopping</button>
+      </div>
+
+      <div class="row cart-items-header" ng-if = "items.length > 0" >
+        <div class="col-sm-5">Item</div>
+        <div class="col-sm-2">Unit Price</div>
+        <div class="col-sm-2 text-center">Quantity</div>
+        <div class="col-sm-1">GST</div>
+        <div class="col-sm-2">Subtotal</div>
+      </div>
+      <div class="cart-item" ng-repeat="item in items track by $index" ng-if = "items.length > 0">
+        <div class="row">
+          <div class="col-xs-3 col-sm-2">
+            <a><img class="img-responsive" ng-src="{{item.products.coverimage}}" ></a>
+          </div>
+
+          <div class="col-xs-8 col-xs-no-gutter-left col-sm-3">
+            <div class="shop-entity-details">
+              <a class="entity-name" >{{item.products.title}}</a>
+              <div class="cart-item-attributes">
+                <div class="value-label" ><strong>Availability:</strong> {{item.products.stock}}</div>
+                <div class="value-label" ng-repeat = "f in item.features"><strong>{{f.feature}}:</strong> {{f.value}}</div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="hidden-xs col-sm-2 shop-entity-details">
+            <div class="price">
+              ₹ {{item.products.price}}
+            </div>
+          </div>
+          <div class="clearfix visible-xs-block"></div>
+          <div class="col-xs-6 col-sm-2 cart-item-quantity text-center">
+            <div class="form-group-inline">
+              <label class="control-label visible-xs-inline-block">Quantity:</label>
+              <div class="row">
+                <span class="fa fa-plus" ng-if="item.quantity < item.products.stock" ng-click = "changeQuantity(item.quantity+1 ,item.products._id , item.products.price , item.products.gst)"></span>
+                <input class="input-narrow ng-pristine ng-valid ng-valid-min ng-valid-max " ng-valid-required ng-touched" type="number" ng-disabled = true  ng-model= "item.quantity" required="" min="1" max="100" step="1"  style="width: 30px!important;">
+                <span class="fa fa-minus" ng-if="item.quantity > 1" ng-click = "changeQuantity(item.quantity-1 , item.products._id, item.products.price , item.products.gst)"></span>
+                <br>
+                <a role="button" class="small text-secondary cursorpointer" ng-click="removeItem(item.products._id , item.quantity)">Remove</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-1 cart-item-subtotal">
+            <strong class="price">{{item.products.gst}} %</strong>
+          </div>
+          <div class="col-xs-6 col-sm-2 cart-item-subtotal">
+            <strong class="price">₹ {{item.subtotal}}</strong>
+          </div>
+
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row" ng-if = "items.length > 0">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+          <div class="pull-right">
+           <span>Subtotal :</span> <strong class="price">₹ {{subtotal}}</strong>
+         </div>
+       </div>
+     </div>
+
+   <!--    <div class="cart-totals" ng-if = "items.length > 0" >
+        <label>Subtotal:</label> <strong class="price">₹ {{subtotal}}</strong><br>
+
+      </div> -->
+      <div class="cart-footer clearfix" ng-if = "items.length > 0">
+        <button class="btn btn-primary pull-left" ng-click="clearCart()">Clear Cart</button>
+        <button class="btn btn-primary pull-right" ng-click="checkout()">Checkout Now</button><!-- end ngIf: zoCart.nonEmpty -->
+      </div>
+      <div>
+
+      </div>
+      <!-- Modal Content: ends -->
+

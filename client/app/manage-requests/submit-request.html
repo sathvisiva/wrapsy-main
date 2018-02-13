@@ -203,9 +203,9 @@
                                         <tbody>
                                             <tr ng-repeat="item in items track by $index">
                                                 <td class="p-name">{{item.description}}</td>
-                                                <td class="p-amount text-center"><span class="amount">₹{{item.price | number:2}}</span></td>
+                                                <td class="p-amount text-center"><span class="amount">₦{{item.price | number:2}}</span></td>
                                                 <td class="p-amount text-center">{{item.quantity}}</td>
-                                                <td class="p-total">₹{{item.total | number:2}}</td> 
+                                                <td class="p-total">₦{{item.total | number:2}}</td> 
                                                 <td>
                                                     <div>
                                                         <button class="btn btn-sm btn-danger" ng-click="removeFromList($index)"><span class="fa fa-close fa-2x"></span>
@@ -237,16 +237,16 @@
                                         <tfoot ng-hide="items.length == 0">
                                             <tr>
                                                 <td colspan="3" class="text-right">Subtotal</td>
-                                                <td class="p-amount">₹{{listSubTotal | number:2}}</td>
+                                                <td class="p-amount">₦{{listSubTotal | number:2}}</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="text-right">Delivery/Service Charge(10%)</td>
-                                                <td class="p-amount">₹{{ listCharge | number:2}}
+                                                <td class="p-amount">₦{{ listCharge | number:2}}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td colspan="3" class="text-right">Grand Total</td>
-                                                <td class="p-total">₹{{listTotal | number:2}}</td>
+                                                <td class="p-total">₦{{listTotal | number:2}}</td>
                                             </tr>
                                         </tfoot>
                                     </table>

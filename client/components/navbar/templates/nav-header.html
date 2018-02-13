@@ -46,10 +46,10 @@
        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{category.name }}</a>
        <ul class="dropdown-menu multi-level" >
          <li ng-class="{'dropdown-submenu': subtree.subtree.length > 0}" ng-repeat="subtree in category.subtree | orderBy:'name'">
-           <a ng-class="{'dropdown-toggle': subtree.subtree.length > 0}" data-toggle="dropdown" ui-sref="products({slug: subtree.slug, category : subtree.name })">{{subtree.name}}</a>
+           <a ng-class="{'dropdown-toggle': subtree.subtree.length > 0}" data-toggle="dropdown" ui-sref="products({slug: subtree.slug, category : subtree.name })"><span class="cursorpointer">{{subtree.name}}</span></a>
            <ul class="dropdown-menu">
             <li ng-repeat="secondsubtree in subtree.subtree | orderBy:'name'">
-              <a ui-sref="products({slug: secondsubtree.slug, category : secondsubtree.name })">{{secondsubtree.name}}</a></li>
+              <a ui-sref="products({slug: secondsubtree.slug, category : secondsubtree.name })"><span class="cursorpointer">{{secondsubtree.name}}</span></a></li>
 
             </ul>
           </li> 

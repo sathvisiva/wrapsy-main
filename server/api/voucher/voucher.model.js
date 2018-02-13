@@ -1,8 +1,9 @@
 'use strict';
 
 var mongoose = require('bluebird').promisifyAll(require('mongoose'));
+var Schema = mongoose.Schema
 
-var VoucherSchema = new mongoose.Schema({
+var VoucherSchema = new Schema({
 	amount : Number,
 	email: {
 		type: String
@@ -18,11 +19,20 @@ var VoucherSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
+
+	applied : {
+		type: Boolean,
+		default: false
+	},
+	
 	paid : {
 		type: Boolean,
 		default: false
 	},
-	paymentId : String
+	txn : {
+		type: Schema.Types.ObjectId,
+		ref: 'PaymentSchema'
+	},
 });
 
 export default mongoose.model('Voucher', VoucherSchema);

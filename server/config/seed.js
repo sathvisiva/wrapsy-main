@@ -5,23 +5,24 @@
 
 'use strict';
 import _ from 'lodash';
+
 var User = require('../api/user/user.model');
 var Product = require('../api/product/product.model').product;
-
+var Variant = require('../api/product/product.model').variant;
 var Review = require('../api/product/product.model').review;
 var Image = require('../api/product/product.model').image;
 var Catalog = require('../api/catalog/catalog.model');
-var Registry = require('../api/registry/registry.model').registry;
 import mongoose from 'mongoose';
 
 
 
-//var users = require('../data/users.json');
+var users = require('../data/users.json');
 var catalogs = require('../data/catalogs.json');
+var variants = require('../data/variants.json');
 var images = require('../data/images.json');
 var reviews = require('../data/reviews.json');
 var products = require('../data/products.json');
-var registries = require('../data/registry.json');
+
 
 
 /*var e = []
@@ -49,7 +50,7 @@ console.log(d)*/
   })
   .then(() => {
     console.log('finished populating users');
-  });*/
+  });
 
 Catalog.find({}).removeAsync()
   .then(() => {
@@ -58,6 +59,15 @@ Catalog.find({}).removeAsync()
     })
   }).then(() => {
     console.log('finished populating catalogs');
+  });*/
+
+Variant.find({}).removeAsync()
+  .then(() => {
+    _.each(variants, function(variant) {
+      Variant.create(variant);
+    })
+  }).then(() => {
+    console.log('finished populating variants ');
   });
 
 Image.find({}).removeAsync()
@@ -78,19 +88,11 @@ Review.find({}).removeAsync()
     console.log('finished populating reviews');
   });
 
-Product.find({}).removeAsync()
+/*Product.find({}).removeAsync()
   .then(() => {
     _.each(products, function(product) {
       Product.create(product);
     })
   }).then(() => {
     console.log('finished populating products');
-  });
-Registry.find({}).removeAsync()
-  .then(() => {
-    _.each(registries, function(registry) {
-      Registry.create(registry);
-    })
-  }).then(() => {
-    console.log('finished populating registries');
-  });
+  });*/

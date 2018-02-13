@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slickCarousel', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper', 'long2know']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, $uiViewScrollProvider) {
+angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp.constants', 'ngCart', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'validation.match', 'ui.bootstrap', 'ngFileUpload', 'toaster', 'socialLinks', 'slick', 'ngMaterial', 'ngMessages', 'rzModule', 'uiCropper', 'long2know', 'checklist-model']).config(function ($urlRouterProvider, $locationProvider, $mdThemingProvider, $mdIconProvider, $uiViewScrollProvider) {
   $urlRouterProvider.otherwise('/');
   $locationProvider.html5Mode(true);
   $uiViewScrollProvider.useAnchorScroll();
 
   $mdThemingProvider.theme('default').primaryPalette('cyan').accentPalette('pink');
-}).run(function ($rootScope, $state, ngCart, $location) {
+}).run(function ($rootScope, $state, ngCart, $location, $transitions) {
   $.scrollUp({
     scrollName: 'scrollUp',
     scrollText: '<i class="fa fa-angle-up"></i>',
@@ -20,11 +20,13 @@ angular.module('bhcmartApp', ['bhcmartApp.auth', 'bhcmartApp.admin', 'bhcmartApp
   $rootScope.$state = $state;
   $rootScope._ = _;
   $rootScope.location = $location;
+  $transitions.onSuccess({}, function () {
+
+    console.log("statechange success");
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  });
   $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-    if ($stateParams.scrollTo) {
-      $location.hash($stateParams.scrollTo);
-      $anchorScroll();
-    }
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   });
 }).directive("randomBackgroundcolor", function () {
   return {

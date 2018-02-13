@@ -81,15 +81,15 @@
                                         <tbody>
                                             <tr ng-repeat="item in request.items">
                                                 <td>{{item.description}}</td>
-                                                <td class="text-left">₹{{item.price | number:2}}</td>
+                                                <td class="text-left">₦{{item.price | number:2}}</td>
                                                 <td class="text-center">{{item.quantity}}</td>
-                                                <td class="text-right">₹{{item.total | number:2}}</td>
+                                                <td class="text-right">₦{{item.total | number:2}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="thick-line"></td>
                                                 <td class="thick-line"></td>
                                                 <td class="thick-line text-left"><strong>Subtotal</strong></td>
-                                                <td class="thick-line text-right">₹{{request.listSubTotal | number:2}}</td>
+                                                <td class="thick-line text-right">₦{{request.listSubTotal | number:2}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="no-line"></td>
@@ -101,7 +101,7 @@
                                                 <td class="no-line"></td>
                                                 <td class="no-line"></td>
                                                 <td class="no-line text-left"><strong>Total</strong></td>
-                                                <td class="no-line text-right">₹{{request.listTotal | number:2}}</td>
+                                                <td class="no-line text-right">₦{{request.listTotal | number:2}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

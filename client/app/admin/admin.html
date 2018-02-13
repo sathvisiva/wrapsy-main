@@ -1,52 +1,57 @@
-<navbar></navbar>
-<div class="breadcrumb">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7 col-md-offset-3">
-                <ul class="breadcrumb">
-                    <li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-                    <li class="active"></li>
-                </ul>
-            </div>
+<section class="adminpage">
+  <div layout="row" layout-fill ng-cloak>
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" role="sidenav" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+      <md-toolbar class=" md-hue-2" layout-align="end end">
+        <div class="md-toolbar-tools" layout layout-padding>
+          <md-icon class=" inherit-color md-cyan-theme md-font material-icons fa fa-user md-primary md-icon-button" md-font-icon="fa fa-user-o" aria-hidden="true"></md-icon>
+          <div layout="column" layout-padding>
+            <span class="md-body-2">{{data.user.name}}</span>
+            
+          </div>
+          <span flex></span>
         </div>
+      </md-toolbar>
+
+      <md-list >
+       <md-list-item >
+        <a class="md-subheader md-primary" ui-sref="admin.dashboard">Dashboard</a>
+        <span flex></span>            
+      </md-list-item>
+      <div ng-repeat="section in data.sidenav.sections">       
+        <md-list-item ng-click="section.expand = !section.expand">
+          <a class="md-subheader md-primary">{{section.name}}</a>
+          <span flex></span>
+          <!-- <md-icon class="md-primary md-icon-button">{{section.expand ? 'arrow_drop_up' : 'arrow_drop_down'}}</md-icon> -->
+          <md-icon class=" inherit-color md-cyan-theme md-font material-icons fa fa-chevron-up md-primary md-icon-button" md-font-icon="fa-chevron-up" aria-hidden="true" ng-if="section.expandable && section.expand"></md-icon> 
+          <md-icon class=" inherit-color md-cyan-theme md-font material-icons fa fa-chevron-down md-primary md-icon-button" md-font-icon="fa-chevron-up" aria-hidden="true" ng-if="section.expandable && !section.expand"></md-icon> 
+        </md-list-item>
+        <md-list-item ng-show="section.expand" ui-sref="{{action.state}}" ng-click ="title = section.name" ng-repeat="action in section.actions">
+
+          <a class="md-body-2 cursorpointer" >{{action.name}} </a>
+          <span flex></span>
+
+        </md-list-item>
+      </div>
+    </md-list>
+  </md-content>
+</md-sidenav>
+<section layout="column" role="main" flex>
+  <md-toolbar role="toolbar">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu">
+        <md-icon>menu</md-icon>
+      </md-button>
+      <h4 class="md-title">Admin Panel</h4>
+      &nbsp;&nbsp;
+&nbsp; &nbsp; &nbsp;    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a ui-sref="home"><h4 class="md-title"><span class="cursorpointer">Wrapsy Home</span></h4></a>
+      <span flex></span>
     </div>
-</div>
-<section class="product-grid" style="min-height: 200px">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3">
-                <sidebar-account></sidebar-account>
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                <div class="list-group user-list">
-                    <div class="input-group primary col-md-6" inputgroup>
-                        <span class="input-group-addon">
-                            <span class="arrow"></span>
-                        <i class="fa fa-search"></i>
-                        </span>
-                        <input type="text" class="form-control search-page-input" placeholder="Search users" ng-model="search">
-                    </div>
-                </div>
-                <ul class="list-group user-list">
-                    <li class="list-group-item" ng-repeat="user in filtered = admin.users | filter: search | startSearchFrom:(admin.currentPage-1) * admin.itemsPerPage | limitTo:admin.itemsPerPage">
-                        <div class="user-info">
-                            <strong>{{user.name}}</strong>
-                            <br>
-                            <span class="text-muted">{{user.email}}</span>
-                            <p class="text-muted">
-                                {{user.address}}
-                                <br ng-show="user.address"> {{user.state}}
-                                <br ng-show="user.state">
-                                <span class="text-muted">{{user.phone}}</span>
-                                <br ng-show="user.phone"> role: {{user.role}}
-                            </p>
-                        </div>
-                        <a ng-click="admin.delete(user.name, user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
-                    </li>
-                </ul>
-            </div>
-            <uib-pagination boundary-links="true" total-items="admin.totalItems" ng-model="admin.currentPage" class="pagination-sm pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
-        </div>
-    </div>
+  </md-toolbar>
+  <section id="content" role="content" layout="column" layout-padding md-scroll-y>
+
+
+    <div id="form-views" ui-view></div>        
+  </section>
 </section>
-<footer></footer>
+</div>
+</section>

@@ -11,6 +11,7 @@
 
  import _ from 'lodash';
  var Voucher = require('./voucher.model');
+ var Cart = require('../cart/cart.model');
  var cc = require('coupon-code');
 
  function isJson(str) {
@@ -71,6 +72,8 @@ function removeEntity(res) {
 
 // Gets a list of Vouchers
 export function index(req, res) {
+  console.log("inside index")
+  console.log(req.query.where)
   if(req.query){
     var q = isJson(req.query.where);
     Voucher.findAsync(q)
@@ -85,6 +88,7 @@ export function index(req, res) {
 
 // Gets a single Voucher from the DB
 export function show(req, res) {
+  console.log(req.params.id)
   Voucher.findByIdAsync(req.params.id)
   .then(handleEntityNotFound(res))
   .then(responseWithResult(res))
@@ -110,23 +114,32 @@ export function checkredeem(req,res){
 
 
 export function redeem(req, res) {
-  console.log(req.body);
+  
   var code = req.body.code;
+  console.log(req.body)
 
   Voucher.findOne({'code' : code},function(err,voucher){
 
     if(voucher){
+      console.log(voucher)
       var todayDate = new Date();
       var validDatae = new Date(voucher.validuntil)
       console.log(voucher.amount);
       if(voucher.redeemed){
         return res.json({'errorcode' : 0});
-      }else if((new Date().getTime() > new Date(voucher.validuntil).getTime())){
+      }
+      else if(voucher.applied){
+        return res.json({'errorcode' :4});
+      }
+      else if((new Date().getTime() > new Date(voucher.validuntil).getTime())){
         return res.json({'errorcode' : 1});
       }else if(parseInt(voucher.amount) > parseInt(req.body.amount)){
         return res.json({'errorcode' :2});
       }else{
-        Voucher.update({ 'code' : code }, { $set: { redeemed: true }}, function (err, resp) {
+
+        console.log("inside voucher update")
+        console.log(voucher)
+        Voucher.update({ 'code' : code }, { $set: { applied: true }}, function (err, resp) {
           if (err) {
             resp.err = err;
             resp.data = null;
@@ -134,7 +147,15 @@ export function redeem(req, res) {
 
             return res.json(responseObject);
           }
-          console.log(voucher);
+          console.log(voucher._id);
+          console.log(req.body.user)
+          Cart.findById(req.body.user , function(err ,cart){
+            console.log("inside cart insert")
+            cart.vouchers = voucher._id ;
+            cart.saveAsync()
+
+
+          })
           return res.json(voucher);
         });
       }

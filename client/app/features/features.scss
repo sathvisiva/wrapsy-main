@@ -1,0 +1,10 @@
+.sortorder:after {
+content: '\25b2';   
+}
+.sortorder.reverse:after {
+content: '\25bc';  
+}
+
+.input-xlarge>div>buttion{
+	width : 200px !important;
+}

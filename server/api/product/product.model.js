@@ -18,23 +18,21 @@ var ImageSchema = new Schema({
   }
 });
 
-var FeatureSchema = new Schema({
-  key: {
+var VariantSchema = new Schema({
+  code: {
     type: String
   },
-  value: [{
-    type: String
-  }]
-
-});
-
-var FilterSchema = new Schema({
-  label: {
-    type: String
+  price: {
+    type: Number,
+    min: 0
   },
-  value: [{
+  stock: {
+    type: Number,
+    min: 0
+  },
+  description: {
     type: String
-  }],
+  }
 });
 
 var ReviewSchema = new Schema({
@@ -60,22 +58,37 @@ var ReviewSchema = new Schema({
   }
 });
 
-
 var ProductSchema = new Schema({
   title: {
     type: String,
     required: true,
     trim: true
   },
-  code: {
-    type: String
+  affiliate : {
+    type : Boolean,
+    default : false
   },
-  vendor: {
+  pageurl : {
+    type : String
+  },
+  asin : {
+    type : String
+  },
+  code: {
     type: String
   },
   price: {
     type: Number,
     required: true,
+    min: 0
+  },
+  gst : {
+    type : Number,
+    default : 0
+  },
+  coverimage : String,
+  discount : {
+    type: Number,
     min: 0
   },
   stock: {
@@ -86,75 +99,48 @@ var ProductSchema = new Schema({
     type: Boolean,
     default: false
   },
-  imageUrl: {
-    type: String
-  },
-  description: String,
   shortdescription : String,
+  description: String,
+  features : [{
+    key : String,
+    val : [],
+    selectable : {
+      type: Boolean,
+      default: false
+    }
+  }],
+  vendor : {
+    type: Schema.Types.ObjectId,
+    ref: 'Vendor',
+    index: true
+  },
   images: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Image',
-    index: true
-  }],
-  features: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Feature',
-    index: true
-  }],
-  features: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Feature',
-    index: true
+    url : String,
+    cover : {
+      type: Boolean,
+      default: false
+    }
   }],
   reviews: [{
     type: Schema.Types.ObjectId,
     ref: 'Review',
     index: true
   }],
-  categories: [{
+  categories: {
     type: Schema.Types.ObjectId,
     ref: 'Catalog',
     index: true
-  }],
-  prodcode: {
-    type: String
-  },
-  linkId : {
-  	type: String
-  },
-  affiliate : {
-    type: Boolean,
-    default: false
-  },
-  cgst: {
-    type: Number,
-    min: 0
-  },
-  sgst: {
-    type: Number,
-    default: 1
-  },
-  dateadded: {
-    type: Date,
-    default: Date.now
   }
-
 }).index({
   'title': 'text',
   'description': 'text'
 });
 
-
-
-
 ProductSchema.plugin(slugs('title'));
-
 
 module.exports = {
   product: mongoose.model('Product', ProductSchema),
-  feature: mongoose.model('Feature', FeatureSchema),
-  filter: mongoose.model('Filter', FilterSchema),
+  variant: mongoose.model('Variant', VariantSchema),
   image: mongoose.model('Image', ImageSchema),
   review: mongoose.model('Review', ReviewSchema)
-  //FilterSchema
 }

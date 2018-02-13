@@ -8,13 +8,11 @@ var router = express.Router();
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.get('/:id/myorders', controller.myOrders);
+router.put('/updateStatus', controller.updateStatus)
 router.post('/', controller.create);
-router.get('/:id', controller.updateCancel);
-router.post('/:id/updateCancel', controller.updateCancel);
 router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
-router.post('/countorders', controller.countorders);
-router.post('/:id/updateVoucher', controller.updateVoucher);
+router.post('/orderCount', controller.count);
 
 module.exports = router;

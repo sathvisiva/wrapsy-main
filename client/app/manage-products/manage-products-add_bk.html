@@ -1,0 +1,260 @@
+<!--   <div class="m-b-20 clearfix">
+    <div class="page-title text-center">
+      <h3 class="text-center"><strong>Add Product</strong></h3>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <form id="form1" name="form1" class="form-horizontal" ng-submit="save(form1)" novalidate>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Title <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model = "product.title" required name="title">
+            
+            <div class="msg-block" ng-if="form1.title.$touched" ng-messages="form1.title.$error" style="color:maroon; ">
+              <div ng-message="required">The Title field is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Description <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-8">
+            <textarea rows="6" class="form-control" name="address"   ng-model="product.description" required></textarea>
+            <div class="msg-block" ng-if="form1.description.$touched && form1.description.$error" ng-messages="form1.description.$error" style="color:maroon; ">
+              <div ng-message="required">The description field is required</div>                  
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Category <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-3">
+            <select class="form-control" name="categories" ng-model="product.vendor">
+              <option ng-repeat="vendor in vendors" value="{{vendor._id}}">{{vendor.name}}</option>
+            </select>
+            <div class="msg-block" ng-if="form1.categories.$touched && form1.categories.$error" ng-messages="form1.categories.$error" style="color:maroon; ">
+              <div ng-message="required">The Category field is required</div>                  
+            </div>
+          </div>
+          <label class="col-sm-2 control-label">Vendor <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-3">
+            <select class="form-control" name="categories" ng-model="product.categories">
+              <option ng-repeat="cat in categories" value="{{cat._id}}">{{cat.name}}</option>
+            </select>
+            <div class="msg-block" ng-if="form1.categories.$touched && form1.categories.$error" ng-messages="form1.categories.$error" style="color:maroon; ">
+              <div ng-message="required">The Category field is required</div>                  
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Price <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" ng-model = "product.price" required name="price">
+            <div class="msg-block" ng-if="form1.price.$touched && form1.price.$error" ng-messages="form1.price.$error" style="color:maroon; ">
+              <div ng-message="required">The price field is required</div>                  
+            </div>
+          </div>
+          <label class="col-sm-2 control-label">Discount <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" ng-model = "product.discount" required name="discount">
+            <div class="msg-block" ng-if="form1.discount.$touched && form1.discount.$error" ng-messages="form1.discount.$error" style="color:maroon; ">
+              <div ng-message="required">The Discount field is required</div>                  
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+         <label class="col-sm-2 control-label">Stock <span class="asterisk">*</span>
+         </label>
+         <div class="col-sm-2">
+          <input type="number" class="form-control" ng-model = "product.stock" required name="stock">
+          <div class="msg-block" ng-if="form1.stock.$touched && form1.stock.$error" ng-messages="form1.stock.$error" style="color:maroon; ">
+            <div ng-message="required">The Stock field is required</div>                  
+          </div>
+        </div>
+        <label class="col-sm-2 control-label">GST <span class="asterisk">*</span>
+        </label>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" ng-model = "product.gst" required name="gst">
+          <div class="msg-block" ng-if="form1.gst.$touched && form1.gst.$error" ng-messages="form1.gst.$error" style="color:maroon; ">
+            <div ng-message="required">The GST field is required</div>                  
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" style="color: black"><strong>Add features </strong>
+        </label>
+      </div>
+
+      <div class="form-group">
+
+        <div class="col-sm-2 col-sm-offset-2">
+         <select ng-model="feature.key" class="form-control" ng-change = "SelectedRow(feature.key)" >
+          <option ng-repeat="x in filterfeatures" value="{{x.key}}">{{x.key}}</option>
+        </select>
+
+      </div>
+      <div class="col-sm-2">
+        <multiselect class="input-xlarge multiselect" ng-model="feature.value" options="x for x in options" select-limit="5"
+        header="Select Values" selected-header="options selected" multiple="true" required
+        enable-filter="true" filter-placeholder="Filter stuff..">
+      </multiselect>
+
+    </div>
+    <div class="col-sm-2">
+      <md-checkbox ng-model="feature.selectable" aria-label="Checkbox 1">
+        Selectable
+      </md-checkbox>
+    </div>
+    <div class="col-sm-1">
+     <a class="btn btn-primary" ng-click="addfeature(feature)"> + </a>
+   </div>
+ </div>
+
+ <div class="form-group" ng-repeat="x in product.mainfeatures">
+  <span class="col-sm-4 control-label">{{x.key}} 
+  </span>
+  <div>
+    <span class="col-sm-4 control-label">{{x.value.join(", ")}}</span>
+    <span class="col-sm-2 control-label">{{x.selectable}}</span>
+    
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-sm-2 control-label">Image <span class="asterisk">*</span>
+  </label>
+  <div class="col-sm-7">
+   <div class="controls">
+    <input type="file" ng-hide="imageUrl" ngf-select="upload($file, $invalidFiles)" ng-model="imageUrl" name="imageUrl" accept="image/*" ngf-max-size="1MB" ngf-resize="{width: 300, height: 175, quality: .8, type: 'image/jpeg', centerCrop: true, restoreExif: false}" ngf-model-invalid="errorFile" />
+    <i ng-show="form.imageUrl.$error.required">*required</i>
+    <i ng-show="form.imageUrl.$error.maxSize">File too large  {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+    <img ng-show="form.imageUrl.$valid" ngf-thumbnail="imageUrl" class="thumb">
+    <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+    <div ng-show="imageUrl" class="remove-btn">
+      <button class="btn btn-danger btn-xs" ng-click="imageUrl = null"> <span class="glyphicon glyphicon-trash"></span> Remove</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="col-sm-12">
+  <div class="text-center">
+    <button class="btn btn-primary" ng-disabled="form1.$invalid" type="submit"> Save Vendor</button>
+  </div>
+</div>
+</form>
+</div>
+</div> -->
+
+<md-tabs md-dynamic-height="" md-border-bottom="">
+  <md-tab label="General">
+    <md-content class="md-padding">
+      <form id="form1" name="form1" class="form-horizontal" ng-submit="save(form1)" novalidate>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Title <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" ng-model = "product.title" required name="title">
+            
+            <div class="msg-block" ng-if="form1.title.$touched" ng-messages="form1.title.$error" style="color:maroon; ">
+              <div ng-message="required">The Title field is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Description <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-8">
+            <textarea rows="6" class="form-control" name="address"   ng-model="product.description" required></textarea>
+            <div class="msg-block" ng-if="form1.description.$touched && form1.description.$error" ng-messages="form1.description.$error" style="color:maroon; ">
+              <div ng-message="required">The description field is required</div>                  
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Category <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-3">
+            <select class="form-control" name="categories" ng-model="product.vendor">
+              <option ng-repeat="vendor in vendors" value="{{vendor._id}}">{{vendor.name}}</option>
+            </select>
+            <div class="msg-block" ng-if="form1.categories.$touched && form1.categories.$error" ng-messages="form1.categories.$error" style="color:maroon; ">
+              <div ng-message="required">The Category field is required</div>                  
+            </div>
+          </div>
+          <label class="col-sm-2 control-label">Vendor <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-3">
+            <select class="form-control" name="categories" ng-model="product.categories">
+              <option ng-repeat="cat in categories" value="{{cat._id}}">{{cat.name}}</option>
+            </select>
+            <div class="msg-block" ng-if="form1.categories.$touched && form1.categories.$error" ng-messages="form1.categories.$error" style="color:maroon; ">
+              <div ng-message="required">The Category field is required</div>                  
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Price <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" ng-model = "product.price" required name="price">
+            <div class="msg-block" ng-if="form1.price.$touched && form1.price.$error" ng-messages="form1.price.$error" style="color:maroon; ">
+              <div ng-message="required">The price field is required</div>                  
+            </div>
+          </div>
+          <label class="col-sm-2 control-label">Discount <span class="asterisk">*</span>
+          </label>
+          <div class="col-sm-2">
+            <input type="number" class="form-control" ng-model = "product.discount" required name="discount">
+            <div class="msg-block" ng-if="form1.discount.$touched && form1.discount.$error" ng-messages="form1.discount.$error" style="color:maroon; ">
+              <div ng-message="required">The Discount field is required</div>                  
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+         <label class="col-sm-2 control-label">Stock <span class="asterisk">*</span>
+         </label>
+         <div class="col-sm-2">
+          <input type="number" class="form-control" ng-model = "product.stock" required name="stock">
+          <div class="msg-block" ng-if="form1.stock.$touched && form1.stock.$error" ng-messages="form1.stock.$error" style="color:maroon; ">
+            <div ng-message="required">The Stock field is required</div>                  
+          </div>
+        </div>
+        <label class="col-sm-2 control-label">GST <span class="asterisk">*</span>
+        </label>
+        <div class="col-sm-2">
+          <input type="number" class="form-control" ng-model = "product.gst" required name="gst">
+          <div class="msg-block" ng-if="form1.gst.$touched && form1.gst.$error" ng-messages="form1.gst.$error" style="color:maroon; ">
+            <div ng-message="required">The GST field is required</div>                  
+          </div>
+        </div>
+      </div>
+    </md-content>
+  </md-tab>
+  <md-tab label="Features">
+    <md-content class="md-padding">
+
+    </md-content>
+  </md-tab>
+  <md-tab label="Images">
+    <md-content class="md-padding">
+    </md-content>
+  </md-tab>
+</md-tabs>

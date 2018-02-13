@@ -3,8 +3,8 @@ import {Strategy as TwitterStrategy} from 'passport-twitter';
 
 export function setup(User, config) {
   passport.use(new TwitterStrategy({
-    consumerKey: "7vVbDeKyA88NiLyRJoHqScDou",
-    consumerSecret: "YZWgTdHggBWrQlqLyp5uQiTULfLSobHLOOapKnsr7bVBIa2OCH",
+    consumerKey: config.twitter.clientID,
+    consumerSecret: config.twitter.clientSecret,
     callbackURL: config.twitter.callbackURL
   },
   function(token, tokenSecret, profile, done) {
