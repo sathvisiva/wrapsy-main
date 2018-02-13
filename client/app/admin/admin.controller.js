@@ -20,9 +20,9 @@ angular.module('bhcmartApp')
     else list.push(item);
   };
 
-  /*$scope.prodcutCount = Product.productCount({});
+  $scope.prodcutCount = Product.productCount({});
   $scope.orderCount = Order.orderCount({})
-  console.log($scope.prodcutCount);*/
+  console.log($scope.prodcutCount);
   $scope.data = {
 
     user: {

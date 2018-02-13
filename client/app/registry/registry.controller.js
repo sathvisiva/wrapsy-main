@@ -538,7 +538,6 @@ angular.module('bhcmartApp')
         reader.onload = function (evt) {
           $scope.$apply(function($scope){
             $scope.myImage=evt.target.result;
-            console.log($scope.myImage)
           });
         };
         reader.readAsDataURL(file);
@@ -556,7 +555,8 @@ angular.module('bhcmartApp')
           $scope.registry.id = $scope.registryslug;
           $scope.registry.profileImageUrl = resp.data.url
           Registry.updateProfilepic({id:$scope.registryslug},$scope.registry).$promise.then(function(res) {
-            $state.go('dashboard', {id: $scope.registryslug});
+            $state.go('registry.home', {id: $scope.registryslug});
+            $uibModalInstance.close('ok');
           })
          /*if ($scope.registry) {
 
@@ -606,10 +606,9 @@ angular.module('bhcmartApp')
           $scope.myCroppedImage = '';
 
           $scope.Withoutcrop = function(){
-            var blob = dataURItoBlob($scope.croppedImage);
+            var blob = dataURItoBlob($scope.myImage);
             var file = new File([blob], 'fileName.jpeg', {type: "'image/jpeg"});
             $scope.uploadprofileImage(file)
-            $uibModalInstance.close('ok'); 
           }
 
 
@@ -618,7 +617,7 @@ angular.module('bhcmartApp')
             var blob = dataURItoBlob($scope.croppedImage);
             var file = new File([blob], 'fileName.jpeg', {type: "'image/jpeg"});
             $scope.uploadprofileImage(file)
-            $uibModalInstance.close('ok'); 
+             
           }
 
         }

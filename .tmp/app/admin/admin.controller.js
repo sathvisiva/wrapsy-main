@@ -18,9 +18,9 @@ angular.module('bhcmartApp').controller('AdminController', ['$scope', '$statePar
     if (idx > -1) list.splice(idx, 1);else list.push(item);
   };
 
-  /*$scope.prodcutCount = Product.productCount({});
-  $scope.orderCount = Order.orderCount({})
-  console.log($scope.prodcutCount);*/
+  $scope.prodcutCount = Product.productCount({});
+  $scope.orderCount = Order.orderCount({});
+  console.log($scope.prodcutCount);
   $scope.data = {
 
     user: {
